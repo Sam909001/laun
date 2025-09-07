@@ -3,1023 +3,783 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Çamaşırhane Yönetim Sistemi</title>
-    <!-- Tailwind CSS for styling -->
+    <title>Probar Çamaşırhane Yönetim Sistemi</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Slate Gray & Blue -->
+    <!-- Application Structure Plan: Uygulama, kullanıcı rollerine göre (operatör, süpervizör) erişim kontrolü sağlayan bir giriş ekranıyla başlar. Ana arayüz, üç temel iş akışını (Paketleme, Sevkiyat, Stok Sorgu) yansıtan sekmeli bir yapıya sahiptir. Bu yapı, kullanıcıların görevler arasında kolayca geçiş yapmasını sağlar ve her sekmeyi kendi özel işlevine odaklayarak bilişsel yükü azaltır. Paketleme ekranı, en sık kullanılan bölüm olduğu için, barkod okuma, hızlı ürün ekleme ve paket kaydetme işlemlerini en verimli hale getiren üç panelli bir düzene (giriş/liste, detay/hızlı ekleme, aksiyonlar) sahiptir. Bu tasarım, operasyonel hızı en üst düzeye çıkarmak için seçilmiştir. Kullanıcı akışı, girişten başlayarak paket oluşturma, konteynere ekleme ve sevkiyat takibine kadar mantıksal bir sıra izler. -->
+    <!-- Visualization & Content Choices: Bu uygulama operasyonel bir araç olduğundan, karmaşık veri görselleştirmeleri (grafikler) yerine, verinin net ve hızlı bir şekilde işlenmesine odaklanılmıştır. Bilgi sunumu için HTML tabloları, formlar, büyük butonlar ve modal pencereler gibi standart UI bileşenleri kullanılmıştır.
+    - **Paket Listeleri (Paketleme/Sevkiyat):** Amaç: Bekleyen veya sevk edilen işleri göstermek. Sunum: HTML `<table>`. Etkileşim: Satır seçimiyle detay panellerini doldurma, filtreleme, sıralama. Gerekçe: Yapılandırılmış verileri sunmak için en etkili yöntem.
+    - **Hızlı Ekleme Butonları (Paketleme):** Amaç: Sık kullanılan ürünleri barkodsuz eklemek. Sunum: Grid düzende HTML `<button>`'lar. Etkileşim: Tıklandığında seçili pakete ürün ekler. Gerekçe: Tekrarlayan görevlerde zaman kazandırır.
+    - **Durum Bildirimleri:** Amaç: Kullanıcıya geri bildirim sağlamak. Sunum: Geçici "toast" bildirimleri (başarı/hata) ve eylem onayı için "modal" pencereler. Etkileşim: Onay/iptal butonları. Gerekçe: Kritik işlemlerde yanlışlığı önler ve akışı kesintiye uğratmadan bilgi verir.
+    - **Stok Sorgu:** Amaç: Ürün bilgilerini bulmak. Sunum: Arama formu ve sonuç tablosu. Etkileşim: Filtreleme ve arama. Gerekçe: Bilgiye hızlı erişim için standart ve etkili bir arayüz.
+    Tüm bu seçimler, masaüstü odaklı, klavye ve barkod okuyucu ile hızlı kullanıma uygun bir deneyim yaratma hedefini desteklemektedir. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .main-content {
-            display: none;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        .tab-btn { transition: all 0.2s ease-in-out; }
+        .tab-btn.active { border-color: #3b82f6; background-color: #3b82f6; color: white; }
+        .tab-btn:not(.active):hover { background-color: #e5e7eb; }
+        .page { display: none; }
+        .page.active { display: flex; }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; z-index: 50; }
+        .toast { position: fixed; bottom: 20px; right: 20px; padding: 1rem 1.5rem; border-radius: 0.5rem; color: white; z-index: 60; opacity: 0; transition: opacity 0.3s ease-in-out; }
+        .toast.show { opacity: 1; }
+        .toast-success { background-color: #16a34a; }
+        .toast-error { background-color: #dc2626; }
+        .toast-warning { background-color: #f59e0b; }
+        .table-selected-row { background-color: #bfdbfe; }
+        .supervisor-only { display: none; }
+        .supervisor-enabled .supervisor-only { display: inline-flex; }
+        .supervisor-enabled-block .supervisor-only { display: block; }
+        input:focus, select:focus { outline: 2px solid #3b82f6; outline-offset: 2px; }
     </style>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 </head>
-<body class="bg-gray-100 min-h-screen p-4 flex flex-col items-center">
+<body class="bg-slate-100 text-slate-800">
 
-    <!-- Header and Navigation -->
-    <header class="w-full max-w-7xl bg-white p-4 rounded-lg shadow-xl flex flex-col md:flex-row items-center justify-between mb-4">
-        <h1 class="text-xl md:text-2xl font-bold text-gray-800 mb-2 md:mb-0">Çamaşırhane Yönetim Sistemi</h1>
-        <nav class="flex space-x-2 md:space-x-4">
-            <button id="tab-packaging" class="tab-button px-4 py-2 rounded-lg font-semibold text-sm transition-colors bg-blue-500 text-white shadow-md hover:bg-blue-600">Paketleme</button>
-            <button id="tab-shipment" class="tab-button px-4 py-2 rounded-lg font-semibold text-sm transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Sevkiyat</button>
-            <button id="tab-stock" class="tab-button px-4 py-2 rounded-lg font-semibold text-sm transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Stok Sorgu</button>
-            <button id="tab-admin" class="tab-button px-4 py-2 rounded-lg font-semibold text-sm transition-colors bg-red-500 text-white hover:bg-red-600">Admin</button>
-        </nav>
-    </header>
-
-    <!-- Main Application Container -->
-    <main class="w-full max-w-7xl bg-white p-8 rounded-lg shadow-xl relative">
-
-        <!-- Paketleme Screen -->
-        <section id="packaging-screen" class="main-content">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Paketleme Ekranı</h2>
-            <!-- User and Customer Selection -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
-                <div class="col-span-1">
-                    <label for="customer-select" class="block text-sm font-medium text-gray-700 mb-1">Müşteri Seçimi</label>
-                    <select id="customer-select" class="w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-200">
-                        <option value="">Müşteri Seçin</option>
+    <!-- Giriş Ekranı -->
+    <div id="login-screen" class="min-h-screen w-full flex items-center justify-center bg-slate-200">
+        <div class="bg-white p-10 rounded-xl shadow-2xl w-full max-w-md">
+            <h1 class="text-4xl font-bold text-center text-slate-700 mb-2">Giriş / Oturum Aç</h1>
+            <p class="text-center text-slate-500 mb-8">Çamaşırhane Yönetim Sistemine Hoş Geldiniz</p>
+            <form id="login-form">
+                <div class="mb-6">
+                    <label for="username" class="block text-lg font-medium text-slate-600 mb-2">Kullanıcı Adı</label>
+                    <input type="text" id="username" class="w-full px-4 py-3 border border-slate-300 rounded-lg text-lg focus:ring-blue-500" value="operator" required>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-lg font-medium text-slate-600 mb-2">Şifre</label>
+                    <input type="password" id="password" class="w-full px-4 py-3 border border-slate-300 rounded-lg text-lg focus:ring-blue-500" value="123" required>
+                </div>
+                <div class="mb-6">
+                     <label for="role" class="block text-lg font-medium text-slate-600 mb-2">Rol</label>
+                    <select id="role" class="w-full px-4 py-3 border border-slate-300 rounded-lg text-lg bg-white">
+                        <option value="operator" selected>Operator (Personel)</option>
+                        <option value="supervisor">Supervisor (Süpervizör)</option>
                     </select>
                 </div>
-                <div class="col-span-1">
-                    <label for="staff-select" class="block text-sm font-medium text-gray-700 mb-1">Personel Seçimi</label>
-                    <select id="staff-select" class="w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-200">
-                        <option value="user1">Personel 1</option>
-                        <option value="user2">Personel 2</option>
-                    </select>
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 px-4 rounded-lg text-lg hover:bg-blue-700 transition-colors">Giriş Yap</button>
+                <div class="text-center mt-6">
+                    <a href="#" class="text-blue-600 hover:underline">Şifremi Unuttum</a>
                 </div>
-                <div class="col-span-1 flex items-end">
-                    <button id="end-day-btn" class="w-full px-4 py-2 bg-red-500 text-white rounded-md font-semibold hover:bg-red-600 transition-colors">İş Sonu</button>
-                </div>
-                <div id="customer-info" class="col-span-full mt-2 p-2 text-gray-600"></div>
-            </div>
-
-            <!-- Main Content Area: Barcode & Quick Add -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <!-- Barcode & Manual Input -->
-                <div class="col-span-2">
-                    <div class="flex items-center space-x-2 mb-4">
-                        <input type="text" id="barcode-input" placeholder="Barkod Okutun" class="flex-1 p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                        <button id="find-barcode-btn" class="px-4 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors">Bul</button>
-                        <button id="clear-barcode-btn" class="px-4 py-3 bg-gray-300 text-gray-800 rounded-lg font-semibold hover:bg-gray-400 transition-colors">Temizle</button>
-                    </div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <button id="manual-add-btn" class="w-full px-4 py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors">Ürün Ekle</button>
-                    </div>
-                    <!-- Quick Add Buttons -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-2">
-                        <button class="quick-add-btn bg-gray-200 text-gray-800 px-3 py-2 rounded-lg hover:bg-gray-300 transition-colors" data-stock-code="CARS">Çarşaf</button>
-                        <button class="quick-add-btn bg-gray-200 text-gray-800 px-3 py-2 rounded-lg hover:bg-gray-300 transition-colors" data-stock-code="HAVLU">Havlu</button>
-                        <button class="quick-add-btn bg-gray-200 text-gray-800 px-3 py-2 rounded-lg hover:bg-gray-300 transition-colors" data-stock-code="ALEZ">Alez</button>
-                        <button class="quick-add-btn bg-gray-200 text-gray-800 px-3 py-2 rounded-lg hover:bg-gray-300 transition-colors" data-stock-code="NEVRESIM">Nevresim</button>
-                        <button class="quick-add-btn bg-gray-200 text-gray-800 px-3 py-2 rounded-lg hover:bg-gray-300 transition-colors" data-stock-code="YASTIK">Yastık</button>
-                        <button class="quick-add-btn bg-gray-200 text-gray-800 px-3 py-2 rounded-lg hover:bg-gray-300 transition-colors" data-stock-code="YASLKF">Yastık Kılıfı</button>
-                        <button class="quick-add-btn bg-gray-200 text-gray-800 px-3 py-2 rounded-lg hover:bg-gray-300 transition-colors" data-stock-code="PIKE">Pike</button>
-                        <button class="quick-add-btn bg-gray-200 text-gray-800 px-3 py-2 rounded-lg hover:bg-gray-300 transition-colors" data-stock-code="DIGER">Diğer</button>
-                    </div>
-                </div>
-
-                <!-- Right Panel: Package Details -->
-                <div id="right-panel" class="col-span-1 p-4 bg-gray-100 rounded-lg shadow-inner">
-                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Seçili Paket Detayları</h3>
-                    <div id="package-details-content" class="text-gray-600 text-sm">
-                        <!-- Content will be dynamically added here -->
-                        <p class="text-gray-400">Paket seçiniz...</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Lower Section -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Bekleyen Paketler Listesi -->
-                <div class="col-span-full md:col-span-2">
-                    <h2 class="text-xl font-semibold mb-4 text-gray-700">Bekleyen Paketler</h2>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white rounded-lg shadow">
-                            <thead>
-                                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                    <th class="py-3 px-6 text-left">Paket No</th>
-                                    <th class="py-3 px-6 text-left">Toplam Miktar</th>
-                                    <th class="py-3 px-6 text-left">Paketleme Zamanı</th>
-                                    <th class="py-3 px-6 text-left">Cari Kod</th>
-                                    <th class="py-3 px-6 text-left">Cari Ünvan</th>
-                                    <th class="py-3 px-6 text-left">Cari Açıklama</th>
-                                </tr>
-                            </thead>
-                            <tbody id="pending-packages-list" class="text-gray-600 text-sm font-light">
-                                <!-- Packages will be dynamically added here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Counters and Actions -->
-                <div class="col-span-1 md:col-span-1 bg-gray-50 p-4 rounded-lg shadow-inner">
-                    <h3 class="text-lg font-semibold mb-2">Paket Sayaçları</h3>
-                    <div class="flex flex-col space-y-2 mb-4">
-                        <div class="flex justify-between items-center text-gray-700">
-                            <span>Tanımsız Adet:</span>
-                            <span id="undefined-count" class="font-bold text-red-500">0</span>
-                        </div>
-                        <div class="flex justify-between items-center text-gray-700">
-                            <span>Tanımlı Adet:</span>
-                            <span id="defined-count" class="font-bold text-green-500">0</span>
-                        </div>
-                        <div class="flex justify-between items-center text-gray-700">
-                            <span>Ortalama Adet:</span>
-                            <span id="average-count" class="font-bold">0</span>
-                        </div>
-                    </div>
-                    <button id="pack-save-btn" class="w-full px-4 py-3 bg-indigo-500 text-white rounded-lg font-semibold hover:bg-indigo-600 transition-colors">Paketle & Kaydet (F2)</button>
-                </div>
-            </div>
-
-            <!-- Paket İşlemleri and Konteyner Yönetimi -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                <!-- Paket İşlemleri -->
-                <div class="col-span-1 p-4 bg-gray-50 rounded-lg shadow-inner">
-                    <h3 class="text-lg font-semibold mb-2">Paket İşlemleri</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <button id="print-label-btn" class="px-4 py-2 bg-purple-500 text-white rounded-lg font-semibold hover:bg-purple-600 transition-colors"><i class="fas fa-print"></i> Etiket Bas</button>
-                        <button id="select-all-btn" class="px-4 py-2 bg-yellow-500 text-white rounded-lg font-semibold hover:bg-yellow-600 transition-colors"><i class="fas fa-check-double"></i> Tümünü Seç</button>
-                        <button id="deselect-all-btn" class="px-4 py-2 bg-gray-500 text-white rounded-lg font-semibold hover:bg-gray-600 transition-colors"><i class="fas fa-times"></i> Seçimi Kaldır</button>
-                        <button id="delete-package-btn" class="px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition-colors"><i class="fas fa-trash"></i> Paket Sil</button>
-                    </div>
-                </div>
-
-                <!-- Konteyner Yönetimi -->
-                <div class="col-span-1 p-4 bg-gray-50 rounded-lg shadow-inner">
-                    <h3 class="text-lg font-semibold mb-2">Konteyner Yönetimi</h3>
-                    <div class="flex flex-col space-y-2">
-                        <input type="text" id="container-number-input" placeholder="Konteyner No" class="p-2 border border-gray-300 rounded-md">
-                        <div class="flex gap-2">
-                            <button id="assign-container-btn" class="w-full px-4 py-2 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition-colors">Paketi Konteyere Bağla</button>
-                        </div>
-                        <div class="flex gap-2">
-                            <button id="delete-container-btn" class="w-full px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition-colors">Konteyner Sil</button>
-                            <button id="send-ramp-btn" class="w-full px-4 py-2 bg-indigo-500 text-white rounded-lg font-semibold hover:bg-indigo-600 transition-colors">Kon. Rampaya Gönder</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Sevkiyat Screen -->
-        <section id="shipment-screen" class="main-content">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Sevkiyat Ekranı</h2>
-            <div class="overflow-x-auto">
-                <table class="min-w-full bg-white rounded-lg shadow">
-                    <thead>
-                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">Paket No</th>
-                            <th class="py-3 px-6 text-left">Müşteri</th>
-                            <th class="py-3 px-6 text-left">Durum</th>
-                            <th class="py-3 px-6 text-left">Konteyner</th>
-                            <th class="py-3 px-6 text-center">İşlemler</th>
-                        </tr>
-                    </thead>
-                    <tbody id="shipment-list" class="text-gray-600 text-sm font-light">
-                        <!-- Shipment data will be dynamically added here -->
-                    </tbody>
-                </table>
-            </div>
-            <div class="flex justify-end gap-2 mt-4">
-                <button id="delete-container-shipment-btn" class="px-4 py-2 bg-red-500 text-white rounded-md font-semibold hover:bg-red-600">Konteyner Sil</button>
-                <button id="send-ramp-shipment-btn" class="px-4 py-2 bg-indigo-500 text-white rounded-md font-semibold hover:bg-indigo-600">Kon. Rampaya Gönder</button>
-            </div>
-        </section>
-
-        <!-- Stok Sorgu Screen -->
-        <section id="stock-screen" class="main-content">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Stok Sorgu Ekranı</h2>
-            <div class="flex items-center space-x-2 mb-4">
-                <input type="text" id="stock-search-input" placeholder="Stok kodu, adı veya kategoriye göre arama" class="flex-1 p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                <button id="search-stock-btn" class="px-4 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors">Ara</button>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <h3 class="text-xl font-semibold mb-2">Günlük Hareketler</h3>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white rounded-lg shadow">
-                            <thead>
-                                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                    <th class="py-3 px-6 text-left">Stok Kodu</th>
-                                    <th class="py-3 px-6 text-left">Cins</th>
-                                    <th class="py-3 px-6 text-left">Miktar</th>
-                                </tr>
-                            </thead>
-                            <tbody id="daily-movements-list" class="text-gray-600 text-sm font-light">
-                                <!-- Daily movements will be dynamically added here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-2">Toplam Stok Miktarı</h3>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white rounded-lg shadow">
-                            <thead>
-                                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                    <th class="py-3 px-6 text-left">Stok Kodu</th>
-                                    <th class="py-3 px-6 text-left">Cins</th>
-                                    <th class="py-3 px-6 text-left">Toplam Miktar</th>
-                                </tr>
-                            </thead>
-                            <tbody id="total-stock-list" class="text-gray-600 text-sm font-light">
-                                <!-- Total stock will be dynamically added here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Admin Screen for managing customers and stock -->
-        <section id="admin-screen" class="main-content">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Admin Yönetim Ekranı</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Müşteri Yönetimi -->
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">Müşteri Yönetimi</h3>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner mb-4">
-                        <div class="flex items-center mb-2">
-                            <input type="text" id="customer-code-input" placeholder="Müşteri Kodu" class="flex-1 p-2 border rounded-md mr-2">
-                            <input type="text" id="customer-name-input" placeholder="Müşteri Adı" class="flex-1 p-2 border rounded-md">
-                        </div>
-                        <input type="email" id="customer-email-input" placeholder="Müşteri E-posta" class="w-full p-2 border rounded-md mb-2">
-                        <input type="text" id="customer-desc-input" placeholder="Müşteri Açıklama" class="w-full p-2 border rounded-md mb-4">
-                        <button id="add-customer-btn" class="w-full px-4 py-2 bg-blue-500 text-white rounded-md font-semibold hover:bg-blue-600">Müşteri Ekle</button>
-                    </div>
-                    <h4 class="text-lg font-semibold mb-2">Mevcut Müşteriler</h4>
-                    <div class="overflow-y-auto max-h-64 border rounded-lg p-2">
-                        <ul id="customers-list" class="list-none"></ul>
-                    </div>
-                </div>
-
-                <!-- Stok Yönetimi -->
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">Stok Yönetimi</h3>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner mb-4">
-                        <div class="flex items-center mb-2">
-                            <input type="text" id="stock-code-input" placeholder="Stok Kodu" class="flex-1 p-2 border rounded-md mr-2">
-                            <input type="text" id="stock-name-input" placeholder="Stok Adı" class="flex-1 p-2 border rounded-md">
-                        </div>
-                        <input type="text" id="stock-category-input" placeholder="Stok Kategori" class="w-full p-2 border rounded-md mb-4">
-                        <button id="add-stock-btn" class="w-full px-4 py-2 bg-blue-500 text-white rounded-md font-semibold hover:bg-blue-600">Stok Ekle</button>
-                    </div>
-                    <h4 class="text-lg font-semibold mb-2">Mevcut Stok Kartları</h4>
-                    <div class="overflow-y-auto max-h-64 border rounded-lg p-2">
-                        <ul id="stock-list" class="list-none"></ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Modal for messages and manual add -->
-        <div id="modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center p-4 z-50">
-            <div class="bg-white rounded-lg shadow-xl p-6 max-w-sm w-full">
-                <h3 id="modal-title" class="text-xl font-semibold mb-2"></h3>
-                <p id="modal-message" class="text-gray-700 mb-4"></p>
-                <div class="flex justify-end">
-                    <button id="modal-close-btn" class="px-4 py-2 bg-blue-500 text-white rounded-md">OK</button>
-                </div>
-            </div>
+            </form>
         </div>
+    </div>
 
-        <!-- Modal for Manual Add -->
-        <div id="manual-add-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center p-4 z-50">
-            <div class="bg-white rounded-lg shadow-xl p-6 max-w-lg w-full">
-                <h3 class="text-xl font-semibold mb-4">Ürün Ekle</h3>
-                <label for="manual-stock-select" class="block text-sm font-medium text-gray-700 mb-1">Ürün Seçin</label>
-                <select id="manual-stock-select" class="w-full p-2 border border-gray-300 rounded-md mb-4"></select>
-                <label for="manual-quantity-input" class="block text-sm font-medium text-gray-700 mb-1">Miktar</label>
-                <input type="number" id="manual-quantity-input" value="1" min="1" class="w-full p-2 border border-gray-300 rounded-md mb-4">
-                <div class="flex justify-end space-x-2">
-                    <button id="manual-add-cancel-btn" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md font-semibold">İptal</button>
-                    <button id="manual-add-confirm-btn" class="px-4 py-2 bg-green-500 text-white rounded-md font-semibold">Ekle</button>
+    <!-- Ana Uygulama Ekranı -->
+    <div id="app-screen" class="hidden h-screen w-full flex-col">
+        <!-- Üst Header -->
+        <header class="bg-white shadow-md p-3 flex justify-between items-center flex-shrink-0">
+            <div class="flex items-center space-x-4">
+                <h1 class="text-2xl font-bold text-blue-600">PROBAR</h1>
+                <nav id="tab-navigation" class="flex items-center border border-slate-300 rounded-lg p-1">
+                    <button data-tab="paketleme" class="tab-btn active text-lg font-semibold px-6 py-2 rounded-md">Paketleme</button>
+                    <button data-tab="sevkiyat" class="tab-btn text-lg font-semibold px-6 py-2 rounded-md">Sevkiyat</button>
+                    <button data-tab="stok-sorgu" class="tab-btn text-lg font-semibold px-6 py-2 rounded-md">Stok Sorgu</button>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="text-right">
+                    <div id="user-display" class="font-semibold text-lg">Kullanıcı Adı</div>
+                    <div id="role-display" class="text-sm text-slate-500">Rol</div>
+                </div>
+                <button id="logout-btn" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Çıkış Yap</button>
+            </div>
+        </header>
+
+        <!-- Sayfa İçerikleri -->
+        <main class="flex-grow flex flex-col overflow-hidden">
+            <!-- Paketleme Sayfası -->
+            <div id="paketleme-page" class="page active flex-col flex-grow bg-slate-50 p-4">
+                <!-- Üst Kontrol Paneli -->
+                <div class="flex-shrink-0 bg-white p-3 rounded-lg shadow-sm mb-4">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center space-x-4">
+                            <div>
+                                <label for="customer-select" class="text-sm font-medium text-slate-500">Müşteri</label>
+                                <select id="customer-select" class="w-64 p-2 border border-slate-300 rounded-md bg-white text-lg">
+                                    <option value="P0006">P0006 - LALELİ HAMİT</option>
+                                    <option value="P0012">P0012 - ACIBADEM HASTANESİ</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="staff-select" class="text-sm font-medium text-slate-500">Personel</label>
+                                <select id="staff-select" class="w-48 p-2 border border-slate-300 rounded-md bg-white text-lg">
+                                    <option>paket1</option>
+                                    <option>paket2</option>
+                                </select>
+                            </div>
+                             <h2 id="customer-name-display" class="text-4xl font-extrabold text-slate-800 self-end ml-6">LALELİ HAMİT</h2>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                             <button class="bg-white border border-slate-300 text-slate-700 px-4 py-2 rounded-md hover:bg-slate-100">Müşteri Seç</button>
+                             <button class="bg-white border border-slate-300 text-slate-700 px-4 py-2 rounded-md hover:bg-slate-100">Tüm Müş. Göster</button>
+                             <button class="bg-amber-500 text-white px-4 py-2 rounded-md hover:bg-amber-600 supervisor-only">İş Sonu</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ana Çalışma Alanı -->
+                <div class="flex-grow grid grid-cols-12 gap-4 overflow-hidden">
+                    <!-- Orta-Sol Panel -->
+                    <div class="col-span-12 lg:col-span-8 flex flex-col">
+                        <div class="flex-shrink-0 bg-white p-3 rounded-t-lg shadow-sm">
+                            <div class="flex items-center">
+                                <input type="text" id="barcode-input" placeholder="Barkod Okutun veya Girin (Enter)..." class="flex-grow text-2xl p-3 border-2 border-slate-300 rounded-l-lg">
+                                <button id="clear-barcode-btn" class="px-4 py-3 border-y-2 border-r-2 border-slate-300 text-slate-500 hover:bg-slate-100 text-2xl">✖</button>
+                                <div class="ml-4 text-xl font-bold">Toplam Paket: <span id="package-count">0</span></div>
+                            </div>
+                        </div>
+                        <div class="flex-grow bg-white shadow-sm rounded-b-lg overflow-y-auto">
+                            <h3 class="p-3 text-lg font-semibold bg-slate-100 sticky top-0">Bekleyen Paketler</h3>
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-slate-200">
+                                    <tr>
+                                        <th class="p-2 w-12"><input type="checkbox" id="select-all-packages"></th>
+                                        <th class="p-2">Sıra</th>
+                                        <th class="p-2">Paket No</th>
+                                        <th class="p-2">T. Miktar</th>
+                                        <th class="p-2">P. Zamanı</th>
+                                        <th class="p-2">Cari Kod</th>
+                                        <th class="p-2">Cari Unvan</th>
+                                        <th class="p-2">Paketleyen</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pending-packages-table">
+                                    <!-- Dinamik olarak doldurulacak -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Sağ Panel -->
+                    <div class="col-span-12 lg:col-span-4 flex flex-col gap-4">
+                        <div class="bg-white p-3 rounded-lg shadow-sm flex-shrink-0">
+                            <h3 class="text-lg font-semibold mb-2">Seçili Paket Detayı</h3>
+                            <div id="package-item-details" class="min-h-[100px] bg-slate-50 p-2 rounded">
+                                <p class="text-slate-500">Yeni bir paket oluşturmak için barkod okutun veya hızlı ekle butonlarını kullanın.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg shadow-sm flex-grow">
+                            <h3 class="text-lg font-semibold mb-2">Hızlı Ekle</h3>
+                            <div id="quick-add-grid" class="grid grid-cols-3 gap-2">
+                                <!-- Dinamik olarak doldurulacak -->
+                            </div>
+                        </div>
+                         <div class="bg-white p-3 rounded-lg shadow-sm flex-shrink-0 flex items-center justify-between">
+                            <div class="flex space-x-4 text-center">
+                                <div class="p-2 rounded bg-red-100 text-red-700">
+                                    <div class="font-bold text-2xl" id="undefined-count">0</div>
+                                    <div class="text-sm">Tanımsız Adet</div>
+                                </div>
+                                <div class="p-2 rounded bg-blue-100 text-blue-700">
+                                    <div class="font-bold text-2xl" id="defined-count">0</div>
+                                    <div class="text-sm">Tanımlı Adet</div>
+                                </div>
+                            </div>
+                            <button id="save-package-btn" class="text-2xl font-bold bg-green-600 text-white rounded-lg px-8 py-6 hover:bg-green-700">(F2) Paketle / Kaydet</button>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Alt Menü -->
+                <footer class="flex-shrink-0 bg-white mt-4 p-2 rounded-lg shadow-inner flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <button class="px-3 py-2 border rounded hover:bg-slate-100">Etiket Bas</button>
+                        <button id="select-all-btn-footer" class="px-3 py-2 border rounded hover:bg-slate-100">Tümünü Seç</button>
+                        <button id="deselect-all-btn-footer" class="px-3 py-2 border rounded hover:bg-slate-100">Seçimi Kaldır</button>
+                        <button id="delete-package-btn" class="px-3 py-2 border rounded bg-red-100 text-red-600 hover:bg-red-200 supervisor-only">Paket Sil</button>
+                    </div>
+                     <div class="flex items-center space-x-2">
+                         <button class="px-3 py-2 border rounded hover:bg-slate-100">Mev. K.</button>
+                         <button class="px-3 py-2 border rounded hover:bg-slate-100">Yeni K.</button>
+                         <div class="text-lg font-mono">Konteyner No: <span id="container-no">C000094</span></div>
+                    </div>
+                     <div class="flex items-center space-x-2">
+                        <button class="px-3 py-2 border rounded hover:bg-slate-100 supervisor-only">Konteyner Sil</button>
+                        <button class="px-3 py-2 border rounded bg-blue-500 text-white hover:bg-blue-600">Kon. Rampaya Gönder</button>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- Sevkiyat Sayfası -->
+            <div id="sevkiyat-page" class="page flex-col flex-grow bg-slate-50 p-4">
+                 <div class="bg-white p-3 rounded-lg shadow-sm mb-4 flex-shrink-0">
+                    <h2 class="text-2xl font-bold mb-3">Sevkiyat Filtrele</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+                        <div class="flex space-x-2">
+                            <div>
+                                <label class="text-sm font-medium">Başlangıç Tarihi</label>
+                                <input type="date" class="w-full p-2 border rounded-md">
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium">Bitiş Tarihi</label>
+                                <input type="date" class="w-full p-2 border rounded-md">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium">Durum</label>
+                            <select class="w-full p-2 border rounded-md bg-white"><option>Beklemede</option><option>Rampaya Gönderildi</option><option>Gönderildi</option></select>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium">Konteyner No</label>
+                            <input type="text" class="w-full p-2 border rounded-md">
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium">Müşteri</label>
+                            <select class="w-full p-2 border rounded-md bg-white"><option>P0006 - LALELİ HAMİT</option><option>P0012 - ACIBADEM HASTANESİ</option></select>
+                        </div>
+                         <button class="bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700">Filtrele</button>
+                    </div>
+                </div>
+                 <div class="flex-grow grid grid-cols-12 gap-4 overflow-hidden">
+                    <div class="col-span-8 flex flex-col bg-white rounded-lg shadow-sm overflow-hidden">
+                        <h3 class="p-3 text-lg font-semibold bg-slate-100 flex-shrink-0">Paket Listesi</h3>
+                        <div class="overflow-y-auto">
+                           <table class="w-full text-left text-sm">
+                                <thead class="bg-slate-200">
+                                    <tr>
+                                        <th class="p-2">Paket No</th>
+                                        <th class="p-2">Müşteri</th>
+                                        <th class="p-2">Konteyner No</th>
+                                        <th class="p-2">Durum</th>
+                                        <th class="p-2">Toplam Ürün</th>
+                                        <th class="p-2">Aksiyonlar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="shipment-packages-table">
+                                    <!-- Dinamik olarak doldurulacak -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-span-4 bg-white rounded-lg shadow-sm p-4">
+                        <h3 class="text-lg font-semibold mb-3">Konteyner Detayı (C000094)</h3>
+                        <ul id="container-details-list" class="space-y-1 mb-4 h-64 overflow-y-auto bg-slate-50 p-2 rounded">
+                            <!-- Dinamik olarak doldurulacak -->
+                        </ul>
+                        <div class="space-y-2">
+                             <button class="w-full text-center py-2 border rounded bg-blue-500 text-white hover:bg-blue-600">Konteyner Rampa Gönder</button>
+                             <button class="w-full text-center py-2 border rounded hover:bg-slate-100 supervisor-only">Konteyneri Kapat</button>
+                        </div>
+                         <div class="mt-8">
+                             <h3 class="text-lg font-semibold mb-3">Rapor & Export</h3>
+                             <div class="flex space-x-2">
+                                <button class="flex-1 text-center py-2 border rounded bg-green-100 text-green-700 hover:bg-green-200">CSV Export</button>
+                                <button class="flex-1 text-center py-2 border rounded bg-red-100 text-red-700 hover:bg-red-200">PDF Export</button>
+                             </div>
+                         </div>
+                    </div>
+                 </div>
+            </div>
+
+            <!-- Stok Sorgu Sayfası -->
+            <div id="stok-sorgu-page" class="page flex-col flex-grow bg-slate-50 p-4">
+                <div class="bg-white p-3 rounded-lg shadow-sm mb-4 flex-shrink-0">
+                    <h2 class="text-2xl font-bold mb-3">Stok Sorgulama</h2>
+                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                        <div>
+                            <label class="text-sm font-medium">Stok Kodu</label>
+                            <input type="text" class="w-full p-2 border rounded-md">
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium">Stok İsmi</label>
+                            <input type="text" class="w-full p-2 border rounded-md">
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium">Kategori</label>
+                            <select id="stock-category-filter" class="w-full p-2 border rounded-md bg-white">
+                                <option>Tümü</option>
+                            </select>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700">Ara</button>
+                            <button class="w-full bg-slate-200 text-slate-700 p-2 rounded-md hover:bg-slate-300">Temizle</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow bg-white rounded-lg shadow-sm overflow-y-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-200 sticky top-0">
+                            <tr>
+                                <th class="p-3">Stok Kodu</th>
+                                <th class="p-3">Stok İsmi</th>
+                                <th class="p-3">Miktar</th>
+                                <th class="p-3">Depo Konumu</th>
+                                <th class="p-3">Günlük Hareket</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stock-query-results">
+                            <!-- Dinamik olarak doldurulacak -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
+        </main>
+    </div>
+    
+    <!-- Modal ve Toast Alanı -->
+    <div id="modal-container"></div>
+    <div id="toast-container"></div>
 
-        <!-- Modal for User Authorization -->
-        <div id="auth-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center p-4 z-50">
-            <div class="bg-white rounded-lg shadow-xl p-6 max-w-sm w-full">
-                <h3 class="text-xl font-semibold mb-2">Yetki Gereklidir</h3>
-                <p id="auth-message" class="text-gray-700 mb-4">Bu işlemi yapmak için süpervizör yetkisi gerekmektedir.</p>
-                <div class="flex justify-end">
-                    <button id="auth-close-btn" class="px-4 py-2 bg-blue-500 text-white rounded-md">Tamam</button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Firebase SDKs -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, doc, getDoc, updateDoc, deleteDoc, where, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Global variables provided by the runtime environment
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
         
-        let db, auth, userId, userRole = 'süpervizör';
+        // --- MOCK DATA ---
+        const MOCK_USERS = {
+            operator: { username: 'operator', password: '123', role: 'operator', name: 'Ayşe Yılmaz' },
+            supervisor: { username: 'supervisor', password: '123', role: 'supervisor', name: 'Ahmet Kaya' },
+        };
 
-        // UI Elements
-        const mainContents = document.querySelectorAll('.main-content');
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const packageNumberInput = document.getElementById('barcode-input');
-        const customerSelect = document.getElementById('customer-select');
-        const staffSelect = document.getElementById('staff-select');
-        const customerInfoDiv = document.getElementById('customer-info');
-        const pendingPackagesList = document.getElementById('pending-packages-list');
-        const rightPanel = document.getElementById('right-panel');
+        const MOCK_STOCK = {
+            '8691234567890': { kod: 'CRS001', isim: 'ÇARŞAF', kategori: 'Tekstil', miktar: 1500, depo: 'A1-01' },
+            '8691234567891': { kod: 'HVL002', isim: 'HAVLU', kategori: 'Tekstil', miktar: 3200, depo: 'A1-02' },
+            '8691234567892': { kod: 'ALZ003', isim: 'ALEZ', kategori: 'Tekstil', miktar: 800, depo: 'B2-05' },
+            '8691234567893': { kod: 'BCRS004', isim: 'BÜYÜK ÇARŞAF YIKAMA', kategori: 'Hizmet', miktar: null, depo: 'N/A' },
+            '8691234567894': { kod: 'NVR005', isim: 'NEVRESİM', kategori: 'Tekstil', miktar: 1250, depo: 'A1-03' },
+            '8691234567895': { kod: 'PIK006', isim: 'PİKE', kategori: 'Tekstil', miktar: 600, depo: 'B2-06' },
+            '8691234567896': { kod: 'YST007', isim: 'YASTIK', kategori: 'Tekstil', miktar: 2100, depo: 'C3-01' },
+            '8691234567897': { kod: 'YKL008', isim: 'YASTIK KILIFI', kategori: 'Tekstil', miktar: 4500, depo: 'C3-02' },
+            '8691234567898': { kod: 'DGR009', isim: 'DİĞER', kategori: 'Genel', miktar: 0, depo: 'N/A' },
+        };
+        
+        const QUICK_ADD_ITEMS = ['ÇARŞAF', 'HAVLU', 'ALEZ', 'BÜYÜK ÇARŞAF YIKAMA', 'NEVRESİM', 'PİKE', 'YASTIK', 'YASTIK KILIFI', 'DİĞER'];
+
+        let MOCK_PENDING_PACKAGES = [
+            { id: 1, no: 'PK00123', miktar: 15, zaman: '10:32', cariKod: 'P0006', cariUnvan: 'LALELİ HAMİT', paketleyen: 'paket1' },
+            { id: 2, no: 'PK00124', miktar: 8, zaman: '10:35', cariKod: 'P0006', cariUnvan: 'LALELİ HAMİT', paketleyen: 'paket1' },
+        ];
+        
+        let MOCK_SHIPMENT_PACKAGES = [
+            { no: 'PK00120', musteri: 'ACIBADEM HASTANESİ', konteyner: 'C000093', durum: 'Gönderildi', urun: 25 },
+            { no: 'PK00121', musteri: 'LALELİ HAMİT', konteyner: 'C000094', durum: 'Rampaya Gönderildi', urun: 18 },
+            { no: 'PK00122', musteri: 'LALELİ HAMİT', konteyner: 'C000094', durum: 'Rampaya Gönderildi', urun: 32 },
+        ]
+
+        // --- STATE MANAGEMENT ---
+        let currentUser = null;
+        let currentPackage = {
+            items: {},
+            tanimsiz: 0,
+        };
+        let packageCounter = MOCK_PENDING_PACKAGES.length;
+
+        // --- DOM Elements ---
+        const loginScreen = document.getElementById('login-screen');
+        const appScreen = document.getElementById('app-screen');
+        const loginForm = document.getElementById('login-form');
+        const logoutBtn = document.getElementById('logout-btn');
+        const userDisplay = document.getElementById('user-display');
+        const roleDisplay = document.getElementById('role-display');
+        const tabNavigation = document.getElementById('tab-navigation');
+        const pages = document.querySelectorAll('.page');
+        const barcodeInput = document.getElementById('barcode-input');
+        const clearBarcodeBtn = document.getElementById('clear-barcode-btn');
         const definedCountEl = document.getElementById('defined-count');
         const undefinedCountEl = document.getElementById('undefined-count');
-        const averageCountEl = document.getElementById('average-count');
-        const printLabelBtn = document.getElementById('print-label-btn');
+        const packageItemDetailsEl = document.getElementById('package-item-details');
+        const savePackageBtn = document.getElementById('save-package-btn');
+        const quickAddGrid = document.getElementById('quick-add-grid');
+        const pendingPackagesTable = document.getElementById('pending-packages-table');
+        const packageCountEl = document.getElementById('package-count');
+        const customerNameDisplay = document.getElementById('customer-name-display');
+        const customerSelect = document.getElementById('customer-select');
+        const shipmentPackagesTable = document.getElementById('shipment-packages-table');
+        const containerDetailsList = document.getElementById('container-details-list');
+        const stockQueryResults = document.getElementById('stock-query-results');
+        const stockCategoryFilter = document.getElementById('stock-category-filter');
         const deletePackageBtn = document.getElementById('delete-package-btn');
-        const shipmentList = document.getElementById('shipment-list');
-        const stockSearchInput = document.getElementById('stock-search-input');
-        const dailyMovementsList = document.getElementById('daily-movements-list');
-        const totalStockList = document.getElementById('total-stock-list');
-        const manualAddModal = document.getElementById('manual-add-modal');
-        const manualStockSelect = document.getElementById('manual-stock-select');
-        const manualQuantityInput = document.getElementById('manual-quantity-input');
-        const authModal = document.getElementById('auth-modal');
-        const containerNumberInput = document.getElementById('container-number-input');
 
-        // Admin panel elements
-        const addCustomerBtn = document.getElementById('add-customer-btn');
-        const customerCodeInput = document.getElementById('customer-code-input');
-        const customerNameInput = document.getElementById('customer-name-input');
-        const customerEmailInput = document.getElementById('customer-email-input');
-        const customerDescInput = document.getElementById('customer-desc-input');
-        const customersListUl = document.getElementById('customers-list');
-        const addStockBtn = document.getElementById('add-stock-btn');
-        const stockCodeInput = document.getElementById('stock-code-input');
-        const stockNameInput = document.getElementById('stock-name-input');
-        const stockCategoryInput = document.getElementById('stock-category-input');
-        const stockListUl = document.getElementById('stock-list');
-
-        let currentPackage = {
-            packageNumber: '',
-            items: [],
-            customer: {},
-            staff: {},
-            container: '',
-            createdAt: null
-        };
-        let selectedPackageId = null;
-        let selectedPackageItems = [];
-        let selectedItemIndex = 0;
-        let customerData = [];
-        let stockData = [];
-
-        // Modal functions
-        const showModal = (title, message) => {
-            const modal = document.getElementById('modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalMessage = document.getElementById('modal-message');
-            modalTitle.textContent = title;
-            modalMessage.textContent = message;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+        // --- SYSTEM WRAPPERS (Desktop Integration Placeholders) ---
+        const SystemAPI = {
+            saveFile: (data, fileName) => {
+                console.log(`[DESKTOP WRAPPER] Saving file: ${fileName}`, data);
+                // Web fallback
+                const blob = new Blob([data], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('Dosya indirildi.', 'success');
+            },
+            openFile: () => {
+                console.log('[DESKTOP WRAPPER] Opening file dialog.');
+                // Web fallback
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.click();
+            },
+            print: (content) => {
+                console.log('[DESKTOP WRAPPER] Printing content.');
+                 // Web fallback
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(content);
+                printWindow.document.close();
+                printWindow.focus();
+                printWindow.print();
+            },
+            sendEmail: (to, subject, body) => {
+                 console.log(`[EMAIL WRAPPER] Sending email to: ${to}`);
+                 console.log(`Subject: ${subject}`);
+                 console.log(`Body: ${body}`);
+                 // Gerçek bir API çağrısı burada olur.
+                 return new Promise(resolve => setTimeout(() => resolve({success: true}), 500));
+            },
         };
 
-        const hideModal = () => {
-            document.getElementById('modal').classList.add('hidden');
-            document.getElementById('modal').classList.remove('flex');
+        // --- UI FUNCTIONS ---
+        const showToast = (message, type = 'success') => {
+            const toastContainer = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            toastContainer.appendChild(toast);
+            setTimeout(() => { toast.classList.add('show'); }, 10);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => { toast.remove(); }, 300);
+            }, 3000);
         };
 
-        document.getElementById('modal-close-btn').addEventListener('click', hideModal);
-
-        const showAuthModal = (message) => {
-            document.getElementById('auth-message').textContent = message;
-            authModal.classList.remove('hidden');
-            authModal.classList.add('flex');
-        };
-
-        document.getElementById('auth-close-btn').addEventListener('click', () => {
-            authModal.classList.add('hidden');
-            authModal.classList.remove('flex');
-        });
-
-        // Tab Switching Logic
-        const showTab = (tabId) => {
-            mainContents.forEach(content => {
-                content.style.display = 'none';
-            });
-            tabButtons.forEach(button => {
-                button.classList.remove('bg-blue-500', 'text-white', 'bg-red-500');
-                button.classList.add('bg-gray-200', 'text-gray-700');
-            });
+        const showModal = (title, content, buttons) => {
+            const modalContainer = document.getElementById('modal-container');
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'modal-overlay';
             
-            document.getElementById(tabId).style.display = 'block';
-            const tabButtonId = `tab-${tabId.replace('-screen', '')}`;
-            const selectedButton = document.getElementById(tabButtonId);
-            if (tabId === 'admin-screen') {
-                selectedButton.classList.remove('bg-gray-200', 'text-gray-700');
-                selectedButton.classList.add('bg-red-500', 'text-white');
-            } else {
-                selectedButton.classList.remove('bg-gray-200', 'text-gray-700');
-                selectedButton.classList.add('bg-blue-500', 'text-white');
-            }
-        };
+            let buttonsHtml = buttons.map(btn => 
+                `<button class="px-6 py-2 rounded-md ${btn.class}" data-action="${btn.action}">${btn.text}</button>`
+            ).join('');
 
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                showTab(button.id.replace('tab-', '') + '-screen');
+            modalOverlay.innerHTML = `
+                <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4">${title}</h2>
+                    <p class="text-slate-600 mb-6">${content}</p>
+                    <div class="flex justify-end space-x-4">
+                        ${buttonsHtml}
+                    </div>
+                </div>
+            `;
+            
+            modalContainer.appendChild(modalOverlay);
+
+            return new Promise((resolve) => {
+                modalOverlay.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'BUTTON') {
+                        const action = e.target.dataset.action;
+                        modalOverlay.remove();
+                        resolve(action);
+                    }
+                });
             });
-        });
+        };
         
-        // Initial setup
-        const initializeUI = () => {
-            showTab('packaging-screen');
-        };
-
-        // Initialize Firebase
-        const initializeFirebase = async () => {
-            if (!firebaseConfig) {
-                showModal("Hata", "Firebase yapılandırması mevcut değil. Uygulama düzgün çalışmayabilir.");
-                return;
-            }
-            try {
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                
-                const userCredential = await signInAnonymously(auth);
-                userId = userCredential.user.uid;
-                console.log("Signed in anonymously with user ID:", userId);
-                setupFirestoreListeners();
-            } catch (error) {
-                console.error("Authentication error:", error);
-                showModal("Kimlik Doğrulama Hatası", "Lütfen sayfayı yeniden yüklemeyi deneyin.");
-            }
-        };
-
-        // Firestore listeners for real-time updates
-        const setupFirestoreListeners = () => {
-            if (!userId) return;
-            
-            // Listener for Customers
-            const customersRef = collection(db, `artifacts/${appId}/users/${userId}/customers`);
-            onSnapshot(customersRef, (snapshot) => {
-                customerData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                renderCustomers();
-            }, (error) => {
-                console.error("Müşteri verisi yüklenemedi:", error);
-            });
-            
-            // Listener for Stock
-            const stockRef = collection(db, `artifacts/${appId}/users/${userId}/stock`);
-            onSnapshot(stockRef, (snapshot) => {
-                stockData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                renderStockCards();
-            }, (error) => {
-                console.error("Stok verisi yüklenemedi:", error);
-            });
-
-            // Listener for Pending Packages
-            const packagesRef = collection(db, `artifacts/${appId}/users/${userId}/packages`);
-            onSnapshot(query(packagesRef, where("status", "==", "hazır")), (snapshot) => {
-                const packages = [];
-                snapshot.forEach(doc => {
-                    packages.push({ id: doc.id, ...doc.data() });
-                });
-                renderPendingPackages(packages);
-            }, (error) => {
-                console.error("Firestore listener error:", error);
-                showModal("Veri Hatası", "Bekleyen paketler yüklenemedi.");
-            });
-            
-            // Listener for Shipment Screen
-            onSnapshot(query(packagesRef, where("status", "!=", "hazır")), (snapshot) => {
-                const packages = [];
-                snapshot.forEach(doc => {
-                    packages.push({ id: doc.id, ...doc.data() });
-                });
-                renderShipmentPackages(packages);
-            }, (error) => {
-                console.error("Firestore listener error:", error);
-                showModal("Veri Hatası", "Sevkiyat verileri yüklenemedi.");
-            });
-        };
-
-        // Admin Panel Functions
-        const renderCustomers = () => {
-            customerSelect.innerHTML = '<option value="">Müşteri Seçin</option>';
-            customersListUl.innerHTML = '';
-            customerData.forEach(customer => {
-                const option = document.createElement('option');
-                option.value = customer.id;
-                option.textContent = `${customer.code} - ${customer.name}`;
-                customerSelect.appendChild(option);
-                
-                const li = document.createElement('li');
-                li.className = 'p-2 border-b last:border-0 flex justify-between items-center';
-                li.innerHTML = `
-                    <span>${customer.code} - ${customer.name}</span>
-                    <button class="delete-item-btn text-red-500 hover:text-red-700" data-id="${customer.id}" data-type="customer">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                `;
-                customersListUl.appendChild(li);
-            });
-        };
-
-        const renderStockCards = () => {
-            manualStockSelect.innerHTML = '';
-            stockListUl.innerHTML = '';
-            stockData.forEach(stock => {
-                const option = document.createElement('option');
-                option.value = stock.id;
-                option.textContent = `${stock.code} - ${stock.name}`;
-                manualStockSelect.appendChild(option);
-                
-                const li = document.createElement('li');
-                li.className = 'p-2 border-b last:border-0 flex justify-between items-center';
-                li.innerHTML = `
-                    <span>${stock.code} - ${stock.name}</span>
-                    <button class="delete-item-btn text-red-500 hover:text-red-700" data-id="${stock.id}" data-type="stock">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                `;
-                stockListUl.appendChild(li);
-            });
-        };
-
-        addCustomerBtn.addEventListener('click', async () => {
-            const code = customerCodeInput.value.trim();
-            const name = customerNameInput.value.trim();
-            const email = customerEmailInput.value.trim();
-            const desc = customerDescInput.value.trim();
-            if (!code || !name) {
-                showModal("Eksik Bilgi", "Lütfen müşteri kodu ve adını girin.");
-                return;
-            }
-            try {
-                const customersRef = collection(db, `artifacts/${appId}/users/${userId}/customers`);
-                await addDoc(customersRef, { code, name, email, description: desc });
-                showModal("Başarılı", "Müşteri başarıyla eklendi.");
-                customerCodeInput.value = '';
-                customerNameInput.value = '';
-                customerEmailInput.value = '';
-                customerDescInput.value = '';
-            } catch (error) {
-                console.error("Müşteri ekleme hatası:", error);
-                showModal("Hata", "Müşteri eklenemedi.");
-            }
-        });
-
-        addStockBtn.addEventListener('click', async () => {
-            const code = stockCodeInput.value.trim();
-            const name = stockNameInput.value.trim();
-            const category = stockCategoryInput.value.trim();
-            if (!code || !name) {
-                showModal("Eksik Bilgi", "Lütfen stok kodu ve adını girin.");
-                return;
-            }
-            try {
-                const stockRef = collection(db, `artifacts/${appId}/users/${userId}/stock`);
-                await addDoc(stockRef, { code, name, category });
-                showModal("Başarılı", "Stok kartı başarıyla eklendi.");
-                stockCodeInput.value = '';
-                stockNameInput.value = '';
-                stockCategoryInput.value = '';
-            } catch (error) => {
-                console.error("Stok ekleme hatası:", error);
-                showModal("Hata", "Stok kartı eklenemedi.");
-            }
-        });
-
-        document.addEventListener('click', async (e) => {
-            if (e.target.closest('.delete-item-btn')) {
-                const btn = e.target.closest('.delete-item-btn');
-                const id = btn.dataset.id;
-                const type = btn.dataset.type;
-                const path = type === 'customer' ? 'customers' : 'stock';
-                try {
-                    const itemDocRef = doc(db, `artifacts/${appId}/users/${userId}/${path}`, id);
-                    await deleteDoc(itemDocRef);
-                    showModal("Silindi", `${type === 'customer' ? 'Müşteri' : 'Stok kartı'} başarıyla silindi.`);
-                } catch (error) {
-                    console.error("Silme hatası:", error);
-                    showModal("Hata", "Silme işlemi başarısız.");
-                }
-            }
-        });
-
-        // Other functions remain the same as the previous version
-        const renderPendingPackages = (packages) => {
-            pendingPackagesList.innerHTML = '';
-            packages.forEach(pkg => {
-                const row = document.createElement('tr');
-                row.classList.add('border-b', 'border-gray-200', 'hover:bg-gray-100', 'cursor-pointer');
-                row.dataset.packageId = pkg.id;
-                row.innerHTML = `
-                    <td class="py-3 px-6 text-left whitespace-nowrap">${pkg.packageNumber}</td>
-                    <td class="py-3 px-6 text-left">${pkg.items.length}</td>
-                    <td class="py-3 px-6 text-left">${new Date(pkg.createdAt?.seconds * 1000).toLocaleString()}</td>
-                    <td class="py-3 px-6 text-left">${pkg.customer?.code || '-'}</td>
-                    <td class="py-3 px-6 text-left">${pkg.customer?.name || '-'}</td>
-                    <td class="py-3 px-6 text-left">${pkg.customer?.description || '-'}</td>
-                `;
-                pendingPackagesList.appendChild(row);
-                
-                row.addEventListener('click', () => {
-                    selectPackage(pkg.id, pkg.items);
-                });
-            });
-        };
-
-        const renderShipmentPackages = (packages) => {
-            shipmentList.innerHTML = '';
-            packages.forEach(pkg => {
-                const row = document.createElement('tr');
-                row.classList.add('border-b', 'border-gray-200', 'hover:bg-gray-100', 'cursor-pointer');
-                row.dataset.packageId = pkg.id;
-                
-                let statusClass, statusText;
-                switch(pkg.status) {
-                    case 'yolda':
-                        statusClass = 'bg-yellow-200 text-yellow-700';
-                        statusText = 'Yolda';
-                        break;
-                    case 'teslim edildi':
-                        statusClass = 'bg-green-200 text-green-700';
-                        statusText = 'Teslim Edildi';
-                        break;
-                    default:
-                        statusClass = 'bg-gray-200 text-gray-700';
-                        statusText = 'Bilinmiyor';
-                }
-
-                row.innerHTML = `
-                    <td class="py-3 px-6 text-left whitespace-nowrap">${pkg.packageNumber}</td>
-                    <td class="py-3 px-6 text-left">${pkg.customer?.name || '-'}</td>
-                    <td class="py-3 px-6 text-left"><span class="py-1 px-3 rounded-full text-xs font-medium ${statusClass}">${statusText}</span></td>
-                    <td class="py-3 px-6 text-left">${pkg.container || '-'}</td>
-                    <td class="py-3 px-6 text-center">
-                        <button data-package-id="${pkg.id}" class="update-status-btn px-3 py-1 bg-green-500 text-white rounded-md text-xs hover:bg-green-600 transition-colors">
-                            Durum Güncelle
-                        </button>
-                    </td>
-                `;
-                shipmentList.appendChild(row);
-            });
-        };
-
-        const renderStock = (daily, total) => {
-            dailyMovementsList.innerHTML = '';
-            daily.forEach(item => {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td class="py-2 px-4">${item.code}</td><td class="py-2 px-4">${item.name}</td><td class="py-2 px-4">${item.quantity}</td>`;
-                dailyMovementsList.appendChild(row);
-            });
-            
-            totalStockList.innerHTML = '';
-            total.forEach(item => {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td class="py-2 px-4">${item.code}</td><td class="py-2 px-4">${item.name}</td><td class="py-2 px-4">${item.quantity}</td>`;
-                totalStockList.appendChild(row);
-            });
-        };
-
-        const updateCounters = () => {
-            let defined = 0;
-            let undefined = 0;
-            currentPackage.items.forEach(item => {
-                if (item.stockCode) {
-                    defined++;
-                } else {
-                    undefined++;
-                }
-            });
-            definedCountEl.textContent = defined;
-            undefinedCountEl.textContent = undefined;
-            if (defined + undefined > 0) {
-                averageCountEl.textContent = ((defined + undefined) / (defined > 0 ? defined : 1)).toFixed(2);
+        const updateRoleUI = () => {
+            if (currentUser.role === 'supervisor') {
+                appScreen.classList.add('supervisor-enabled');
+                document.body.classList.add('supervisor-enabled-block'); // for block elements
             } else {
-                averageCountEl.textContent = '0';
+                appScreen.classList.remove('supervisor-enabled');
+                document.body.classList.remove('supervisor-enabled-block');
             }
+        };
+
+        // --- APP LOGIC ---
+        const handleLogin = (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const role = document.getElementById('role').value;
+
+            const user = (role === 'operator') ? MOCK_USERS.operator : MOCK_USERS.supervisor;
+
+            if (user) {
+                currentUser = { ...user };
+                loginScreen.style.display = 'none';
+                appScreen.style.display = 'flex';
+                userDisplay.textContent = currentUser.name;
+                roleDisplay.textContent = currentUser.role === 'operator' ? 'Operatör' : 'Süpervizör';
+                updateRoleUI();
+                initializePaketlemePage();
+                initializeSevkiyatPage();
+                initializeStokSorguPage();
+                barcodeInput.focus();
+            } else {
+                showToast('Geçersiz kullanıcı adı veya şifre.', 'error');
+            }
+        };
+
+        const handleLogout = () => {
+            currentUser = null;
+            loginScreen.style.display = 'flex';
+            appScreen.style.display = 'none';
+            document.getElementById('login-form').reset();
+        };
+
+        const switchTab = (tabName) => {
+            tabNavigation.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tabName);
+            });
+            pages.forEach(page => {
+                page.classList.toggle('active', page.id === `${tabName}-page`);
+            });
+        };
+
+        // --- PAKETLEME SAYFASI LOGIC ---
+        const initializePaketlemePage = () => {
+            renderPendingPackages();
+            renderQuickAddButtons();
+            updatePackageCounts();
+            packageCountEl.textContent = packageCounter;
+            customerNameDisplay.textContent = customerSelect.options[customerSelect.selectedIndex].text.split(' - ')[1];
+        };
+        
+        const renderPendingPackages = () => {
+            pendingPackagesTable.innerHTML = MOCK_PENDING_PACKAGES.map((pkg, index) => `
+                <tr class="hover:bg-slate-50 cursor-pointer" data-id="${pkg.id}">
+                    <td class="p-2"><input type="checkbox" class="package-checkbox"></td>
+                    <td class="p-2">${index + 1}</td>
+                    <td class="p-2">${pkg.no}</td>
+                    <td class="p-2">${pkg.miktar}</td>
+                    <td class="p-2">${pkg.zaman}</td>
+                    <td class="p-2">${pkg.cariKod}</td>
+                    <td class="p-2">${pkg.cariUnvan}</td>
+                    <td class="p-2">${pkg.paketleyen}</td>
+                </tr>
+            `).join('');
+        };
+        
+        const renderQuickAddButtons = () => {
+            quickAddGrid.innerHTML = QUICK_ADD_ITEMS.map(item => `
+                <button data-item-name="${item}" class="quick-add-btn text-lg font-semibold p-4 border rounded-lg bg-slate-50 hover:bg-blue-100 hover:border-blue-400 transition-all">${item}</button>
+            `).join('');
+        };
+
+        const updatePackageCounts = () => {
+            const definedTotal = Object.values(currentPackage.items).reduce((sum, item) => sum + item.qty, 0);
+            definedCountEl.textContent = definedTotal;
+            undefinedCountEl.textContent = currentPackage.tanimsiz;
+        };
+        
+        const updatePackageDetails = () => {
+             if (Object.keys(currentPackage.items).length === 0 && currentPackage.tanimsiz === 0) {
+                 packageItemDetailsEl.innerHTML = '<p class="text-slate-500">Yeni bir paket oluşturmak için barkod okutun veya hızlı ekle butonlarını kullanın.</p>';
+                 return;
+             }
+             let html = '<ul class="space-y-1 text-lg">';
+             for(const [kod, item] of Object.entries(currentPackage.items)) {
+                html += `<li class="flex justify-between items-center p-1 rounded"><span>${item.isim}</span><span class="font-bold bg-blue-200 text-blue-800 px-2 rounded-full">${item.qty}</span></li>`;
+             }
+             html += '</ul>';
+             packageItemDetailsEl.innerHTML = html;
         };
 
         const addItemToPackage = (item) => {
-            currentPackage.items.push(item);
-            updateCounters();
-            showModal("Ürün Eklendi", `${item.name} pakete eklendi.`);
-        };
-
-        const renderRightPanel = (items) => {
-            rightPanel.innerHTML = `
-                <h3 class="text-lg font-semibold text-gray-700 mb-2">Seçili Paket Detayları</h3>
-                <div class="flex items-center justify-between">
-                    <button id="prev-item-btn" class="text-gray-500 hover:text-gray-700"><i class="fas fa-arrow-up"></i></button>
-                    <span id="item-index" class="text-lg font-bold"></span>
-                    <button id="next-item-btn" class="text-gray-500 hover:text-gray-700"><i class="fas fa-arrow-down"></i></button>
-                </div>
-                <div id="item-details" class="mt-2 text-gray-600 text-sm"></div>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <button class="flag-btn px-2 py-1 text-xs rounded-full bg-gray-200" data-flag="Ozel">Özel</button>
-                    <button class="flag-btn px-2 py-1 text-xs rounded-full bg-gray-200" data-flag="Yeni">Yeni</button>
-                    <button class="flag-btn px-2 py-1 text-xs rounded-full bg-gray-200" data-flag="Yirtik">Yırtık</button>
-                    <button class="flag-btn px-2 py-1 text-xs rounded-full bg-gray-200" data-flag="Cikmayan">Çıkmayan</button>
-                    <button class="flag-btn px-2 py-1 text-xs rounded-full bg-gray-200" data-flag="Lekeli">Lekeli</button>
-                </div>
-            `;
-            selectedItemIndex = 0;
-            updateItemDetails();
-            
-            document.getElementById('prev-item-btn').addEventListener('click', () => {
-                if (selectedItemIndex > 0) {
-                    selectedItemIndex--;
-                    updateItemDetails();
-                }
-            });
-            document.getElementById('next-item-btn').addEventListener('click', () => {
-                if (selectedItemIndex < items.length - 1) {
-                    selectedItemIndex++;
-                    updateItemDetails();
-                }
-            });
-
-            document.querySelectorAll('.flag-btn').forEach(button => {
-                button.addEventListener('click', async (e) => {
-                    const flag = e.target.dataset.flag;
-                    const packageRef = doc(db, `artifacts/${appId}/users/${userId}/packages`, selectedPackageId);
-                    const packageDoc = await getDoc(packageRef);
-                    const packageData = packageDoc.data();
-                    
-                    const item = packageData.items[selectedItemIndex];
-                    item.flags = item.flags || [];
-                    const flagIndex = item.flags.indexOf(flag);
-                    if (flagIndex > -1) {
-                        item.flags.splice(flagIndex, 1);
-                    } else {
-                        item.flags.push(flag);
-                    }
-                    
-                    await updateDoc(packageRef, { items: packageData.items });
-                    selectedPackageItems[selectedItemIndex].flags = item.flags;
-                    updateItemDetails();
-                });
-            });
-        };
-
-        const updateItemDetails = () => {
-            const item = selectedPackageItems[selectedItemIndex];
-            if (!item) {
-                document.getElementById('item-details').innerHTML = `<p class="text-gray-400">Ürün yok.</p>`;
-                document.getElementById('item-index').textContent = '';
-                return;
-            }
-            document.getElementById('item-index').textContent = `${selectedItemIndex + 1} / ${selectedPackageItems.length}`;
-            const details = document.getElementById('item-details');
-            details.innerHTML = `
-                <p><strong>Stok Kodu:</strong> ${item.stockCode || 'Tanımsız'}</p>
-                <p><strong>Cinsi:</strong> ${item.name}</p>
-                <p><strong>Miktar:</strong> ${item.quantity}</p>
-                <p><strong>Özellikler:</strong> ${item.flags?.join(', ') || 'Yok'}</p>
-            `;
-            document.querySelectorAll('.flag-btn').forEach(btn => {
-                const flag = btn.dataset.flag;
-                if (item.flags && item.flags.includes(flag)) {
-                    btn.classList.add('bg-blue-500', 'text-white');
-                    btn.classList.remove('bg-gray-200', 'text-gray-800');
-                } else {
-                    btn.classList.add('bg-gray-200', 'text-gray-800');
-                    btn.classList.remove('bg-blue-500', 'text-white');
-                }
-            });
-        };
-
-        const selectPackage = async (packageId, items) => {
-            selectedPackageId = packageId;
-            selectedPackageItems = items;
-            renderRightPanel(items);
-            // Highlight selected row
-            document.querySelectorAll('#pending-packages-list tr').forEach(row => {
-                row.classList.remove('bg-blue-100');
-            });
-            document.querySelector(`tr[data-package-id="${packageId}"]`).classList.add('bg-blue-100');
-        };
-
-        // Event Listeners
-        document.getElementById('find-barcode-btn').addEventListener('click', () => {
-            const barcodeValue = packageNumberInput.value.trim().toUpperCase();
-            if (barcodeValue) {
-                const stockItem = stockData.find(s => s.code === barcodeValue);
-                if (stockItem) {
-                    addItemToPackage({
-                        stockCode: stockItem.code,
-                        name: stockItem.name,
-                        quantity: 1,
-                        flags: []
-                    });
-                } else {
-                    addItemToPackage({
-                        stockCode: null,
-                        name: 'Tanımsız Ürün',
-                        quantity: 1,
-                        flags: []
-                    });
-                    showModal("Ürün Bulunamadı", "Girilen barkod stokta bulunamadı. Tanımsız olarak eklendi.");
-                }
-                packageNumberInput.value = '';
-            }
-        });
-
-        document.getElementById('clear-barcode-btn').addEventListener('click', () => {
-            packageNumberInput.value = '';
-        });
-
-        document.querySelectorAll('.quick-add-btn').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const stockCode = e.target.dataset.stockCode;
-                const stockItem = stockData.find(s => s.code === stockCode);
-                if (stockItem) {
-                    addItemToPackage({
-                        stockCode: stockItem.code,
-                        name: stockItem.name,
-                        quantity: 1,
-                        flags: []
-                    });
-                } else {
-                    showModal("Stok Hatası", "Seçilen ürün stok kartlarında bulunamıyor. Lütfen admin panelinden ekleyin.");
-                }
-            });
-        });
-
-        document.getElementById('manual-add-btn').addEventListener('click', () => {
-            manualAddModal.classList.remove('hidden');
-            manualAddModal.classList.add('flex');
-        });
-
-        document.getElementById('manual-add-cancel-btn').addEventListener('click', () => {
-            manualAddModal.classList.add('hidden');
-            manualAddModal.classList.remove('flex');
-        });
-
-        document.getElementById('manual-add-confirm-btn').addEventListener('click', () => {
-            const stockId = manualStockSelect.value;
-            const quantity = parseInt(manualQuantityInput.value, 10);
-            const stockItem = stockData.find(s => s.id === stockId);
-            if (stockItem && quantity > 0) {
-                addItemToPackage({
-                    stockCode: stockItem.code,
-                    name: stockItem.name,
-                    quantity: quantity,
-                    flags: []
-                });
-                manualAddModal.classList.add('hidden');
+            if (currentPackage.items[item.kod]) {
+                currentPackage.items[item.kod].qty++;
             } else {
-                showModal("Hata", "Lütfen geçerli bir ürün ve miktar seçin.");
+                currentPackage.items[item.kod] = { ...item, qty: 1 };
             }
-        });
-
-        document.getElementById('pack-save-btn').addEventListener('click', async () => {
-            if (currentPackage.items.length === 0) {
-                showModal("Hata", "Paketleyecek ürün yok.");
-                return;
-            }
-            const selectedCustomer = customerData.find(c => c.id === customerSelect.value);
-            if (!selectedCustomer) {
-                showModal("Eksik Bilgi", "Lütfen geçerli bir müşteri seçimi yapın.");
-                return;
-            }
-            
-            const selectedStaff = staffSelect.value;
-            if (!selectedStaff) {
-                showModal("Eksik Bilgi", "Lütfen personel seçimi yapın.");
-                return;
-            }
-
-            const packageNumber = `PKT-${Date.now()}`;
-            
-            try {
-                const packagesRef = collection(db, `artifacts/${appId}/users/${userId}/packages`);
-                const newPackage = {
-                    packageNumber: packageNumber,
-                    items: currentPackage.items,
-                    customer: { 
-                        id: selectedCustomer.id,
-                        code: selectedCustomer.code,
-                        name: selectedCustomer.name,
-                        email: selectedCustomer.email,
-                        description: selectedCustomer.description
-                    },
-                    staff: { id: selectedStaff, name: staffSelect.options[staffSelect.selectedIndex].text },
-                    container: '',
-                    createdAt: new Date(),
-                    status: 'hazır'
-                };
-                
-                await addDoc(packagesRef, newPackage);
-                showModal("Paket Kaydedildi", `Paket No: ${packageNumber} başarıyla kaydedildi.`);
-                
-                // Reset current package for new entry
-                currentPackage = { packageNumber: '', items: [] };
-                updateCounters();
-                packageNumberInput.value = '';
-
-            } catch (error) {
-                console.error("Paket kaydetme hatası:", error);
-                showModal("Hata", `Paket kaydedilemedi. Hata: ${error.message}`);
-            }
-        });
-        
-        document.getElementById('delete-package-btn').addEventListener('click', async () => {
-            if (userRole !== 'süpervizör') {
-                showAuthModal("Bu işlemi sadece süpervizör yapabilir.");
-                return;
-            }
-            if (!selectedPackageId) {
-                showModal("Seçim Yok", "Lütfen silmek için bir paket seçin.");
-                return;
-            }
-            try {
-                const packageDocRef = doc(db, `artifacts/${appId}/users/${userId}/packages`, selectedPackageId);
-                await deleteDoc(packageDocRef);
-                showModal("Paket Silindi", `Paket başarıyla silindi.`);
-                selectedPackageId = null;
-                selectedPackageItems = [];
-                renderRightPanel([]);
-            } catch (error) {
-                console.error("Paket silme hatası:", error);
-                showModal("Hata", "Paket silinemedi.");
-            }
-        });
-
-        printLabelBtn.addEventListener('click', () => {
-            if (!selectedPackageId) {
-                showModal("Seçim Yok", "Lütfen etiketini basmak için bir paket seçin.");
-                return;
-            }
-            // Etiket çıktısı alma mantığı
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-                <html>
-                <head>
-                    <title>Paket Etiketi</title>
-                    <style>
-                        body { font-family: 'Inter', sans-serif; padding: 20px; }
-                        .label { width: 4in; height: 6in; border: 1px solid black; padding: 10px; box-sizing: border-box; }
-                        h1 { font-size: 20px; font-weight: bold; margin-bottom: 10px; }
-                        p { font-size: 14px; margin-bottom: 5px; }
-                    </style>
-                </head>
-                <body>
-                    <div class="label">
-                        <h1>PAKET ETİKETİ</h1>
-                        <p><strong>Paket No:</strong> ${pendingPackagesList.querySelector(`tr[data-package-id="${selectedPackageId}"]`).cells[0].textContent}</p>
-                        <p><strong>Müşteri:</strong> ${pendingPackagesList.querySelector(`tr[data-package-id="${selectedPackageId}"]`).cells[4].textContent}</p>
-                        <p><strong>Konteyner:</strong> ${containerNumberInput.value || '-'}</p>
-                        <hr style="margin-top: 10px; border-top: 1px dashed gray;">
-                        <h3>Ürün Listesi</h3>
-                        <ul>
-                            ${selectedPackageItems.map(item => `<li>${item.name} (${item.quantity} adet)</li>`).join('')}
-                        </ul>
-                    </div>
-                </body>
-                </html>
-            `);
-            printWindow.document.close();
-            printWindow.print();
-        });
-
-        document.getElementById('end-day-btn').addEventListener('click', () => {
-            if (userRole !== 'süpervizör') {
-                showAuthModal("Bu işlemi sadece süpervizör yapabilir.");
-                return;
-            }
-            showModal("İş Sonu", "Gün sonu işlemleri tamamlandı. Raporlar hazırlanıyor...");
-        });
-        
-        document.getElementById('search-stock-btn').addEventListener('click', () => {
-            const query = stockSearchInput.value.toLowerCase();
-            
-            const filteredStock = stockData.filter(item => 
-                item.code.toLowerCase().includes(query) ||
-                item.name.toLowerCase().includes(query) ||
-                item.category.toLowerCase().includes(query)
-            );
-            
-            const dailyMovements = filteredStock.map(item => ({...item, quantity: Math.floor(Math.random() * 20) + 1}));
-            const totalStock = filteredStock.map(item => ({...item, quantity: Math.floor(Math.random() * 500) + 100}));
-            
-            renderStock(dailyMovements, totalStock);
-        });
-
-        window.onload = () => {
-            initializeUI();
-            initializeFirebase();
+            updatePackageCounts();
+            updatePackageDetails();
         };
+
+        const handleBarcodeScan = () => {
+            const barcode = barcodeInput.value.trim();
+            if (!barcode) return;
+
+            const stockItem = Object.values(MOCK_STOCK).find(s => s.kod === barcode) || MOCK_STOCK[barcode];
+            if (stockItem) {
+                addItemToPackage(stockItem);
+                showToast(`${stockItem.isim} eklendi.`, 'success');
+            } else {
+                currentPackage.tanimsiz++;
+                updatePackageCounts();
+                showToast('Tanımsız barkod okutuldu.', 'warning');
+            }
+            barcodeInput.value = '';
+            barcodeInput.focus();
+        };
+
+        const handleQuickAdd = (e) => {
+            const itemName = e.target.dataset.itemName;
+            if (!itemName) return;
+            
+            const stockItem = Object.values(MOCK_STOCK).find(s => s.isim === itemName);
+            if(stockItem){
+                addItemToPackage(stockItem);
+                showToast(`${stockItem.isim} eklendi.`, 'success');
+            } else {
+                showToast('Hızlı ekleme ürünü bulunamadı!', 'error');
+            }
+        };
+
+        const handleSavePackage = async () => {
+            const totalItems = Object.values(currentPackage.items).reduce((sum, item) => sum + item.qty, 0) + currentPackage.tanimsiz;
+            if (totalItems === 0) {
+                showModal('Hata', 'Pakete kaydedilecek en az 1 ürün eklenmelidir.', [{text: 'Tamam', class: 'bg-blue-500 text-white', action: 'ok'}]);
+                return;
+            }
+
+            const newPackageNo = `PK${String(125 + packageCounter).padStart(5, '0')}`;
+            const now = new Date();
+            const newPackage = {
+                id: 3 + packageCounter,
+                no: newPackageNo,
+                miktar: totalItems,
+                zaman: `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`,
+                cariKod: customerSelect.value,
+                cariUnvan: customerSelect.options[customerSelect.selectedIndex].text.split(' - ')[1],
+                paketleyen: document.getElementById('staff-select').value
+            };
+            
+            MOCK_PENDING_PACKAGES.push(newPackage);
+            packageCounter++;
+            packageCountEl.textContent = packageCounter;
+
+            renderPendingPackages();
+            resetCurrentPackage();
+            showToast('Paket başarıyla kaydedildi!', 'success');
+            
+            // Etiket oluştur ve e-posta gönder
+            const labelContent = generateLabelContent(newPackage, currentPackage.items);
+            SystemAPI.print(labelContent);
+            
+            const emailBody = `Sayın ${newPackage.cariUnvan}, ${newPackage.no} numaralı paketiniz ${totalItems} adet ürün ile oluşturulmuştur.`;
+            await SystemAPI.sendEmail('musteri@ornek.com', `Paketiniz #${newPackage.no} Oluşturuldu`, emailBody);
+        };
+        
+        const generateLabelContent = (packageInfo, items) => {
+            let itemsList = Object.values(items).map(i => `<li>${i.isim}: ${i.qty}</li>`).join('');
+            return `
+                <html><head><title>Etiket</title><style>body{font-family: sans-serif; margin: 10px;} h1{font-size: 18px;} p{font-size: 14px;} ul{padding-left: 20px;}</style></head><body>
+                <h1>Paket No: ${packageInfo.no}</h1>
+                <p><strong>Müşteri:</strong> ${packageInfo.cariUnvan}</p>
+                <p><strong>Konteyner:</strong> ${document.getElementById('container-no').textContent}</p>
+                <hr>
+                <strong>Ürünler:</strong>
+                <ul>${itemsList}</ul>
+                <p><strong>Toplam Miktar:</strong> ${packageInfo.miktar}</p>
+                </body></html>
+            `;
+        };
+
+        const resetCurrentPackage = () => {
+            currentPackage = { items: {}, tanimsiz: 0 };
+            updatePackageCounts();
+            updatePackageDetails();
+        };
+        
+        const handleDeletePackage = async () => {
+             const selectedCount = pendingPackagesTable.querySelectorAll('.package-checkbox:checked').length;
+             if (selectedCount === 0) {
+                 showModal('Uyarı', 'Lütfen silmek için en az bir paket seçin.', [{text: 'Tamam', class: 'bg-blue-500 text-white', action: 'ok'}]);
+                 return;
+             }
+             
+             const result = await showModal('Onay', `${selectedCount} adet paket silinecek. Emin misiniz? Bu işlem geri alınamaz.`, [
+                 {text: 'Vazgeç', class: 'bg-slate-200', action: 'cancel'},
+                 {text: 'Evet, Sil', class: 'bg-red-500 text-white', action: 'confirm'}
+             ]);
+
+             if (result === 'confirm') {
+                showToast(`${selectedCount} paket silindi.`, 'success');
+                // Silme işlemini burada mock data'dan yap
+             }
+        };
+
+        // --- SEVKİYAT SAYFASI LOGIC ---
+        const initializeSevkiyatPage = () => {
+            renderShipmentPackages();
+            renderContainerDetails();
+        };
+
+        const renderShipmentPackages = () => {
+            shipmentPackagesTable.innerHTML = MOCK_SHIPMENT_PACKAGES.map(pkg => `
+                 <tr class="hover:bg-slate-50">
+                    <td class="p-2">${pkg.no}</td>
+                    <td class="p-2">${pkg.musteri}</td>
+                    <td class="p-2">${pkg.konteyner}</td>
+                    <td class="p-2"><span class="px-2 py-1 text-xs rounded-full ${pkg.durum === 'Gönderildi' ? 'bg-green-200 text-green-800' : 'bg-yellow-200 text-yellow-800'}">${pkg.durum}</span></td>
+                    <td class="p-2">${pkg.urun}</td>
+                    <td class="p-2 space-x-2">
+                        <button title="Etiket Yazdır" class="text-blue-500">🖨️</button>
+                        <button title="Konteyner Sil" class="text-red-500 supervisor-only">🗑️</button>
+                    </td>
+                </tr>
+            `).join('');
+        };
+        
+        const renderContainerDetails = () => {
+            containerDetailsList.innerHTML = MOCK_SHIPMENT_PACKAGES
+                .filter(p => p.konteyner === 'C000094')
+                .map(p => `<li class="p-1">${p.no} - ${p.musteri} (${p.urun} ürün)</li>`)
+                .join('');
+        };
+
+        // --- STOK SORGU SAYFASI LOGIC ---
+        const initializeStokSorguPage = () => {
+            renderStockQueryResults(Object.values(MOCK_STOCK));
+            const categories = [...new Set(Object.values(MOCK_STOCK).map(s => s.kategori))];
+            stockCategoryFilter.innerHTML = '<option>Tümü</option>' + categories.map(c => `<option>${c}</option>`).join('');
+        };
+        
+        const renderStockQueryResults = (stockList) => {
+            stockQueryResults.innerHTML = stockList.map(s => `
+                <tr class="border-b hover:bg-slate-50">
+                    <td class="p-3">${s.kod}</td>
+                    <td class="p-3">${s.isim}</td>
+                    <td class="p-3">${s.miktar ?? 'N/A'}</td>
+                    <td class="p-3">${s.depo}</td>
+                    <td class="p-3 text-green-600">+10</td>
+                </tr>
+            `).join('');
+        };
+
+        // --- EVENT LISTENERS ---
+        loginForm.addEventListener('submit', handleLogin);
+        logoutBtn.addEventListener('click', handleLogout);
+        tabNavigation.addEventListener('click', (e) => {
+            if (e.target.matches('.tab-btn')) {
+                switchTab(e.target.dataset.tab);
+            }
+        });
+        
+        customerSelect.addEventListener('change', () => {
+             customerNameDisplay.textContent = customerSelect.options[customerSelect.selectedIndex].text.split(' - ')[1];
+        });
+
+        // Paketleme Sayfası Eventleri
+        barcodeInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleBarcodeScan();
+            }
+            if (e.key === 'Escape') {
+                resetCurrentPackage();
+            }
+        });
+        clearBarcodeBtn.addEventListener('click', () => { barcodeInput.value=''; barcodeInput.focus(); });
+        quickAddGrid.addEventListener('click', (e) => {
+            if(e.target.classList.contains('quick-add-btn')) {
+                handleQuickAdd(e);
+            }
+        });
+        savePackageBtn.addEventListener('click', handleSavePackage);
+        deletePackageBtn.addEventListener('click', handleDeletePackage);
+
+        // Klavye kısayolları
+        document.addEventListener('keydown', (e) => {
+            if (appScreen.style.display === 'flex' && document.getElementById('paketleme-page').classList.contains('active')) {
+                if (e.key === 'F2') {
+                    e.preventDefault();
+                    savePackageBtn.click();
+                }
+            }
+        });
+    });
     </script>
 </body>
 </html>
