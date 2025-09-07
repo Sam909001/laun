@@ -558,8 +558,9 @@
             renderPendingPackages();
             renderQuickAddButtons();
             updatePackageCounts();
-            packageCountEl.textContent = packageCounter;
+            packageCountEl.textContent = MOCK_PENDING_PACKAGES.length;
             customerNameDisplay.textContent = customerSelect.options[customerSelect.selectedIndex].text.split(' - ')[1];
+            updatePackageDetails(); // Yeni eklendi
         };
         
         const renderPendingPackages = () => {
@@ -585,6 +586,7 @@
             undefinedCountEl.textContent = currentPackage.tanimsiz;
         };
         
+        // Bu fonksiyon, Paket Detayları panelini güncelliyor
         const updatePackageDetails = () => {
              if (Object.keys(currentPackage.items).length === 0 && currentPackage.tanimsiz === 0) {
                  packageItemDetailsEl.innerHTML = '<p class="text-slate-500">Yeni bir paket oluşturmak için barkod okutun veya hızlı ekle butonlarını kullanın.</p>';
@@ -592,7 +594,10 @@
              }
              let html = '<ul class="space-y-1 text-sm">';
              for(const [kod, item] of Object.entries(currentPackage.items)) {
-                html += `<li class="flex justify-between items-center p-1 rounded"><span>${item.isim}</span><span class="font-bold bg-blue-200 text-blue-800 px-2 rounded-full">${item.qty}</span></li>`;
+                html += `<li class="flex justify-between items-center p-1 rounded hover:bg-slate-200 cursor-pointer" data-item-kod="${kod}"><span>${item.isim}</span><span class="font-bold bg-blue-200 text-blue-800 px-2 rounded-full">${item.qty}</span></li>`;
+             }
+             if (currentPackage.tanimsiz > 0) {
+                 html += `<li class="flex justify-between items-center p-1 rounded bg-red-100 hover:bg-red-200 cursor-pointer"><span>Tanımsız Ürün</span><span class="font-bold text-red-800 px-2 rounded-full">${currentPackage.tanimsiz}</span></li>`;
              }
              html += '</ul>';
              packageItemDetailsEl.innerHTML = html;
@@ -619,6 +624,7 @@
             } else {
                 currentPackage.tanimsiz++;
                 updatePackageCounts();
+                updatePackageDetails(); // Tanımsız ürün eklendiğinde de detayları güncelle
                 showToast('Tanımsız barkod okutuldu.', 'warning');
             }
             barcodeInput.value = '';
@@ -645,10 +651,10 @@
                 return;
             }
 
-            const newPackageNo = `PK${String(125 + packageCounter).padStart(5, '0')}`;
+            const newPackageNo = `PK${String(125 + MOCK_PENDING_PACKAGES.length + 1).padStart(5, '0')}`;
             const now = new Date();
             const newPackage = {
-                id: 3 + packageCounter,
+                id: MOCK_PENDING_PACKAGES.length + 1,
                 no: newPackageNo,
                 miktar: totalItems,
                 zaman: `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`,
@@ -658,8 +664,7 @@
             };
             
             MOCK_PENDING_PACKAGES.push(newPackage);
-            packageCounter++;
-            packageCountEl.textContent = packageCounter;
+            packageCountEl.textContent = MOCK_PENDING_PACKAGES.length;
 
             renderPendingPackages();
             resetCurrentPackage();
@@ -707,8 +712,14 @@
              ]);
 
              if (result === 'confirm') {
+                 const selectedPackageIds = Array.from(pendingPackagesTable.querySelectorAll('.package-checkbox:checked'))
+                    .map(checkbox => parseInt(checkbox.closest('tr').dataset.id, 10));
+                
+                MOCK_PENDING_PACKAGES = MOCK_PENDING_PACKAGES.filter(pkg => !selectedPackageIds.includes(pkg.id));
+                
+                renderPendingPackages();
+                packageCountEl.textContent = MOCK_PENDING_PACKAGES.length;
                 showToast(`${selectedCount} paket silindi.`, 'success');
-                // Silme işlemini burada mock data'dan yap
              }
         };
 
