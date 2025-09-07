@@ -121,64 +121,91 @@
 
                 <!-- Ana Çalışma Alanı -->
                 <div class="flex-grow grid grid-cols-12 gap-4 overflow-hidden">
-                    <!-- Orta-Sol Panel -->
-                    <div class="col-span-12 lg:col-span-8 flex flex-col">
-                        <div class="flex-shrink-0 bg-white p-3 rounded-t-lg shadow-sm">
-                            <div class="flex items-center">
-                                <input type="text" id="barcode-input" placeholder="Barkod Okutun veya Girin (Enter)..." class="flex-grow text-2xl p-3 border-2 border-slate-300 rounded-l-lg">
-                                <button id="clear-barcode-btn" class="px-4 py-3 border-y-2 border-r-2 border-slate-300 text-slate-500 hover:bg-slate-100 text-2xl">✖</button>
-                                <div class="ml-4 text-xl font-bold">Toplam Paket: <span id="package-count">0</span></div>
+                    <!-- Sol Panel -->
+                    <div class="col-span-12 lg:col-span-4 flex flex-col gap-4">
+                        <div class="bg-white p-3 rounded-lg shadow-sm flex-shrink-0">
+                            <h3 class="text-lg font-semibold mb-2">Paket Oluştur</h3>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm text-slate-500">Ürün Ekle</span>
+                                <input type="text" id="barcode-input" placeholder="Barkod Okutun..." class="flex-grow text-lg p-2 border-2 border-slate-300 rounded-lg">
+                            </div>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-sm text-slate-500">Aynı paket sayısı:</span>
+                                <span class="font-bold text-lg">1</span>
                             </div>
                         </div>
-                        <div class="flex-grow bg-white shadow-sm rounded-b-lg overflow-y-auto">
-                            <h3 class="p-3 text-lg font-semibold bg-slate-100 sticky top-0">Bekleyen Paketler</h3>
-                            <table class="w-full text-left text-sm">
-                                <thead class="bg-slate-200">
-                                    <tr>
-                                        <th class="p-2 w-12"><input type="checkbox" id="select-all-packages"></th>
-                                        <th class="p-2">Sıra</th>
-                                        <th class="p-2">Paket No</th>
-                                        <th class="p-2">T. Miktar</th>
-                                        <th class="p-2">P. Zamanı</th>
-                                        <th class="p-2">Cari Kod</th>
-                                        <th class="p-2">Cari Unvan</th>
-                                        <th class="p-2">Paketleyen</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="pending-packages-table">
-                                    <!-- Dinamik olarak doldurulacak -->
-                                </tbody>
-                            </table>
+                        <div class="bg-white p-3 rounded-lg shadow-sm flex-grow overflow-hidden">
+                            <h3 class="text-lg font-semibold mb-2">Bekleyen Paketler</h3>
+                            <div class="flex items-center space-x-2 mb-2">
+                                <span class="text-sm">Toplam Bekleyen: <span id="package-count" class="font-bold">0</span></span>
+                            </div>
+                            <div class="overflow-y-auto h-[calc(100%-4rem)]">
+                                <table class="w-full text-left text-sm">
+                                    <thead class="bg-slate-200">
+                                        <tr>
+                                            <th class="p-2 w-12"><input type="checkbox" id="select-all-packages"></th>
+                                            <th class="p-2">Sıra</th>
+                                            <th class="p-2">Paket No</th>
+                                            <th class="p-2">T. Miktar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pending-packages-table">
+                                        <!-- Dinamik olarak doldurulacak -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Orta Panel -->
+                    <div class="col-span-12 lg:col-span-4 flex flex-col gap-4">
+                        <div class="bg-white p-3 rounded-lg shadow-sm flex-grow overflow-hidden">
+                            <h3 class="text-lg font-semibold mb-2">Paket Detayı</h3>
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center space-x-2">
+                                     <button class="bg-slate-200 p-1 rounded-full text-lg hover:bg-slate-300">▲</button>
+                                     <button class="bg-slate-200 p-1 rounded-full text-lg hover:bg-slate-300">▼</button>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="px-3 py-1 text-sm rounded-md bg-green-500 text-white hover:bg-green-600">MANUEL</button>
+                                    <button class="px-3 py-1 text-sm rounded-md bg-blue-500 text-white hover:bg-blue-600">Ürün Ekle</button>
+                                </div>
+                            </div>
+                            <div id="package-item-details" class="min-h-[200px] bg-slate-50 p-2 rounded overflow-y-auto">
+                                <p class="text-slate-500">Yeni bir paket oluşturmak için barkod okutun veya hızlı ekle butonlarını kullanın.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg shadow-sm flex-shrink-0">
+                            <h3 class="text-lg font-semibold mb-2">TANIMLA</h3>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200">Temizle / Yeni</button>
+                                <div class="p-2 rounded-lg bg-red-100 text-center">
+                                    <div class="text-xl font-bold text-red-700" id="undefined-count">0</div>
+                                    <div class="text-sm text-red-600">Tanımsız Adet</div>
+                                </div>
+                                <div class="p-2 rounded-lg bg-blue-100 text-center">
+                                    <div class="text-xl font-bold text-blue-700" id="defined-count">0</div>
+                                    <div class="text-sm text-blue-600">Tanımlı Adet</div>
+                                </div>
+                                <div class="p-2 rounded-lg bg-slate-100 text-center">
+                                    <div class="text-xl font-bold">0</div>
+                                    <div class="text-sm">Ortalama Adet</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Sağ Panel -->
                     <div class="col-span-12 lg:col-span-4 flex flex-col gap-4">
-                        <div class="bg-white p-3 rounded-lg shadow-sm flex-shrink-0">
-                            <h3 class="text-lg font-semibold mb-2">Seçili Paket Detayı</h3>
-                            <div id="package-item-details" class="min-h-[100px] bg-slate-50 p-2 rounded">
-                                <p class="text-slate-500">Yeni bir paket oluşturmak için barkod okutun veya hızlı ekle butonlarını kullanın.</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg shadow-sm flex-grow">
+                        <div class="bg-white p-3 rounded-lg shadow-sm flex-grow overflow-hidden">
                             <h3 class="text-lg font-semibold mb-2">Hızlı Ekle</h3>
                             <div id="quick-add-grid" class="grid grid-cols-3 gap-2">
                                 <!-- Dinamik olarak doldurulacak -->
                             </div>
                         </div>
-                         <div class="bg-white p-3 rounded-lg shadow-sm flex-shrink-0 flex items-center justify-between">
-                            <div class="flex space-x-4 text-center">
-                                <div class="p-2 rounded bg-red-100 text-red-700">
-                                    <div class="font-bold text-2xl" id="undefined-count">0</div>
-                                    <div class="text-sm">Tanımsız Adet</div>
-                                </div>
-                                <div class="p-2 rounded bg-blue-100 text-blue-700">
-                                    <div class="font-bold text-2xl" id="defined-count">0</div>
-                                    <div class="text-sm">Tanımlı Adet</div>
-                                </div>
-                            </div>
-                            <button id="save-package-btn" class="text-2xl font-bold bg-green-600 text-white rounded-lg px-8 py-6 hover:bg-green-700">(F2) Paketle / Kaydet</button>
-                         </div>
+                        <div class="bg-white p-3 rounded-lg shadow-sm flex-shrink-0">
+                            <button id="save-package-btn" class="w-full text-2xl font-bold bg-green-600 text-white rounded-lg px-8 py-6 hover:bg-green-700">(F2) Paketle / Kaydet</button>
+                        </div>
                     </div>
                 </div>
 
@@ -374,7 +401,6 @@
         const tabNavigation = document.getElementById('tab-navigation');
         const pages = document.querySelectorAll('.page');
         const barcodeInput = document.getElementById('barcode-input');
-        const clearBarcodeBtn = document.getElementById('clear-barcode-btn');
         const definedCountEl = document.getElementById('defined-count');
         const undefinedCountEl = document.getElementById('undefined-count');
         const packageItemDetailsEl = document.getElementById('package-item-details');
@@ -539,21 +565,17 @@
         const renderPendingPackages = () => {
             pendingPackagesTable.innerHTML = MOCK_PENDING_PACKAGES.map((pkg, index) => `
                 <tr class="hover:bg-slate-50 cursor-pointer" data-id="${pkg.id}">
-                    <td class="p-2"><input type="checkbox" class="package-checkbox"></td>
+                    <td class="p-2 w-12"><input type="checkbox" class="package-checkbox"></td>
                     <td class="p-2">${index + 1}</td>
                     <td class="p-2">${pkg.no}</td>
                     <td class="p-2">${pkg.miktar}</td>
-                    <td class="p-2">${pkg.zaman}</td>
-                    <td class="p-2">${pkg.cariKod}</td>
-                    <td class="p-2">${pkg.cariUnvan}</td>
-                    <td class="p-2">${pkg.paketleyen}</td>
                 </tr>
             `).join('');
         };
         
         const renderQuickAddButtons = () => {
             quickAddGrid.innerHTML = QUICK_ADD_ITEMS.map(item => `
-                <button data-item-name="${item}" class="quick-add-btn text-lg font-semibold p-4 border rounded-lg bg-slate-50 hover:bg-blue-100 hover:border-blue-400 transition-all">${item}</button>
+                <button data-item-name="${item}" class="quick-add-btn text-sm font-semibold p-2 border rounded-lg bg-slate-50 hover:bg-blue-100 hover:border-blue-400 transition-all">${item}</button>
             `).join('');
         };
 
@@ -568,7 +590,7 @@
                  packageItemDetailsEl.innerHTML = '<p class="text-slate-500">Yeni bir paket oluşturmak için barkod okutun veya hızlı ekle butonlarını kullanın.</p>';
                  return;
              }
-             let html = '<ul class="space-y-1 text-lg">';
+             let html = '<ul class="space-y-1 text-sm">';
              for(const [kod, item] of Object.entries(currentPackage.items)) {
                 html += `<li class="flex justify-between items-center p-1 rounded"><span>${item.isim}</span><span class="font-bold bg-blue-200 text-blue-800 px-2 rounded-full">${item.qty}</span></li>`;
              }
@@ -761,7 +783,6 @@
                 resetCurrentPackage();
             }
         });
-        clearBarcodeBtn.addEventListener('click', () => { barcodeInput.value=''; barcodeInput.focus(); });
         quickAddGrid.addEventListener('click', (e) => {
             if(e.target.classList.contains('quick-add-btn')) {
                 handleQuickAdd(e);
