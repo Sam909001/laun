@@ -684,6 +684,18 @@
             <div id="modalBody"></div>
         </div>
     </div>
+
+        <!-- Miktar Seçim Modal -->
+    <div class="quantity-modal" id="quantityModal">
+        <div class="quantity-content">
+            <h3 id="quantityProductName">Ürün Miktarı</h3>
+            <input type="number" id="quantityInput" class="quantity-input" min="1" value="1">
+            <div class="quantity-buttons">
+                <button class="btn btn-primary" onclick="confirmQuantity()">Tamam</button>
+                <button class="btn" onclick="closeQuantityModal()">İptal</button>
+            </div>
+        </div>
+    </div>
     
     <!-- Print Area -->
     <div id="printArea"></div>
