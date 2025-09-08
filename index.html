@@ -11,7 +11,7 @@
     <!-- Firebase SDK'leri -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
@@ -19,7 +19,6 @@
             initializeApp,
             getAuth,
             signInAnonymously,
-            signInWithCustomToken,
             onAuthStateChanged,
             getFirestore,
             doc,
@@ -64,48 +63,7 @@
             display: flex;
             flex-direction: column;
         }
-
-        .login-container {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
-        }
-
-        .login-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .login-form h1 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
+        
         .btn {
             padding: 0.8rem 1.5rem;
             border: none;
@@ -559,26 +517,6 @@
     </style>
 </head>
 <body>
-    <!-- Login Screen -->
-    <div class="login-container" id="loginScreen">
-        <div class="login-form">
-            <h1>ProClean - Oturum Aç</h1>
-            <p>Anonim giriş otomatik olarak yapılacaktır. Giriş yapmak için herhangi bir şey girmenize gerek yoktur. Sorun yaşarsanız "Giriş Yap" butonuna tıklamanız yeterlidir.</p>
-            <div class="form-group">
-                <label for="username">Kullanıcı Adı</label>
-                <input type="text" id="username" placeholder="Kullanıcı adınızı girin">
-            </div>
-            <div class="form-group">
-                <label for="password">Şifre</label>
-                <input type="password" id="password" placeholder="Şifrenizi girin">
-            </div>
-            <button class="btn btn-primary" onclick="login()">Giriş Yap</button>
-            <div style="text-align: center; margin-top: 1rem;">
-                <button class="btn-link">Şifremi Unuttum</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Application -->
     <div class="app-container" id="appContainer">
         <!-- Header -->
@@ -745,11 +683,10 @@
     <div id="printArea"></div>
 
     <script type="module">
-        const { initializeApp, getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs, setLogLevel } = window.firebase;
+        const { initializeApp, getAuth, signInAnonymously, onAuthStateChanged, getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs, setLogLevel } = window.firebase;
 
         const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
@@ -784,7 +721,6 @@
         };
         
         // DOM Elements
-        const loginScreen = document.getElementById('loginScreen');
         const appContainer = document.getElementById('appContainer');
         const toast = document.getElementById('toast');
         const modal = document.getElementById('modal');
@@ -811,30 +747,16 @@
                 state.user = user;
                 state.userId = user.uid;
                 userIdDisplay.textContent = `UID: ${state.userId}`;
-                loginScreen.style.display = 'none';
                 appContainer.style.display = 'flex';
                 showToast('Bağlantı başarılı', 'success');
                 await loadInitialData();
             } else {
                 state.user = null;
                 state.userId = null;
-                loginScreen.style.display = 'flex';
                 appContainer.style.display = 'none';
+                signInAnonymously(auth);
             }
         });
-
-        async function login() {
-            try {
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (error) {
-                console.error("Giriş hatası:", error);
-                showToast(`Giriş başarısız: ${error.message}`, 'error');
-            }
-        }
 
         async function logout() {
             const modalHtml = `
@@ -848,13 +770,13 @@
 
         async function confirmLogout() {
             closeModal();
-            state.user = null;
-            state.userId = null;
-            loginScreen.style.display = 'flex';
-            appContainer.style.display = 'none';
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            showToast('Başarıyla çıkış yapıldı', 'success');
+            try {
+                await auth.signOut();
+                showToast('Başarıyla çıkış yapıldı', 'success');
+            } catch (error) {
+                console.error("Çıkış hatası:", error);
+                showToast(`Çıkış başarısız: ${error.message}`, 'error');
+            }
         }
 
         async function loadInitialData() {
@@ -1355,8 +1277,8 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-             // Otomatik giriş yapma simülasyonu
-             login();
+             // Sayfa yüklendiğinde otomatik olarak anonim giriş yap
+             signInAnonymously(auth);
         });
     </script>
 </body>
