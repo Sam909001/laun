@@ -563,6 +563,7 @@
     <div class="login-container" id="loginScreen">
         <div class="login-form">
             <h1>ProClean - Oturum Aç</h1>
+            <p>Anonim giriş otomatik olarak yapılacaktır. Giriş yapmak için herhangi bir şey girmenize gerek yoktur. Sorun yaşarsanız "Giriş Yap" butonuna tıklamanız yeterlidir.</p>
             <div class="form-group">
                 <label for="username">Kullanıcı Adı</label>
                 <input type="text" id="username" placeholder="Kullanıcı adınızı girin">
@@ -753,7 +754,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
-        setLogLevel('debug'); // Firestore loglarını aç
+        setLogLevel('debug');
 
         // Simüle edilmiş ürün ve personel verileri
         const MOCK_PRODUCTS = {
@@ -823,21 +824,15 @@
         });
 
         async function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (initialAuthToken) {
-                try {
+            try {
+                if (initialAuthToken) {
                     await signInWithCustomToken(auth, initialAuthToken);
-                } catch (error) {
-                    showToast(`Giriş başarısız: ${error.message}`, 'error');
-                }
-            } else {
-                try {
+                } else {
                     await signInAnonymously(auth);
-                } catch (error) {
-                    showToast(`Anonim giriş başarısız: ${error.message}`, 'error');
                 }
+            } catch (error) {
+                console.error("Giriş hatası:", error);
+                showToast(`Giriş başarısız: ${error.message}`, 'error');
             }
         }
 
