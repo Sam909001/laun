@@ -6,35 +6,6 @@
     <title>ProClean - Profesyonel Çamaşırhane Yönetim Sistemi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
-    <!-- Firebase SDK'leri -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        window.firebase = {
-            initializeApp,
-            getAuth,
-            signInAnonymously,
-            onAuthStateChanged,
-            getFirestore,
-            doc,
-            getDoc,
-            addDoc,
-            setDoc,
-            updateDoc,
-            deleteDoc,
-            onSnapshot,
-            collection,
-            query,
-            where,
-            getDocs,
-            setLogLevel
-        };
-    </script>
     <style>
         :root {
             --primary: #2c3e50;
@@ -63,7 +34,48 @@
             display: flex;
             flex-direction: column;
         }
-        
+
+        .login-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+        }
+
+        .login-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-form h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
         .btn {
             padding: 0.8rem 1.5rem;
             border: none;
@@ -83,11 +95,6 @@
         .btn-primary:hover {
             background-color: #2980b9;
         }
-        
-        .btn-small {
-            padding: 0.6rem 1rem;
-            font-size: 0.9rem;
-        }
 
         .btn-link {
             background: none;
@@ -95,7 +102,7 @@
             text-decoration: underline;
             padding: 0.5rem;
         }
-        
+
         .app-container {
             display: none;
             flex-grow: 1;
@@ -201,7 +208,7 @@
             grid-template-columns: 1fr 1.2fr 1fr;
             gap: 1rem;
         }
-        
+
         .panel {
             background: white;
             padding: 1rem;
@@ -288,12 +295,6 @@
             gap: 0.5rem;
         }
 
-        .quick-btn-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-        }
-
         .quick-btn {
             padding: 0.6rem;
             background: var(--light);
@@ -303,7 +304,6 @@
             text-align: center;
             font-size: 0.8rem;
             transition: background 0.2s ease;
-            flex-grow: 1;
         }
         
         .quick-btn:hover {
@@ -315,6 +315,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.2rem;
+            margin-top: 0.3rem;
             font-size: 0.8rem;
         }
         
@@ -446,25 +447,17 @@
             gap: 0.5rem;
             margin-top: 1rem;
         }
-
+        
         #printArea {
             display: none;
             padding: 20px;
             text-align: center;
         }
-
         #printArea svg {
             width: 100%;
             max-width: 300px;
             height: auto;
         }
-        
-        #pdfFrame {
-            width: 100%;
-            height: 500px;
-            border: 1px solid #ccc;
-        }
-
         @media print {
             body > *:not(#printArea) {
                 display: none;
@@ -517,15 +510,33 @@
     </style>
 </head>
 <body>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginScreen">
+        <div class="login-form">
+            <h1>ProClean - Oturum Aç</h1>
+            <div class="form-group">
+                <label for="username">Kullanıcı Adı</label>
+                <input type="text" id="username" placeholder="Kullanıcı adınızı girin" value="operator">
+            </div>
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <input type="password" id="password" placeholder="Şifrenizi girin" value="1234">
+            </div>
+            <button class="btn btn-primary" onclick="login()">Giriş Yap</button>
+            <div style="text-align: center; margin-top: 1rem;">
+                <button class="btn-link">Şifremi Unuttum</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Application -->
     <div class="app-container" id="appContainer">
         <!-- Header -->
         <div class="app-header">
             <div class="app-title">ProClean - Profesyonel Çamaşırhane Yönetim Sistemi</div>
             <div class="user-info">
-                <span id="userRole">Yükleniyor...</span>
-                <span id="userIdDisplay" style="font-size: 0.8rem;"></span>
-                <button class="btn btn-danger btn-small" onclick="logout()">Çıkış Yap</button>
+                <span id="userRole">Operatör: Ahmet Yılmaz</span>
+                <button class="btn btn-danger" onclick="logout()">Çıkış Yap</button>
             </div>
         </div>
 
@@ -559,49 +570,19 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-small btn-primary" onclick="showAddCustomerModal()">Müşteri Ekle</button>
-                        <button class="btn btn-small" onclick="showAllCustomers()">Tüm Müş. Göster</button>
-                        <button class="btn btn-small btn-warning" onclick="generateReport()">İş Sonu Raporu</button>
+                        <button class="btn btn-primary" onclick="showAddCustomerModal()">Müşteri Ekle</button>
+                        <button class="btn" onclick="showAllCustomers()">Tüm Müş. Göster</button>
+                        <button class="btn btn-warning">İş Sonu</button>
                     </div>
                 </div>
 
                 <div class="packaging-content">
-                    <!-- Right Panel: Quick Add & Actions -->
-                    <div class="panel">
-                        <h3>Hızlı Ürün Ekleme</h3>
-                        <div class="quick-buttons" id="quickAddButtons">
-                            <!-- Dinamik içerik buraya gelecek -->
-                        </div>
-                        <div class="package-actions">
-                             <div class="definition-panel">
-                                <p>Tanımsız Adet: <span style="color: red; font-weight: bold;" id="undefinedCount">0</span></p>
-                                <p>Tanımlı Adet: <span style="color: blue; font-weight: bold;" id="definedCount">0</span></p>
-                            </div>
-                            <button class="btn btn-success" onclick="savePackage()">(F2) Paketle / Kaydet</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Middle Panel: Package Details -->
-                    <div class="panel">
-                        <h3>Paket Detayları</h3>
-                        <p id="packageDetailsMessage">Barkod okutun veya hızlı ekleme butonlarını kullanın.</p>
-                        <table class="package-table" id="packageDetailsTable" style="display: none;">
-                            <thead>
-                                <tr>
-                                    <th>Ürün</th>
-                                    <th>Miktar</th>
-                                </tr>
-                            </thead>
-                            <tbody id="packageDetailsBody"></tbody>
-                        </table>
-                    </div>
-
                     <!-- Left Panel: Barcode & Pending Packages -->
                     <div class="panel" style="grid-row: span 2;">
                         <h3>Paket Oluştur</h3>
                         <div class="barcode-input">
                             <input type="text" id="barcodeInput" placeholder="Barkodu okutun veya girin" autofocus>
-                            <button onclick="addItemFromBarcode()"><i class="fas fa-barcode"></i></button>
+                            <button><i class="fas fa-barcode"></i></button>
                         </div>
                         <div class="barcode-counter">
                              <span>Okutulan barkod sayısı: <strong id="scannedBarcodeCount">0</strong></span>
@@ -624,6 +605,36 @@
                             </table>
                         </div>
                     </div>
+
+                    <!-- Middle Panel: Package Details -->
+                    <div class="panel">
+                        <h3>Paket Detayları</h3>
+                        <p id="packageDetailsMessage">Barkod okutun veya hızlı ekleme butonlarını kullanın.</p>
+                        <table class="package-table" id="packageDetailsTable" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th>Ürün</th>
+                                    <th>Miktar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="packageDetailsBody"></tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Right Panel: Quick Add & Actions -->
+                    <div class="panel">
+                        <h3>Hızlı Ürün Ekleme</h3>
+                        <div class="quick-buttons" id="quickAddButtons">
+                            <!-- Dinamik içerik buraya gelecek -->
+                        </div>
+                        <div class="package-actions">
+                             <div class="definition-panel">
+                                <p>Tanımsız Adet: <span style="color: red; font-weight: bold;" id="undefinedCount">0</span></p>
+                                <p>Tanımlı Adet: <span style="color: blue; font-weight: bold;" id="definedCount">0</span></p>
+                            </div>
+                            <button class="btn btn-success" onclick="savePackage()">(F2) Paketle / Kaydet</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -636,31 +647,26 @@
             <!-- Stock Tab -->
             <div class="tab-pane" id="stockTab">
                 <h2>Stok Sorgulama</h2>
-                <div class="form-group">
-                    <label for="stockQueryInput">Ürün Kodu</label>
-                    <input type="text" id="stockQueryInput" placeholder="Ürün kodunu girin (örn: CRS, HVL)">
-                </div>
-                <button class="btn btn-primary" onclick="queryStock()">Stok Sorgula</button>
-                <div id="stockResult" style="margin-top: 1rem; font-size: 1.1rem; font-weight: bold;"></div>
+                <p>Bu sekme stok sorgulama işlemleri için kullanılacaktır.</p>
             </div>
         </div>
 
         <!-- Footer -->
         <div class="app-footer">
             <div class="footer-actions">
-                <button class="btn btn-small" onclick="printBarcode()"><i class="fas fa-print"></i> Etiket Bas</button>
-                <button class="btn btn-small" onclick="selectAllPackages()">Tümünü Seç</button>
-                <button class="btn btn-small" onclick="deselectAllPackages()">Seçimi Kaldır</button>
-                <button class="btn btn-small btn-danger" onclick="deleteSelectedPackages()">Paket Sil</button>
+                <button class="btn" onclick="printBarcode()"><i class="fas fa-print"></i> Etiket Bas</button>
+                <button class="btn" onclick="selectAllPackages()">Tümünü Seç</button>
+                <button class="btn" onclick="deselectAllPackages()">Seçimi Kaldır</button>
+                <button class="btn btn-danger" onclick="deleteSelectedPackages()">Paket Sil</button>
             </div>
             <div class="container-info">
-                <button class="btn btn-small" onclick="showContainerModal('change')">Mev. K.</button>
-                <button class="btn btn-small" onclick="showContainerModal('new')">Yeni K.</button>
-                <span>Konteyner No: <strong id="containerNo">Yükleniyor...</strong></span>
+                <button class="btn" onclick="showContainerModal('change')">Mev. K.</button>
+                <button class="btn" onclick="showContainerModal('new')">Yeni K.</button>
+                <span>Konteyner No: <strong id="containerNo">C000094</strong></span>
             </div>
             <div class="footer-actions">
-                <button class="btn btn-danger btn-small" onclick="deleteContainer()">Konteyner Sil</button>
-                <button class="btn btn-success btn-small" onclick="sendToRamp()">Kon. Rampaya Gönder</button>
+                <button class="btn btn-danger" onclick="deleteContainer()">Konteyner Sil</button>
+                <button class="btn btn-success" onclick="sendToRamp()">Kon. Rampaya Gönder</button>
             </div>
         </div>
     </div>
@@ -682,18 +688,21 @@
     <!-- Print Area -->
     <div id="printArea"></div>
 
-    <script type="module">
-        const { initializeApp, getAuth, signInAnonymously, onAuthStateChanged, getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs, setLogLevel } = window.firebase;
-
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        setLogLevel('debug');
-
-        // Simüle edilmiş ürün ve personel verileri
+    <script>
+        // Simüle edilmiş veritabanı ve state yönetimi
+        const users = [
+            { username: "operator", password: "1234", role: "operator", name: "Ahmet Yılmaz" },
+            { username: "supervisor", password: "1234", role: "supervisor", name: "Mehmet Demir" }
+        ];
+        
+        const MOCK_CUSTOMERS = [
+            { code: "P0006", name: "LALELİ HAMİT", email: "hamit@lalelitextile.com" },
+            { code: "P0007", name: "BEYOĞLU TEKSTİL", email: "info@beyoglutextile.com" },
+            { code: "P0008", name: "ŞİŞLİ OTEL", email: "reservations@sisliotel.com" },
+            { code: "P0009", name: "BAKIRKÖY RESTORAN", email: "restoran@bakirkoy.com" },
+            { code: "P0100", name: "ORTAKÖY CAFE", email: "cafe@ortakoy.com" }
+        ];
+        
         const MOCK_PRODUCTS = {
             'CRS': { code: 'CRS', name: 'ÇARŞAF' },
             'HVL': { code: 'HVL', name: 'HAVLU' },
@@ -702,25 +711,30 @@
             'NVR': { code: 'NVR', name: 'NEVRESİM' },
             'PIK': { code: 'PIK', name: 'PİKE' },
             'YST': { code: 'YST', name: 'YASTIK' },
-            'YKL': { code: 'YKL', 'name': 'YASTIK KILIFI' },
+            'YKL': { code: 'YKL', name: 'YASTIK KILIFI' },
             'DGR': { code: 'DGR', name: 'DİĞER' }
         };
 
-        const MOCK_QUICK_ADD = Object.values(MOCK_PRODUCTS);
+        const MOCK_QUICK_ADD = [
+            { code: 'CRS', name: 'ÇARŞAF', quantity: 1 },
+            { code: 'HVL', name: 'HAVLU', quantity: 1 },
+            { code: 'ALZ', name: 'ALEZ', quantity: 1 },
+            { code: 'BCY', name: 'BÜYÜK ÇARŞAF YIKAMA', quantity: 1 },
+            { code: 'NVR', name: 'NEVRESİM', quantity: 1 },
+            { code: 'PIK', name: 'PİKE', quantity: 1 },
+            { code: 'YST', name: 'YASTIK', quantity: 1 },
+            { code: 'YKL', name: 'YASTIK KILIFI', quantity: 1 },
+            { code: 'DGR', name: 'DİĞER', quantity: 1 }
+        ];
 
-        // State Management
-        let state = {
-            user: null,
-            userId: null,
-            db: null,
-            currentPackage: { items: {}, undefinedCount: 0 },
-            customers: [],
-            pendingPackages: [],
-            containerId: '',
-            dailyReport: { packages: [], issues: [] }
-        };
-        
+        let currentUser = null;
+        let currentPackage = { items: {}, undefinedCount: 0 };
+        let nextPackageId = 1;
+        let pendingPackages = [];
+        let containerId = "C000094";
+
         // DOM Elements
+        const loginScreen = document.getElementById('loginScreen');
         const appContainer = document.getElementById('appContainer');
         const toast = document.getElementById('toast');
         const modal = document.getElementById('modal');
@@ -737,78 +751,6 @@
         const pendingPackagesTable = document.getElementById('pendingPackagesTable');
         const containerNoSpan = document.getElementById('containerNo');
         const printArea = document.getElementById('printArea');
-        const stockQueryInput = document.getElementById('stockQueryInput');
-        const stockResultDiv = document.getElementById('stockResult');
-        const userIdDisplay = document.getElementById('userIdDisplay');
-
-        // --- AUTHENTICATION & DATA SETUP ---
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                state.user = user;
-                state.userId = user.uid;
-                userIdDisplay.textContent = `UID: ${state.userId}`;
-                appContainer.style.display = 'flex';
-                showToast('Bağlantı başarılı', 'success');
-                await loadInitialData();
-            } else {
-                state.user = null;
-                state.userId = null;
-                appContainer.style.display = 'none';
-                signInAnonymously(auth);
-            }
-        });
-
-        async function logout() {
-            const modalHtml = `
-                <p>Çıkış yapmak istediğinize emin misiniz?</p>
-                <div class="modal-buttons">
-                    <button class="btn btn-danger" onclick="confirmLogout()">Evet</button>
-                    <button class="btn" onclick="closeModal()">İptal</button>
-                </div>`;
-            showModal('Çıkış Yapma Onayı', modalHtml);
-        }
-
-        async function confirmLogout() {
-            closeModal();
-            try {
-                await auth.signOut();
-                showToast('Başarıyla çıkış yapıldı', 'success');
-            } catch (error) {
-                console.error("Çıkış hatası:", error);
-                showToast(`Çıkış başarısız: ${error.message}`, 'error');
-            }
-        }
-
-        async function loadInitialData() {
-            if (!state.userId) return;
-
-            // Müşteri verilerini gerçek zamanlı dinle
-            onSnapshot(collection(db, 'artifacts', appId, 'users', state.userId, 'customers'), (snapshot) => {
-                state.customers = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                updateCustomerDropdown();
-            });
-
-            // Paket verilerini gerçek zamanlı dinle
-            onSnapshot(collection(db, 'artifacts', appId, 'users', state.userId, 'pendingPackages'), (snapshot) => {
-                state.pendingPackages = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                renderPendingPackages();
-            });
-
-            // Konteyner verisini yükle
-            const containerDocRef = doc(db, 'artifacts', appId, 'users', state.userId, 'appData', 'container');
-            const containerDoc = await getDoc(containerDocRef);
-            if (containerDoc.exists()) {
-                state.containerId = containerDoc.data().containerId;
-            } else {
-                state.containerId = 'C000001';
-                await setDoc(containerDocRef, { containerId: state.containerId });
-            }
-            containerNoSpan.textContent = state.containerId;
-
-            renderQuickAddButtons();
-            updatePackageDetails();
-            document.getElementById('userRole').textContent = 'Operatör: Giriş Yaptı';
-        }
 
         // --- UI GÜNCELLEME İŞLEVLERİ ---
         function showToast(message, type = 'success') {
@@ -830,28 +772,26 @@
         }
         
         function updateCustomerDropdown() {
-            customerSelect.innerHTML = state.customers.map(c => `<option value="${c.id}">${c.id} - ${c.name}</option>`).join('');
+            customerSelect.innerHTML = MOCK_CUSTOMERS.map(c => `<option value="${c.code}">${c.code} - ${c.name}</option>`).join('');
             updateCustomerName();
         }
 
         function updateCustomerName() {
-            const selectedCustomer = state.customers.find(c => c.id === customerSelect.value);
+            const selectedCustomer = MOCK_CUSTOMERS.find(c => c.code === customerSelect.value);
             customerNameDisplay.textContent = selectedCustomer ? selectedCustomer.name : '';
         }
 
         function updatePackageDetails() {
             packageDetailsBody.innerHTML = '';
             let totalItems = 0;
-            let definedItemsCount = 0;
-            if (state.currentPackage.undefinedCount > 0) {
-                packageDetailsBody.innerHTML += `<tr><td>Tanımsız Ürün</td><td>${state.currentPackage.undefinedCount}</td></tr>`;
-                totalItems += state.currentPackage.undefinedCount;
+            if (currentPackage.undefinedCount > 0) {
+                packageDetailsBody.innerHTML += `<tr><td>Tanımsız Ürün</td><td>${currentPackage.undefinedCount}</td></tr>`;
+                totalItems += currentPackage.undefinedCount;
             }
-            for (const code in state.currentPackage.items) {
-                const item = state.currentPackage.items[code];
+            for (const code in currentPackage.items) {
+                const item = currentPackage.items[code];
                 packageDetailsBody.innerHTML += `<tr><td>${item.name}</td><td>${item.quantity}</td></tr>`;
                 totalItems += item.quantity;
-                definedItemsCount += item.quantity;
             }
             
             if (totalItems > 0) {
@@ -862,13 +802,13 @@
                 document.getElementById('packageDetailsMessage').style.display = 'block';
             }
             
-            undefinedCountSpan.textContent = state.currentPackage.undefinedCount;
-            definedCountSpan.textContent = definedItemsCount;
+            undefinedCountSpan.textContent = currentPackage.undefinedCount;
+            definedCountSpan.textContent = totalItems - currentPackage.undefinedCount;
             document.getElementById('scannedBarcodeCount').textContent = totalItems;
         }
 
         function renderPendingPackages() {
-            pendingPackagesTable.innerHTML = state.pendingPackages.map((pkg, index) => `
+            pendingPackagesTable.innerHTML = pendingPackages.map((pkg, index) => `
                 <tr id="package-row-${pkg.id}" onclick="togglePackageSelection('${pkg.id}')">
                     <td class="checkbox-cell"><input type="checkbox" id="checkbox-${pkg.id}" onchange="event.stopPropagation(); togglePackageSelection('${pkg.id}')"></td>
                     <td>${index + 1}</td>
@@ -885,15 +825,40 @@
             checkbox.checked = row.classList.contains('selected');
         }
 
-        function renderQuickAddButtons() {
-            quickAddButtonsContainer.innerHTML = MOCK_QUICK_ADD.map(item => `
-                <div class="quick-btn-container">
-                    <button class="quick-btn" onclick="promptForQuantity('${item.code}')">${item.name}</button>
-                </div>
-            `).join('');
-        }
-        
         // --- İŞLEVSEL KOD ---
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                document.getElementById('userRole').textContent = 
+                    user.role === 'operator' ? `Operatör: ${user.name}` : `Süpervizör: ${user.name}`;
+                
+                loginScreen.style.display = 'none';
+                appContainer.style.display = 'flex';
+                
+                updateCustomerDropdown();
+                renderQuickAddButtons();
+                updatePackageDetails();
+                renderPendingPackages();
+                showToast('Başarıyla giriş yapıldı', 'success');
+            } else {
+                showToast('Kullanıcı adı veya şifre hatalı', 'error');
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            appContainer.style.display = 'none';
+            loginScreen.style.display = 'flex';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            showToast('Başarıyla çıkış yapıldı', 'success');
+        }
+
         function switchTab(tabName) {
             document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
@@ -901,8 +866,12 @@
             document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
         }
 
-        async function showAddCustomerModal() {
+        function showAddCustomerModal() {
             const content = `
+                <div class="form-group">
+                    <label for="newCustomerCode">Müşteri Kodu</label>
+                    <input type="text" id="newCustomerCode" placeholder="Müşteri kodunu girin">
+                </div>
                 <div class="form-group">
                     <label for="newCustomerName">Müşteri Adı</label>
                     <input type="text" id="newCustomerName" placeholder="Müşteri adını girin">
@@ -919,16 +888,17 @@
             showModal('Yeni Müşteri Ekle', content);
         }
 
-        async function addCustomer() {
+        function addCustomer() {
+            const code = document.getElementById('newCustomerCode').value;
             const name = document.getElementById('newCustomerName').value;
             const email = document.getElementById('newCustomerEmail').value;
-            if (name) {
-                const customerRef = collection(db, 'artifacts', appId, 'users', state.userId, 'customers');
-                await addDoc(customerRef, { name, email, createdAt: new Date() });
+            if (code && name) {
+                MOCK_CUSTOMERS.push({ code, name, email });
+                updateCustomerDropdown();
                 showToast('Müşteri başarıyla eklendi', 'success');
                 closeModal();
             } else {
-                showToast('Müşteri adı boş bırakılamaz', 'error');
+                showToast('Müşteri kodu ve adı boş bırakılamaz', 'error');
             }
         }
 
@@ -939,7 +909,7 @@
                         <tr><th>Kod</th><th>Ad</th><th>E-posta</th></tr>
                     </thead>
                     <tbody>
-                        ${state.customers.map(c => `<tr><td>${c.id}</td><td>${c.name}</td><td>${c.email}</td></tr>`).join('')}
+                        ${MOCK_CUSTOMERS.map(c => `<tr><td>${c.code}</td><td>${c.name}</td><td>${c.email}</td></tr>`).join('')}
                     </tbody>
                 </table>
                 <div class="modal-buttons"><button class="btn" onclick="closeModal()">Kapat</button></div>
@@ -947,91 +917,81 @@
             showModal('Tüm Müşteriler', tableHtml);
         }
         
-        function addItemFromBarcode() {
-            const barcode = barcodeInput.value.trim().toUpperCase();
-            if (!barcode) return;
-            addItemToPackage(barcode, 1);
-            barcodeInput.value = '';
-        }
-
-        function promptForQuantity(productCode) {
-            const product = MOCK_PRODUCTS[productCode];
-            const content = `
-                <div class="form-group">
-                    <label for="quantityInput">${product.name} için Miktar Girin</label>
-                    <input type="number" id="quantityInput" value="1" min="1" autofocus>
-                </div>
-                <div class="modal-buttons">
-                    <button class="btn btn-primary" onclick="confirmQuantity('${productCode}')">Ekle</button>
-                    <button class="btn" onclick="closeModal()">İptal</button>
-                </div>
-            `;
-            showModal('Miktar Girin', content);
-        }
-
-        function confirmQuantity(productCode) {
-            const quantityInput = document.getElementById('quantityInput');
-            const quantity = parseInt(quantityInput.value, 10);
-            if (quantity > 0) {
-                addItemToPackage(productCode, quantity);
-                closeModal();
-            } else {
-                showToast('Miktar 1 veya daha büyük bir sayı olmalıdır.', 'error');
-            }
-        }
-
-        function addItemToPackage(productCode, quantity) {
+        function addItemToPackage(productCode, quantity = 1) {
             const product = MOCK_PRODUCTS[productCode];
             if (product) {
-                if (state.currentPackage.items[productCode]) {
-                    state.currentPackage.items[productCode].quantity += quantity;
+                if (currentPackage.items[productCode]) {
+                    currentPackage.items[productCode].quantity += quantity;
                 } else {
-                    state.currentPackage.items[productCode] = { ...product, quantity };
+                    currentPackage.items[productCode] = { ...product, quantity };
                 }
                 showToast(`${product.name} ürünü pakete eklendi`, 'success');
             } else {
-                state.currentPackage.undefinedCount += quantity;
+                currentPackage.undefinedCount += quantity;
                 showToast(`${quantity} adet tanımsız barkod okutuldu`, 'warning');
             }
             updatePackageDetails();
         }
         
-        async function savePackage() {
-            const totalQuantity = Object.values(state.currentPackage.items).reduce((sum, item) => sum + item.quantity, 0) + state.currentPackage.undefinedCount;
+        function changeQuickAddQuantity(index, change) {
+            MOCK_QUICK_ADD[index].quantity += change;
+            if (MOCK_QUICK_ADD[index].quantity < 1) {
+                MOCK_QUICK_ADD[index].quantity = 1;
+            }
+            renderQuickAddButtons();
+        }
+
+        function renderQuickAddButtons() {
+            quickAddButtonsContainer.innerHTML = MOCK_QUICK_ADD.map((item, index) => `
+                <div class="quick-btn-container">
+                    <button class="quick-btn" onclick="addItemToPackage('${item.code}', ${item.quantity})">${item.name}</button>
+                    <div class="quick-btn-qty">
+                        <label>Miktar: ${item.quantity}</label>
+                        <button onclick="changeQuickAddQuantity(${index}, 1)"><i class="fas fa-plus"></i></button>
+                        <button onclick="changeQuickAddQuantity(${index}, -1)"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function savePackage() {
+            const totalQuantity = Object.values(currentPackage.items).reduce((sum, item) => sum + item.quantity, 0) + currentPackage.undefinedCount;
             if (totalQuantity === 0) {
                  showModal('Hata', '<p>Kaydedilecek bir paket bulunamadı. Lütfen önce ürün ekleyin.</p>');
                  return;
             }
 
-            const packageData = {
-                customer: customerSelect.value,
+            const packageId = `PKG-${String(nextPackageId++).padStart(4, '0')}`;
+            const newPackage = {
+                id: packageId,
                 totalQuantity,
-                items: JSON.stringify(state.currentPackage.items),
-                undefinedCount: state.currentPackage.undefinedCount,
-                timestamp: new Date().toISOString()
+                customer: customerSelect.value,
+                items: currentPackage.items,
+                undefinedCount: currentPackage.undefinedCount
             };
 
-            try {
-                const docRef = await addDoc(collection(db, 'artifacts', appId, 'users', state.userId, 'pendingPackages'), packageData);
-                showToast(`Paket başarıyla kaydedildi`, 'success');
-                state.currentPackage = { items: {}, undefinedCount: 0 };
-                updatePackageDetails();
-            } catch (error) {
-                console.error("Paket kaydedilirken hata:", error);
-                showToast('Paket kaydedilirken hata oluştu.', 'error');
-            }
+            pendingPackages.push(newPackage);
+            renderPendingPackages();
+            
+            // Sıfırlama
+            currentPackage = { items: {}, undefinedCount: 0 };
+            updatePackageDetails();
+            showToast(`Paket ${packageId} başarıyla kaydedildi`, 'success');
+            
+            // Etiket Yazdır ve E-posta Gönder (Simülasyon)
+            console.log("Müşteriye e-posta gönderiliyor...");
         }
 
-        function getSelectedPackageIds() {
+        function getSelectedPackages() {
             const selectedIds = [];
             document.querySelectorAll('#pendingPackagesTable input[type="checkbox"]:checked').forEach(checkbox => {
                 selectedIds.push(checkbox.id.replace('checkbox-', ''));
             });
-            return selectedIds;
+            return selectedIds.map(id => pendingPackages.find(pkg => pkg.id === id));
         }
 
         function printBarcode() {
-            const selectedPackages = getSelectedPackageIds().map(id => state.pendingPackages.find(pkg => pkg.id === id));
+            const selectedPackages = getSelectedPackages();
             if (selectedPackages.length === 0) {
                 showModal('Uyarı', '<p>Lütfen yazdırmak için en az bir paket seçin.</p><div class="modal-buttons"><button class="btn" onclick="closeModal()">Kapat</button></div>');
                 return;
@@ -1039,21 +999,22 @@
 
             printArea.innerHTML = '';
             selectedPackages.forEach(pkg => {
-                const customer = state.customers.find(c => c.id === pkg.customer);
+                const customer = MOCK_CUSTOMERS.find(c => c.code === pkg.customer);
+                const barcodeId = pkg.id;
                 const barcodeContainer = document.createElement('div');
                 barcodeContainer.style = 'page-break-after: always; text-align: center; padding: 20px;';
                 
                 const heading = document.createElement('h2');
-                heading.textContent = `Paket: ${pkg.id}`;
+                heading.textContent = `Paket: ${barcodeId}`;
                 
                 const customerInfo = document.createElement('p');
-                customerInfo.innerHTML = `<strong>Müşteri:</strong> ${customer ? customer.name : 'Bilinmiyor'} (${pkg.customer})`;
+                customerInfo.innerHTML = `<strong>Müşteri:</strong> ${customer.name} (${customer.code})`;
                 
                 const packageInfo = document.createElement('p');
                 packageInfo.innerHTML = `<strong>Toplam Miktar:</strong> ${pkg.totalQuantity}`;
                 
                 const svgElement = document.createElement('svg');
-                svgElement.id = `barcode-${pkg.id}`;
+                svgElement.id = `barcode-${barcodeId}`;
 
                 barcodeContainer.appendChild(heading);
                 barcodeContainer.appendChild(customerInfo);
@@ -1061,7 +1022,7 @@
                 barcodeContainer.appendChild(svgElement);
                 printArea.appendChild(barcodeContainer);
 
-                JsBarcode(`#barcode-${pkg.id}`, pkg.id, {
+                JsBarcode(`#barcode-${barcodeId}`, barcodeId, {
                     format: "CODE128",
                     displayValue: true,
                     fontSize: 20,
@@ -1090,63 +1051,47 @@
             showToast('Seçim kaldırıldı', 'success');
         }
 
-        async function deleteSelectedPackages() {
-            const selectedIds = getSelectedPackageIds();
+        function deleteSelectedPackages() {
+            const selectedIds = getSelectedPackages().map(pkg => pkg.id);
             if (selectedIds.length === 0) {
                  showModal('Uyarı', '<p>Lütfen silmek için en az bir paket seçin.</p><div class="modal-buttons"><button class="btn" onclick="closeModal()">Kapat</button></div>');
                  return;
             }
             
-            showModal('Paketleri Silme Onayı', `<p>${selectedIds.length} adet paketi silmek istediğinize emin misiniz?</p>
-                <div class="modal-buttons">
-                    <button class="btn btn-danger" onclick="confirmDeletePackages('${JSON.stringify(selectedIds)}')">Onayla</button>
-                    <button class="btn" onclick="closeModal()">İptal</button>
-                </div>
-            `);
-        }
-        
-        async function confirmDeletePackages(selectedIdsJson) {
-            closeModal();
-            const selectedIds = JSON.parse(selectedIdsJson);
-            for (const id of selectedIds) {
-                const packageDocRef = doc(db, 'artifacts', appId, 'users', state.userId, 'pendingPackages', id);
-                await deleteDoc(packageDocRef);
-            }
-            showToast(`${selectedIds.length} paket başarıyla silindi`, 'success');
+            pendingPackages = pendingPackages.filter(pkg => !selectedIds.includes(pkg.id));
+            renderPendingPackages();
+            showToast(`${selectedIds.length} paket silindi`, 'success');
         }
 
-        async function showContainerModal(type) {
-            const isNew = type === 'new';
-            const title = isNew ? 'Yeni Konteyner' : 'Konteyner Numarasını Değiştir';
+        function showContainerModal(type) {
+            const title = type === 'new' ? 'Yeni Konteyner' : 'Konteyner Numarasını Değiştir';
             const content = `
                 <div class="form-group">
                     <label for="containerIdInput">Yeni Konteyner Numarası</label>
-                    <input type="text" id="containerIdInput" placeholder="Konteyner numarasını girin" value="${isNew ? '' : state.containerId}">
+                    <input type="text" id="containerIdInput" placeholder="Konteyner numarasını girin" value="${type === 'change' ? containerId : ''}">
                 </div>
                 <div class="modal-buttons">
-                    <button class="btn btn-primary" onclick="setContainerId('${type}')">Onayla</button>
+                    <button class="btn btn-primary" onclick="setContainerId()">Onayla</button>
                     <button class="btn" onclick="closeModal()">İptal</button>
                 </div>
             `;
             showModal(title, content);
         }
 
-        async function setContainerId(type) {
+        function setContainerId() {
             const newId = document.getElementById('containerIdInput').value;
             if (newId) {
-                const containerDocRef = doc(db, 'artifacts', appId, 'users', state.userId, 'appData', 'container');
-                await setDoc(containerDocRef, { containerId: newId.toUpperCase() });
-                state.containerId = newId.toUpperCase();
-                containerNoSpan.textContent = state.containerId;
-                showToast(`Konteyner numarası ${state.containerId} olarak güncellendi`, 'success');
+                containerId = newId.toUpperCase();
+                containerNoSpan.textContent = containerId;
+                showToast(`Konteyner numarası ${containerId} olarak güncellendi`, 'success');
                 closeModal();
             } else {
                 showToast('Konteyner numarası boş bırakılamaz', 'error');
             }
         }
         
-        async function deleteContainer() {
-            showModal('Konteyner Silme Onayı', `<p>Konteyner ${state.containerId} içindeki tüm paketler silinecek. Onaylıyor musunuz?</p>
+        function deleteContainer() {
+            showModal('Konteyner Silme Onayı', `<p>Konteyner ${containerId} içindeki tüm paketler silinecek. Onaylıyor musunuz?</p>
                 <div class="modal-buttons">
                     <button class="btn btn-danger" onclick="confirmDeleteContainer()">Onayla</button>
                     <button class="btn" onclick="closeModal()">İptal</button>
@@ -1154,19 +1099,15 @@
             `);
         }
         
-        async function confirmDeleteContainer() {
+        function confirmDeleteContainer() {
+            pendingPackages = [];
+            renderPendingPackages();
             closeModal();
-            const packagesRef = collection(db, 'artifacts', appId, 'users', state.userId, 'pendingPackages');
-            const snapshot = await getDocs(packagesRef);
-            
-            snapshot.docs.forEach(async (d) => {
-                await deleteDoc(doc(db, 'artifacts', appId, 'users', state.userId, 'pendingPackages', d.id));
-            });
-            showToast(`Konteyner ${state.containerId} ve içindeki tüm paketler silindi`, 'success');
+            showToast(`Konteyner ${containerId} başarıyla silindi`, 'success');
         }
         
-        async function sendToRamp() {
-            showModal('Sevkiyat Onayı', `<p>Konteyner ${state.containerId} ve içindeki paketler sevkiyata hazırlanacak. Onaylıyor musunuz?</p>
+        function sendToRamp() {
+            showModal('Sevkiyat Onayı', `<p>Konteyner ${containerId} rampaya gönderilecek. Onaylıyor musunuz?</p>
                 <div class="modal-buttons">
                     <button class="btn btn-success" onclick="confirmSendToRamp()">Onayla</button>
                     <button class="btn" onclick="closeModal()">İptal</button>
@@ -1174,98 +1115,19 @@
             `);
         }
         
-        async function confirmSendToRamp() {
+        function confirmSendToRamp() {
+            pendingPackages = [];
+            renderPendingPackages();
             closeModal();
-            // Burada paketleri "sevkiyata hazır" koleksiyonuna taşıma veya durumlarını güncelleme gibi mantık eklenebilir.
-            const packagesRef = collection(db, 'artifacts', appId, 'users', state.userId, 'pendingPackages');
-            const snapshot = await getDocs(packagesRef);
-            
-            // Tüm paketleri sevkiyata gönderilmiş olarak işaretle
-            snapshot.docs.forEach(async (d) => {
-                const packageDocRef = doc(db, 'artifacts', appId, 'users', state.userId, 'pendingPackages', d.id);
-                await updateDoc(packageDocRef, { status: 'sentToRamp', sentAt: new Date().toISOString() });
-            });
-            
-            showToast(`Konteyner ${state.containerId} rampaya gönderildi`, 'success');
-        }
-
-        async function queryStock() {
-            const queryCode = stockQueryInput.value.trim().toUpperCase();
-            if (!queryCode) {
-                stockResultDiv.textContent = 'Lütfen bir ürün kodu girin.';
-                return;
-            }
-
-            const product = MOCK_PRODUCTS[queryCode];
-            if (!product) {
-                stockResultDiv.textContent = 'Ürün kodu bulunamadı.';
-                return;
-            }
-
-            // Simülasyon: Gerçek bir sistemde bu bir API çağrısı olurdu.
-            const stockQuantity = Math.floor(Math.random() * 500); // 0-500 arası rastgele stok
-            stockResultDiv.textContent = `${product.name} stokta ${stockQuantity} adet bulunmaktadır.`;
-        }
-        
-        async function generateReport() {
-            const allPackages = await getDocs(collection(db, 'artifacts', appId, 'users', state.userId, 'pendingPackages'));
-
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            const pageWidth = doc.internal.pageSize.getWidth();
-            const title = "Gün Sonu Raporu";
-            const date = `Tarih: ${new Date().toLocaleDateString()}`;
-            const time = `Saat: ${new Date().toLocaleTimeString()}`;
-            
-            // Header
-            doc.setFontSize(22);
-            doc.text(title, pageWidth / 2, 20, { align: 'center' });
-            doc.setFontSize(12);
-            doc.text(date, pageWidth / 2, 30, { align: 'center' });
-            doc.text(time, pageWidth / 2, 35, { align: 'center' });
-            
-            let yPos = 50;
-
-            doc.setFontSize(16);
-            doc.text("Paketleme İşlemleri", 15, yPos);
-            yPos += 10;
-
-            const packageTableData = await Promise.all(allPackages.docs.map(async (doc) => {
-                const pkg = doc.data();
-                const customerDoc = await getDoc(doc(db, 'artifacts', appId, 'users', state.userId, 'customers', pkg.customer));
-                const customerName = customerDoc.exists() ? customerDoc.data().name : 'Bilinmiyor';
-                return [doc.id, customerName, pkg.totalQuantity, new Date(pkg.timestamp).toLocaleString()];
-            }));
-
-            doc.autoTable({
-                head: [['Paket No', 'Müşteri', 'Toplam Miktar', 'Zaman Damgası']],
-                body: packageTableData,
-                startY: yPos,
-                theme: 'striped',
-                headStyles: { fillColor: [44, 62, 80] }
-            });
-
-            const pdfData = doc.output('datauristring');
-            
-            const content = `
-                <p>PDF raporu başarıyla oluşturuldu.</p>
-                <div style="margin-top: 1rem; text-align: center;">
-                    <a href="${pdfData}" download="gunluk_rapor.pdf" class="btn btn-success">Raporu İndir</a>
-                </div>
-                <div class="modal-buttons">
-                    <button class="btn" onclick="closeModal()">Kapat</button>
-                </div>
-            `;
-            
-            showModal('İş Sonu Raporu', content);
+            showToast(`Konteyner ${containerId} rampaya gönderildi`, 'success');
         }
 
         // --- OLAY DİNLEYİCİLERİ ---
         document.getElementById('barcodeInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
-                addItemFromBarcode();
+                addItemToPackage(this.value.toUpperCase());
+                this.value = '';
             }
         });
         
@@ -1276,10 +1138,13 @@
             }
         });
 
+        // Başlangıç işlevleri
         document.addEventListener('DOMContentLoaded', () => {
-             // Sayfa yüklendiğinde otomatik olarak anonim giriş yap
-             signInAnonymously(auth);
+            document.getElementById('username').value = 'operator';
+            document.getElementById('password').value = '1234';
+            loginScreen.style.display = 'flex';
         });
+
     </script>
 </body>
 </html>
