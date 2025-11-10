@@ -12,8 +12,6 @@
   <title>$FLUFFI Presale & </title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="fluffi.jpg" type="image/jpeg">
-  
-  <!-- CSS Libraries -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@walletconnect/modal@latest/css/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
@@ -22,15 +20,11 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preload" href="fluffi.jpg" as="image">
-  
-</head>
-  
+</head>  
 <body class="text-gray-800 dark:text-white">
-   <!-- Header -->
  <header class="bg-green-600 shadow sticky top-0 z-10 px-4 py-3">
   <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between">
     <div class="flex items-center gap-3">
-      <!-- Logo + Title with improved floating animation -->
       <div class="logo-container logo-float">
         <img src="fluffi.jpg" alt="FLUFFI Logo" class="w-10 h-10 rounded-full" loading="lazy">
       </div>
@@ -38,8 +32,6 @@
         $FLUFFI
       </h1>
     </div>
-   
-    <!-- Navigation -->
     <nav class="flex flex-wrap gap-4 mt-2 md:mt-0 text-sm font-semibold items-center">
       <a href="Airdrop.html" target="_blank" class="text-white hover:underline">Join Airdrop</a>
       <a href="#presale" class="text-white hover:underline">Presale</a>
@@ -53,7 +45,6 @@
       <button onclick="toggleDarkMode()" class="ml-2 bg-gray-300 dark:bg-gray-700 px-2 rounded text-black dark:text-white" aria-label="Toggle dark mode">
         <span id="darkModeIcon">🌙</span>
       </button>
-  
       <div class="wallet-buttons" id="walletButtons">
         <button id="walletButton" class="bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded flex items-center gap-2">
   <i class="fas fa-wallet"></i>Connect Wallet
@@ -63,8 +54,6 @@
     <input type="hidden" id="walletAddress" value="">
   </div>
 </header>
-
-<!-- Hero Messaging Section -->
 <section id="hero-message" class="py-10 px-4 text-center bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white shadow-xl">
   <h1 class="text-4xl md:text-5xl font-extrabold mb-6 animate-bounce">
     🐾 Secure Your Spot in the FLUFFI Revolution!
@@ -78,7 +67,6 @@
     Join Presale Now 🚀
   </a>
 </section>
-
 <div id="countdown-container" class="text-center my-10 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg max-w-xl mx-auto">
   <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">🚀 PRESALE ENDS IN:</h3>
   <div id="presale-timer" class="text-2xl font-mono text-red-600 dark:text-red-300">
@@ -86,50 +74,38 @@
     <span id="hours">00</span>h 
     <span id="minutes">00</span>m 
     <span id="seconds">00</span>s
-  </div>
-  
+  </div>  
   <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
     <h4 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Current Stage Progress</h4>
-    
-    <!-- Progress Bar -->
     <div class="w-full bg-gray-300 dark:bg-gray-600 h-4 rounded-full overflow-hidden mb-2">
       <div id="stageProgressBar" class="h-full bg-green-500 transition-all duration-1000 ease-in-out" style="width: 0%"></div>
     </div>
-
     <div class="flex justify-between text-sm font-mono text-gray-700 dark:text-gray-300">
       <span>Stage: <span id="current-stage">1</span>/15</span>
       <span>Ends in: <span id="stage-time-left">00d 00h 00m 00s</span></span>
     </div>
   </div>
 </div>
-
-<!-- Testing button - remove in production -->
 <button onclick="resetTimer()" class="fixed bottom-4 right-4 bg-red-500 text-white p-2 rounded">
   Reset Timer (For Testing)
 </button>
-    
-<!-- Presale Section -->
 <section id="presale" class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg mb-6">
   <h2 class="section-title text-3xl md:text-4xl font-extrabold text-green-600 dark:text-green-400 mb-6">
     🚀 Limited Presale — Act Fast!
   </h2>
-
   <div id="live-feed" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md max-w-xl mx-auto">
     <h2 class="text-xl font-bold mb-2 text-center text-gray-800 dark:text-white">🔥 Live FLUFFI Activity</h2>
     <ul id="feed-list" class="space-y-2 text-gray-700 dark:text-gray-300">
       <!-- Live events will appear here -->
     </ul>
   </div>
-
-  <div id="walletError" class="wallet-error hidden"></div>
-        
+  <div id="walletError" class="wallet-error hidden"></div>      
   <div id="walletStatus" class="wallet-address hidden">
     <strong>Connected:</strong> <span id="connectedAddress"></span>
     <button onclick="disconnectWallet()" class="ml-2 mt-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
       Disconnect
     </button>
   </div>
-
   <div class="fluio-status-container">
     <div class="fluio-price mt-2">
       <div class="price-header flex items-center justify-between">
@@ -150,7 +126,6 @@
       <div class="price-change text-sm text-gray-500">+0.00%</div>
     </div>
   </div>
-
   <div class="flex items-center mt-4 mb-4">
     <svg class="w-5 h-5 mr-2 text-green-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
@@ -158,37 +133,27 @@
     <span class="font-mono text-lg font-bold" id="tokensSold">67,431,509</span>
     <span class="ml-2 text-sm text-gray-500 dark:text-gray-300">FLUFFI sold</span>
   </div>
-
   <p class="mb-4 text-green-600 font-semibold">🎯 Referral Bonus: <strong>10%</strong></p>
-
 <div class="flex gap-2 mb-4">
-    <input type="number" placeholder="Amount" id="amountInput" class="flex-1 p-3 border rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-green-500" aria-label="Amount to purchase">
-    
-    <!-- Combined Chain + Currency Selector -->
+    <input type="number" placeholder="Amount" id="amountInput" class="flex-1 p-3 border rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-green-500" aria-label="Amount to purchase">  
     <select id="chainCurrencySelect" class="p-3 border rounded-lg text-black dark:text-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 min-w-[180px]" aria-label="Chain and currency selection">
       <optgroup label="🟡 BSC Network">
         <option value="56-BNB">BSC - BNB</option>
-      </optgroup>
-      
+      </optgroup>      
       <optgroup label="🔷 Ethereum Network">
         <option value="1-ETH">Ethereum - ETH</option>
-      </optgroup>
-      
+      </optgroup>    
       <optgroup label="🔴 Avalanche Network">
         <option value="43114-AVAX">Avalanche - AVAX</option>
-      </optgroup>
-      
+      </optgroup>      
     </select>
   </div>
   <input type="text" placeholder="Referral wallet (optional)" id="refInput" class="w-full p-3 border rounded-lg mb-4 text-black focus:outline-none focus:ring-2 focus:ring-green-500" aria-label="Referral wallet address">
   <button onclick="buyFluffi()" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg font-semibold text-lg transition-colors">
     🚀 Buy Now
   </button>
-</section>
-  
+</section>  
 <input type="hidden" id="referralLink" value="">
-  
-<!-- Referral Section -->
 <section id="referral" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
   <h2 class="text-2xl font-bold mb-4">💰 Earn with Referrals</h2>
   <div id="referralSection">
@@ -198,8 +163,6 @@
     </button>
   </div>
 </section>
-
-<!-- Claim Section -->
 <section class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg mb-6">
   <h2 class="section-title">🔓 Claim $FLUFFI</h2>
   <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg mb-4">
@@ -228,12 +191,8 @@
     Claim Tokens
   </button>
 </section>
-
-<!-- Staking Dashboard -->
 <section id="staking" class="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
   <div class="max-w-5xl mx-auto px-6 text-center">
-
-    <!-- Title -->
     <h2 class="text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
       🐾 FLUFFI Staking Dashboard
     </h2>
@@ -241,8 +200,6 @@
       🔥 90% APY — Stake Early, Earn Big!<br>
       Lock your tokens and watch your rewards grow until listing.
     </p>
-
-    <!-- Coming Soon Banner -->
     <div class="mb-12 bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-2xl shadow-2xl">
       <div class="flex items-center justify-center mb-4">
         <span class="text-6xl">🔒</span>
@@ -267,25 +224,17 @@
         </div>
       </div>
     </div>
-
-    <!-- Dashboard Grid (Preview/Disabled) -->
     <div class="grid gap-8 md:grid-cols-3 opacity-50 pointer-events-none">
-
-      <!-- Total Staked -->
       <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
         <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Total Staked</h3>
         <p class="text-3xl font-bold text-green-500" id="total-staked">0</p>
         <p class="text-gray-600 dark:text-gray-400 text-sm">FLUFFI Tokens</p>
       </div>
-
-      <!-- User Balance -->
       <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
         <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Your Balance</h3>
         <p class="text-3xl font-bold text-blue-500" id="user-balance-value">0</p>
         <p class="text-gray-600 dark:text-gray-400 text-sm">FLUFFI Available</p>
       </div>
-
-      <!-- Estimated Earnings -->
       <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
         <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Estimated Earnings</h3>
         <p class="text-3xl font-bold text-yellow-500" id="user-earnings">0</p>
@@ -295,14 +244,11 @@
 
   </div>
 </section>
-<!-- Tokenomics Section -->
 <section id="tokenomics" class="px-6 py-10 bg-white dark:bg-gray-900 rounded-xl shadow-xl mb-12">
   <h2 class="text-3xl font-extrabold text-center text-green-700 dark:text-green-400 mb-8 uppercase tracking-wide">
     📊 Tokenomics
   </h2>
-
   <div class="grid md:grid-cols-2 gap-10 items-center">
-    <!-- Token Details -->
     <div>
       <ul class="space-y-4 text-lg text-gray-900 dark:text-white">
         <li>
@@ -331,18 +277,13 @@
         </li>
       </ul>
     </div>
-
-    <!-- Chart -->
     <div class="flex justify-center">
       <canvas id="tokenChart" width="280" height="280" aria-label="Token distribution chart" role="img"></canvas>
     </div>
   </div>
 </section>
-    
-<!-- FAQ Section -->
 <section id="faq" class="p-6 bg-white dark:bg-gray-900 rounded-xl shadow-lg mb-10 max-w-3xl mx-auto">
   <h2 class="text-3xl font-bold text-center mb-6 text-purple-700 dark:text-purple-400">❓ FAQ</h2>
-
   <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
     <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
       What's the token tax?
@@ -359,7 +300,6 @@
       </ul>
     </div>
   </details>
-
   <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
     <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
       How to claim after presale?
@@ -372,7 +312,6 @@
       Tokens will be automatically airdropped to your wallet within 24 hours of launch. No manual claiming needed.
     </div>
   </details>
-
   <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
     <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
       What's the vesting schedule?
@@ -388,7 +327,6 @@
       </ul>
     </div>
   </details>
-
   <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
     <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
       How do I buy $FLUFFI?
@@ -401,7 +339,6 @@
       Connect your wallet, enter amount in BNB, ETH Or AVAX and click "Buy Now".
     </div>
   </details>
-
   <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
     <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
       When does staking end?
@@ -414,7 +351,6 @@
       Staking ends at the official listing date.
     </div>
   </details>
-
   <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-2">
     <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
       What chains are supported?
@@ -428,15 +364,10 @@
     </div>
   </details>
 </section>
-
 <div class="split-sections">
-
-  <!-- Why Fluffi Coin Section -->
   <section id="why" class="py-16 px-6 text-center">
     <h2 class="text-4xl font-bold mb-12 text-green-500">Why Fluffi Coin?</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-
-      <!-- Meme Power -->
       <div class="p-6 rounded-2xl shadow-lg bg-white dark:bg-gray-900 transition duration-300">
         <div class="text-5xl mb-4 animate-bounce">🔥</div>
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Meme Power</h3>
@@ -444,8 +375,6 @@
           Fluffi thrives on community-driven meme culture with viral potential.
         </p>
       </div>
-
-      <!-- Community Driven -->
       <div class="p-6 rounded-2xl shadow-lg bg-white dark:bg-gray-900 transition duration-300">
         <div class="text-5xl mb-4 animate-pulse">🎨</div>
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Community Driven</h3>
@@ -453,8 +382,6 @@
           100% transparent, fun, and powered by YOU — the community.
         </p>
       </div>
-
-      <!-- Fair & Secure -->
       <div class="p-6 rounded-2xl shadow-lg bg-white dark:bg-gray-900 transition duration-300">
         <div class="text-5xl mb-4 animate-sway">⚖️</div>
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Fair & Secure</h3>
@@ -462,35 +389,24 @@
           Locked liquidity, audited contracts, and fair presale stages.
         </p>
       </div>
-
     </div>
   </section>
-
-  <!-- Trust Section with Live Counters & Full Dark/Light Fix -->
   <section class="py-16 px-6 bg-gray-100 dark:bg-gray-900 text-center transition-colors duration-300">
     <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Trusted & Verified</h2>
     <p class="text-lg mb-12 text-gray-700 dark:text-gray-300">
       Fluffi is backed by security, community, and transparency. Invest with confidence.
     </p>
-
-    <!-- Trust Cards Grid -->
     <div class="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
-
-      <!-- Audit Badge -->
       <div class="trust-card bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-green-500/40 transition transform hover:-translate-y-2">
         <img src="https://img.icons8.com/fluency/96/security-checked.png" alt="Audit Badge" class="mx-auto mb-4 animate-bounce">
         <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Smart Contract Audited</h3>
         <p class="text-gray-600 dark:text-gray-300 text-sm">Verified for safety & transparency.</p>
       </div>
-
-      <!-- Liquidity Locked -->
       <div class="trust-card bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-green-500/40 transition transform hover:-translate-y-2">
         <img src="https://img.icons8.com/color/96/lock--v1.png" alt="Liquidity Locked" class="mx-auto mb-4 animate-pulse">
         <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Liquidity Locked</h3>
         <p class="text-gray-600 dark:text-gray-300 text-sm">Funds securely locked until listing.</p>
       </div>
-
-      <!-- Community Section -->
 <div class="trust-card bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-green-500/40 transition transform hover:-translate-y-2">
   <img src="https://img.icons8.com/fluency/96/groups.png" alt="Community" class="mx-auto mb-4 animate-sway">
   <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Community</h3>
@@ -498,9 +414,6 @@
     🐾 The FLUFFI family is growing stronger every day — be part of the pack!
   </p>
 </div>
-
-
-      <!-- Trusted Partners -->
       <div class="trust-card bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-green-500/40 transition transform hover:-translate-y-2">
         <h3 class="font-bold text-2xl text-gray-900 dark:text-white mb-4">Trusted Partners</h3>
         <div class="flex flex-col gap-2 items-center justify-center">
@@ -513,8 +426,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Team Section with two new members -->
   <section id="team">
     <h2>Our Team</h2>
     <div class="team-grid">
@@ -526,14 +437,10 @@
         <h3>Priya Patel</h3>
         <p>Ex-Senior Engineer at Polygon. Specialized in ZK-rollups and Layer 2 scaling solutions.</p>
       </div>
-      
-      <!-- New team member 1: Former AVAX Developer -->
       <div class="team-member">
         <h3>Marcus Johnson</h3>
         <p>Former Core Developer at Avalanche. 8+ years experience in consensus algorithms and distributed systems.</p>
       </div>
-      
-      <!-- New team member 2: Marketing Specialist -->
       <div class="team-member">
         <h3>Sophia Williams</h3>
         <p>Ex-Product Lead at Chainlink. Specialized in oracle systems and DeFi integrations.</p>
@@ -541,19 +448,13 @@
     </div>
   </section>
 </div>
-
-<!-- ================== COMMUNITY ACTIVITY ================== -->
 <section id="community-activity" class="py-12 bg-green-50 dark:bg-gray-800">
   <h2 class="text-3xl font-bold text-center text-green-600 dark:text-green-400 mb-8">
     🔥 Live Community Activity
   </h2>
-
-  <!-- Live Feed -->
   <div id="liveFeed" class="max-w-2xl mx-auto bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-lg mb-8 text-center">
     <p id="feedMessage" class="text-lg font-medium text-gray-800 dark:text-gray-200">Loading latest activity...</p>
   </div>
-
-  <!-- Referral Leaderboard -->
 <div class="bg-green-600 dark:bg-green-700 text-white py-3 overflow-hidden relative">
   <div id="leaderboard" class="whitespace-nowrap animate-marquee text-lg font-bold">
     <span class="mx-6">0xA12...F45 earned 50,000 FLUFFI</span>
@@ -610,9 +511,7 @@
     <span class="mx-6">0x2C4...D78 earned 80,000 FLUFFI</span>
   </div>
 </div>
-</section>
-
-  
+</section>  
 <footer class="flex flex-col md:flex-row justify-between px-6 py-6 text-sm text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800">
   <div class="mb-4 md:mb-0">© 2025 $FLUFFI Token - All Rights Reserved</div>
   <div class="flex gap-4 justify-center md:justify-end">
@@ -624,8 +523,6 @@
     </a>
   </div>
 </footer>
-
-<!-- Wallet Connect Modal -->
 <div id="walletModal" class="wallet-modal">
   <div class="wallet-modal-content dark:bg-gray-800">
     <div class="wallet-header">
@@ -653,7 +550,6 @@
       </div>
       <div class="wallet-help-btn" onclick="showConnectionHelp('walletconnect', event)">?</div>
     </div>
-
     <div class="wallet-option" onclick="connectWallet('phantom')">
       <div class="flex items-center w-full">
         <img src="Phantom-Icon_App_1200x1200.png" alt="Phantom" class="w-6 h-6">
@@ -663,8 +559,6 @@
     </div>
   </div>
 </div>
-
-<!-- WalletConnect QR Code Modal -->
 <div id="walletConnectModal" class="wallet-connect-modal">
   <div class="wallet-connect-content dark:bg-gray-800">
     <span class="wallet-connect-close" onclick="closeWalletConnectModal()">&times;</span>
@@ -674,24 +568,15 @@
     <p id="walletConnectLink" class="wallet-connect-link hidden">Or open in wallet app</p>
   </div>
 </div>
-  
-<!-- Connection Help Modal -->
 <div id="connectionHelpModal" class="help-modal">
   <div class="help-modal-content dark:bg-gray-800">
     <span class="help-close" onclick="closeHelpModal()">&times;</span>
     <div id="helpContent"></div>
   </div>
 </div>
-
-<!-- Web3Modal v2 (WalletConnect v2) -->
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-
 <script>
-  // Configuration
   let tokenChart = null;
-
-
-
   // Add this to your configuration section
 const PRICE_API_ENDPOINTS = {
   'BINANCE': 'https://api.binance.com/api/v3/ticker/price?symbol=',
