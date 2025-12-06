@@ -467,5 +467,102 @@
       });
     }
   </script>
+
+  <script>
+// Dark/Light Mode Toggle Script
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the toggle button and icon
+  const darkModeToggle = document.querySelector('button[aria-label="Toggle dark mode"]');
+  const darkModeIcon = document.getElementById('darkModeIcon');
+  
+  // Check for saved theme or system preference
+  const savedTheme = localStorage.getItem('theme');
+  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  // Determine initial theme
+  let currentTheme;
+  if (savedTheme) {
+    currentTheme = savedTheme;
+  } else {
+    currentTheme = systemPrefersDark ? 'dark' : 'light';
+  }
+  
+  // Apply the theme
+  applyTheme(currentTheme);
+  
+  // Add click event listener to toggle button
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', function() {
+      // Toggle theme
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(currentTheme);
+      // Save preference
+      localStorage.setItem('theme', currentTheme);
+    });
+  }
+  
+  // Apply theme function
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      if (darkModeIcon) darkModeIcon.textContent = '☀️';
+    } else {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+      if (darkModeIcon) darkModeIcon.textContent = '🌙';
+    }
+    
+    // Update Chart.js colors if chart exists
+    updateChartTheme(theme);
+  }
+  
+  // Update Chart.js theme
+  function updateChartTheme(theme) {
+    const chart = window.tokenChart; // Reference your chart instance
+    if (!chart) return;
+    
+    const isDark = theme === 'dark';
+    chart.options.plugins.legend.labels.color = isDark ? '#E2E8F0' : '#1F2937';
+    chart.options.plugins.tooltip.backgroundColor = isDark ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)';
+    chart.options.plugins.tooltip.titleColor = isDark ? '#E2E8F0' : '#1F2937';
+    chart.options.plugins.tooltip.bodyColor = isDark ? '#E2E8F0' : '#1F2937';
+    chart.update();
+  }
+  
+  // Listen for system theme changes (if no manual preference set)
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      currentTheme = e.matches ? 'dark' : 'light';
+      applyTheme(currentTheme);
+    }
+  });
+  
+  // Additional utility: Add smooth transition for theme changes
+  function addThemeTransitions() {
+    const style = document.createElement('style');
+    style.textContent = `
+      * {
+        transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+      }
+      .bg-white, .bg-gray-50, .bg-gray-100, .bg-green-50, .bg-green-600, .bg-gray-800, .bg-gray-900, 
+      .dark\\:bg-gray-800, .dark\\:bg-gray-900, .dark\\:bg-green-900\\/20 {
+        transition: background-color 0.3s ease;
+      }
+      .text-gray-800, .text-gray-700, .text-gray-600, .text-gray-500, .text-green-600, .text-green-700,
+      .dark\\:text-white, .dark\\:text-gray-300, .dark\\:text-gray-400, .dark\\:text-green-400 {
+        transition: color 0.3s ease;
+      }
+      .border-gray-200, .dark\\:border-gray-700 {
+        transition: border-color 0.3s ease;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  
+  // Call the transition function
+  addThemeTransitions();
+});
+</script>
 </body>
 </html>
