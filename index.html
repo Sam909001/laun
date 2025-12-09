@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,9 +62,52 @@
       transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     }
     
-    /* Ensure Tailwind dark mode classes work */
+    /* Enhanced dark mode styles */
+    .dark {
+      background-color: #0f172a;
+      color: #e2e8f0;
+    }
+    
+    .dark .bg-white {
+      background-color: #1e293b !important;
+    }
+    
+    .dark .bg-gray-50 {
+      background-color: #1e293b !important;
+    }
+    
+    .dark .text-gray-800 {
+      color: #e2e8f0 !important;
+    }
+    
+    .dark .text-gray-700 {
+      color: #cbd5e1 !important;
+    }
+    
+    .dark .text-gray-900 {
+      color: #f1f5f9 !important;
+    }
+    
+    .dark .bg-gray-100 {
+      background-color: #334155 !important;
+      color: #cbd5e1 !important;
+    }
+    
+    .dark .border-gray-200 {
+      border-color: #475569 !important;
+    }
+    
+    .dark .bg-green-50 {
+      background-color: #064e3b !important;
+    }
+    
+    .dark .bg-gray-50 {
+      background-color: #1e293b !important;
+    }
+    
     .dark .trust-card {
       border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: #1e293b !important;
     }
     
     .dark .trust-card h3 {
@@ -74,9 +117,26 @@
     .dark .trust-card p {
       color: #d1d5db !important;
     }
+    
+    .dark details summary {
+      color: #e2e8f0 !important;
+    }
+    
+    .dark details div {
+      color: #cbd5e1 !important;
+    }
+    
+    .dark footer {
+      background-color: #1e293b !important;
+      color: #94a3b8 !important;
+    }
+    
+    .dark footer a {
+      color: #cbd5e1 !important;
+    }
   </style>
 </head>
-<body class="text-gray-800 bg-gray-50">
+<body class="text-gray-800 bg-gray-50 dark:bg-slate-900 dark:text-gray-200">
   <header class="bg-green-600 shadow sticky top-0 z-10 px-4 py-3">
     <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between">
       <div class="flex items-center gap-3">
@@ -92,7 +152,7 @@
         <a href="#faq" class="text-white hover:underline">FAQ</a>
         <a href="#how-to-buy" class="text-white hover:underline">How to Buy</a>
         <a href="#why-fluffi" class="text-white hover:underline">Why Fluffi?</a>
-        <button onclick="toggleDarkMode()" class="ml-2 bg-gray-300 px-2 rounded text-black" aria-label="Toggle dark mode">
+        <button onclick="toggleDarkMode()" class="ml-2 bg-gray-300 dark:bg-gray-700 px-3 py-1 rounded text-black dark:text-white" aria-label="Toggle dark mode">
           <span id="darkModeIcon">🌙</span>
         </button>
       </nav>
@@ -120,36 +180,36 @@
     </div>
   </section>
 
-  <section id="tokenomics" class="px-6 py-16 bg-white">
+  <section id="tokenomics" class="px-6 py-16 bg-white dark:bg-slate-800">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-extrabold text-center text-green-700 mb-12 uppercase tracking-wide">
+      <h2 class="text-3xl font-extrabold text-center text-green-700 dark:text-green-400 mb-12 uppercase tracking-wide">
         📊 Tokenomics
       </h2>
       <div class="grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <ul class="space-y-4 text-lg text-gray-900">
+          <ul class="space-y-4 text-lg text-gray-900 dark:text-gray-100">
             <li>
-              <span class="font-semibold text-green-700">Total Supply:</span>
+              <span class="font-semibold text-green-700 dark:text-green-400">Total Supply:</span>
               <span class="ml-2">10,000,000,000 FLUFFI</span>
             </li>
             <li>
-              <span class="font-semibold text-green-700">Liquidity:</span>
+              <span class="font-semibold text-green-700 dark:text-green-400">Liquidity:</span>
               <span class="ml-2">50% (Locked)</span>
             </li>
             <li>
-              <span class="font-semibold text-green-700">Community Rewards:</span>
+              <span class="font-semibold text-green-700 dark:text-green-400">Community Rewards:</span>
               <span class="ml-2">30%</span>
             </li>
             <li>
-              <span class="font-semibold text-green-700">Marketing:</span>
+              <span class="font-semibold text-green-700 dark:text-green-400">Marketing:</span>
               <span class="ml-2">10%</span>
             </li>
             <li>
-              <span class="font-semibold text-green-700">Team:</span>
+              <span class="font-semibold text-green-700 dark:text-green-400">Team:</span>
               <span class="ml-2">10% (Locked for 12 months)</span>
             </li>
             <li>
-              <span class="font-semibold text-green-700">Transaction Tax:</span>
+              <span class="font-semibold text-green-700 dark:text-green-400">Transaction Tax:</span>
               <span class="ml-2">5% (3% LP, 2% Marketing)</span>
             </li>
           </ul>
@@ -161,78 +221,78 @@
     </div>
   </section>
 
-  <section id="how-to-buy" class="px-6 py-16 bg-gray-50">
+  <section id="how-to-buy" class="px-6 py-16 bg-gray-50 dark:bg-slate-800">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-extrabold text-center text-green-600 mb-12">
+      <h2 class="text-3xl font-extrabold text-center text-green-600 dark:text-green-400 mb-12">
         🛒 How to Buy $FLUFFI
       </h2>
       <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <div class="bg-white dark:bg-slate-700 p-6 rounded-2xl shadow-lg">
           <div class="text-4xl mb-4">1️⃣</div>
-          <h3 class="text-xl font-semibold mb-3">Get a Solana Wallet</h3>
-          <p class="text-gray-700">
+          <h3 class="text-xl font-semibold mb-3 dark:text-white">Get a Solana Wallet</h3>
+          <p class="text-gray-700 dark:text-gray-300">
             Download Phantom or Solflare wallet. Get some SOL from any exchange.
           </p>
         </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <div class="bg-white dark:bg-slate-700 p-6 rounded-2xl shadow-lg">
           <div class="text-4xl mb-4">2️⃣</div>
-          <h3 class="text-xl font-semibold mb-3">Go to Pump.fun</h3>
-          <p class="text-gray-700">
+          <h3 class="text-xl font-semibold mb-3 dark:text-white">Go to Pump.fun</h3>
+          <p class="text-gray-700 dark:text-gray-300">
             Visit pump.fun and connect your wallet. Search for "$FLUFFI" or use our contract address.
           </p>
         </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <div class="bg-white dark:bg-slate-700 p-6 rounded-2xl shadow-lg">
           <div class="text-4xl mb-4">3️⃣</div>
-          <h3 class="text-xl font-semibold mb-3">Swap SOL for FLUFFI</h3>
-          <p class="text-gray-700">
+          <h3 class="text-xl font-semibold mb-3 dark:text-white">Swap SOL for FLUFFI</h3>
+          <p class="text-gray-700 dark:text-gray-300">
             Enter the amount of SOL you want to swap. Confirm the transaction in your wallet.
           </p>
         </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <div class="bg-white dark:bg-slate-700 p-6 rounded-2xl shadow-lg">
           <div class="text-4xl mb-4">4️⃣</div>
-          <h3 class="text-xl font-semibold mb-3">Hold & Enjoy!</h3>
-          <p class="text-gray-700">
+          <h3 class="text-xl font-semibold mb-3 dark:text-white">Hold & Enjoy!</h3>
+          <p class="text-gray-700 dark:text-gray-300">
             Your FLUFFI tokens will appear in your wallet. Hold and watch the magic happen!
           </p>
         </div>
       </div>
       
-      <div class="mt-12 bg-green-50 p-6 rounded-2xl">
-        <h3 class="text-xl font-bold mb-4">📝 Contract Address</h3>
-        <div class="bg-gray-100 p-4 rounded-lg font-mono text-sm break-all">
+      <div class="mt-12 bg-green-50 dark:bg-green-900/30 p-6 rounded-2xl">
+        <h3 class="text-xl font-bold mb-4 dark:text-white">📝 Contract Address</h3>
+        <div class="bg-gray-100 dark:bg-slate-700 p-4 rounded-lg font-mono text-sm break-all dark:text-gray-300">
           BpP6hRn1JReh3YVQgLQdH4kPTLUt4nty1PmXNN7rARfZ
         </div>
-        <p class="mt-4 text-sm text-gray-600">
+        <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
           Always verify the contract address before trading. Beware of fake copies!
         </p>
       </div>
     </div>
   </section>
 
-  <section id="why-fluffi" class="px-6 py-16 bg-white">
+  <section id="why-fluffi" class="px-6 py-16 bg-white dark:bg-slate-800">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-extrabold text-center text-green-600 mb-12">
+      <h2 class="text-3xl font-extrabold text-center text-green-600 dark:text-green-400 mb-12">
         ❓ Why Fluffi Coin?
       </h2>
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-gray-50 p-6 rounded-2xl shadow-lg">
+        <div class="bg-gray-50 dark:bg-slate-700 p-6 rounded-2xl shadow-lg">
           <div class="text-5xl mb-4">🔥</div>
-          <h3 class="text-xl font-semibold mb-3">Pure Meme Energy</h3>
-          <p class="text-gray-700">
+          <h3 class="text-xl font-semibold mb-3 dark:text-white">Pure Meme Energy</h3>
+          <p class="text-gray-700 dark:text-gray-300">
             Fluffi isn't just another token—it's a movement. Born from the community, for the community.
           </p>
         </div>
-        <div class="bg-gray-50 p-6 rounded-2xl shadow-lg">
+        <div class="bg-gray-50 dark:bg-slate-700 p-6 rounded-2xl shadow-lg">
           <div class="text-5xl mb-4">🔒</div>
-          <h3 class="text-xl font-semibold mb-3">Transparent & Secure</h3>
-          <p class="text-gray-700">
+          <h3 class="text-xl font-semibold mb-3 dark:text-white">Transparent & Secure</h3>
+          <p class="text-gray-700 dark:text-gray-300">
             Liquidity locked, contract renounced. We're here for the long haul with full transparency.
           </p>
         </div>
-        <div class="bg-gray-50 p-6 rounded-2xl shadow-lg">
+        <div class="bg-gray-50 dark:bg-slate-700 p-6 rounded-2xl shadow-lg">
           <div class="text-5xl mb-4">🚀</div>
-          <h3 class="text-xl font-semibold mb-3">Pump.fun Ready</h3>
-          <p class="text-gray-700">
+          <h3 class="text-xl font-semibold mb-3 dark:text-white">Pump.fun Ready</h3>
+          <p class="text-gray-700 dark:text-gray-300">
             Already minted and listed on the most popular Solana launchpad. Easy to buy and trade.
           </p>
         </div>
@@ -240,71 +300,71 @@
     </div>
   </section>
 
-  <section id="faq" class="px-6 py-16 bg-gray-50">
+  <section id="faq" class="px-6 py-16 bg-gray-50 dark:bg-slate-800">
     <div class="max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-12 text-green-600">❓ FAQ</h2>
+      <h2 class="text-3xl font-bold text-center mb-12 text-green-600 dark:text-green-400">❓ FAQ</h2>
       
-      <details class="group border border-gray-200 rounded-lg mb-4">
-        <summary class="cursor-pointer p-4 font-semibold text-gray-800 flex justify-between items-center">
+      <details class="group border border-gray-200 dark:border-slate-600 rounded-lg mb-4">
+        <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-200 flex justify-between items-center">
           Where can I buy $FLUFFI?
-          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
             viewBox="0 0 24 24" aria-hidden="true">
             <path d="M19 9l-7 7-7-7" />
           </svg>
         </summary>
-        <div class="px-4 pb-4 text-gray-700">
+        <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
           $FLUFFI is available on Pump.fun. You'll need a Solana wallet (like Phantom) and some SOL to trade.
         </div>
       </details>
 
-      <details class="group border border-gray-200 rounded-lg mb-4">
-        <summary class="cursor-pointer p-4 font-semibold text-gray-800 flex justify-between items-center">
+      <details class="group border border-gray-200 dark:border-slate-600 rounded-lg mb-4">
+        <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-200 flex justify-between items-center">
           What's the transaction tax?
-          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
             viewBox="0 0 24 24" aria-hidden="true">
             <path d="M19 9l-7 7-7-7" />
           </svg>
         </summary>
-        <div class="px-4 pb-4 text-gray-700">
+        <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
           5% total tax on all transactions: 3% goes to liquidity pool, 2% to marketing and development.
         </div>
       </details>
 
-      <details class="group border border-gray-200 rounded-lg mb-4">
-        <summary class="cursor-pointer p-4 font-semibold text-gray-800 flex justify-between items-center">
+      <details class="group border border-gray-200 dark:border-slate-600 rounded-lg mb-4">
+        <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-200 flex justify-between items-center">
           Is liquidity locked?
-          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
             viewBox="0 0 24 24" aria-hidden="true">
             <path d="M19 9l-7 7-7-7" />
           </svg>
         </summary>
-        <div class="px-4 pb-4 text-gray-700">
+        <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
           Yes! 50% of total supply is locked in liquidity for 12 months. You can verify this on Pump.fun.
         </div>
       </details>
 
-      <details class="group border border-gray-200 rounded-lg mb-4">
-        <summary class="cursor-pointer p-4 font-semibold text-gray-800 flex justify-between items-center">
+      <details class="group border border-gray-200 dark:border-slate-600 rounded-lg mb-4">
+        <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-200 flex justify-between items-center">
           What chain is $FLUFFI on?
-          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
             viewBox="0 0 24 24" aria-hidden="true">
             <path d="M19 9l-7 7-7-7" />
           </svg>
         </summary>
-        <div class="px-4 pb-4 text-gray-700">
+        <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
           $FLUFFI is a Solana SPL token, perfect for fast and cheap transactions.
         </div>
       </details>
 
-      <details class="group border border-gray-200 rounded-lg mb-4">
-        <summary class="cursor-pointer p-4 font-semibold text-gray-800 flex justify-between items-center">
+      <details class="group border border-gray-200 dark:border-slate-600 rounded-lg mb-4">
+        <summary class="cursor-pointer p-4 font-semibold text-gray-800 dark:text-gray-200 flex justify-between items-center">
           How do I stay updated?
-          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
             viewBox="0 0 24 24" aria-hidden="true">
             <path d="M19 9l-7 7-7-7" />
           </svg>
         </summary>
-        <div class="px-4 pb-4 text-gray-700">
+        <div class="px-4 pb-4 text-gray-700 dark:text-gray-300">
           Follow our Twitter and join our Telegram community for the latest updates and announcements.
         </div>
       </details>
@@ -332,23 +392,23 @@
     </div>
   </section>
 
-  <footer class="px-6 py-8 text-sm text-gray-600 bg-gray-100">
+  <footer class="px-6 py-8 text-sm text-gray-600 bg-gray-100 dark:bg-slate-800 dark:text-gray-400">
     <div class="max-w-6xl mx-auto">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <div class="mb-4 md:mb-0">© 2025 $FLUFFI Token - All Rights Reserved</div>
         <div class="flex gap-4">
-          <a href="https://t.me/FLUFFI_BSC_OFFICIAL" target="_blank" rel="noopener noreferrer" class="hover:opacity-75">
+          <a href="https://t.me/FLUFFI_BSC_OFFICIAL" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 dark:text-gray-300">
             Telegram
           </a>
-          <a href="https://x.com/FLUFFIOFFICIAL" target="_blank" rel="noopener noreferrer" class="hover:opacity-75">
+          <a href="https://x.com/FLUFFIOFFICIAL" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 dark:text-gray-300">
             Twitter
           </a>
-          <a href="https://pump.fun" target="_blank" rel="noopener noreferrer" class="hover:opacity-75">
+          <a href="https://pump.fun" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 dark:text-gray-300">
             Pump.fun
           </a>
         </div>
       </div>
-      <div class="mt-4 text-center text-xs text-gray-500">
+      <div class="mt-4 text-center text-xs text-gray-500 dark:text-gray-500">
         $FLUFFI is a meme token. Cryptocurrency investments are highly volatile. Only invest what you can afford to lose.
       </div>
     </div>
@@ -371,10 +431,10 @@
       if (button) {
         if (isDark) {
           button.classList.remove('bg-gray-300', 'text-black');
-          button.classList.add('dark:bg-gray-700', 'dark:text-white');
+          button.classList.add('bg-gray-700', 'text-white');
         } else {
           button.classList.add('bg-gray-300', 'text-black');
-          button.classList.remove('dark:bg-gray-700', 'dark:text-white');
+          button.classList.remove('bg-gray-700', 'text-white');
         }
       }
       
@@ -410,7 +470,7 @@
         const button = document.querySelector('button[aria-label="Toggle dark mode"]');
         if (button) {
           button.classList.remove('bg-gray-300', 'text-black');
-          button.classList.add('dark:bg-gray-700', 'dark:text-white');
+          button.classList.add('bg-gray-700', 'text-white');
         }
       }
       
