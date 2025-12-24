@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yeditepe Laundry - Profesyonel Otel Çamaşır Hizmeti</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add EmailJS library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         /* Base Styles and Colors */
         :root {
@@ -19,6 +21,8 @@
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --border-radius: 8px;
             --transition: all 0.3s ease;
+            --success-green: #28a745;
+            --error-red: #dc3545;
         }
         
         * {
@@ -103,6 +107,47 @@
         
         .btn i {
             margin-right: 8px;
+        }
+        
+        .btn:disabled {
+            background-color: var(--medium-gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Alert Messages */
+        .alert {
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .alert-success {
+            background-color: rgba(40, 167, 69, 0.1);
+            border-left: 4px solid var(--success-green);
+            color: var(--success-green);
+        }
+        
+        .alert-error {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-left: 4px solid var(--error-red);
+            color: var(--error-red);
+        }
+        
+        .alert-info {
+            background-color: rgba(23, 162, 184, 0.1);
+            border-left: 4px solid var(--light-blue);
+            color: var(--dark-blue);
         }
         
         /* Header Styles */
@@ -391,6 +436,28 @@
             resize: vertical;
         }
         
+        .form-note {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: var(--white);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
         /* Footer */
         footer {
             background-color: var(--dark-blue);
@@ -528,6 +595,10 @@
             .section {
                 padding: 60px 0;
             }
+            
+            .contact-form {
+                padding: 25px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -537,10 +608,6 @@
             
             .services-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .contact-form {
-                padding: 25px;
             }
         }
     </style>
@@ -729,25 +796,45 @@
                 <div class="contact-form">
                     <h3>Bize Ulaşın</h3>
                     <p>Teklif almak veya sorularınız için formu doldurun, en kısa sürede size dönüş yapalım.</p>
+                    
+                    <!-- Form Messages Area -->
+                    <div id="form-messages"></div>
+                    
                     <form id="contactForm">
                         <div class="form-group">
-                            <label for="name">Adınız Soyadınız</label>
+                            <label for="name">Adınız Soyadınız *</label>
                             <input type="text" id="name" class="form-control" placeholder="Adınız Soyadınız" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">E-posta Adresiniz</label>
+                            <label for="email">E-posta Adresiniz *</label>
                             <input type="email" id="email" class="form-control" placeholder="E-posta adresiniz" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Telefon Numaranız</label>
+                            <label for="phone">Telefon Numaranız *</label>
                             <input type="tel" id="phone" class="form-control" placeholder="Telefon numaranız" required>
                         </div>
                         <div class="form-group">
-                            <label for="message">Mesajınız</label>
+                            <label for="hotel_name">Otel Adı (Opsiyonel)</label>
+                            <input type="text" id="hotel_name" class="form-control" placeholder="Otel adınız (varsa)">
+                        </div>
+                        <div class="form-group">
+                            <label for="service_type">Hizmet Türü</label>
+                            <select id="service_type" class="form-control">
+                                <option value="">Seçiniz</option>
+                                <option value="yatak">Yatak Çamaşırları</option>
+                                <option value="battaniye">Battaniye & Yorgan</option>
+                                <option value="havlu">Havlu & Bornoz</option>
+                                <option value="restoran">Restoran Tekstilleri</option>
+                                <option value="diger">Diğer</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mesajınız *</label>
                             <textarea id="message" class="form-control" placeholder="Mesajınızı buraya yazın..." required></textarea>
                         </div>
-                        <button type="submit" class="btn" style="width: 100%;">
-                            <i class="fas fa-paper-plane"></i> Mesaj Gönder
+                        <div class="form-note">* İşaretli alanlar zorunludur.</div>
+                        <button type="submit" class="btn" id="submit-btn" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> <span id="btn-text">Mesaj Gönder</span>
                         </button>
                     </form>
                 </div>
@@ -796,6 +883,53 @@
     </footer>
 
     <script>
+        // Initialize EmailJS with your public key
+        // You need to sign up at https://www.emailjs.com/ and get these values
+        // Replace these with your actual EmailJS credentials
+        (function() {
+            // Initialize EmailJS with your public key
+            emailjs.init("YOUR_PUBLIC_KEY_HERE"); // You'll get this from EmailJS dashboard
+            
+            // Set your Service ID and Template ID
+            const SERVICE_ID = "YOUR_SERVICE_ID_HERE";
+            const TEMPLATE_ID = "YOUR_TEMPLATE_ID_HERE";
+            
+            // Store these in a global object for easy access
+            window.emailConfig = {
+                serviceId: SERVICE_ID,
+                templateId: TEMPLATE_ID
+            };
+            
+            // Show setup instructions if keys are not set
+            if (SERVICE_ID === "YOUR_SERVICE_ID_HERE") {
+                console.warn("EmailJS is not configured. Please follow the setup instructions.");
+                showSetupInstructions();
+            }
+        })();
+        
+        function showSetupInstructions() {
+            const messageContainer = document.getElementById('form-messages');
+            if (messageContainer) {
+                messageContainer.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>Email Gönderimi Kurulum Gerektirir</strong><br>
+                            Formun çalışması için EmailJS kurulumu yapmanız gerekiyor. 
+                            Lütfen aşağıdaki adımları takip edin:
+                            <ol style="margin-top: 10px; padding-left: 20px;">
+                                <li><a href="https://www.emailjs.com" target="_blank">EmailJS.com</a>'a üye olun</li>
+                                <li>Gmail veya başka bir email servisi ekleyin</li>
+                                <li>Bir email şablonu oluşturun</li>
+                                <li>Public Key, Service ID ve Template ID'yi alın</li>
+                                <li>Bu kodda ilgili yerleri güncelleyin</li>
+                            </ol>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const mainNav = document.getElementById('main-nav');
@@ -837,24 +971,142 @@
             });
         });
         
-        // Contact Form Submission
+        // Contact Form Submission with EmailJS
         const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', function(e) {
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const formMessages = document.getElementById('form-messages');
+        
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            // Check if EmailJS is configured
+            if (!window.emailConfig || window.emailConfig.serviceId === "YOUR_SERVICE_ID_HERE") {
+                showMessage('error', 'Email gönderimi henüz yapılandırılmamış. Lütfen site sahibiyle iletişime geçin.');
+                return;
+            }
+            
+            // Validate form
+            if (!validateForm()) {
+                return;
+            }
+            
             // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const message = document.getElementById('message').value;
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                hotel_name: document.getElementById('hotel_name').value,
+                service_type: document.getElementById('service_type').value,
+                message: document.getElementById('message').value,
+                submission_date: new Date().toLocaleString('tr-TR'),
+                website: 'Yeditepe Laundry Web Sitesi'
+            };
             
-            // In a real implementation, you would send this data to a server
-            // For this example, we'll just show an alert
-            alert(`Teşekkürler ${name}! Mesajınız başarıyla alındı. En kısa sürede size dönüş yapacağız.`);
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.textContent = 'Gönderiliyor...';
+            submitBtn.innerHTML = '<div class="spinner"></div> <span id="btn-text">Gönderiliyor...</span>';
             
-            // Reset form
-            contactForm.reset();
+            try {
+                // Send email using EmailJS
+                const response = await emailjs.send(
+                    window.emailConfig.serviceId,
+                    window.emailConfig.templateId,
+                    formData
+                );
+                
+                // Success
+                showMessage('success', 'Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.');
+                contactForm.reset();
+                
+            } catch (error) {
+                // Error
+                console.error('EmailJS Error:', error);
+                showMessage('error', 'Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin veya doğrudan email gönderin.');
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span id="btn-text">Mesaj Gönder</span>';
+                btnText.textContent = 'Mesaj Gönder';
+            }
         });
+        
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Clear previous messages
+            formMessages.innerHTML = '';
+            
+            // Validate required fields
+            if (!name) {
+                showMessage('error', 'Lütfen adınızı soyadınızı giriniz.');
+                document.getElementById('name').focus();
+                return false;
+            }
+            
+            if (!email) {
+                showMessage('error', 'Lütfen e-posta adresinizi giriniz.');
+                document.getElementById('email').focus();
+                return false;
+            }
+            
+            // Simple email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showMessage('error', 'Lütfen geçerli bir e-posta adresi giriniz.');
+                document.getElementById('email').focus();
+                return false;
+            }
+            
+            if (!phone) {
+                showMessage('error', 'Lütfen telefon numaranızı giriniz.');
+                document.getElementById('phone').focus();
+                return false;
+            }
+            
+            if (!message) {
+                showMessage('error', 'Lütfen mesajınızı giriniz.');
+                document.getElementById('message').focus();
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function showMessage(type, text) {
+            // Clear previous messages
+            formMessages.innerHTML = '';
+            
+            // Create message element
+            const messageEl = document.createElement('div');
+            messageEl.className = `alert alert-${type}`;
+            
+            // Set icon based on type
+            const icon = type === 'success' ? 'fa-check-circle' : 
+                        type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+            
+            messageEl.innerHTML = `
+                <i class="fas ${icon}"></i>
+                <div>${text}</div>
+            `;
+            
+            // Add to messages container
+            formMessages.appendChild(messageEl);
+            
+            // Scroll to messages
+            formMessages.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Auto-remove success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageEl.remove();
+                }, 5000);
+            }
+        }
         
         // Header scroll effect
         window.addEventListener('scroll', function() {
@@ -863,6 +1115,19 @@
                 header.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.1)';
             } else {
                 header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
+            }
+        });
+        
+        // Show a welcome message with setup instructions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if this is the first visit (for demo purposes)
+            const isFirstVisit = !localStorage.getItem('yeditepe_visited');
+            
+            if (isFirstVisit && window.emailConfig.serviceId === "YOUR_SERVICE_ID_HERE") {
+                setTimeout(() => {
+                    showSetupInstructions();
+                    localStorage.setItem('yeditepe_visited', 'true');
+                }, 2000);
             }
         });
     </script>
