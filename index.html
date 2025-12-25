@@ -174,22 +174,22 @@
         
      
 .logo-icon {
-    width: auto;        /* Let it size based on content */
-    min-width: 80px;    /* But ensure minimum size */
-    height: 80px;
+    width: auto;
+    min-width: 120px;
+    height: 100px;
     background: transparent;
     border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: visible;
-    padding: 0 10px;    /* Add horizontal padding */
+    padding: 0;
 }
 
 .logo-icon img {
-    max-width: 100px;   /* Maximum logo width */
-    max-height: 80px;   /* Maximum logo height */
-    width: auto;        /* Maintain aspect ratio */
+    max-width: 140px;
+    max-height: 100px;
+    width: auto;
     height: auto;
     object-fit: contain;
     border-radius: 0 !important;
@@ -279,17 +279,56 @@
             color: var(--dark-gray);
         }
         
-        .hero-image {
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+       .hero-image {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    position: relative;
+    height: 400px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-image img.active {
+    display: block;
+    opacity: 1;
+    z-index: 1;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+    background: var(--white);
+    width: 25px;
+    border-radius: 5px;
+}
         
         /* Services Section */
         .services-grid {
@@ -332,11 +371,40 @@
         
         /* Gallery Section */
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.gallery-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-item .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(26, 95, 122, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .play-button {
+    background: var(--light-blue);
+    transform: translate(-50%, -50%) scale(1.1);
+}
         
         .gallery-item {
             border-radius: var(--border-radius);
@@ -660,9 +728,14 @@
                     <p>Yeditepe Laundry olarak, otelleriniz için en kaliteli çamaşır ve tekstil temizleme hizmetini sunuyoruz. Battaniyeler, yatak örtüleri, havlular ve daha fazlası için güvenilir çözümler.</p>
                     <a href="#contact" class="btn"><i class="fas fa-envelope"></i> Teklif Alın</a>
                 </div>
-                <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Professional Laundry Service">
-                </div>
+                <div class="hero-image" id="hero-slider">
+    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="About 1" class="active">
+    <img src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="About 2">
+    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="About 3">
+    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="About 4">
+    <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="About 5">
+    <div class="slider-dots" id="hero-dots"></div>
+</div>
             </div>
         </div>
     </section>
@@ -677,9 +750,14 @@
                     <p>Müşteri memnuniyetini her şeyin üzerinde tutan anlayışımızla, otellerinizin tekstil ihtiyaçlarını en titiz şekilde karşılıyoruz. Battaniyeler, yorganlar, yastık kılıfları, masa örtüleri ve tüm otel tekstilleri için komple çözümler sunuyoruz.</p>
                     <p>Hijyen standartlarımız, sektördeki en yüksek kalite gerekliliklerini karşılamakta ve sürekli olarak denetlenmektedir.</p>
                 </div>
-                <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="About Yeditepe Laundry">
-                </div>
+               <div class="hero-image" id="about-slider">
+    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Laundry Service 1" class="active">
+    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Laundry Service 2">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Laundry Service 3">
+    <img src="https://images.unsplash.com/photo-1595272563634-9b1d78b06082?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Laundry Service 4">
+    <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Laundry Service 5">
+    <div class="slider-dots" id="about-dots"></div>
+</div>
             </div>
         </div>
     </section>
@@ -688,37 +766,30 @@
     <section id="services" class="section bg-light">
         <div class="container">
             <h2>Hizmetlerimiz</h2>
+            
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-bed"></i>
-                    </div>
-                    <h3>Otel Yatak Çamaşırları</h3>
-                    <p>Çarşaf, yastık kılıfı, yorgan kılıfı gibi tüm yatak tekstillerinin profesyonel temizliği.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-blanket"></i>
-                    </div>
-                    <h3>Battaniye & Yorgan</h3>
-                    <p>Her türlü battaniye ve yorganların hijyenik temizliği ve bakımı.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-towel"></i>
-                    </div>
-                    <h3>Havlu & Bornoz</h3>
-                    <p>Otel havluları ve bornozlarının yumuşak, hijyenik temizliği.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <h3>Restoran Tekstilleri</h3>
-                    <p>Masa örtüleri, peçeteler ve diğer restoran tekstillerinin temizliği.</p>
-                </div>
-            </div>
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-hotel"></i>
         </div>
+        <h3>Otel Çamaşırları</h3>
+        <p>Çarşaf, yastık kılıfı, yorgan kılıfı, battaniye ve tüm otel tekstillerinin profesyonel temizliği ve hijyenik bakımı.</p>
+    </div>
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-hospital"></i>
+        </div>
+        <h3>Hastane Çamaşırları</h3>
+        <p>Hastane yatak çamaşırları, cerrahi örtüler ve tüm medikal tekstillerin steril temizlik standartlarında işlenmesi.</p>
+    </div>
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-utensils"></i>
+        </div>
+        <h3>Restoran Tekstilleri</h3>
+        <p>Masa örtüleri, peçeteler, önlükler ve diğer restoran tekstillerinin leke çıkarma garantili temizliği.</p>
+    </div>
+</div>
     </section>
 
     <!-- Gallery Section -->
@@ -726,30 +797,101 @@
         <div class="container">
             <h2>Galeri</h2>
             <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">Modern ekipmanlarımız ve profesyonel çalışma alanlarımızdan örnekler. Görseller yüklenmeye hazır alanlardır.</p>
-            <div class="gallery-grid">
-                <div class="gallery-item gallery-placeholder">
-                    <i class="fas fa-camera"></i>
-                    <p>Makine Fotoğrafı</p>
-                </div>
-                <div class="gallery-item gallery-placeholder">
-                    <i class="fas fa-image"></i>
-                    <p>Tesis Fotoğrafı</p>
-                </div>
-                <div class="gallery-item gallery-placeholder">
-                    <i class="fas fa-upload"></i>
-                    <p>Çalışma Alanı</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Laundry Machine">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1595272563634-9b1d78b06082?ixlib=rb-1.2.1&auto=format&fit=crop&w-1350&q=80" alt="Laundry Facility">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w-1350&q=80" alt="Professional Service">
-                </div>
-            </div>
-        </div>
+           <div class="gallery-grid">
+    <!-- 10 Images -->
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery 1">
+    </div>
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1595272563634-9b1d78b06082?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery 2">
+    </div>
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery 3">
+    </div>
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery 4">
+    </div>
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery 5">
+    </div>
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery 6">
+    </div>
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery 7">
+    </div>
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery 8">
+    </div>
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery 9">
+    </div>
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1571624436279-b272aff752b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery 10">
+    </div>
+    
+    <!-- 10 Video Placeholders (You can replace with actual video URLs) -->
+    <div class="gallery-item">
+        <video poster="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400">
+            <source src="assets/video1.mp4" type="video/mp4">
+        </video>
+        <div class="play-button"><i class="fas fa-play"></i></div>
+    </div>
+    <div class="gallery-item">
+        <video poster="https://images.unsplash.com/photo-1595272563634-9b1d78b06082?w=400">
+            <source src="assets/video2.mp4" type="video/mp4">
+        </video>
+        <div class="play-button"><i class="fas fa-play"></i></div>
+    </div>
+    <div class="gallery-item">
+        <video poster="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400">
+            <source src="assets/video3.mp4" type="video/mp4">
+        </video>
+        <div class="play-button"><i class="fas fa-play"></i></div>
+    </div>
+    <div class="gallery-item">
+        <video poster="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400">
+            <source src="assets/video4.mp4" type="video/mp4">
+        </video>
+        <div class="play-button"><i class="fas fa-play"></i></div>
+    </div>
+    <div class="gallery-item">
+        <video poster="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?w=400">
+            <source src="assets/video5.mp4" type="video/mp4">
+        </video>
+        <div class="play-button"><i class="fas fa-play"></i></div>
+    </div>
+    <div class="gallery-item">
+        <video poster="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400">
+            <source src="assets/video6.mp4" type="video/mp4">
+        </video>
+        <div class="play-button"><i class="fas fa-play"></i></div>
+    </div>
+    <div class="gallery-item">
+        <video poster="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400">
+            <source src="assets/video7.mp4" type="video/mp4">
+        </video>
+        <div class="play-button"><i class="fas fa-play"></i></div>
+    </div>
+    <div class="gallery-item">
+        <video poster="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80">
+            <source src="assets/video8.mp4" type="video/mp4">
+        </video>
+        <div class="play-button"><i class="fas fa-play"></i></div>
+    </div>
+    <div class="gallery-item">
+        <video poster="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400">
+            <source src="assets/video9.mp4" type="video/mp4">
+        </video>
+        <div class="play-button"><i class="fas fa-play"></i></div>
+    </div>
+    <div class="gallery-item">
+        <video poster="https://images.unsplash.com/photo-1571624436279-b272aff752b5?w=400">
+            <source src="assets/video10.mp4" type="video/mp4">
+        </video>
+        <div class="play-button"><i class="fas fa-play"></i></div>
+    </div>
+</div>
     </section>
 
     <!-- Contact Section -->
@@ -830,13 +972,13 @@
                         </div>
                         <div class="form-group">
                             <label for="service_type">Hizmet Türü</label>
-                            <select id="service_type" class="form-control">
-                                <option value="">Seçiniz</option>
-                                <option value="yatak">Hotel Çamaşırları</option>
-                                <option value="battaniye">Hastane Çamaşırları</option>
-                                <option value="restoran">Restoran Tekstilleri</option>
-                                <option value="diger">Diğer</option>
-                            </select>
+                           <select id="service_type" class="form-control">
+    <option value="">Seçiniz</option>
+    <option value="otel">Otel Çamaşırları</option>
+    <option value="hastane">Hastane Çamaşırları</option>
+    <option value="restoran">Restoran Tekstilleri</option>
+    <option value="diger">Diğer</option>
+</select>
                         </div>
                         <div class="form-group">
                             <label for="message">Mesajınız *</label>
@@ -1164,269 +1306,55 @@ const siteConfig = {
     
     console.log('Site configuration applied successfully!');
 }
+
+
+         // ============================================
+// IMAGE SLIDER FUNCTIONALITY
+// ============================================
+function initSlider(sliderId, dotsId, interval = 10000) {
+    const slider = document.getElementById(sliderId);
+    if (!slider) return;
+    
+    const images = slider.querySelectorAll('img');
+    const dotsContainer = document.getElementById(dotsId);
+    let currentIndex = 0;
+    let sliderInterval;
+    
+    // Create dots
+    images.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+    
+    const dots = dotsContainer.querySelectorAll('.slider-dot');
+    
+    function goToSlide(index) {
+        images[currentIndex].classList.remove('active');
+        dots[currentIndex].classList.remove('active');
         
-// ============================================
-// INITIALIZE SITE WHEN PAGE LOADS
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    applySiteConfiguration();
-    
-    // Your existing initialization code continues here...
-    // (Mobile menu, form submission, etc.)
-    
-    // Check if this is the first visit
-    const isFirstVisit = !localStorage.getItem('yeditepe_visited');
-    if (isFirstVisit && window.emailConfig && window.emailConfig.serviceId === "YOUR_SERVICE_ID_HERE") {
-        setTimeout(() => {
-            showSetupInstructions();
-            localStorage.setItem('yeditepe_visited', 'true');
-        }, 2000);
+        currentIndex = index;
+        
+        images[currentIndex].classList.add('active');
+        dots[currentIndex].classList.add('active');
     }
-});
+    
+    function nextSlide() {
+        const nextIndex = (currentIndex + 1) % images.length;
+        goToSlide(nextIndex);
+    }
+    
+    // Start auto-slide
+    sliderInterval = setInterval(nextSlide, interval);
+    
+    // Pause on hover
+    slider.addEventListener('mouseenter', () => clearInterval(sliderInterval));
+    slider.addEventListener('mouseleave', () => {
+        sliderInterval = setInterval(nextSlide, interval);
+    });
+} 
         
-        (function() {
-            emailjs.init("jH-KlJ2ffs_lGwfsp"); 
-            emailjs.init("jH-KlJ2ffs_lGwfsp");
-            const SERVICE_ID = "service_4rt2w5g";
-            const TEMPLATE_ID = "template_2jf8cvh";
-            
-            // Store these in a global object for easy access
-            window.emailConfig = {
-                serviceId: SERVICE_ID,
-                templateId: TEMPLATE_ID,
-                receiverEmail: "mondevpro92@gmail.com"
-            };
-            
-            // Show setup instructions if keys are not set
-            if (SERVICE_ID === "YOUR_SERVICE_ID_HERE") {
-                console.warn("EmailJS is not configured. Please follow the setup instructions.");
-                showSetupInstructions();
-            }
-        })();
-        
-        function showSetupInstructions() {
-            const messageContainer = document.getElementById('form-messages');
-            if (messageContainer) {
-                messageContainer.innerHTML = `
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i>
-                        <div>
-                            <strong>Email Gönderimi Kurulum Gerektirir</strong><br>
-                            Formun çalışması için EmailJS kurulumu yapmanız gerekiyor. 
-                            Lütfen aşağıdaki adımları takip edin:
-                            <ol style="margin-top: 10px; padding-left: 20px;">
-                                <li><a href="https://www.emailjs.com" target="_blank">EmailJS.com</a>'a üye olun</li>
-                                <li>Gmail veya başka bir email servisi ekleyin</li>
-                                <li>Bir email şablonu oluşturun</li>
-                                <li>Public Key, Service ID ve Template ID'yi alın</li>
-                                <li>Bu kodda ilgili yerleri güncelleyin</li>
-                            </ol>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-        
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mainNav = document.getElementById('main-nav');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-            const icon = this.querySelector('i');
-            if (mainNav.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    // Close mobile menu if open
-                    if (mainNav.classList.contains('active')) {
-                        mainNav.classList.remove('active');
-                        mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-                        mobileMenuBtn.querySelector('i').classList.add('fa-bars');
-                    }
-                    
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Contact Form Submission with EmailJS
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submit-btn');
-        const btnText = document.getElementById('btn-text');
-        const formMessages = document.getElementById('form-messages');
-        
-        contactForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            // Check if EmailJS is configured
-            if (!window.emailConfig || window.emailConfig.serviceId === "YOUR_SERVICE_ID_HERE") {
-                showMessage('error', 'Email gönderimi henüz yapılandırılmamış. Lütfen site sahibiyle iletişime geçin.');
-                return;
-            }
-            
-            // Validate form
-            if (!validateForm()) {
-                return;
-            }
-            
-            // Get form values
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                hotel_name: document.getElementById('hotel_name').value,
-                service_type: document.getElementById('service_type').value,
-                message: document.getElementById('message').value,
-                submission_date: new Date().toLocaleString('tr-TR'),
-                website: 'Yeditepe Laundry Web Sitesi'
-            };
-            
-            // Show loading state
-            submitBtn.disabled = true;
-            btnText.textContent = 'Gönderiliyor...';
-            submitBtn.innerHTML = '<div class="spinner"></div> <span id="btn-text">Gönderiliyor...</span>';
-            
-            try {
-                // Send email using EmailJS
-                const response = await emailjs.send(
-                    window.emailConfig.serviceId,
-                    window.emailConfig.templateId,
-                    formData
-                );
-                
-                // Success
-                showMessage('success', 'Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.');
-                contactForm.reset();
-                
-            } catch (error) {
-                // Error
-                console.error('EmailJS Error:', error);
-                showMessage('error', 'Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin veya doğrudan email gönderin.');
-            } finally {
-                // Reset button state
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span id="btn-text">Mesaj Gönder</span>';
-                btnText.textContent = 'Mesaj Gönder';
-            }
-        });
-        
-        function validateForm() {
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const message = document.getElementById('message').value.trim();
-            
-            // Clear previous messages
-            formMessages.innerHTML = '';
-            
-            // Validate required fields
-            if (!name) {
-                showMessage('error', 'Lütfen adınızı soyadınızı giriniz.');
-                document.getElementById('name').focus();
-                return false;
-            }
-            
-            if (!email) {
-                showMessage('error', 'Lütfen e-posta adresinizi giriniz.');
-                document.getElementById('email').focus();
-                return false;
-            }
-            
-            // Simple email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showMessage('error', 'Lütfen geçerli bir e-posta adresi giriniz.');
-                document.getElementById('email').focus();
-                return false;
-            }
-            
-            if (!phone) {
-                showMessage('error', 'Lütfen telefon numaranızı giriniz.');
-                document.getElementById('phone').focus();
-                return false;
-            }
-            
-            if (!message) {
-                showMessage('error', 'Lütfen mesajınızı giriniz.');
-                document.getElementById('message').focus();
-                return false;
-            }
-            
-            return true;
-        }
-        
-        function showMessage(type, text) {
-            // Clear previous messages
-            formMessages.innerHTML = '';
-            
-            // Create message element
-            const messageEl = document.createElement('div');
-            messageEl.className = `alert alert-${type}`;
-            
-            // Set icon based on type
-            const icon = type === 'success' ? 'fa-check-circle' : 
-                        type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
-            
-            messageEl.innerHTML = `
-                <i class="fas ${icon}"></i>
-                <div>${text}</div>
-            `;
-            
-            // Add to messages container
-            formMessages.appendChild(messageEl);
-            
-            // Scroll to messages
-            formMessages.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            
-            // Auto-remove success messages after 5 seconds
-            if (type === 'success') {
-                setTimeout(() => {
-                    messageEl.remove();
-                }, 5000);
-            }
-        }
-        
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
-            }
-        });
-        
-        // Show a welcome message with setup instructions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if this is the first visit (for demo purposes)
-            const isFirstVisit = !localStorage.getItem('yeditepe_visited');
-            
-            if (isFirstVisit && window.emailConfig.serviceId === "YOUR_SERVICE_ID_HERE") {
-                setTimeout(() => {
-                    showSetupInstructions();
-                    localStorage.setItem('yeditepe_visited', 'true');
-                }, 2000);
-            }
-        });
     </script>
 </body>
 </html>
