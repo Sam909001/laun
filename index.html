@@ -1011,12 +1011,6 @@ const siteConfig = {
         receiverEmail: "mondevpro92@gmail.com"
     };
 })();
-
-// ============================================
-// FUNCTION TO APPLY CONFIGURATION
-// ============================================
-function applySiteConfiguration() {
-    console.log('Applying site configuration...');
     
     // ========== APPLY LOGO ==========
     function applySiteConfiguration() {
@@ -1160,6 +1154,7 @@ function applySiteConfiguration() {
     
     console.log('Site configuration applied successfully!');
 }
+        
 // ============================================
 // INITIALIZE SITE WHEN PAGE LOADS
 // ============================================
@@ -1188,7 +1183,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Store these in a global object for easy access
             window.emailConfig = {
                 serviceId: SERVICE_ID,
-                templateId: TEMPLATE_ID
+                templateId: TEMPLATE_ID,
                 receiverEmail: "mondevpro92@gmail.com"
             };
             
