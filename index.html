@@ -174,21 +174,25 @@
         
      
 .logo-icon {
-    width: 100px;
-    height: 100px;
+    width: auto;        /* Let it size based on content */
+    min-width: 80px;    /* But ensure minimum size */
+    height: 80px;
     background: transparent;
     border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: visible;
+    padding: 0 10px;    /* Add horizontal padding */
 }
 
 .logo-icon img {
-    width: 100%;
-    height: 100%;
+    max-width: 100px;   /* Maximum logo width */
+    max-height: 80px;   /* Maximum logo height */
+    width: auto;        /* Maintain aspect ratio */
+    height: auto;
     object-fit: contain;
-    border-radius: 0 !important;  /* Remove any circular styling */
+    border-radius: 0 !important;
 }
         
         .logo-text h1 {
