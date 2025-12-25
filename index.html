@@ -1417,8 +1417,7 @@ function initializeLightbox() {
             
             if (type === 'image') {
                 lightboxContent.innerHTML = `<img src="${src}" alt="Galeri Görseli">`;
-            } else // In initializeLightbox() function:
-if (type === 'video') {
+            } else if (type === 'video') {
     lightboxContent.innerHTML = `
         <video controls autoplay muted playsinline>
             <source src="${src}" type="video/mp4">
