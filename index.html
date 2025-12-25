@@ -1033,15 +1033,11 @@ header, footer, main {
                 <i class="fas fa-video"></i> Videolar
             </button>
         </div>
-        
-        <!-- Images Grid -->
         <div class="gallery-content active" id="gallery-images">
             <div class="gallery-grid" id="gallery-images-container">
                 <!-- Gallery images will be added by JavaScript -->
             </div>
         </div>
-        
-        <!-- Videos Grid -->
         <div class="gallery-content" id="gallery-videos">
             <div class="gallery-grid" id="gallery-videos-container">
                 <!-- Gallery videos will be added by JavaScript -->
@@ -1441,21 +1437,18 @@ function initializeLightbox() {
     const lightboxModal = document.getElementById('lightboxModal');
     const lightboxContent = document.getElementById('lightboxContent');
     const closeLightbox = document.querySelector('.close-lightbox');
-
-    // Delegate event listener to parent containers
+    
     document.addEventListener('click', function(e) {
         const galleryItem = e.target.closest('.gallery-item');
         if (!galleryItem) return;
 
         const type = galleryItem.getAttribute('data-type');
         const src = galleryItem.getAttribute('data-src');
-        
-        // Load the media if not already loaded
+
         if (!galleryItem.classList.contains('loaded')) {
             loadGalleryItem(galleryItem);
         }
-        
-        // Open lightbox
+
         lightboxContent.innerHTML = '';
         
         if (type === 'image') {
@@ -1523,8 +1516,6 @@ function loadGalleryItem(item) {
     }
 }
 
-
-        // Gallery Tab Switching
 document.addEventListener('DOMContentLoaded', function() {
     const galleryTabs = document.querySelectorAll('.gallery-tab');
     const galleryContents = document.querySelectorAll('.gallery-content');
@@ -1532,12 +1523,10 @@ document.addEventListener('DOMContentLoaded', function() {
     galleryTabs.forEach(tab => {
         tab.addEventListener('click', function() {
             const targetTab = this.getAttribute('data-tab');
-            
-            // Remove active class from all tabs and contents
+       
             galleryTabs.forEach(t => t.classList.remove('active'));
             galleryContents.forEach(c => c.classList.remove('active'));
-            
-            // Add active class to clicked tab and corresponding content
+
             this.classList.add('active');
             document.getElementById(`gallery-${targetTab}`).classList.add('active');
         });
