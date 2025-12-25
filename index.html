@@ -886,47 +886,100 @@
 
 // MEDIA CONFIGURATION - Update these URLs to change all images/icons
 const siteConfig = {
-    // Logo Configuration
+    // ================= LOGO CONFIGURATION =================
     logo: {
-        iconClass: 'assets/yeditepelogo.png', 
-        // Alternative: Use image instead of icon
-        // imageUrl: 'images/logo.png', // Uncomment to use image logo
+        // OPTION 1: Use FontAwesome icon (like before)
+        // iconClass: 'fas fa-tshirt',
+        
+        // OPTION 2: Use your own image logo (RECOMMENDED)
+        imageUrl: 'assets/logo/yeditepelogo.png',  // Path to your logo
         name: 'Yeditepe Laundry',
-        tagline: 'Profesyonel Otel Çamaşır Hizmeti'
+        tagline: 'Profesyonel Otel Çamaşır Hizmeti',
+        
+        // Optional: Control image size
+        imageWidth: '60px',
+        imageHeight: '60px',
+        imageStyle: 'border-radius: 50%; object-fit: contain;'
     },
     
-    // Hero Section Images
+    // ================= HERO SECTION IMAGES =================
     hero: {
-        backgroundImage: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-        mainImage: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+        // Background image for hero section
+        backgroundImage: 'assets/images/hero/hero-background.jpg',
+        
+        // Main hero image (right side)
+        mainImage: 'assets/images/hero/hero-main.jpg',
+        
+        // Optional: Alt text for images
+        altText: 'Yeditepe Laundry - Profesyonel Çamaşır Hizmeti'
     },
     
-    // About Section Image
+    // ================= ABOUT SECTION IMAGE =================
     about: {
-        image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+        image: 'assets/images/about/about-us.jpg',
+        altText: 'Yeditepe Laundry Hakkımızda'
     },
     
-    // Service Icons (FontAwesome classes)
+    // ================= SERVICE ICONS =================
     serviceIcons: {
-        bedding: 'fas fa-bed',
-        blanket: 'fas fa-blanket',
-        towel: 'fas fa-towel',
-        restaurant: 'fas fa-utensils'
+        // OPTION A: Use FontAwesome icons (if you prefer)
+        // bedding: 'fas fa-bed',
+        // blanket: 'fas fa-blanket',
+        // towel: 'fas fa-towel',
+        // restaurant: 'fas fa-utensils',
+        
+        // OPTION B: Use your own icon images (RECOMMENDED)
+        bedding: {
+            type: 'image',
+            url: 'assets/icons/service-bed.png',
+            alt: 'Otel Yatak Çamaşırları'
+        },
+        blanket: {
+            type: 'image', 
+            url: 'assets/icons/service-blanket.png',
+            alt: 'Battaniye & Yorgan'
+        },
+        towel: {
+            type: 'image',
+            url: 'assets/icons/service-towel.png',
+            alt: 'Havlu & Bornoz'
+        },
+        restaurant: {
+            type: 'image',
+            url: 'assets/icons/service-restaurant.png',
+            alt: 'Restoran Tekstilleri'
+        }
     },
     
-    // Gallery Images
+    // ================= GALLERY IMAGES =================
     gallery: {
+        // Your local gallery images
         images: [
-            'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-            'https://images.unsplash.com/photo-1595272563634-9b1d78b06082?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-            'https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-            // Add more image URLs here for additional gallery items
+            'assets/images/gallery/machine1.jpg',
+            'assets/images/gallery/facility1.jpg',
+            'assets/images/gallery/team1.jpg',
+            'assets/images/gallery/machine2.jpg',
+            'assets/images/gallery/facility2.jpg',
+            'assets/images/gallery/process1.jpg'
         ],
-        placeholders: 3 // Number of placeholder items to show
+        
+        // Alt texts for gallery images (optional)
+        altTexts: [
+            'Modern Çamaşır Makineleri',
+            'Tesisimizden Görüntü',
+            'Profesyonel Ekibimiz',
+            'Endüstriyel Ekipman',
+            'Temizlik Alanımız',
+            'Çalışma Prosesi'
+        ],
+        
+        // Number of placeholder items to show (if you don't have all images)
+        placeholders: 0 // Set to 0 when you have all images
     },
     
-    // Contact Icons
+    // ================= CONTACT ICONS =================
     contactIcons: {
+        // Keep as FontAwesome (small, consistent) or use images:
         address: 'fas fa-map-marker-alt',
         phone: 'fas fa-phone',
         fax: 'fas fa-fax',
@@ -934,11 +987,11 @@ const siteConfig = {
         clock: 'fas fa-clock'
     },
     
-    // Business Information
+    // ================= BUSINESS INFORMATION =================
     business: {
-        address: 'Örnek Mahallesi, Laundry Caddesi No: 123<br>İstanbul, Türkiye',
-        phone: '+90 (212) 123 45 67',
-        fax: '+90 (212) 123 45 68',
+        address: 'Atatürk Caddesi No: 123, Beşiktaş<br>İstanbul, Türkiye',
+        phone: '+90 (212) 555 12 34',
+        fax: '+90 (212) 555 12 35',
         email: 'info@yeditepelaundry.com',
         hours: 'Pazartesi - Cumartesi: 08:00 - 19:00<br>Pazar: 10:00 - 17:00'
     }
