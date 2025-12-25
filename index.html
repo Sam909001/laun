@@ -1318,21 +1318,22 @@ function applySiteConfiguration() {
         }
         
         // Add videos
-        if (siteConfig.gallery.videos && siteConfig.gallery.videos.length > 0) {
-            siteConfig.gallery.videos.forEach((videoUrl, index) => {
-                if (index < 10) { // Limit to 10 videos
-                    const altText = siteConfig.gallery.altTexts?.videos?.[index] || `Video ${index + 1}`;
-                    galleryContainer.innerHTML += `
-                        <div class="gallery-item video-item" data-type="video" data-src="${videoUrl}">
-                            <video preload="metadata" poster="${siteConfig.gallery.images?.[index] || ''}">
-                                <source src="${videoUrl}" type="video/mp4">
-                            </video>
-                        </div>
-                    `;
-                }
-            });
+       if (siteConfig.gallery.videos && siteConfig.gallery.videos.length > 0) {
+    siteConfig.gallery.videos.forEach((videoUrl, index) => {
+        if (index < 10) {
+            const altText = siteConfig.gallery.altTexts?.videos?.[index] || `Video ${index + 1}`;
+            galleryContainer.innerHTML += `
+                <div class="gallery-item video-item" data-type="video" data-src="${videoUrl}">
+                    <video preload="metadata" controls>
+                        <source src="${videoUrl}" type="video/mp4">
+                        Tarayıcınız video etiketini desteklemiyor.
+                    </video>
+                </div>
+            `;
         }
-    }
+    });
+   }
+}
     
     // ========== APPLY BUSINESS INFORMATION ==========
     const contactDetails = document.querySelectorAll('.contact-details p');
