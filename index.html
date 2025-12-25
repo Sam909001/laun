@@ -879,6 +879,51 @@ header, footer, main {
         grid-template-columns: 1fr;
     }
 }
+        .gallery-item-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.gallery-item-overlay i {
+    font-size: 50px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.gallery-item-overlay p {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.gallery-item:hover .gallery-item-overlay {
+    background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+}
+
+.gallery-item.loaded .gallery-item-overlay {
+    display: none;
+}
+
+.gallery-item:not(.loaded) img,
+.gallery-item:not(.loaded) video {
+    opacity: 0;
+}
+
+.gallery-item.loaded img,
+.gallery-item.loaded video {
+    opacity: 1;
+}
 
     </style>
 </head>
@@ -1303,8 +1348,12 @@ if (galleryImagesContainer && siteConfig.gallery.images && siteConfig.gallery.im
         if (index < 10) {
             const altText = siteConfig.gallery.altTexts?.images?.[index] || `Galeri Görseli ${index + 1}`;
             galleryImagesContainer.innerHTML += `
-                <div class="gallery-item" data-type="image" data-src="${imageUrl}">
-                    <img src="${imageUrl}" alt="${altText}" loading="lazy">
+                <div class="gallery-item" data-type="image" data-src="${imageUrl}" data-alt="${altText}">
+                    <div class="gallery-item-overlay">
+                        <i class="fas fa-image"></i>
+                        <p>Görmek için tıklayın</p>
+                    </div>
+                    <img alt="${altText}" style="display:none;">
                 </div>
             `;
         }
@@ -1318,8 +1367,12 @@ if (galleryVideosContainer && siteConfig.gallery.videos && siteConfig.gallery.vi
             const altText = siteConfig.gallery.altTexts?.videos?.[index] || `Video ${index + 1}`;
             galleryVideosContainer.innerHTML += `
                 <div class="gallery-item video-item" data-type="video" data-src="${videoUrl}">
-                    <video preload="metadata">
-                        <source src="${videoUrl}" type="video/mp4">
+                    <div class="gallery-item-overlay">
+                        <i class="fas fa-play-circle"></i>
+                        <p>İzlemek için tıklayın</p>
+                    </div>
+                    <video style="display:none;">
+                        <source type="video/mp4">
                         Tarayıcınız video etiketini desteklemiyor.
                     </video>
                 </div>
@@ -1383,35 +1436,60 @@ function initializeSliders() {
     });
 }
 
+
 function initializeLightbox() {
     const lightboxModal = document.getElementById('lightboxModal');
     const lightboxContent = document.getElementById('lightboxContent');
     const closeLightbox = document.querySelector('.close-lightbox');
-    const galleryItems = document.querySelectorAll('.gallery-item');
 
-    galleryItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const type = this.getAttribute('data-type');
-            const src = this.getAttribute('data-src');
-            
-            lightboxContent.innerHTML = '';
-            
-            if (type === 'image') {
-                lightboxContent.innerHTML = `<img src="${src}" alt="Galeri Görseli">`;
-            } else if (type === 'video') {
-    lightboxContent.innerHTML = `
-        <video controls autoplay muted playsinline>
-            <source src="${src}" type="video/mp4">
-            Tarayıcınız video etiketini desteklemiyor.
-        </video>
-    `;
-}
-            
-            lightboxModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        });
+    // Delegate event listener to parent containers
+    document.addEventListener('click', function(e) {
+        const galleryItem = e.target.closest('.gallery-item');
+        if (!galleryItem) return;
+
+        const type = galleryItem.getAttribute('data-type');
+        const src = galleryItem.getAttribute('data-src');
+        
+        // Load the media if not already loaded
+        if (!galleryItem.classList.contains('loaded')) {
+            loadGalleryItem(galleryItem);
+        }
+        
+        // Open lightbox
+        lightboxContent.innerHTML = '';
+        
+        if (type === 'image') {
+            lightboxContent.innerHTML = `<img src="${src}" alt="Galeri Görseli">`;
+        } else if (type === 'video') {
+            lightboxContent.innerHTML = `
+                <video controls autoplay muted playsinline>
+                    <source src="${src}" type="video/mp4">
+                    Tarayıcınız video etiketini desteklemiyor.
+                </video>
+            `;
+        }
+        
+        lightboxModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
     });
+
     closeLightbox.addEventListener('click', function() {
+        closeLightboxModal();
+    });
+
+    lightboxModal.addEventListener('click', function(e) {
+        if (e.target === lightboxModal) {
+            closeLightboxModal();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightboxModal.style.display === 'block') {
+            closeLightboxModal();
+        }
+    });
+
+    function closeLightboxModal() {
         lightboxModal.style.display = 'none';
         document.body.style.overflow = 'auto';
         const video = lightboxContent.querySelector('video');
@@ -1419,29 +1497,30 @@ function initializeLightbox() {
             video.pause();
             video.currentTime = 0;
         }
-    });
-    lightboxModal.addEventListener('click', function(e) {
-        if (e.target === lightboxModal) {
-            lightboxModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            const video = lightboxContent.querySelector('video');
-            if (video) {
-                video.pause();
-                video.currentTime = 0;
-            }
-        }
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && lightboxModal.style.display === 'block') {
-            lightboxModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            const video = lightboxContent.querySelector('video');
-            if (video) {
-                video.pause();
-                video.currentTime = 0;
-            }
-        }
-    });
+    }
+}
+
+function loadGalleryItem(item) {
+    const type = item.getAttribute('data-type');
+    const src = item.getAttribute('data-src');
+    
+    if (type === 'image') {
+        const img = item.querySelector('img');
+        img.src = src;
+        img.style.display = 'block';
+        img.onload = function() {
+            item.classList.add('loaded');
+        };
+    } else if (type === 'video') {
+        const video = item.querySelector('video');
+        const source = video.querySelector('source');
+        source.src = src;
+        video.load();
+        video.style.display = 'block';
+        video.onloadeddata = function() {
+            item.classList.add('loaded');
+        };
+    }
 }
 
 
