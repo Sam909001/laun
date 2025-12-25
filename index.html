@@ -330,151 +330,47 @@
             margin-bottom: 15px;
         }
         
-       /* ===== ENHANCED GALLERY STYLES ===== */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 25px;
-    margin-top: 40px;
-}
-
-.gallery-item {
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    height: 280px;
-    position: relative;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-}
-
-.gallery-item.video-item:before {
-    content: '▶';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0,0,0,0.7);
-    color: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    z-index: 2;
-    transition: all 0.3s ease;
-}
-
-.gallery-item:hover.video-item:before {
-    background: var(--light-blue);
-    transform: translate(-50%, -50%) scale(1.1);
-}
-
-.gallery-media {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-
-.gallery-item:hover .gallery-media {
-    transform: scale(1.05);
-}
-
-.gallery-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-    color: white;
-    padding: 15px;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover .gallery-caption {
-    transform: translateY(0);
-}
-
-/* Lightbox Modal */
-.lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
-}
-
-.lightbox.active {
-    display: flex;
-}
-
-.lightbox-content {
-    max-width: 90%;
-    max-height: 90%;
-    position: relative;
-}
-
-.lightbox-media {
-    max-width: 100%;
-    max-height: 80vh;
-    border-radius: 8px;
-}
-
-.lightbox-close {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-    background: none;
-    border: none;
-}
-
-.lightbox-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.2);
-    color: white;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.lightbox-nav:hover {
-    background: var(--light-blue);
-}
-
-.lightbox-prev {
-    left: 20px;
-}
-
-.lightbox-next {
-    right: 20px;
-}
-
-.lightbox-caption {
-    color: white;
-    text-align: center;
-    margin-top: 20px;
-    font-size: 18px;
-}
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .gallery-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            height: 250px;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-placeholder {
+            background-color: var(--medium-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--dark-gray);
+        }
+        
+        .gallery-placeholder i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: var(--light-blue);
+        }
         
         /* Contact Section */
         .contact-container {
@@ -725,104 +621,6 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        /* ===== HERO SLIDER STYLES ===== */
-.hero-slider {
-    position: relative;
-    width: 100%;
-    height: 600px;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-}
-
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    background-size: cover;
-    background-position: center;
-}
-
-.slide.active {
-    opacity: 1;
-}
-
-.slide-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-    color: white;
-    padding: 40px;
-    transform: translateY(20px);
-    transition: transform 0.5s ease;
-}
-
-.slide.active .slide-content {
-    transform: translateY(0);
-}
-
-.slide-indicators {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    z-index: 10;
-}
-
-.slide-indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.5);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.slide-indicator.active {
-    background: var(--light-blue);
-    transform: scale(1.2);
-}
-
-.slide-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.8);
-    color: var(--dark-blue);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.3s ease;
-    font-size: 20px;
-}
-
-.slide-nav:hover {
-    background: var(--light-blue);
-    color: white;
-}
-
-.slide-nav.prev {
-    left: 20px;
-}
-
-.slide-nav.next {
-    right: 20px;
-}
-        
     </style>
 </head>
 <body>
@@ -853,32 +651,21 @@
         </div>
     </header>
 
-   <!-- Hero Section with Slider -->
-<section id="home" class="hero">
-    <div class="container">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Otel Çamaşır Hizmetlerinde Profesyonel Çözüm</h1>
-                <p>Yeditepe Laundry olarak, otelleriniz için en kaliteli çamaşır ve tekstil temizleme hizmetini sunuyoruz. Battaniyeler, yatak örtüleri, havlular ve daha fazlası için güvenilir çözümler.</p>
-                <a href="#contact" class="btn"><i class="fas fa-envelope"></i> Teklif Alın</a>
-            </div>
-            
-            <!-- Hero Image Slider -->
-            <div class="hero-slider" id="heroSlider">
-                <!-- Slides will be inserted here by JavaScript -->
-                <div class="slide-nav prev">
-                    <i class="fas fa-chevron-left"></i>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Otel Çamaşır Hizmetlerinde Profesyonel Çözüm</h1>
+                    <p>Yeditepe Laundry olarak, otelleriniz için en kaliteli çamaşır ve tekstil temizleme hizmetini sunuyoruz. Battaniyeler, yatak örtüleri, havlular ve daha fazlası için güvenilir çözümler.</p>
+                    <a href="#contact" class="btn"><i class="fas fa-envelope"></i> Teklif Alın</a>
                 </div>
-                <div class="slide-nav next">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                <div class="slide-indicators" id="slideIndicators">
-                    <!-- Indicators will be inserted here -->
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Professional Laundry Service">
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- About Section -->
     <section id="about" class="section">
@@ -934,53 +721,36 @@
         </div>
     </section>
 
-   <!-- Gallery Section -->
-<section id="gallery" class="section">
-    <div class="container">
-        <h2>Galeri</h2>
-        <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">Modern ekipmanlarımız, tesisimiz ve çalışma süreçlerimizden örnekler. Hem fotoğraf hem video içeriklerimizi inceleyebilirsiniz.</p>
-        
-        <!-- Gallery Navigation Tabs -->
-        <div class="gallery-tabs" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 30px;">
-            <button class="btn gallery-tab active" data-filter="all">Tümü</button>
-            <button class="btn gallery-tab" data-filter="image">Fotoğraflar</button>
-            <button class="btn gallery-tab" data-filter="video">Videolar</button>
+    <!-- Gallery Section -->
+    <section id="gallery" class="section">
+        <div class="container">
+            <h2>Galeri</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">Modern ekipmanlarımız ve profesyonel çalışma alanlarımızdan örnekler. Görseller yüklenmeye hazır alanlardır.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item gallery-placeholder">
+                    <i class="fas fa-camera"></i>
+                    <p>Makine Fotoğrafı</p>
+                </div>
+                <div class="gallery-item gallery-placeholder">
+                    <i class="fas fa-image"></i>
+                    <p>Tesis Fotoğrafı</p>
+                </div>
+                <div class="gallery-item gallery-placeholder">
+                    <i class="fas fa-upload"></i>
+                    <p>Çalışma Alanı</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Laundry Machine">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1595272563634-9b1d78b06082?ixlib=rb-1.2.1&auto=format&fit=crop&w-1350&q=80" alt="Laundry Facility">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w-1350&q=80" alt="Professional Service">
+                </div>
+            </div>
         </div>
-        
-        <!-- Gallery Grid -->
-        <div class="gallery-grid" id="galleryGrid">
-            <!-- Gallery items will be inserted by JavaScript -->
-        </div>
-        
-        <!-- Load More Button (if you have more than 6 items) -->
-        <div style="text-align: center; margin-top: 40px;">
-            <button class="btn" id="loadMoreBtn" style="display: none;">
-                <i class="fas fa-plus"></i> Daha Fazla Göster
-            </button>
-        </div>
-    </div>
-</section>
-
-<!-- Lightbox Modal -->
-<div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose">
-        <i class="fas fa-times"></i>
-    </button>
-    <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
-        <i class="fas fa-chevron-left"></i>
-    </button>
-    <button class="lightbox-nav lightbox-next" id="lightboxNext">
-        <i class="fas fa-chevron-right"></i>
-    </button>
-    <div class="lightbox-content">
-        <img class="lightbox-media" id="lightboxImage" src="" alt="">
-        <video class="lightbox-media" id="lightboxVideo" controls style="display: none;">
-            <source src="" type="video/mp4">
-            Tarayıcınız video etiketini desteklemiyor.
-        </video>
-        <div class="lightbox-caption" id="lightboxCaption"></div>
-    </div>
-</div>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="section bg-light">
@@ -1141,42 +911,6 @@ const siteConfig = {
         imageHeight: '60px',
         imageStyle: 'border-radius: 0; object-fit: contain;'
     },
-
-
-     // ================= HERO SLIDER IMAGES =================
-    heroSlider: {
-        images: [
-            {
-                url: 'assets/images/slider/slide1.jpg',
-                title: 'Modern Çamaşırhanemiz',
-                description: 'En son teknoloji ekipmanlarımızla hizmetinizdeyiz'
-            },
-            {
-                url: 'assets/images/slider/slide2.jpg',
-                title: 'Profesyonel Ekip',
-                description: 'Deneyimli personelimiz ile kaliteli hizmet'
-            },
-            {
-                url: 'assets/images/slider/slide3.jpg',
-                title: 'Hijyen Standartları',
-                description: 'En yüksek hijyen standartlarında temizlik'
-            },
-            {
-                url: 'assets/images/slider/slide4.jpg',
-                title: 'Otel Tekstilleri',
-                description: 'Oteliniz için özel çamaşır çözümleri'
-            },
-            {
-                url: 'assets/images/slider/slide5.jpg',
-                title: 'Hızlı Teslimat',
-                description: 'Zamanında ve güvenilir teslimat'
-            }
-        ],
-        autoSlideInterval: 12000, // 12 seconds
-        slideDuration: 1500, // 1.5 second fade animation
-        showIndicators: true,
-        showNavigation: true
-    },
     
     // ================= HERO SECTION IMAGES =================
     hero: {
@@ -1228,74 +962,29 @@ const siteConfig = {
     },
     
     // ================= GALLERY IMAGES =================
-   gallery: {
-        items: [
-            // Images
-            {
-                type: 'image',
-                url: 'assets/images/gallery/machine1.jpg',
-                thumbnail: 'assets/images/gallery/thumb-machine1.jpg',
-                title: 'Endüstriyel Çamaşır Makinesi',
-                description: 'Yüksek kapasiteli modern makinelerimiz'
-            },
-            {
-                type: 'image',
-                url: 'assets/images/gallery/facility1.jpg',
-                thumbnail: 'assets/images/gallery/thumb-facility1.jpg',
-                title: 'Tesisimiz',
-                description: 'Geniş ve hijyenik çalışma alanımız'
-            },
-            {
-                type: 'image',
-                url: 'assets/images/gallery/team1.jpg',
-                thumbnail: 'assets/images/gallery/thumb-team1.jpg',
-                title: 'Profesyonel Ekibimiz',
-                description: 'Deneyimli ve eğitimli personelimiz'
-            },
-            {
-                type: 'image',
-                url: 'assets/images/gallery/process1.jpg',
-                thumbnail: 'assets/images/gallery/thumb-process1.jpg',
-                title: 'Kalite Kontrol',
-                description: 'Her aşamada titiz kalite kontrolü'
-            },
-            {
-                type: 'image',
-                url: 'assets/images/gallery/delivery1.jpg',
-                thumbnail: 'assets/images/gallery/thumb-delivery1.jpg',
-                title: 'Paketleme ve Teslimat',
-                description: 'Özenli paketleme ve zamanında teslimat'
-            },
-            {
-                type: 'image',
-                url: 'assets/images/gallery/equipment1.jpg',
-                thumbnail: 'assets/images/gallery/thumb-equipment1.jpg',
-                title: 'Modern Ekipmanlar',
-                description: 'Son teknoloji kurutma ve ütüleme sistemleri'
-            },
-            // Videos (up to 10 total items)
-            {
-                type: 'video',
-                url: 'assets/videos/facility-tour.mp4',
-                thumbnail: 'assets/images/gallery/video-thumb1.jpg',
-                title: 'Tesis Turu',
-                description: 'Çamaşırhanemizi tanıyalım'
-            },
-            {
-                type: 'video',
-                url: 'assets/videos/cleaning-process.mp4',
-                thumbnail: 'assets/images/gallery/video-thumb2.jpg',
-                description: 'Temizlik sürecimiz'
-            },
-            {
-                type: 'video',
-                url: 'assets/videos/quality-control.mp4',
-                thumbnail: 'assets/images/gallery/video-thumb3.jpg',
-                description: 'Kalite kontrol süreçlerimiz'
-            }
+    gallery: {
+        // Your local gallery images
+        images: [
+            'assets/gallery1.jpg',
+            'assets/gallery2.jpg',
+            'assets/gallery3.jpg',
+            'assets/gallery4.jpg',
+            'assets/gallery5.jpg',
+            'assets/gallery6.jpg'
         ],
-        itemsPerPage: 6, // Initial items to show
-        showLoadMore: true
+        
+        // Alt texts for gallery images (optional)
+        altTexts: [
+            'Modern Çamaşır Makineleri',
+            'Tesisimizden Görüntü',
+            'Profesyonel Ekibimiz',
+            'Endüstriyel Ekipman',
+            'Temizlik Alanımız',
+            'Çalışma Prosesi'
+        ],
+        
+        // Number of placeholder items to show (if you don't have all images)
+        placeholders: 0 // Set to 0 when you have all images
     },
     
     // ================= CONTACT ICONS =================
@@ -1334,487 +1023,7 @@ const siteConfig = {
 })();
     
     // ========== APPLY LOGO ==========
-    // ============================================
-// HERO SLIDER FUNCTIONALITY
-// ============================================
-function initializeHeroSlider() {
-    const sliderContainer = document.getElementById('heroSlider');
-    const indicatorsContainer = document.getElementById('slideIndicators');
-    
-    if (!sliderContainer || !siteConfig.heroSlider || !siteConfig.heroSlider.images) {
-        console.log('Hero slider config not found, using fallback');
-        return;
-    }
-    
-    const slides = siteConfig.heroSlider.images;
-    let currentSlide = 0;
-    let slideInterval;
-    
-    // Create slides
-    slides.forEach((slide, index) => {
-        // Create slide element
-        const slideEl = document.createElement('div');
-        slideEl.className = `slide ${index === 0 ? 'active' : ''}`;
-        slideEl.style.backgroundImage = `url('${slide.url}')`;
-        
-        // Create slide content
-        const contentEl = document.createElement('div');
-        contentEl.className = 'slide-content';
-        contentEl.innerHTML = `
-            <h3 style="color: white; margin-bottom: 10px;">${slide.title}</h3>
-            <p style="color: rgba(255,255,255,0.9);">${slide.description}</p>
-        `;
-        
-        slideEl.appendChild(contentEl);
-        sliderContainer.insertBefore(slideEl, sliderContainer.firstChild);
-        
-        // Create indicator
-        const indicator = document.createElement('div');
-        indicator.className = `slide-indicator ${index === 0 ? 'active' : ''}`;
-        indicator.dataset.index = index;
-        indicator.addEventListener('click', () => goToSlide(index));
-        indicatorsContainer.appendChild(indicator);
-    });
-    
-    // Navigation buttons
-    const prevBtn = sliderContainer.querySelector('.prev');
-    const nextBtn = sliderContainer.querySelector('.next');
-    
-    if (prevBtn) prevBtn.addEventListener('click', () => prevSlide());
-    if (nextBtn) nextBtn.addEventListener('click', () => nextSlide());
-    
-    function goToSlide(index) {
-        // Remove active class from all slides and indicators
-        document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
-        document.querySelectorAll('.slide-indicator').forEach(ind => ind.classList.remove('active'));
-        
-        // Add active class to current slide and indicator
-        document.querySelectorAll('.slide')[index].classList.add('active');
-        document.querySelectorAll('.slide-indicator')[index].classList.add('active');
-        
-        currentSlide = index;
-        resetInterval();
-    }
-    
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        goToSlide(currentSlide);
-    }
-    
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        goToSlide(currentSlide);
-    }
-    
-    function startInterval() {
-        if (siteConfig.heroSlider.autoSlideInterval) {
-            slideInterval = setInterval(nextSlide, siteConfig.heroSlider.autoSlideInterval);
-        }
-    }
-    
-    function resetInterval() {
-        clearInterval(slideInterval);
-        startInterval();
-    }
-    
-    // Start auto-sliding
-    startInterval();
-    
-    // Pause on hover
-    sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
-    sliderContainer.addEventListener('mouseleave', startInterval);
-}
-
-// ============================================
-// ENHANCED GALLERY FUNCTIONALITY
-// ============================================
-function initializeEnhancedGallery() {
-    const galleryGrid = document.getElementById('galleryGrid');
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const lightboxVideo = document.getElementById('lightboxVideo');
-    const lightboxCaption = document.getElementById('lightboxCaption');
-    const lightboxClose = document.getElementById('lightboxClose');
-    const lightboxPrev = document.getElementById('lightboxPrev');
-    const lightboxNext = document.getElementById('lightboxNext');
-    
-    if (!galleryGrid || !siteConfig.gallery || !siteConfig.gallery.items) {
-        console.log('Gallery config not found');
-        return;
-    }
-    
-    const galleryItems = siteConfig.gallery.items;
-    let currentItems = siteConfig.gallery.itemsPerPage || 6;
-    let currentFilter = 'all';
-    let currentLightboxIndex = 0;
-    
-    // Create gallery items
-    function renderGallery() {
-        galleryGrid.innerHTML = '';
-        
-        const filteredItems = galleryItems.filter(item => {
-            if (currentFilter === 'all') return true;
-            return item.type === currentFilter;
-        });
-        
-        const itemsToShow = filteredItems.slice(0, currentItems);
-        
-        itemsToShow.forEach((item, index) => {
-            const itemEl = document.createElement('div');
-            itemEl.className = `gallery-item ${item.type}-item`;
-            itemEl.dataset.index = galleryItems.indexOf(item);
-            
-            const mediaEl = item.type === 'video' ? 'video' : 'img';
-            itemEl.innerHTML = `
-                <${mediaEl} class="gallery-media" 
-                    src="${item.thumbnail || item.url}" 
-                    alt="${item.title || item.description}"
-                    ${item.type === 'video' ? 'poster="' + (item.thumbnail || '') + '"' : ''}>
-                </${mediaEl}>
-                <div class="gallery-caption">
-                    <h4 style="color: white; margin-bottom: 5px;">${item.title || ''}</h4>
-                    <p style="color: rgba(255,255,255,0.9); font-size: 14px;">${item.description || ''}</p>
-                </div>
-            `;
-            
-            itemEl.addEventListener('click', () => openLightbox(galleryItems.indexOf(item)));
-            galleryGrid.appendChild(itemEl);
-        });
-        
-        // Show/hide load more button
-        if (loadMoreBtn && siteConfig.gallery.showLoadMore) {
-            loadMoreBtn.style.display = filteredItems.length > currentItems ? 'block' : 'none';
-        }
-    }
-    
-    // Lightbox functions
-    function openLightbox(index) {
-        currentLightboxIndex = index;
-        const item = galleryItems[index];
-        
-        if (item.type === 'image') {
-            lightboxImage.src = item.url;
-            lightboxImage.style.display = 'block';
-            lightboxVideo.style.display = 'none';
-            lightboxVideo.pause();
-        } else {
-            lightboxVideo.querySelector('source').src = item.url;
-            lightboxVideo.load();
-            lightboxVideo.style.display = 'block';
-            lightboxImage.style.display = 'none';
-        }
-        
-        lightboxCaption.textContent = item.description || item.title || '';
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto';
-        lightboxVideo.pause();
-    }
-    
-    function lightboxNextItem() {
-        currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length;
-        openLightbox(currentLightboxIndex);
-    }
-    
-    function lightboxPrevItem() {
-        currentLightboxIndex = (currentLightboxIndex - 1 + galleryItems.length) % galleryItems.length;
-        openLightbox(currentLightboxIndex);
-    }
-    
-    // Event listeners
-    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-    if (lightboxNext) lightboxNext.addEventListener('click', lightboxNextItem);
-    if (lightboxPrev) lightboxPrev.addEventListener('click', lightboxPrevItem);
-    
-    // Close lightbox on ESC key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowRight') lightboxNextItem();
-        if (e.key === 'ArrowLeft') lightboxPrevItem();
-    });
-    
-    // Close lightbox on background click
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-    });
-    
-    // Tab filtering
-    document.querySelectorAll('.gallery-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            currentFilter = tab.dataset.filter;
-            currentItems = siteConfig.gallery.itemsPerPage || 6;
-            renderGallery();
-        });
-    });
-    
-    // Load more button
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', () => {
-            currentItems += 3;
-            renderGallery();
-        });
-    }
-    
-    // Initial render
-    renderGallery();
-}
-
-// ============================================
-// UPDATE DOMCONTENTLOADED
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    applySiteConfiguration();
-    initializeHeroSlider();
-    initializeEnhancedGallery();
-
-        
-        // ============================================
-// HERO SLIDER FUNCTIONALITY
-// ============================================
-function initializeHeroSlider() {
-    const sliderContainer = document.getElementById('heroSlider');
-    const indicatorsContainer = document.getElementById('slideIndicators');
-    
-    if (!sliderContainer || !siteConfig.heroSlider || !siteConfig.heroSlider.images) {
-        console.log('Hero slider config not found, using fallback');
-        return;
-    }
-    
-    const slides = siteConfig.heroSlider.images;
-    let currentSlide = 0;
-    let slideInterval;
-    
-    // Create slides
-    slides.forEach((slide, index) => {
-        // Create slide element
-        const slideEl = document.createElement('div');
-        slideEl.className = `slide ${index === 0 ? 'active' : ''}`;
-        slideEl.style.backgroundImage = `url('${slide.url}')`;
-        
-        // Create slide content
-        const contentEl = document.createElement('div');
-        contentEl.className = 'slide-content';
-        contentEl.innerHTML = `
-            <h3 style="color: white; margin-bottom: 10px;">${slide.title}</h3>
-            <p style="color: rgba(255,255,255,0.9);">${slide.description}</p>
-        `;
-        
-        slideEl.appendChild(contentEl);
-        sliderContainer.insertBefore(slideEl, sliderContainer.firstChild);
-        
-        // Create indicator
-        const indicator = document.createElement('div');
-        indicator.className = `slide-indicator ${index === 0 ? 'active' : ''}`;
-        indicator.dataset.index = index;
-        indicator.addEventListener('click', () => goToSlide(index));
-        indicatorsContainer.appendChild(indicator);
-    });
-    
-    // Navigation buttons
-    const prevBtn = sliderContainer.querySelector('.prev');
-    const nextBtn = sliderContainer.querySelector('.next');
-    
-    if (prevBtn) prevBtn.addEventListener('click', () => prevSlide());
-    if (nextBtn) nextBtn.addEventListener('click', () => nextSlide());
-    
-    function goToSlide(index) {
-        // Remove active class from all slides and indicators
-        document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
-        document.querySelectorAll('.slide-indicator').forEach(ind => ind.classList.remove('active'));
-        
-        // Add active class to current slide and indicator
-        document.querySelectorAll('.slide')[index].classList.add('active');
-        document.querySelectorAll('.slide-indicator')[index].classList.add('active');
-        
-        currentSlide = index;
-        resetInterval();
-    }
-    
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        goToSlide(currentSlide);
-    }
-    
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        goToSlide(currentSlide);
-    }
-    
-    function startInterval() {
-        if (siteConfig.heroSlider.autoSlideInterval) {
-            slideInterval = setInterval(nextSlide, siteConfig.heroSlider.autoSlideInterval);
-        }
-    }
-    
-    function resetInterval() {
-        clearInterval(slideInterval);
-        startInterval();
-    }
-    
-    // Start auto-sliding
-    startInterval();
-    
-    // Pause on hover
-    sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
-    sliderContainer.addEventListener('mouseleave', startInterval);
-}
-
-// ============================================
-// ENHANCED GALLERY FUNCTIONALITY
-// ============================================
-function initializeEnhancedGallery() {
-    const galleryGrid = document.getElementById('galleryGrid');
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const lightboxVideo = document.getElementById('lightboxVideo');
-    const lightboxCaption = document.getElementById('lightboxCaption');
-    const lightboxClose = document.getElementById('lightboxClose');
-    const lightboxPrev = document.getElementById('lightboxPrev');
-    const lightboxNext = document.getElementById('lightboxNext');
-    
-    if (!galleryGrid || !siteConfig.gallery || !siteConfig.gallery.items) {
-        console.log('Gallery config not found');
-        return;
-    }
-    
-    const galleryItems = siteConfig.gallery.items;
-    let currentItems = siteConfig.gallery.itemsPerPage || 6;
-    let currentFilter = 'all';
-    let currentLightboxIndex = 0;
-    
-    // Create gallery items
-    function renderGallery() {
-        galleryGrid.innerHTML = '';
-        
-        const filteredItems = galleryItems.filter(item => {
-            if (currentFilter === 'all') return true;
-            return item.type === currentFilter;
-        });
-        
-        const itemsToShow = filteredItems.slice(0, currentItems);
-        
-        itemsToShow.forEach((item, index) => {
-            const itemEl = document.createElement('div');
-            itemEl.className = `gallery-item ${item.type}-item`;
-            itemEl.dataset.index = galleryItems.indexOf(item);
-            
-            const mediaEl = item.type === 'video' ? 'video' : 'img';
-            itemEl.innerHTML = `
-                <${mediaEl} class="gallery-media" 
-                    src="${item.thumbnail || item.url}" 
-                    alt="${item.title || item.description}"
-                    ${item.type === 'video' ? 'poster="' + (item.thumbnail || '') + '"' : ''}>
-                </${mediaEl}>
-                <div class="gallery-caption">
-                    <h4 style="color: white; margin-bottom: 5px;">${item.title || ''}</h4>
-                    <p style="color: rgba(255,255,255,0.9); font-size: 14px;">${item.description || ''}</p>
-                </div>
-            `;
-            
-            itemEl.addEventListener('click', () => openLightbox(galleryItems.indexOf(item)));
-            galleryGrid.appendChild(itemEl);
-        });
-        
-        // Show/hide load more button
-        if (loadMoreBtn && siteConfig.gallery.showLoadMore) {
-            loadMoreBtn.style.display = filteredItems.length > currentItems ? 'block' : 'none';
-        }
-    }
-    
-    // Lightbox functions
-    function openLightbox(index) {
-        currentLightboxIndex = index;
-        const item = galleryItems[index];
-        
-        if (item.type === 'image') {
-            lightboxImage.src = item.url;
-            lightboxImage.style.display = 'block';
-            lightboxVideo.style.display = 'none';
-            lightboxVideo.pause();
-        } else {
-            lightboxVideo.querySelector('source').src = item.url;
-            lightboxVideo.load();
-            lightboxVideo.style.display = 'block';
-            lightboxImage.style.display = 'none';
-        }
-        
-        lightboxCaption.textContent = item.description || item.title || '';
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto';
-        lightboxVideo.pause();
-    }
-    
-    function lightboxNextItem() {
-        currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length;
-        openLightbox(currentLightboxIndex);
-    }
-    
-    function lightboxPrevItem() {
-        currentLightboxIndex = (currentLightboxIndex - 1 + galleryItems.length) % galleryItems.length;
-        openLightbox(currentLightboxIndex);
-    }
-    
-    // Event listeners
-    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-    if (lightboxNext) lightboxNext.addEventListener('click', lightboxNextItem);
-    if (lightboxPrev) lightboxPrev.addEventListener('click', lightboxPrevItem);
-    
-    // Close lightbox on ESC key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowRight') lightboxNextItem();
-        if (e.key === 'ArrowLeft') lightboxPrevItem();
-    });
-    
-    // Close lightbox on background click
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-    });
-    
-    // Tab filtering
-    document.querySelectorAll('.gallery-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            currentFilter = tab.dataset.filter;
-            currentItems = siteConfig.gallery.itemsPerPage || 6;
-            renderGallery();
-        });
-    });
-    
-    // Load more button
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', () => {
-            currentItems += 3;
-            renderGallery();
-        });
-    }
-    
-    // Initial render
-    renderGallery();
-}
-
-// ============================================
-// UPDATE DOMCONTENTLOADED
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    applySiteConfiguration();
-    initializeHeroSlider();
-    initializeEnhancedGallery();
- 
+    function applySiteConfiguration() {
     // =========== APPLY LOGO ===========
     const logoIcon = document.querySelector('.logo-icon');
     
