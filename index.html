@@ -883,7 +883,199 @@
     </footer>
 
     <script>
-     
+
+// MEDIA CONFIGURATION - Update these URLs to change all images/icons
+const siteConfig = {
+    // Logo Configuration
+    logo: {
+        iconClass: 'fas fa-tshirt', 
+        // Alternative: Use image instead of icon
+        // imageUrl: 'images/logo.png', // Uncomment to use image logo
+        name: 'Yeditepe Laundry',
+        tagline: 'Profesyonel Otel Çamaşır Hizmeti'
+    },
+    
+    // Hero Section Images
+    hero: {
+        backgroundImage: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        mainImage: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+    },
+    
+    // About Section Image
+    about: {
+        image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+    },
+    
+    // Service Icons (FontAwesome classes)
+    serviceIcons: {
+        bedding: 'fas fa-bed',
+        blanket: 'fas fa-blanket',
+        towel: 'fas fa-towel',
+        restaurant: 'fas fa-utensils'
+    },
+    
+    // Gallery Images
+    gallery: {
+        images: [
+            'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+            'https://images.unsplash.com/photo-1595272563634-9b1d78b06082?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+            'https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+            // Add more image URLs here for additional gallery items
+        ],
+        placeholders: 3 // Number of placeholder items to show
+    },
+    
+    // Contact Icons
+    contactIcons: {
+        address: 'fas fa-map-marker-alt',
+        phone: 'fas fa-phone',
+        fax: 'fas fa-fax',
+        email: 'fas fa-envelope',
+        clock: 'fas fa-clock'
+    },
+    
+    // Business Information
+    business: {
+        address: 'Örnek Mahallesi, Laundry Caddesi No: 123<br>İstanbul, Türkiye',
+        phone: '+90 (212) 123 45 67',
+        fax: '+90 (212) 123 45 68',
+        email: 'info@yeditepelaundry.com',
+        hours: 'Pazartesi - Cumartesi: 08:00 - 19:00<br>Pazar: 10:00 - 17:00'
+    }
+};
+
+// ============================================
+// EMAILJS CONFIGURATION
+// ============================================
+(function() {
+    emailjs.init("jH-KlJ2ffs_lGwfsp"); 
+    const SERVICE_ID = "service_4rt2w5g";
+    const TEMPLATE_ID = "template_2jf8cvh";
+    
+    window.emailConfig = {
+        serviceId: SERVICE_ID,
+        templateId: TEMPLATE_ID,
+        receiverEmail: "mondevpro92@gmail.com"
+    };
+})();
+
+// ============================================
+// FUNCTION TO APPLY CONFIGURATION
+// ============================================
+function applySiteConfiguration() {
+    // Apply logo configuration
+    const logoIcon = document.querySelector('.logo-icon i');
+    if (logoIcon) {
+        if (siteConfig.logo.iconClass) {
+            logoIcon.className = siteConfig.logo.iconClass;
+        }
+        // If using image logo instead of icon:
+        /*
+        if (siteConfig.logo.imageUrl) {
+            const logoContainer = document.querySelector('.logo-icon');
+            logoContainer.innerHTML = `<img src="${siteConfig.logo.imageUrl}" alt="Logo" style="width: 40px; height: 40px;">`;
+        }
+        */
+    }
+    
+    const logoText = document.querySelector('.logo-text h1');
+    const logoTagline = document.querySelector('.logo-text p');
+    if (logoText) logoText.textContent = siteConfig.logo.name;
+    if (logoTagline) logoTagline.textContent = siteConfig.logo.tagline;
+    
+    // Apply hero section images
+    const heroSection = document.querySelector('.hero');
+    if (heroSection && siteConfig.hero.backgroundImage) {
+        heroSection.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('${siteConfig.hero.backgroundImage}')`;
+    }
+    
+    const heroImage = document.querySelector('.hero-image img');
+    if (heroImage && siteConfig.hero.mainImage) {
+        heroImage.src = siteConfig.hero.mainImage;
+        heroImage.alt = siteConfig.logo.name;
+    }
+    
+    // Apply about section image
+    const aboutImage = document.querySelector('#about .hero-image img');
+    if (aboutImage && siteConfig.about.image) {
+        aboutImage.src = siteConfig.about.image;
+    }
+    
+    // Apply service icons
+    const serviceIcons = document.querySelectorAll('.service-icon i');
+    if (serviceIcons.length >= 4) {
+        serviceIcons[0].className = siteConfig.serviceIcons.bedding;
+        serviceIcons[1].className = siteConfig.serviceIcons.blanket;
+        serviceIcons[2].className = siteConfig.serviceIcons.towel;
+        serviceIcons[3].className = siteConfig.serviceIcons.restaurant;
+    }
+    
+    // Apply gallery images
+    const galleryItems = document.querySelectorAll('.gallery-item:not(.gallery-placeholder)');
+    siteConfig.gallery.images.forEach((imageUrl, index) => {
+        if (galleryItems[index]) {
+            const img = galleryItems[index].querySelector('img');
+            if (img) {
+                img.src = imageUrl;
+            }
+        }
+    });
+    
+    // Apply contact icons
+    const contactIcons = document.querySelectorAll('.contact-icon i');
+    if (contactIcons.length >= 5) {
+        contactIcons[0].className = siteConfig.contactIcons.address;
+        contactIcons[1].className = siteConfig.contactIcons.phone;
+        contactIcons[2].className = siteConfig.contactIcons.fax;
+        contactIcons[3].className = siteConfig.contactIcons.email;
+        contactIcons[4].className = siteConfig.contactIcons.clock;
+    }
+    
+    // Apply business information
+    const contactDetails = document.querySelectorAll('.contact-details p');
+    if (contactDetails.length >= 5) {
+        contactDetails[0].innerHTML = siteConfig.business.address;
+        contactDetails[1].textContent = siteConfig.business.phone;
+        contactDetails[2].textContent = siteConfig.business.fax;
+        contactDetails[3].textContent = siteConfig.business.email;
+        contactDetails[4].innerHTML = siteConfig.business.hours;
+    }
+    
+    // Apply footer information
+    const footerContact = document.querySelectorAll('.footer-contact p');
+    if (footerContact.length >= 4) {
+        footerContact[0].innerHTML = `<i class="fas fa-map-marker-alt"></i> ${siteConfig.business.address.replace('<br>', ', ')}`;
+        footerContact[1].innerHTML = `<i class="fas fa-phone"></i> ${siteConfig.business.phone}`;
+        footerContact[2].innerHTML = `<i class="fas fa-envelope"></i> ${siteConfig.business.email}`;
+        footerContact[3].innerHTML = `<i class="fas fa-fax"></i> ${siteConfig.business.fax}`;
+    }
+    
+    // Update footer logo text
+    const footerLogoName = document.querySelector('.footer-logo .logo-text h1');
+    const footerLogoTagline = document.querySelector('.footer-logo .logo-text p');
+    if (footerLogoName) footerLogoName.textContent = siteConfig.logo.name;
+    if (footerLogoTagline) footerLogoTagline.textContent = siteConfig.logo.tagline;
+}
+
+// ============================================
+// INITIALIZE SITE WHEN PAGE LOADS
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    applySiteConfiguration();
+    
+    // Your existing initialization code continues here...
+    // (Mobile menu, form submission, etc.)
+    
+    // Check if this is the first visit
+    const isFirstVisit = !localStorage.getItem('yeditepe_visited');
+    if (isFirstVisit && window.emailConfig && window.emailConfig.serviceId === "YOUR_SERVICE_ID_HERE") {
+        setTimeout(() => {
+            showSetupInstructions();
+            localStorage.setItem('yeditepe_visited', 'true');
+        }, 2000);
+    }
+});
+        
         (function() {
             emailjs.init("jH-KlJ2ffs_lGwfsp"); 
             emailjs.init("jH-KlJ2ffs_lGwfsp");
