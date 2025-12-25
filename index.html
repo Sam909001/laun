@@ -883,14 +883,10 @@
     </footer>
 
     <script>
-        // Initialize EmailJS with your public key
-        // You need to sign up at https://www.emailjs.com/ and get these values
-        // Replace these with your actual EmailJS credentials
+     
         (function() {
-            // Initialize EmailJS with your public key
-            emailjs.init("jH-KlJ2ffs_lGwfsp"); // You'll get this from EmailJS dashboard
-            
-            // Set your Service ID and Template ID
+            emailjs.init("jH-KlJ2ffs_lGwfsp"); 
+            emailjs.init("jH-KlJ2ffs_lGwfsp");
             const SERVICE_ID = "service_4rt2w5g";
             const TEMPLATE_ID = "template_2jf8cvh";
             
@@ -898,6 +894,7 @@
             window.emailConfig = {
                 serviceId: SERVICE_ID,
                 templateId: TEMPLATE_ID
+                receiverEmail: "mondevpro92@gmail.com"
             };
             
             // Show setup instructions if keys are not set
