@@ -1016,75 +1016,109 @@ const siteConfig = {
 // FUNCTION TO APPLY CONFIGURATION
 // ============================================
 function applySiteConfiguration() {
-    // Apply logo configuration
-    const logoIcon = document.querySelector('.logo-icon i');
-    if (logoIcon) {
-        if (siteConfig.logo.iconClass) {
-            logoIcon.className = siteConfig.logo.iconClass;
-        }
-        // If using image logo instead of icon:
-        /*
+    console.log('Applying site configuration...');
+    
+    // ========== APPLY LOGO ==========
+    const logoContainer = document.querySelector('.logo-icon');
+    if (logoContainer) {
         if (siteConfig.logo.imageUrl) {
-            const logoContainer = document.querySelector('.logo-icon');
-            logoContainer.innerHTML = `<img src="${siteConfig.logo.imageUrl}" alt="Logo" style="width: 40px; height: 40px;">`;
+            // Use image logo
+            logoContainer.innerHTML = `
+                <img src="${siteConfig.logo.imageUrl}" 
+                     alt="${siteConfig.logo.name} Logo"
+                     style="width: ${siteConfig.logo.imageWidth || '60px'}; 
+                            height: ${siteConfig.logo.imageHeight || '60px'};
+                            ${siteConfig.logo.imageStyle || 'border-radius: 50%; object-fit: contain;'}">
+            `;
+        } else if (siteConfig.logo.iconClass) {
+            // Use FontAwesome icon (fallback)
+            logoContainer.innerHTML = `<i class="${siteConfig.logo.iconClass}"></i>`;
         }
-        */
     }
     
+    // Update logo text
     const logoText = document.querySelector('.logo-text h1');
     const logoTagline = document.querySelector('.logo-text p');
     if (logoText) logoText.textContent = siteConfig.logo.name;
     if (logoTagline) logoTagline.textContent = siteConfig.logo.tagline;
     
-    // Apply hero section images
+    // ========== APPLY HERO IMAGES ==========
     const heroSection = document.querySelector('.hero');
     if (heroSection && siteConfig.hero.backgroundImage) {
-        heroSection.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('${siteConfig.hero.backgroundImage}')`;
+        heroSection.style.backgroundImage = `
+            linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
+            url('${siteConfig.hero.backgroundImage}')
+        `;
     }
     
     const heroImage = document.querySelector('.hero-image img');
     if (heroImage && siteConfig.hero.mainImage) {
         heroImage.src = siteConfig.hero.mainImage;
-        heroImage.alt = siteConfig.logo.name;
+        heroImage.alt = siteConfig.hero.altText || siteConfig.logo.name;
     }
     
-    // Apply about section image
+    // ========== APPLY ABOUT IMAGE ==========
     const aboutImage = document.querySelector('#about .hero-image img');
     if (aboutImage && siteConfig.about.image) {
         aboutImage.src = siteConfig.about.image;
+        aboutImage.alt = siteConfig.about.altText || 'Yeditepe Laundry Hakkımızda';
     }
     
-    // Apply service icons
-    const serviceIcons = document.querySelectorAll('.service-icon i');
-    if (serviceIcons.length >= 4) {
-        serviceIcons[0].className = siteConfig.serviceIcons.bedding;
-        serviceIcons[1].className = siteConfig.serviceIcons.blanket;
-        serviceIcons[2].className = siteConfig.serviceIcons.towel;
-        serviceIcons[3].className = siteConfig.serviceIcons.restaurant;
+    // ========== APPLY SERVICE ICONS ==========
+    const serviceIcons = document.querySelectorAll('.service-icon');
+    const serviceTypes = ['bedding', 'blanket', 'towel', 'restaurant'];
+    
+    serviceTypes.forEach((type, index) => {
+        if (serviceIcons[index]) {
+            const iconConfig = siteConfig.serviceIcons[type];
+            
+            if (typeof iconConfig === 'object' && iconConfig.type === 'image') {
+                // Use image icon
+                serviceIcons[index].innerHTML = `
+                    <img src="${iconConfig.url}" 
+                         alt="${iconConfig.alt}" 
+                         style="width: 50px; height: 50px;">
+                `;
+            } else if (typeof iconConfig === 'string') {
+                // Use FontAwesome icon
+                serviceIcons[index].innerHTML = `<i class="${iconConfig}"></i>`;
+            }
+        }
+    });
+    
+    // ========== APPLY GALLERY IMAGES ==========
+    const galleryItems = document.querySelectorAll('.gallery-item:not(.gallery-placeholder)');
+    
+    // Hide placeholder items if we have enough images
+    const placeholderItems = document.querySelectorAll('.gallery-placeholder');
+    if (siteConfig.gallery.images.length >= galleryItems.length) {
+        placeholderItems.forEach(item => {
+            item.style.display = 'none';
+        });
     }
     
     // Apply gallery images
-    const galleryItems = document.querySelectorAll('.gallery-item:not(.gallery-placeholder)');
     siteConfig.gallery.images.forEach((imageUrl, index) => {
         if (galleryItems[index]) {
             const img = galleryItems[index].querySelector('img');
             if (img) {
                 img.src = imageUrl;
+                img.alt = siteConfig.gallery.altTexts[index] || `Galeri Görseli ${index + 1}`;
             }
         }
     });
     
-    // Apply contact icons
+    // ========== APPLY CONTACT ICONS ==========
     const contactIcons = document.querySelectorAll('.contact-icon i');
-    if (contactIcons.length >= 5) {
-        contactIcons[0].className = siteConfig.contactIcons.address;
-        contactIcons[1].className = siteConfig.contactIcons.phone;
-        contactIcons[2].className = siteConfig.contactIcons.fax;
-        contactIcons[3].className = siteConfig.contactIcons.email;
-        contactIcons[4].className = siteConfig.contactIcons.clock;
-    }
+    const contactTypes = ['address', 'phone', 'fax', 'email', 'clock'];
     
-    // Apply business information
+    contactTypes.forEach((type, index) => {
+        if (contactIcons[index]) {
+            contactIcons[index].className = siteConfig.contactIcons[type];
+        }
+    });
+    
+    // ========== APPLY BUSINESS INFORMATION ==========
     const contactDetails = document.querySelectorAll('.contact-details p');
     if (contactDetails.length >= 5) {
         contactDetails[0].innerHTML = siteConfig.business.address;
@@ -1094,22 +1128,34 @@ function applySiteConfiguration() {
         contactDetails[4].innerHTML = siteConfig.business.hours;
     }
     
-    // Apply footer information
+    // ========== APPLY FOOTER INFORMATION ==========
+    // Footer logo
+    const footerLogoContainer = document.querySelector('.footer-logo .logo-icon');
+    if (footerLogoContainer && siteConfig.logo.imageUrl) {
+        footerLogoContainer.innerHTML = `
+            <img src="${siteConfig.logo.imageUrl}" 
+                 alt="${siteConfig.logo.name} Logo"
+                 style="width: 40px; height: 40px; border-radius: 50%; object-fit: contain;">
+        `;
+    }
+    
+    // Footer text
+    const footerLogoName = document.querySelector('.footer-logo .logo-text h1');
+    const footerLogoTagline = document.querySelector('.footer-logo .logo-text p');
+    if (footerLogoName) footerLogoName.textContent = siteConfig.logo.name;
+    if (footerLogoTagline) footerLogoTagline.textContent = siteConfig.logo.tagline;
+    
+    // Footer contact info
     const footerContact = document.querySelectorAll('.footer-contact p');
     if (footerContact.length >= 4) {
-        footerContact[0].innerHTML = `<i class="fas fa-map-marker-alt"></i> ${siteConfig.business.address.replace('<br>', ', ')}`;
+        footerContact[0].innerHTML = `<i class="fas fa-map-marker-alt"></i> ${siteConfig.business.address.replace(/<br>/g, ', ')}`;
         footerContact[1].innerHTML = `<i class="fas fa-phone"></i> ${siteConfig.business.phone}`;
         footerContact[2].innerHTML = `<i class="fas fa-envelope"></i> ${siteConfig.business.email}`;
         footerContact[3].innerHTML = `<i class="fas fa-fax"></i> ${siteConfig.business.fax}`;
     }
     
-    // Update footer logo text
-    const footerLogoName = document.querySelector('.footer-logo .logo-text h1');
-    const footerLogoTagline = document.querySelector('.footer-logo .logo-text p');
-    if (footerLogoName) footerLogoName.textContent = siteConfig.logo.name;
-    if (footerLogoTagline) footerLogoTagline.textContent = siteConfig.logo.tagline;
+    console.log('Site configuration applied successfully!');
 }
-
 // ============================================
 // INITIALIZE SITE WHEN PAGE LOADS
 // ============================================
