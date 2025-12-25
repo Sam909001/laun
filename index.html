@@ -8,12 +8,9 @@
  <link rel="icon" href="favicon.ico" type="image/x-icon">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Add EmailJS library -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <!-- Add Swiper CSS for image slider -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
-        /* Base Styles and Colors */
         :root {
             --primary-blue: #1a5f7a;
             --light-blue: #57a6c3;
@@ -281,7 +278,6 @@
             color: var(--dark-gray);
         }
         
-        /* Hero Slider */
         .hero-slider {
             border-radius: var(--border-radius);
             overflow: hidden;
@@ -308,7 +304,6 @@
             opacity: 1;
         }
         
-        /* About Section Slider */
         .about-slider {
             border-radius: var(--border-radius);
             overflow: hidden;
@@ -323,7 +318,6 @@
             display: block;
         }
         
-        /* Services Section */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -371,7 +365,6 @@
             flex-grow: 1;
         }
         
-        /* Gallery Section */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -421,8 +414,6 @@
             opacity: 1;
             transform: translate(-50%, -50%) scale(1.1);
         }
-        
-        /* Contact Section */
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -458,7 +449,6 @@
             margin-bottom: 5px;
         }
         
-        /* Contact Form */
         .contact-form {
             background-color: var(--white);
             padding: 40px;
@@ -503,8 +493,7 @@
             margin-top: 5px;
             font-style: italic;
         }
-        
-        /* Loading Spinner */
+
         .spinner {
             display: inline-block;
             width: 20px;
@@ -518,8 +507,7 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        
-        /* Footer */
+
         footer {
             background-color: var(--dark-blue);
             color: var(--white);
@@ -588,8 +576,7 @@
             color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
         }
-        
-        /* Lightbox Modal */
+
         .lightbox-modal {
             display: none;
             position: fixed;
@@ -632,8 +619,7 @@
         .close-lightbox:hover {
             color: var(--light-blue);
         }
-        
-        /* Responsive Styles */
+
         @media (max-width: 992px) {
             .hero-content {
                 grid-template-columns: 1fr;
@@ -750,7 +736,6 @@
             }
         }
 
-        /* Fix horizontal overflow */
 html, body {
     overflow-x: hidden;
     max-width: 100%;
@@ -762,17 +747,15 @@ html, body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    overflow: hidden; /* Added this */
+    overflow: hidden; 
 }
 
-/* Ensure all sections don't exceed viewport width */
 section, .section {
     width: 100%;
     max-width: 100vw;
     overflow: hidden;
 }
 
-/* Fix for grid elements */
 .hero-content,
 .services-grid,
 .gallery-grid,
@@ -782,14 +765,12 @@ section, .section {
     overflow: hidden;
 }
 
-/* Specifically fix the hero slider */
 .hero-slider,
 .about-slider {
     max-width: 100%;
     overflow: hidden;
 }
 
-/* Fix for Swiper slider */
 .swiper {
     max-width: 100%;
     overflow: hidden;
@@ -803,25 +784,21 @@ section, .section {
     max-width: 100%;
 }
 
-/* Fix for images */
 img, video {
     max-width: 100%;
     height: auto;
 }
 
-/* Remove any potential horizontal padding/margin */
 * {
     box-sizing: border-box;
 }
 
-/* Additional safety measures */
 header, footer, main {
     width: 100%;
     max-width: 100vw;
     overflow-x: hidden;
 }
 
-/* Media query for mobile - additional safety */
 @media (max-width: 768px) {
     body {
         position: relative;
@@ -839,21 +816,13 @@ header, footer, main {
     }
 }
 
-/* Debug helper - uncomment to see problem elements */
-/*
-* {
-    outline: 1px solid red !important;
-}
-*/
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container header-container">
             <div class="logo">
                 <div class="logo-icon">
-                    <!-- Logo will be added by JavaScript -->
                 </div>
                 <div class="logo-text">
                     <h1>Yeditepe Laundry</h1>
@@ -874,14 +843,10 @@ header, footer, main {
             </nav>
         </div>
     </header>
-
-    <!-- Lightbox Modal -->
     <div id="lightboxModal" class="lightbox-modal">
         <span class="close-lightbox">&times;</span>
         <div class="lightbox-content" id="lightboxContent"></div>
     </div>
-
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
@@ -899,8 +864,6 @@ header, footer, main {
             </div>
         </div>
     </section>
-
-    <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
             <h2>Hakkımızda</h2>
@@ -919,8 +882,6 @@ header, footer, main {
             </div>
         </div>
     </section>
-
-    <!-- Services Section -->
     <section id="services" class="section bg-light">
         <div class="container">
             <h2>Hizmetlerimiz</h2>
@@ -949,8 +910,6 @@ header, footer, main {
             </div>
         </div>
     </section>
-
-    <!-- Gallery Section -->
     <section id="gallery" class="section">
         <div class="container">
             <h2>Galeri</h2>
@@ -960,8 +919,6 @@ header, footer, main {
             </div>
         </div>
     </section>
-
-    <!-- Contact Section -->
     <section id="contact" class="section bg-light">
         <div class="container">
             <h2>İletişim</h2>
@@ -1016,10 +973,7 @@ header, footer, main {
                 <div class="contact-form">
                     <h3>Bize Ulaşın</h3>
                     <p>Teklif almak veya sorularınız için formu doldurun, en kısa sürede size dönüş yapalım.</p>
-                    
-                    <!-- Form Messages Area -->
-                    <div id="form-messages"></div>
-                    
+                    <div id="form-messages"></div>                  
                     <form id="contactForm">
                         <div class="form-group">
                             <label for="name">Adınız Soyadınız *</label>
@@ -1060,8 +1014,6 @@ header, footer, main {
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-container">
@@ -1100,25 +1052,14 @@ header, footer, main {
             </div>
         </div>
     </footer>
-
-    <!-- Add Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
     <script>
-// MEDIA CONFIGURATION - Update these URLs to change all images/icons
 const siteConfig = {
-    // ================= LOGO CONFIGURATION =================
     logo: {
-        // OPTION 1: Use FontAwesome icon
-        iconClass: 'fas fa-tshirt',
-        
-        // OPTION 2: Use your own image logo (RECOMMENDED)
-        imageUrl: 'assets/yeditepelogo.png',  // Path to your logo
+        imageUrl: 'assets/yeditepelogo.png',
         name: 'Yeditepe Laundry',
         tagline: 'Profesyonel Otel Çamaşır Hizmeti',
     },
-    
-    // ================= HERO SECTION SLIDER IMAGES =================
     heroSlider: [
         'assets/main.jpg',
         'assets/aboutus.jpg',
@@ -1126,8 +1067,6 @@ const siteConfig = {
         'assets/gallery2.jpg',
         'assets/gallery3.jpg'
     ],
-    
-    // ================= ABOUT SECTION SLIDER IMAGES =================
     aboutSlider: [
         'assets/gallery4.jpg',
         'assets/gallery5.jpg',
@@ -1136,9 +1075,7 @@ const siteConfig = {
         'assets/gallery8.jpg'
     ],
     
-    // ================= GALLERY MEDIA =================
     gallery: {
-        // Images
         images: [
             'assets/gallery1.jpg',
             'assets/gallery2.jpg',
@@ -1151,8 +1088,6 @@ const siteConfig = {
             'assets/gallery9.jpg',
             'assets/gallery10.jpg'
         ],
-        
-        // Videos (optional - add your video files)
         videos: [
             'assets/galleryvid1.mp4',
             'assets/galleryvid2.mp4',
@@ -1163,8 +1098,6 @@ const siteConfig = {
             'assets/galleryvid7.mp4',
             'assets/galleryvid8.mp4'
         ],
-        
-        // Alt texts for gallery items
         altTexts: {
             images: [
                 'Modern Çamaşır Makineleri',
@@ -1187,8 +1120,6 @@ const siteConfig = {
             ]
         }
     },
-    
-    // ================= BUSINESS INFORMATION =================
     business: {
         address: 'İnönü Mah. Dolapdere Cad. No:12 Şişli<br>İstanbul, Türkiye',
         phone: '+90 530 952 86 94',
@@ -1197,10 +1128,6 @@ const siteConfig = {
         hours: 'Pazartesi - Cumartesi: 08:00 - 19:00<br>Pazar: 10:00 - 17:00'
     }
 };
-
-// ============================================
-// EMAILJS CONFIGURATION
-// ============================================
 (function() {
     emailjs.init("jH-KlJ2ffs_lGwfsp"); 
     const SERVICE_ID = "service_4rt2w5g";
@@ -1212,19 +1139,11 @@ const siteConfig = {
         receiverEmail: "mondevpro92@gmail.com"
     };
 })();
-
-// ============================================
-// INITIALIZE SITE WHEN PAGE LOADS
-// ============================================
 document.addEventListener('DOMContentLoaded', function() {
     applySiteConfiguration();
     initializeSliders();
     initializeLightbox();
-    
-    // Your existing initialization code continues here...
-    // (Mobile menu, form submission, etc.)
-    
-    // Check if this is the first visit
+
     const isFirstVisit = !localStorage.getItem('yeditepe_visited');
     if (isFirstVisit && window.emailConfig && window.emailConfig.serviceId === "YOUR_SERVICE_ID_HERE") {
         setTimeout(() => {
@@ -1234,11 +1153,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// ============================================
-// SITE CONFIGURATION APPLIER
-// ============================================
 function applySiteConfiguration() {
-    // =========== APPLY LOGO ===========
     const logoIcons = document.querySelectorAll('.logo-icon');
     
     logoIcons.forEach(logoIcon => {
@@ -1252,27 +1167,24 @@ function applySiteConfiguration() {
                          style="width: auto; height: 60px; object-fit: contain; display: block;">
                 `;
             } 
-            // Check if we have an icon class (fallback)
+
             else if (siteConfig.logo.iconClass) {
-                // Use FontAwesome icon
+
                 logoIcon.innerHTML = `<i class="${siteConfig.logo.iconClass}" style="font-size: 50px;"></i>`;
             }
         }
     });
     
-    // Apply logo text
     const logoText = document.querySelector('.logo-text h1');
     const logoTagline = document.querySelector('.logo-text p');
     if (logoText) logoText.textContent = siteConfig.logo.name;
     if (logoTagline) logoTagline.textContent = siteConfig.logo.tagline;
-    
-    // Apply footer logo text
+
     const footerLogoName = document.querySelector('.footer-logo .logo-text h1');
     const footerLogoTagline = document.querySelector('.footer-logo .logo-text p');
     if (footerLogoName) footerLogoName.textContent = siteConfig.logo.name;
     if (footerLogoTagline) footerLogoTagline.textContent = siteConfig.logo.tagline;
-    
-    // ========== APPLY HERO SLIDER ==========
+
     const heroSliderWrapper = document.getElementById('hero-slider-wrapper');
     if (heroSliderWrapper && siteConfig.heroSlider && siteConfig.heroSlider.length > 0) {
         heroSliderWrapper.innerHTML = '';
@@ -1284,8 +1196,7 @@ function applySiteConfiguration() {
             `;
         });
     }
-    
-    // ========== APPLY ABOUT SLIDER ==========
+
     const aboutSliderWrapper = document.getElementById('about-slider-wrapper');
     if (aboutSliderWrapper && siteConfig.aboutSlider && siteConfig.aboutSlider.length > 0) {
         aboutSliderWrapper.innerHTML = '';
@@ -1297,13 +1208,11 @@ function applySiteConfiguration() {
             `;
         });
     }
-    
-    // ========== APPLY GALLERY MEDIA ==========
+
     const galleryContainer = document.getElementById('gallery-container');
     if (galleryContainer) {
         galleryContainer.innerHTML = '';
         
-        // Add images
         if (siteConfig.gallery.images && siteConfig.gallery.images.length > 0) {
             siteConfig.gallery.images.forEach((imageUrl, index) => {
                 if (index < 10) { // Limit to 10 images
@@ -1316,8 +1225,7 @@ function applySiteConfiguration() {
                 }
             });
         }
-        
-        // Add videos
+
        if (siteConfig.gallery.videos && siteConfig.gallery.videos.length > 0) {
     siteConfig.gallery.videos.forEach((videoUrl, index) => {
         if (index < 10) {
@@ -1335,7 +1243,6 @@ function applySiteConfiguration() {
    }
 }
     
-    // ========== APPLY BUSINESS INFORMATION ==========
     const contactDetails = document.querySelectorAll('.contact-details p');
     if (contactDetails.length >= 5) {
         contactDetails[0].innerHTML = siteConfig.business.address;
@@ -1344,8 +1251,7 @@ function applySiteConfiguration() {
         contactDetails[3].textContent = siteConfig.business.email;
         contactDetails[4].innerHTML = siteConfig.business.hours;
     }
-    
-    // ========== APPLY FOOTER INFORMATION ==========
+
     const footerContact = document.querySelectorAll('.footer-contact p');
     if (footerContact.length >= 4) {
         footerContact[0].innerHTML = `<i class="fas fa-map-marker-alt"></i> ${siteConfig.business.address.replace(/<br>/g, ', ')}`;
@@ -1357,14 +1263,10 @@ function applySiteConfiguration() {
     console.log('Site configuration applied successfully!');
 }
 
-// ============================================
-// INITIALIZE SWIPER SLIDERS
-// ============================================
 function initializeSliders() {
-    // Initialize Hero Slider
     const heroSlider = new Swiper('.hero-slider', {
         autoplay: {
-            delay: 5000, // 10 seconds
+            delay: 5000,
             disableOnInteraction: false,
         },
         pagination: {
@@ -1378,8 +1280,6 @@ function initializeSliders() {
             crossFade: true
         },
     });
-    
-    // Initialize About Slider
     const aboutSlider = new Swiper('.about-slider', {
         autoplay: {
             delay: 5000, 
@@ -1398,16 +1298,12 @@ function initializeSliders() {
     });
 }
 
-// ============================================
-// LIGHTBOX FUNCTIONALITY
-// ============================================
 function initializeLightbox() {
     const lightboxModal = document.getElementById('lightboxModal');
     const lightboxContent = document.getElementById('lightboxContent');
     const closeLightbox = document.querySelector('.close-lightbox');
     const galleryItems = document.querySelectorAll('.gallery-item');
-    
-    // Open lightbox when gallery item is clicked
+
     galleryItems.forEach(item => {
         item.addEventListener('click', function() {
             const type = this.getAttribute('data-type');
@@ -1430,27 +1326,19 @@ function initializeLightbox() {
             document.body.style.overflow = 'hidden';
         });
     });
-    
-    // Close lightbox
     closeLightbox.addEventListener('click', function() {
         lightboxModal.style.display = 'none';
         document.body.style.overflow = 'auto';
-        
-        // Stop video playback
         const video = lightboxContent.querySelector('video');
         if (video) {
             video.pause();
             video.currentTime = 0;
         }
     });
-    
-    // Close lightbox when clicking outside
     lightboxModal.addEventListener('click', function(e) {
         if (e.target === lightboxModal) {
             lightboxModal.style.display = 'none';
             document.body.style.overflow = 'auto';
-            
-            // Stop video playback
             const video = lightboxContent.querySelector('video');
             if (video) {
                 video.pause();
@@ -1458,14 +1346,10 @@ function initializeLightbox() {
             }
         }
     });
-    
-    // Close with Escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && lightboxModal.style.display === 'block') {
             lightboxModal.style.display = 'none';
             document.body.style.overflow = 'auto';
-            
-            // Stop video playback
             const video = lightboxContent.querySelector('video');
             if (video) {
                 video.pause();
@@ -1475,9 +1359,6 @@ function initializeLightbox() {
     });
 }
 
-// ============================================
-// YOUR EXISTING FUNCTIONS
-// ============================================
 function showSetupInstructions() {
     const messageContainer = document.getElementById('form-messages');
     if (messageContainer) {
@@ -1501,7 +1382,6 @@ function showSetupInstructions() {
     }
 }
 
-// Mobile Menu Toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const mainNav = document.getElementById('main-nav');
 
@@ -1517,7 +1397,6 @@ mobileMenuBtn.addEventListener('click', function() {
     }
 });
 
-// Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -1527,7 +1406,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-            // Close mobile menu if open
             if (mainNav.classList.contains('active')) {
                 mainNav.classList.remove('active');
                 mobileMenuBtn.querySelector('i').classList.remove('fa-times');
@@ -1542,7 +1420,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Contact Form Submission with EmailJS
 const contactForm = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submit-btn');
 const btnText = document.getElementById('btn-text');
@@ -1550,19 +1427,16 @@ const formMessages = document.getElementById('form-messages');
 
 contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
-    // Check if EmailJS is configured
+
     if (!window.emailConfig || window.emailConfig.serviceId === "YOUR_SERVICE_ID_HERE") {
         showMessage('error', 'Email gönderimi henüz yapılandırılmamış. Lütfen site sahibiyle iletişime geçin.');
         return;
     }
-    
-    // Validate form
+
     if (!validateForm()) {
         return;
     }
-    
-    // Get form values
+
     const formData = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
@@ -1573,30 +1447,25 @@ contactForm.addEventListener('submit', async function(e) {
         submission_date: new Date().toLocaleString('tr-TR'),
         website: 'Yeditepe Laundry Web Sitesi'
     };
-    
-    // Show loading state
+
     submitBtn.disabled = true;
     btnText.textContent = 'Gönderiliyor...';
     submitBtn.innerHTML = '<div class="spinner"></div> <span id="btn-text">Gönderiliyor...</span>';
     
     try {
-        // Send email using EmailJS
         const response = await emailjs.send(
             window.emailConfig.serviceId,
             window.emailConfig.templateId,
             formData
         );
-        
-        // Success
+
         showMessage('success', 'Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.');
         contactForm.reset();
         
     } catch (error) {
-        // Error
         console.error('EmailJS Error:', error);
         showMessage('error', 'Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin veya doğrudan email gönderin.');
     } finally {
-        // Reset button state
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span id="btn-text">Mesaj Gönder</span>';
         btnText.textContent = 'Mesaj Gönder';
@@ -1608,11 +1477,9 @@ function validateForm() {
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const message = document.getElementById('message').value.trim();
-    
-    // Clear previous messages
+
     formMessages.innerHTML = '';
-    
-    // Validate required fields
+
     if (!name) {
         showMessage('error', 'Lütfen adınızı soyadınızı giriniz.');
         document.getElementById('name').focus();
@@ -1624,8 +1491,7 @@ function validateForm() {
         document.getElementById('email').focus();
         return false;
     }
-    
-    // Simple email validation
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
         showMessage('error', 'Lütfen geçerli bir e-posta adresi giriniz.');
@@ -1649,14 +1515,10 @@ function validateForm() {
 }
 
 function showMessage(type, text) {
-    // Clear previous messages
+
     formMessages.innerHTML = '';
-    
-    // Create message element
     const messageEl = document.createElement('div');
     messageEl.className = `alert alert-${type}`;
-    
-    // Set icon based on type
     const icon = type === 'success' ? 'fa-check-circle' : 
                 type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
     
@@ -1664,14 +1526,10 @@ function showMessage(type, text) {
         <i class="fas ${icon}"></i>
         <div>${text}</div>
     `;
-    
-    // Add to messages container
+
     formMessages.appendChild(messageEl);
-    
-    // Scroll to messages
+
     formMessages.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    
-    // Auto-remove success messages after 5 seconds
     if (type === 'success') {
         setTimeout(() => {
             messageEl.remove();
@@ -1679,7 +1537,6 @@ function showMessage(type, text) {
     }
 }
 
-// Header scroll effect
 window.addEventListener('scroll', function() {
     const header = document.querySelector('header');
     if (window.scrollY > 100) {
@@ -1688,10 +1545,7 @@ window.addEventListener('scroll', function() {
         header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
     }
 });
-
-// Show a welcome message with setup instructions
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if this is the first visit (for demo purposes)
     const isFirstVisit = !localStorage.getItem('yeditepe_visited');
     
     if (isFirstVisit && window.emailConfig.serviceId === "YOUR_SERVICE_ID_HERE") {
