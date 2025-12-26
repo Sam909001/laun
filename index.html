@@ -1095,51 +1095,6 @@ header, footer, main {
         grid-template-columns: 1fr;
     }
 }
-        .gallery-item-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: var(--white);
-    transition: var(--transition);
-}
-
-.gallery-item-overlay i {
-    font-size: 50px;
-    margin-bottom: 10px;
-    opacity: 0.9;
-}
-
-.gallery-item-overlay p {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin: 0;
-    opacity: 0.9;
-}
-
-.gallery-item:hover .gallery-item-overlay {
-    background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
-}
-
-.gallery-item.loaded .gallery-item-overlay {
-    display: none;
-}
-
-.gallery-item:not(.loaded) img,
-.gallery-item:not(.loaded) video {
-    opacity: 0;
-}
-
-.gallery-item.loaded img,
-.gallery-item.loaded video {
-    opacity: 1;
-}
 
         .hero-buttons {
     display: flex;
@@ -1801,12 +1756,8 @@ if (galleryImagesContainer && siteConfig.gallery.images && siteConfig.gallery.im
         if (index < 10) {
             const altText = siteConfig.gallery.altTexts?.images?.[index] || `Galeri Görseli ${index + 1}`;
             galleryImagesContainer.innerHTML += `
-                <div class="gallery-item" data-type="image" data-src="${imageUrl}" data-alt="${altText}">
-                    <div class="gallery-item-overlay">
-                        <i class="fas fa-image"></i>
-                        <p>Görmek için tıklayın</p>
-                    </div>
-                    <img alt="${altText}" style="display:none;">
+                <div class="gallery-item" data-type="image" data-src="${imageUrl}">
+                    <img src="${imageUrl}" alt="${altText}">
                     <div class="gallery-item-caption">
                         <p>${altText}</p>
                     </div>
@@ -1823,12 +1774,8 @@ if (galleryVideosContainer && siteConfig.gallery.videos && siteConfig.gallery.vi
             const altText = siteConfig.gallery.altTexts?.videos?.[index] || `Video ${index + 1}`;
             galleryVideosContainer.innerHTML += `
                 <div class="gallery-item video-item" data-type="video" data-src="${videoUrl}">
-                    <div class="gallery-item-overlay">
-                        <i class="fas fa-play-circle"></i>
-                        <p>İzlemek için tıklayın</p>
-                    </div>
-                    <video style="display:none;">
-                        <source type="video/mp4">
+                    <video preload="metadata">
+                        <source src="${videoUrl}" type="video/mp4">
                         Tarayıcınız video etiketini desteklemiyor.
                     </video>
                     <div class="gallery-item-caption">
@@ -1907,11 +1854,8 @@ function initializeLightbox() {
 
         const type = galleryItem.getAttribute('data-type');
         const src = galleryItem.getAttribute('data-src');
-
-        if (!galleryItem.classList.contains('loaded')) {
-            loadGalleryItem(galleryItem);
-        }
-
+        
+        // Open lightbox
         lightboxContent.innerHTML = '';
         
         if (type === 'image') {
@@ -2020,28 +1964,7 @@ function initializeScrollAnimations() {
     });
 }
         
-function loadGalleryItem(item) {
-    const type = item.getAttribute('data-type');
-    const src = item.getAttribute('data-src');
-    
-    if (type === 'image') {
-        const img = item.querySelector('img');
-        img.src = src;
-        img.style.display = 'block';
-        img.onload = function() {
-            item.classList.add('loaded');
-        };
-    } else if (type === 'video') {
-        const video = item.querySelector('video');
-        const source = video.querySelector('source');
-        source.src = src;
-        video.load();
-        video.style.display = 'block';
-        video.onloadeddata = function() {
-            item.classList.add('loaded');
-        };
-    }
-}// Gallery Tab Switching
+
 function initializeGalleryTabs() {
     const galleryTabs = document.querySelectorAll('.gallery-tab');
     const galleryContents = document.querySelectorAll('.gallery-content');
