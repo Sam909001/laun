@@ -12,20 +12,76 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
         :root {
-            --primary-blue: #1a5f7a;
-            --light-blue: #57a6c3;
-            --dark-blue: #0a3d62;
-            --white: #ffffff;
-            --light-gray: #f8f9fa;
-            --medium-gray: #e9ecef;
-            --dark-gray: #495057;
-            --text-color: #333333;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --border-radius: 8px;
-            --transition: all 0.3s ease;
-            --success-green: #28a745;
-            --error-red: #dc3545;
-        }
+    --primary-blue: #0066FF;
+    --light-blue: #00B4D8;
+    --dark-blue: #003D82;
+    --accent-cyan: #00F5FF;
+    --white: #ffffff;
+    --light-gray: #f8f9fa;
+    --medium-gray: #e9ecef;
+    --dark-gray: #495057;
+    --text-color: #1a1a1a;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 40px rgba(0, 102, 255, 0.15);
+    --border-radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --success-green: #00C853;
+    --error-red: #FF1744;
+}
+
+        /* WhatsApp Floating Button */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: pulse 2s infinite;
+}
+
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-float i {
+    margin: 0;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7);
+    }
+    100% {
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    }
+}
+
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 24px;
+    }
+}
         
         * {
             margin: 0;
@@ -326,44 +382,70 @@
         }
         
         .service-card {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            padding: 40px 30px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: var(--transition);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .service-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            color: var(--white);
-            font-size: 42px;
-            flex-shrink: 0;
-        }
-        
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .service-card p {
-            flex-grow: 1;
-        }
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    padding: 40px 30px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 102, 255, 0.05), transparent);
+    transition: left 0.5s;
+}
+
+.service-card:hover::before {
+    left: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--light-blue);
+}
+
+.service-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    color: var(--white);
+    font-size: 42px;
+    flex-shrink: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.service-card:hover .service-icon {
+    transform: rotateY(360deg) scale(1.1);
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+    box-shadow: 0 8px 25px rgba(0, 102, 255, 0.3);
+}
+
+.service-icon i {
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon i {
+    transform: scale(1.1);
+}
         
        /* Gallery Tabs */
 .gallery-tabs {
@@ -572,74 +654,124 @@
             to { transform: rotate(360deg); }
         }
 
-        footer {
-            background-color: var(--dark-blue);
-            color: var(--white);
-            padding: 60px 0 30px;
-        }
-        
-        .footer-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-logo .logo-text h1,
-        .footer-logo .logo-text p {
-            color: var(--white);
-        }
-        
-        .footer-logo .logo-text p {
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .footer-links h3,
-        .footer-contact h3 {
-            color: var(--white);
-            margin-bottom: 25px;
-            font-size: 1.4rem;
-        }
-        
-        .footer-links ul {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .footer-links a:hover {
-            color: var(--light-blue);
-            padding-left: 5px;
-        }
-        
-        .footer-contact p {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .footer-contact i {
-            color: var(--light-blue);
-            width: 20px;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
+       footer {
+    background: linear-gradient(135deg, var(--dark-blue), #001a3d);
+    color: var(--white);
+    padding: 60px 0 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--accent-cyan), var(--primary-blue));
+}
+
+.footer-logo {
+    position: relative;
+}
+
+.footer-logo .logo {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+}
+
+.footer-logo .logo:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 102, 255, 0.2);
+}
+
+.footer-logo .logo-icon img {
+    filter: brightness(0) invert(1);
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.social-link:hover {
+    background: var(--primary-blue);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 102, 255, 0.3);
+}
+
+.footer-links h3,
+.footer-contact h3 {
+    color: var(--white);
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-links h3::after,
+.footer-contact h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--accent-cyan));
+    border-radius: 2px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: var(--accent-cyan);
+    padding-left: 10px;
+}
+
+.footer-links a::before {
+    content: '→';
+    margin-right: 8px;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.footer-links a:hover::before {
+    opacity: 1;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 30px;
+    margin-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
 
         .lightbox-modal {
             display: none;
@@ -729,14 +861,121 @@
                 display: block;
             }
             
-            nav ul {
-                flex-direction: column;
-                gap: 0;
-            }
-            
-            nav li {
-                margin-bottom: 10px;
-            }
+          nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--dark-blue);
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: var(--transition);
+    padding: 5px 0;
+    position: relative;
+}
+
+nav a:hover {
+    color: var(--primary-blue);
+}
+
+nav a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--accent-cyan));
+    bottom: 0;
+    left: 0;
+    transition: var(--transition);
+    border-radius: 2px;
+}
+
+nav a:hover:after {
+    width: 100%;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--dark-blue);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.mobile-menu-btn:hover {
+    color: var(--primary-blue);
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+        z-index: 999;
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        padding-top: 100px;
+    }
+    
+    nav.active {
+        left: 0;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: 0;
+        padding: 0 40px;
+    }
+    
+    nav li {
+        margin-bottom: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        animation: slideInLeft 0.4s ease forwards;
+        opacity: 0;
+    }
+    
+    nav.active li:nth-child(1) { animation-delay: 0.1s; }
+    nav.active li:nth-child(2) { animation-delay: 0.2s; }
+    nav.active li:nth-child(3) { animation-delay: 0.3s; }
+    nav.active li:nth-child(4) { animation-delay: 0.4s; }
+    nav.active li:nth-child(5) { animation-delay: 0.5s; }
+    
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    nav a {
+        color: var(--white);
+        display: block;
+        padding: 20px 0;
+        font-size: 1.2rem;
+    }
+    
+    nav a:after {
+        background: var(--accent-cyan);
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+        position: relative;
+        z-index: 1001;
+    }
+}
             
             .mobile-menu-btn {
                 display: block;
@@ -925,9 +1164,200 @@ header, footer, main {
     opacity: 1;
 }
 
+        .hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 102, 255, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-blue);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 102, 255, 0.3);
+}
+
+        .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.about-content > div:first-child {
+    animation: fadeInLeft 0.8s ease;
+}
+
+.about-content .about-slider {
+    animation: fadeInRight 0.8s ease;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 992px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+        #gallery {
+    min-height: 200px;
+}
+
+#gallery .gallery-content-wrapper {
+    display: none;
+    animation: fadeInUp 0.5s ease;
+}
+
+#gallery .gallery-content-wrapper.visible {
+    display: block;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gallery-message {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.05), rgba(0, 180, 216, 0.05));
+    border-radius: var(--border-radius);
+    margin-top: 30px;
+}
+
+.gallery-message i {
+    font-size: 60px;
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.gallery-message h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--dark-blue);
+}
+
+.gallery-message p {
+    font-size: 1.1rem;
+    color: var(--dark-gray);
+    margin-bottom: 0;
+}
+
+/* Gallery item captions */
+.gallery-item-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    padding: 15px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 3;
+}
+
+.gallery-item.loaded:hover .gallery-item-caption {
+    transform: translateY(0);
+}
+
+.gallery-item-caption p {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+        .btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: ripple-animation 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+        .footer-links ul {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+        @media (max-width: 576px) {
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
     </style>
 </head>
 <body>
+    <!-- WhatsApp Floating Button -->
+<a href="https://wa.me/905309528694" target="_blank" class="whatsapp-float" title="WhatsApp ile iletişime geçin">
+    <i class="fab fa-whatsapp"></i>
+</a>
     <header>
         <div class="container header-container">
             <div class="logo">
@@ -959,11 +1389,14 @@ header, footer, main {
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Otel Çamaşır Hizmetlerinde Profesyonel Çözüm</h1>
-                    <p>Yeditepe Laundry olarak, otelleriniz için en kaliteli çamaşır ve tekstil temizleme hizmetini sunuyoruz. Battaniyeler, yatak örtüleri, havlular ve daha fazlası için güvenilir çözümler.</p>
-                    <a href="#contact" class="btn"><i class="fas fa-envelope"></i> Teklif Alın</a>
-                </div>
+               <div class="hero-text">
+    <h1>Otel Çamaşır Hizmetlerinde Profesyonel Çözüm</h1>
+    <p>Yeditepe Laundry olarak, otelleriniz için en kaliteli çamaşır ve tekstil temizleme hizmetini sunuyoruz. Battaniyeler, yatak örtüleri, havlular ve daha fazlası için güvenilir çözümler.</p>
+    <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary"><i class="fas fa-envelope"></i> Teklif Alın</a>
+        <a href="#services" class="btn btn-secondary"><i class="fas fa-arrow-down"></i> Hizmetlerimizi Keşfedin</a>
+    </div>
+</div>
                 <div class="hero-slider swiper">
                     <div class="swiper-wrapper" id="hero-slider-wrapper">
                         <!-- Slider images will be added by JavaScript -->
@@ -976,7 +1409,7 @@ header, footer, main {
     <section id="about" class="section">
         <div class="container">
             <h2>Hakkımızda</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+            <div class="about-content">
                 <div>
                     <p>Yeditepe Laundry olarak 15 yılı aşkın süredir otel ve turizm sektörüne profesyonel çamaşır hizmetleri sunmaktayız. En modern ekipmanlar ve çevre dostu temizlik ürünleri ile hizmet veriyoruz.</p>
                     <p>Müşteri memnuniyetini her şeyin üzerinde tutan anlayışımızla, otellerinizin tekstil ihtiyaçlarını en titiz şekilde karşılıyoruz. Battaniyeler, yorganlar, yastık kılıfları, masa örtüleri ve tüm otel tekstilleri için komple çözümler sunuyoruz.</p>
@@ -1024,24 +1457,38 @@ header, footer, main {
         <h2>Galeri</h2>
         <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">Modern ekipmanlarımız, profesyonel çalışma alanlarımız ve iş süreçlerimizden görüntüler.</p>
         
-        <!-- Gallery Tabs -->
-        <div class="gallery-tabs">
-            <button class="gallery-tab active" data-tab="images">
-                <i class="fas fa-images"></i> Fotoğraflar
-            </button>
-            <button class="gallery-tab" data-tab="videos">
-                <i class="fas fa-video"></i> Videolar
-            </button>
-        </div>
-        <div class="gallery-content active" id="gallery-images">
-            <div class="gallery-grid" id="gallery-images-container">
-                <!-- Gallery images will be added by JavaScript -->
+        <!-- Gallery content wrapper (hidden by default) -->
+        <div class="gallery-content-wrapper" id="galleryContentWrapper">
+            <!-- Gallery Tabs -->
+            <div class="gallery-tabs">
+                <button class="gallery-tab active" data-tab="images">
+                    <i class="fas fa-images"></i> Fotoğraflar
+                </button>
+                <button class="gallery-tab" data-tab="videos">
+                    <i class="fas fa-video"></i> Videolar
+                </button>
+            </div>
+            
+            <!-- Images Grid -->
+            <div class="gallery-content active" id="gallery-images">
+                <div class="gallery-grid" id="gallery-images-container">
+                    <!-- Gallery images will be added by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Videos Grid -->
+            <div class="gallery-content" id="gallery-videos">
+                <div class="gallery-grid" id="gallery-videos-container">
+                    <!-- Gallery videos will be added by JavaScript -->
+                </div>
             </div>
         </div>
-        <div class="gallery-content" id="gallery-videos">
-            <div class="gallery-grid" id="gallery-videos-container">
-                <!-- Gallery videos will be added by JavaScript -->
-            </div>
+        
+        <!-- Message shown when gallery not opened yet -->
+        <div class="gallery-message" id="galleryMessage">
+            <i class="fas fa-images"></i>
+            <h3>Galerimizi Görüntülemek İçin</h3>
+            <p>Yukarıdaki menüden "Galeri" sekmesine tıklayın</p>
         </div>
     </div>
 </section>
@@ -1143,18 +1590,32 @@ header, footer, main {
     <footer>
         <div class="container">
             <div class="footer-container">
-                <div class="footer-logo">
-                    <div class="logo">
-                        <div class="logo-icon">
-                            <!-- Logo will be added by JavaScript -->
-                        </div>
-                        <div class="logo-text">
-                            <h1>Yeditepe Laundry</h1>
-                            <p>Profesyonel Otel Çamaşır Hizmeti</p>
-                        </div>
-                    </div>
-                    <p style="margin-top: 20px; color: rgba(255,255,255,0.8);">Otel tekstil temizliğinde kalite ve güvenin adresi.</p>
-                </div>
+               <div class="footer-logo">
+    <div class="logo">
+        <div class="logo-icon">
+            <!-- Logo will be added by JavaScript -->
+        </div>
+        <div class="logo-text">
+            <h1>Yeditepe Laundry</h1>
+            <p>Profesyonel Otel Çamaşır Hizmeti</p>
+        </div>
+    </div>
+    <p style="color: rgba(255,255,255,0.8);">Otel tekstil temizliğinde kalite ve güvenin adresi. 15+ yıllık deneyimimizle sektörün lider firmasıyız.</p>
+    <div class="footer-social">
+        <a href="https://wa.me/905309528694" target="_blank" class="social-link" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+905309528694" class="social-link" title="Telefon">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="mailto:yeditepelaundry@gmail.com" class="social-link" title="Email">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="#gallery" class="social-link" title="Galeri">
+            <i class="fas fa-images"></i>
+        </a>
+    </div>
+</div>
                 <div class="footer-links">
                     <h3>Hızlı Bağlantılar</h3>
                     <ul>
@@ -1269,6 +1730,9 @@ document.addEventListener('DOMContentLoaded', function() {
     applySiteConfiguration();
     initializeSliders();
     initializeLightbox();
+    initializeGalleryVisibility();
+    initializeScrollAnimations();
+    initializeGalleryTabs(); // Add this line
 
     const isFirstVisit = !localStorage.getItem('yeditepe_visited');
     if (isFirstVisit && window.emailConfig && window.emailConfig.serviceId === "YOUR_SERVICE_ID_HERE") {
@@ -1278,7 +1742,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 2000);
     }
 });
-
 function applySiteConfiguration() {
     const logoIcons = document.querySelectorAll('.logo-icon');
     
@@ -1335,7 +1798,7 @@ function applySiteConfiguration() {
         });
     }
 
-    const galleryImagesContainer = document.getElementById('gallery-images-container');
+const galleryImagesContainer = document.getElementById('gallery-images-container');
 const galleryVideosContainer = document.getElementById('gallery-videos-container');
 
 if (galleryImagesContainer && siteConfig.gallery.images && siteConfig.gallery.images.length > 0) {
@@ -1350,6 +1813,9 @@ if (galleryImagesContainer && siteConfig.gallery.images && siteConfig.gallery.im
                         <p>Görmek için tıklayın</p>
                     </div>
                     <img alt="${altText}" style="display:none;">
+                    <div class="gallery-item-caption">
+                        <p>${altText}</p>
+                    </div>
                 </div>
             `;
         }
@@ -1371,6 +1837,9 @@ if (galleryVideosContainer && siteConfig.gallery.videos && siteConfig.gallery.vi
                         <source type="video/mp4">
                         Tarayıcınız video etiketini desteklemiyor.
                     </video>
+                    <div class="gallery-item-caption">
+                        <p>${altText}</p>
+                    </div>
                 </div>
             `;
         }
@@ -1493,6 +1962,70 @@ function initializeLightbox() {
     }
 }
 
+
+            // Gallery visibility control
+function initializeGalleryVisibility() {
+    const galleryLinks = document.querySelectorAll('a[href="#gallery"]');
+    const galleryContentWrapper = document.getElementById('galleryContentWrapper');
+    const galleryMessage = document.getElementById('galleryMessage');
+    let galleryOpened = false;
+
+    galleryLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (!galleryOpened) {
+                e.preventDefault();
+                
+                // Scroll to gallery section
+                const gallerySection = document.getElementById('gallery');
+                if (gallerySection) {
+                    gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                
+                // Show gallery content with delay for smooth scroll
+                setTimeout(() => {
+                    if (galleryMessage) galleryMessage.style.display = 'none';
+                    if (galleryContentWrapper) {
+                        galleryContentWrapper.classList.add('visible');
+                    }
+                    galleryOpened = true;
+                }, 500);
+            }
+        });
+    });
+}
+        // Scroll animations for elements
+function initializeScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe service cards
+    document.querySelectorAll('.service-card').forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+        observer.observe(card);
+    });
+
+    // Observe contact items
+    document.querySelectorAll('.contact-item').forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-30px)';
+        item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+        observer.observe(item);
+    });
+}
+        
 function loadGalleryItem(item) {
     const type = item.getAttribute('data-type');
     const src = item.getAttribute('data-src');
@@ -1514,9 +2047,8 @@ function loadGalleryItem(item) {
             item.classList.add('loaded');
         };
     }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
+}// Gallery Tab Switching
+function initializeGalleryTabs() {
     const galleryTabs = document.querySelectorAll('.gallery-tab');
     const galleryContents = document.querySelectorAll('.gallery-content');
     
@@ -1531,7 +2063,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById(`gallery-${targetTab}`).classList.add('active');
         });
     });
-});
+}
         
 function showSetupInstructions() {
     const messageContainer = document.getElementById('form-messages');
@@ -1711,23 +2243,43 @@ function showMessage(type, text) {
     }
 }
 
+// Enhanced header shadow and scroll effects
+let lastScroll = 0;
 window.addEventListener('scroll', function() {
     const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-        header.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.1)';
+    const currentScroll = window.scrollY;
+    
+    if (currentScroll > 100) {
+        header.style.boxShadow = '0 6px 20px rgba(0, 102, 255, 0.15)';
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+        header.style.backdropFilter = 'blur(10px)';
     } else {
         header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
+        header.style.background = '#ffffff';
+        header.style.backdropFilter = 'none';
     }
-});
-document.addEventListener('DOMContentLoaded', function() {
-    const isFirstVisit = !localStorage.getItem('yeditepe_visited');
     
-    if (isFirstVisit && window.emailConfig.serviceId === "YOUR_SERVICE_ID_HERE") {
-        setTimeout(() => {
-            showSetupInstructions();
-            localStorage.setItem('yeditepe_visited', 'true');
-        }, 2000);
-    }
+    lastScroll = currentScroll;
+});
+
+        // Add ripple effect to buttons
+document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+    });
 });
     </script>
 </body>
