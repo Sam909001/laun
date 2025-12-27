@@ -1587,35 +1587,24 @@ header, footer, main {
 .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
 
-.footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.footer-text {
     margin-bottom: 10px;
 }
 
-.footer-logo .logo-icon img {
-    max-width: 120px;
-    max-height: 60px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-}
-
-.footer-logo .logo-text h1 {
+.footer-text h1 {
     color: var(--white);
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-bottom: 5px;
     line-height: 1.2;
 }
 
-.footer-logo .logo-text p {
+.footer-tagline {
     color: var(--accent-cyan);
-    font-size: 0.9rem;
-    margin-bottom: 0;
+    font-size: 1rem;
+    margin-bottom: 15px;
     font-weight: 500;
 }
 
@@ -1623,7 +1612,7 @@ header, footer, main {
     color: rgba(255, 255, 255, 0.85);
     line-height: 1.6;
     font-size: 0.95rem;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .footer-links {
@@ -2330,7 +2319,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     function applySiteConfiguration() {
-    const logoIcons = document.querySelectorAll('.logo-icon:not(.footer-logo .logo-icon)');
+    const logoIcons = document.querySelectorAll('.logo-icon'); 
     
     logoIcons.forEach(logoIcon => {
         if (logoIcon) {
