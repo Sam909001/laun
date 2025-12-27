@@ -772,11 +772,11 @@
             to { transform: rotate(360deg); }
         }
 
-      /* Footer with Form */
+/* Compact Footer */
 footer {
     background: linear-gradient(135deg, var(--dark-blue), #001a3d);
     color: var(--white);
-    padding: 60px 0 30px;
+    padding: 50px 0 25px;
     position: relative;
 }
 
@@ -786,101 +786,104 @@ footer::before {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 3px;
     background: linear-gradient(90deg, var(--primary-blue), var(--accent-cyan), var(--primary-blue));
 }
 
 .footer-container {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 60px;
-    margin-bottom: 40px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 30px;
 }
 
+/* Column 1: Brand */
 .footer-text h1 {
     color: var(--white);
-    font-size: 2rem;
-    margin-bottom: 5px;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
 }
 
 .footer-tagline {
     color: var(--accent-cyan);
-    font-size: 1rem;
-    margin-bottom: 15px;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
     font-weight: 500;
 }
 
 .footer-description {
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.6;
-    font-size: 0.95rem;
-    margin-bottom: 25px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
 }
 
+/* Quick Links - Horizontal */
 .footer-links {
-    margin: 30px 0;
+    margin-top: 15px;
 }
 
 .footer-links h3 {
     color: var(--white);
-    font-size: 1.2rem;
-    margin-bottom: 15px;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
 }
 
 .footer-links ul {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
 }
 
 .footer-links a {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     transition: var(--transition);
-    padding: 8px 20px;
-    border-radius: 20px;
+    padding: 6px 15px;
+    border-radius: 15px;
     background: rgba(255, 255, 255, 0.05);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
 }
 
 .footer-links a:hover {
     color: var(--white);
     background: var(--primary-blue);
-    transform: translateX(5px);
 }
 
-.footer-contact-info {
-    margin-top: 30px;
-}
-
+/* Column 2: Contact Info */
 .footer-contact-info h3 {
     color: var(--white);
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+}
+.map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--primary-blue);
+    color: white !important;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 5px;
 }
 
-.contact-item-footer {
+        .contact-item-footer {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.contact-item-footer:last-of-type {
-    border-bottom: none;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 12px;
 }
 
 .contact-item-footer i {
     color: var(--accent-cyan);
-    font-size: 16px;
-    width: 20px;
+    font-size: 14px;
+    width: 18px;
     margin-top: 2px;
     flex-shrink: 0;
 }
@@ -889,8 +892,8 @@ footer::before {
 .contact-item-footer a {
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
-    line-height: 1.5;
-    font-size: 0.9rem;
+    line-height: 1.4;
+    font-size: 0.85rem;
     text-decoration: none;
     transition: var(--transition);
 }
@@ -898,20 +901,7 @@ footer::before {
 .contact-item-footer a:hover {
     color: var(--accent-cyan);
 }
-
-.map-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--primary-blue);
-    color: white !important;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-top: 8px;
-}
-
+        
 .map-link:hover {
     background: var(--accent-cyan);
     color: var(--dark-blue) !important;
@@ -919,54 +909,54 @@ footer::before {
 
 .footer-social {
     display: flex;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 8px;
+    margin-top: 12px;
 }
 
 .social-link {
-    width: 38px;
-    height: 38px;
+    width: 35px;
+    height: 35px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
-    font-size: 16px;
+    font-size: 15px;
     transition: var(--transition);
     text-decoration: none;
 }
 
 .social-link:hover {
     background: var(--primary-blue);
-    transform: translateY(-3px) scale(1.1);
+    transform: translateY(-3px);
 }
 
-/* Footer Form */
+/* Column 3: Compact Form */
 .footer-form {
     background: rgba(255, 255, 255, 0.05);
-    padding: 30px;
+    padding: 20px;
     border-radius: var(--border-radius);
     border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-form h3 {
     color: var(--white);
-    font-size: 1.3rem;
-    margin-bottom: 20px;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    gap: 10px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .form-group.half {
@@ -975,18 +965,18 @@ footer::before {
 
 .form-group label {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     font-weight: 600;
     color: var(--white);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .form-control {
     width: 100%;
-    padding: 10px 12px;
+    padding: 8px 10px;
     border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    font-size: 0.95rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
     transition: var(--transition);
     background: rgba(255, 255, 255, 0.9);
     color: var(--text-color);
@@ -995,12 +985,12 @@ footer::before {
 .form-control:focus {
     outline: none;
     border-color: var(--accent-cyan);
-    box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.2);
+    box-shadow: 0 0 0 2px rgba(0, 245, 255, 0.2);
     background: var(--white);
 }
 
 textarea.form-control {
-    min-height: 80px;
+    min-height: 60px;
     resize: vertical;
 }
 
@@ -1008,8 +998,9 @@ textarea.form-control {
     background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
     border: none;
     font-weight: 600;
-    padding: 12px;
-    margin-top: 10px;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 0.9rem;
 }
 
 .btn-primary:hover {
@@ -1017,78 +1008,62 @@ textarea.form-control {
     transform: translateY(-2px);
 }
 
-.btn-primary:disabled {
-    background: var(--medium-gray);
-    cursor: not-allowed;
-    transform: none;
-}
-
 /* Alert Messages */
 .alert {
-    padding: 12px 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 0.9rem;
+    gap: 8px;
+    font-size: 0.8rem;
 }
 
 .alert-success {
     background-color: rgba(0, 200, 83, 0.2);
-    border-left: 4px solid var(--success-green);
+    border-left: 3px solid var(--success-green);
     color: #a7f3d0;
 }
 
 .alert-error {
     background-color: rgba(255, 23, 68, 0.2);
-    border-left: 4px solid var(--error-red);
+    border-left: 3px solid var(--error-red);
     color: #fecaca;
-}
-
-.spinner {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 3px solid rgba(255,255,255,.3);
-    border-radius: 50%;
-    border-top-color: var(--white);
-    animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
 }
 
 .copyright {
     text-align: center;
-    padding-top: 30px;
-    margin-top: 30px;
+    padding-top: 20px;
+    margin-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 /* Responsive */
 @media (max-width: 992px) {
     .footer-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+    
+    .footer-form {
+        grid-column: 1 / -1;
     }
 }
 
 @media (max-width: 576px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+    
     .form-row {
         grid-template-columns: 1fr;
     }
     
-    .footer-form {
-        padding: 25px 20px;
-    }
-    
     .footer-links ul {
         flex-direction: column;
-        gap: 8px;
+        gap: 5px;
     }
 }
         .lightbox-modal {
@@ -1790,514 +1765,6 @@ header, footer, main {
     
     .gallery-cta-btn .btn-text {
         font-size: 1.3rem;
-    }
-}
-
-        /* Yeni Footer Stilleri */
-.footer-container {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 60px;
-    margin-bottom: 40px;
-}
-
-.footer-left {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-}
-
-.footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.footer-text {
-    margin-bottom: 10px;
-}
-
-.footer-text h1 {
-    color: var(--white);
-    font-size: 2rem;
-    margin-bottom: 5px;
-    line-height: 1.2;
-}
-
-.footer-tagline {
-    color: var(--accent-cyan);
-    font-size: 1rem;
-    margin-bottom: 15px;
-    font-weight: 500;
-}
-
-.footer-description {
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.6;
-    font-size: 0.95rem;
-    margin-bottom: 5px;
-}
-
-.footer-links {
-    margin-top: 20px;
-}
-
-.footer-links h3 {
-    color: var(--white);
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.footer-links h3::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 40px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary-blue), var(--accent-cyan));
-    border-radius: 2px;
-}
-
-.footer-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-links li {
-    margin-bottom: 12px;
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: var(--transition);
-    display: inline-block;
-    font-size: 1rem;
-}
-
-.footer-links a:hover {
-    color: var(--accent-cyan);
-    transform: translateX(5px);
-}
-
-.footer-links a::before {
-    content: '→';
-    margin-right: 8px;
-    opacity: 0;
-    transition: var(--transition);
-}
-
-.footer-links a:hover::before {
-    opacity: 1;
-}
-
-/* Sağ taraf - İletişim bilgileri */
-.footer-contact {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 25px;
-    border-radius: var(--border-radius);
-    border-left: 3px solid var(--accent-cyan);
-}
-
-.footer-contact h3 {
-    color: var(--white);
-    font-size: 1.3rem;
-    margin-bottom: 25px;
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.footer-contact h3::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 40px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary-blue), var(--accent-cyan));
-    border-radius: 2px;
-}
-
-.contact-info-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.contact-info-item:last-child {
-    margin-bottom: 0;
-}
-
-.contact-info-item i {
-    color: var(--accent-cyan);
-    font-size: 18px;
-    width: 24px;
-    text-align: center;
-    margin-top: 2px;
-    flex-shrink: 0;
-}
-
-.contact-info-item p {
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-    line-height: 1.6;
-    font-size: 0.95rem;
-}
-
-/* Sosyal medya ikonları */
-.footer-social {
-    display: flex;
-    gap: 12px;
-    margin-top: 10px;
-}
-
-.social-link {
-    width: 42px;
-    height: 42px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    font-size: 18px;
-    transition: var(--transition);
-    text-decoration: none;
-}
-
-.social-link:hover {
-    background: var(--primary-blue);
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 5px 15px rgba(0, 102, 255, 0.3);
-}
-
-/* Copyright */
-.copyright {
-    text-align: center;
-    padding-top: 30px;
-    margin-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
-}
-
-/* Responsive tasarım */
-@media (max-width: 992px) {
-    .footer-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .footer-left {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .footer-contact {
-        margin-top: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    .footer-container {
-        gap: 30px;
-    }
-    
-    .footer-logo {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    
-    .footer-logo .logo-icon {
-        display: flex;
-        justify-content: center;
-    }
-    
-    .footer-description {
-        text-align: center;
-    }
-    
-    .footer-social {
-        justify-content: center;
-    }
-    
-    .footer-links {
-        text-align: center;
-    }
-    
-    .footer-links h3::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    
-    .footer-contact h3::after {
-        left: 0;
-        transform: none;
-    }
-}
-
-@media (max-width: 576px) {
-    .footer-contact {
-        padding: 20px;
-    }
-    
-    .social-link {
-        width: 38px;
-        height: 38px;
-        font-size: 16px;
-    }
-}
-
-        /* Harita bağlantısı stilleri */
-.contact-text {
-    flex: 1;
-}
-
-.map-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
-    color: white;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 8px 15px;
-    border-radius: 25px;
-    margin-top: 10px;
-    transition: var(--transition);
-    box-shadow: 0 4px 12px rgba(0, 102, 255, 0.2);
-}
-
-.map-link:hover {
-    background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 102, 255, 0.3);
-}
-
-.map-link i {
-    font-size: 0.9rem;
-}
-
-/* İletişim bölümündeki ikonları ve metinleri hizalamak için */
-.contact-info-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.contact-info-item:last-child {
-    margin-bottom: 0;
-}
-
-.contact-info-item i {
-    color: var(--accent-cyan);
-    font-size: 18px;
-    width: 24px;
-    text-align: center;
-    margin-top: 2px;
-    flex-shrink: 0;
-}
-
-.contact-info-item p {
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-    line-height: 1.6;
-    font-size: 0.95rem;
-}
-
-/* Mobile responsive adjustments */
-@media (max-width: 768px) {
-    .map-link {
-        font-size: 0.8rem;
-        padding: 5px 10px;
-    }
-    
-    .map-link i {
-        font-size: 0.7rem;
-    }
-}
-
-        /* Compact Contact Section */
-.contact-info-compact {
-    display: flex;
-    flex-direction: column;
-}
-
-.contact-info-card {
-    background: var(--white);
-    padding: 25px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    border-left: 4px solid var(--primary-blue);
-}
-
-.contact-info-card h3 {
-    margin-bottom: 20px;
-    color: var(--dark-blue);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.3rem;
-}
-
-.contact-info-card h3 i {
-    color: var(--light-blue);
-}
-
-.compact-contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid var(--medium-gray);
-}
-
-.compact-contact-item:last-child {
-    border-bottom: none;
-    margin-bottom: 20px;
-}
-
-.compact-contact-item i {
-    color: var(--light-blue);
-    font-size: 16px;
-    margin-top: 3px;
-    min-width: 20px;
-}
-
-.compact-contact-item strong {
-    display: block;
-    font-size: 0.9rem;
-    color: var(--dark-blue);
-    margin-bottom: 2px;
-}
-
-.compact-contact-item p {
-    margin: 0;
-    font-size: 0.95rem;
-    color: var(--dark-gray);
-    line-height: 1.4;
-}
-
-.contact-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.btn-small {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 15px;
-    background: var(--light-gray);
-    color: var(--dark-blue);
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: var(--transition);
-    border: 1px solid var(--medium-gray);
-    flex: 1;
-    justify-content: center;
-}
-
-.btn-small:hover {
-    background: var(--primary-blue);
-    color: var(--white);
-    transform: translateY(-2px);
-}
-
-.btn-small.whatsapp {
-    background: #25D366;
-    color: white;
-    border-color: #25D366;
-}
-
-.btn-small.whatsapp:hover {
-    background: #128C7E;
-}
-
-/* Compact Form */
-.contact-form-compact {
-    background: var(--white);
-    padding: 25px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    border-left: 4px solid var(--light-blue);
-}
-
-.contact-form-compact h3 {
-    margin-bottom: 20px;
-    color: var(--dark-blue);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.3rem;
-}
-
-.contact-form-compact h3 i {
-    color: var(--primary-blue);
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.form-group.half {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-}
-
-.form-control {
-    padding: 12px;
-    font-size: 0.95rem;
-}
-
-textarea.form-control {
-    min-height: 100px;
-    resize: vertical;
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-    .contact-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .contact-info-card,
-    .contact-form-compact {
-        padding: 20px;
-    }
-}
-
-@media (max-width: 576px) {
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-    
-    .contact-buttons {
-        flex-direction: column;
-    }
-    
-    .btn-small {
-        width: 100%;
     }
 }
     </style>
