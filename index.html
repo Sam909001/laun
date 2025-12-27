@@ -2256,8 +2256,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 2000);
     }
 });
-function applySiteConfiguration() {
-    const logoIcons = document.querySelectorAll('.logo-icon');
+
+    
+    function applySiteConfiguration() {
+    const logoIcons = document.querySelectorAll('.logo-icon:not(.footer-logo .logo-icon)');
     
     logoIcons.forEach(logoIcon => {
         if (logoIcon) {
@@ -2269,20 +2271,30 @@ function applySiteConfiguration() {
                          alt="${siteConfig.logo.name}" 
                          style="width: auto; height: 60px; object-fit: contain; display: block;">
                 `;
-            } 
-
-            else if (siteConfig.logo.iconClass) {
-
+            } else if (siteConfig.logo.iconClass) {
                 logoIcon.innerHTML = `<i class="${siteConfig.logo.iconClass}" style="font-size: 50px;"></i>`;
             }
         }
     });
+    
+    // Footer logo için ayrı işlem
+    const footerLogoIcon = document.querySelector('.footer-logo .logo-icon');
+    if (footerLogoIcon && siteConfig.logo.imageUrl) {
+        footerLogoIcon.innerHTML = `
+            <img src="${siteConfig.logo.imageUrl}" 
+                 alt="${siteConfig.logo.name}" 
+                 style="width: auto; height: 60px; object-fit: contain; display: block; filter: brightness(0) invert(1);">
+        `;
+    } else if (footerLogoIcon && siteConfig.logo.iconClass) {
+        footerLogoIcon.innerHTML = `<i class="${siteConfig.logo.iconClass}" style="font-size: 50px; color: white;"></i>`;
+    }
     
     const logoText = document.querySelector('.logo-text h1');
     const logoTagline = document.querySelector('.logo-text p');
     if (logoText) logoText.textContent = siteConfig.logo.name;
     if (logoTagline) logoTagline.textContent = siteConfig.logo.tagline;
 
+    // Footer logo text'leri
     const footerLogoName = document.querySelector('.footer-logo .logo-text h1');
     const footerLogoTagline = document.querySelector('.footer-logo .logo-text p');
     if (footerLogoName) footerLogoName.textContent = siteConfig.logo.name;
@@ -2312,45 +2324,45 @@ function applySiteConfiguration() {
         });
     }
 
-const galleryImagesContainer = document.getElementById('gallery-images-container');
-const galleryVideosContainer = document.getElementById('gallery-videos-container');
+    const galleryImagesContainer = document.getElementById('gallery-images-container');
+    const galleryVideosContainer = document.getElementById('gallery-videos-container');
 
-if (galleryImagesContainer && siteConfig.gallery.images && siteConfig.gallery.images.length > 0) {
-    galleryImagesContainer.innerHTML = '';
-    siteConfig.gallery.images.forEach((imageUrl, index) => {
-        if (index < 10) {
-            const altText = siteConfig.gallery.altTexts?.images?.[index] || `Galeri Görseli ${index + 1}`;
-            galleryImagesContainer.innerHTML += `
-                <div class="gallery-item" data-type="image" data-src="${imageUrl}">
-                    <img src="${imageUrl}" alt="${altText}">
-                    <div class="gallery-item-caption">
-                        <p>${altText}</p>
+    if (galleryImagesContainer && siteConfig.gallery.images && siteConfig.gallery.images.length > 0) {
+        galleryImagesContainer.innerHTML = '';
+        siteConfig.gallery.images.forEach((imageUrl, index) => {
+            if (index < 10) {
+                const altText = siteConfig.gallery.altTexts?.images?.[index] || `Galeri Görseli ${index + 1}`;
+                galleryImagesContainer.innerHTML += `
+                    <div class="gallery-item" data-type="image" data-src="${imageUrl}">
+                        <img src="${imageUrl}" alt="${altText}">
+                        <div class="gallery-item-caption">
+                            <p>${altText}</p>
+                        </div>
                     </div>
-                </div>
-            `;
-        }
-    });
-}
+                `;
+            }
+        });
+    }
 
-if (galleryVideosContainer && siteConfig.gallery.videos && siteConfig.gallery.videos.length > 0) {
-    galleryVideosContainer.innerHTML = '';
-    siteConfig.gallery.videos.forEach((videoUrl, index) => {
-        if (index < 10) {
-            const altText = siteConfig.gallery.altTexts?.videos?.[index] || `Video ${index + 1}`;
-            galleryVideosContainer.innerHTML += `
-                <div class="gallery-item video-item" data-type="video" data-src="${videoUrl}">
-                    <video preload="metadata">
-                        <source src="${videoUrl}" type="video/mp4">
-                        Tarayıcınız video etiketini desteklemiyor.
-                    </video>
-                    <div class="gallery-item-caption">
-                        <p>${altText}</p>
+    if (galleryVideosContainer && siteConfig.gallery.videos && siteConfig.gallery.videos.length > 0) {
+        galleryVideosContainer.innerHTML = '';
+        siteConfig.gallery.videos.forEach((videoUrl, index) => {
+            if (index < 10) {
+                const altText = siteConfig.gallery.altTexts?.videos?.[index] || `Video ${index + 1}`;
+                galleryVideosContainer.innerHTML += `
+                    <div class="gallery-item video-item" data-type="video" data-src="${videoUrl}">
+                        <video preload="metadata">
+                            <source src="${videoUrl}" type="video/mp4">
+                            Tarayıcınız video etiketini desteklemiyor.
+                        </video>
+                        <div class="gallery-item-caption">
+                            <p>${altText}</p>
+                        </div>
                     </div>
-                </div>
-            `;
-        }
-    });
-}
+                `;
+            }
+        });
+    }
     
     const contactDetails = document.querySelectorAll('.contact-details p');
     if (contactDetails.length >= 5) {
@@ -2361,12 +2373,15 @@ if (galleryVideosContainer && siteConfig.gallery.videos && siteConfig.gallery.vi
         contactDetails[4].innerHTML = siteConfig.business.hours;
     }
 
-    const footerContact = document.querySelectorAll('.footer-contact p');
-    if (footerContact.length >= 4) {
-        footerContact[0].innerHTML = `<i class="fas fa-map-marker-alt"></i> ${siteConfig.business.address.replace(/<br>/g, ', ')}`;
-        footerContact[1].innerHTML = `<i class="fas fa-phone"></i> ${siteConfig.business.phone}`;
-        footerContact[2].innerHTML = `<i class="fas fa-envelope"></i> ${siteConfig.business.email}`;
-        footerContact[3].innerHTML = `<i class="fas fa-fax"></i> ${siteConfig.business.fax}`;
+    // Footer contact bilgilerini güncelle
+    const footerContactItems = document.querySelectorAll('.contact-info-item p');
+    if (footerContactItems.length >= 4) {
+        // Footer contact güncellenmesi artık gerekmiyor çünkü HTML'de statik olarak var
+        // Ama yine de JavaScript ile güncellemek isterseniz:
+        // footerContactItems[0].innerHTML = siteConfig.business.address;
+        // footerContactItems[1].textContent = siteConfig.business.phone;
+        // footerContactItems[2].textContent = siteConfig.business.email;
+        // footerContactItems[3].textContent = siteConfig.business.fax;
     }
     
     console.log('Site configuration applied successfully!');
