@@ -1842,6 +1842,77 @@ header, footer, main {
         font-size: 16px;
     }
 }
+
+        /* Harita bağlantısı stilleri */
+.contact-text {
+    flex: 1;
+}
+
+.map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 102, 255, 0.1);
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-top: 8px;
+    transition: var(--transition);
+    border: 1px solid rgba(0, 102, 255, 0.2);
+}
+
+.map-link:hover {
+    background: rgba(0, 102, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 102, 255, 0.15);
+}
+
+.map-link i {
+    font-size: 0.8rem;
+}
+
+/* İletişim bölümündeki ikonları ve metinleri hizalamak için */
+.contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.contact-info-item:last-child {
+    margin-bottom: 0;
+}
+
+.contact-info-item i {
+    color: var(--accent-cyan);
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.contact-info-item p {
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .map-link {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+    
+    .map-link i {
+        font-size: 0.7rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -2082,7 +2153,7 @@ header, footer, main {
             </div>
         </div>
     </section>
-    <footer>
+   <footer>
     <div class="container">
         <div class="footer-container">
             <!-- Sol taraf: Logo ve bağlantılar -->
@@ -2132,7 +2203,12 @@ header, footer, main {
                 <h3>İletişim Bilgileri</h3>
                 <div class="contact-info-item">
                     <i class="fas fa-map-marker-alt"></i>
-                    <p>İnönü Mah. Dolapdere Cad. No:12<br>Şişli, İstanbul, Türkiye</p>
+                    <div class="contact-text">
+                        <p>İnönü Mah. Dolapdere Cad. No:12<br>Şişli, İstanbul, Türkiye</p>
+                        <a href="https://maps.app.goo.gl/YFVbxkGG4Zd1mrJf7" target="_blank" class="map-link">
+                            <i class="fas fa-map"></i> Haritada Görüntüle
+                        </a>
+                    </div>
                 </div>
                 <div class="contact-info-item">
                     <i class="fas fa-phone"></i>
