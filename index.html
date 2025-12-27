@@ -1901,6 +1901,182 @@ header, footer, main {
         font-size: 0.7rem;
     }
 }
+
+        /* Compact Contact Section */
+.contact-info-compact {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-info-card {
+    background: var(--white);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary-blue);
+}
+
+.contact-info-card h3 {
+    margin-bottom: 20px;
+    color: var(--dark-blue);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.3rem;
+}
+
+.contact-info-card h3 i {
+    color: var(--light-blue);
+}
+
+.compact-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--medium-gray);
+}
+
+.compact-contact-item:last-child {
+    border-bottom: none;
+    margin-bottom: 20px;
+}
+
+.compact-contact-item i {
+    color: var(--light-blue);
+    font-size: 16px;
+    margin-top: 3px;
+    min-width: 20px;
+}
+
+.compact-contact-item strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--dark-blue);
+    margin-bottom: 2px;
+}
+
+.compact-contact-item p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--dark-gray);
+    line-height: 1.4;
+}
+
+.contact-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-small {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: var(--light-gray);
+    color: var(--dark-blue);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    border: 1px solid var(--medium-gray);
+    flex: 1;
+    justify-content: center;
+}
+
+.btn-small:hover {
+    background: var(--primary-blue);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.btn-small.whatsapp {
+    background: #25D366;
+    color: white;
+    border-color: #25D366;
+}
+
+.btn-small.whatsapp:hover {
+    background: #128C7E;
+}
+
+/* Compact Form */
+.contact-form-compact {
+    background: var(--white);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--light-blue);
+}
+
+.contact-form-compact h3 {
+    margin-bottom: 20px;
+    color: var(--dark-blue);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.3rem;
+}
+
+.contact-form-compact h3 i {
+    color: var(--primary-blue);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group.half {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    padding: 12px;
+    font-size: 0.95rem;
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .contact-info-card,
+    .contact-form-compact {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .contact-buttons {
+        flex-direction: column;
+    }
+    
+    .btn-small {
+        width: 100%;
+    }
+}
     </style>
 </head>
 <body>
@@ -2046,101 +2222,108 @@ header, footer, main {
     </div>
 </div>
 </section>
-    <section id="contact" class="section bg-light">
-        <div class="container">
-            <h2>İletişim</h2>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Adres</h4>
-                            <p>İnönü Mah. Dolapdere Cad. No:12 Şişli<br>İstanbul, Türkiye</p>
+   <section id="contact" class="section bg-light">
+    <div class="container">
+        <h2>İletişim</h2>
+        <p style="text-align: center; max-width: 600px; margin: 0 auto 40px; color: var(--dark-gray);">
+            Teklif almak veya sorularınız için bize ulaşın. En kısa sürede size dönüş yapacağız.
+        </p>
+        
+        <div class="contact-container">
+            <!-- Contact Info - More Compact -->
+            <div class="contact-info-compact">
+                <div class="contact-info-card">
+                    <h3><i class="fas fa-info-circle"></i> İletişim Bilgileri</h3>
+                    
+                    <div class="compact-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Adres:</strong>
+                            <p>İnönü Mah. Dolapdere Cad. No:12 Şişli, İstanbul</p>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Telefon</h4>
+                    
+                    <div class="compact-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Telefon:</strong>
                             <p>+90 530 952 86 94</p>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-fax"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Faks</h4>
-                            <p>+90 212 232 27 84</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>E-posta</h4>
+                    
+                    <div class="compact-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>E-posta:</strong>
                             <p>yeditepelaundry@gmail.com</p>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Çalışma Saatleri</h4>
-                            <p>Pazartesi - Cumartesi: 08:00 - 19:00<br>Pazar: 10:00 - 17:00</p>
+                    
+                    <div class="compact-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Çalışma Saatleri:</strong>
+                            <p>Pzt-Cmt: 08:00-19:00<br>Pazar: 10:00-17:00</p>
                         </div>
                     </div>
-                </div>
-                <div class="contact-form">
-                    <h3>Bize Ulaşın</h3>
-                    <p>Teklif almak veya sorularınız için formu doldurun, en kısa sürede size dönüş yapalım.</p>
-                    <div id="form-messages"></div>                  
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Adınız Soyadınız *</label>
-                            <input type="text" id="name" class="form-control" placeholder="Adınız Soyadınız" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-posta Adresiniz *</label>
-                            <input type="email" id="email" class="form-control" placeholder="E-posta adresiniz" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Telefon Numaranız *</label>
-                            <input type="tel" id="phone" class="form-control" placeholder="Telefon numaranız" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="hotel_name">Otel/Hastane/Restoran Adı (Opsiyonel)</label>
-                            <input type="text" id="hotel_name" class="form-control" placeholder="Kurum adınız (varsa)">
-                        </div>
-                        <div class="form-group">
-                            <label for="service_type">Hizmet Türü</label>
-                            <select id="service_type" class="form-control">
-                                <option value="">Seçiniz</option>
-                                <option value="otel">Otel Çamaşırları</option>
-                                <option value="hastane">Hastane Çamaşırları</option>
-                                <option value="restoran">Restoran Tekstilleri</option>
-                                <option value="diger">Diğer</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Mesajınız *</label>
-                            <textarea id="message" class="form-control" placeholder="Mesajınızı buraya yazın..." required></textarea>
-                        </div>
-                        <div class="form-note">* İşaretli alanlar zorunludur.</div>
-                        <button type="submit" class="btn" id="submit-btn" style="width: 100%;">
-                            <i class="fas fa-paper-plane"></i> <span id="btn-text">Mesaj Gönder</span>
-                        </button>
-                    </form>
+                    
+                    <div class="contact-buttons">
+                        <a href="tel:+905309528694" class="btn-small">
+                            <i class="fas fa-phone"></i> Hemen Ara
+                        </a>
+                        <a href="https://wa.me/905309528694" target="_blank" class="btn-small whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
                 </div>
             </div>
+            
+            <!-- Form - Streamlined -->
+            <div class="contact-form-compact">
+                <h3><i class="fas fa-paper-plane"></i> Hızlı Mesaj Gönder</h3>
+                
+                <div id="form-messages"></div>
+                
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="name">Ad Soyad *</label>
+                            <input type="text" id="name" class="form-control" placeholder="Adınız Soyadınız" required>
+                        </div>
+                        <div class="form-group half">
+                            <label for="phone">Telefon *</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="Telefon Numaranız" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-posta *</label>
+                        <input type="email" id="email" class="form-control" placeholder="E-posta Adresiniz" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service_type">Hizmet Türü</label>
+                        <select id="service_type" class="form-control">
+                            <option value="">Hizmet Türünü Seçin</option>
+                            <option value="otel">Otel Çamaşırları</option>
+                            <option value="hastane">Hastane Çamaşırları</option>
+                            <option value="restoran">Restoran Tekstilleri</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mesajınız *</label>
+                        <textarea id="message" class="form-control" placeholder="Kısaca ihtiyacınızı yazın..." rows="3" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Gönder
+                    </button>
+                </form>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
   <footer>
     <div class="container">
         <div class="footer-container">
