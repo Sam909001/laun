@@ -1310,12 +1310,26 @@ header, footer, main {
     }
 }
 
+/* Gallery message animation */
 .gallery-message {
     text-align: center;
     padding: 60px 20px;
     background: linear-gradient(135deg, rgba(0, 102, 255, 0.05), rgba(0, 180, 216, 0.05));
     border-radius: var(--border-radius);
     margin-top: 30px;
+    transition: all 0.5s ease;
+    animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .gallery-message i {
@@ -1323,18 +1337,22 @@ header, footer, main {
     color: var(--primary-blue);
     margin-bottom: 20px;
     display: block;
+    animation: pulse 2s infinite;
 }
 
-.gallery-message h3 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: var(--dark-blue);
-}
-
-.gallery-message p {
-    font-size: 1.1rem;
-    color: var(--dark-gray);
-    margin-bottom: 0;
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 0 rgba(0, 102, 255, 0.3);
+    }
+    50% {
+        transform: scale(1.1);
+        text-shadow: 0 0 20px rgba(0, 102, 255, 0.5);
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 0 rgba(0, 102, 255, 0.3);
+    }
 }
 
 /* Gallery item captions */
@@ -1417,6 +1435,59 @@ header, footer, main {
     background: rgba(255, 255, 255, 0.05);
     border-radius: var(--border-radius);
     border-left: 3px solid var(--accent-cyan);
+}
+
+        /* Gallery link styles */
+.gallery-link {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    padding: 5px 10px;
+    border-radius: var(--border-radius);
+    background-color: rgba(0, 102, 255, 0.1);
+    display: inline-block;
+    margin: 0 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-link:hover {
+    color: var(--dark-blue);
+    background-color: rgba(0, 102, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 102, 255, 0.15);
+}
+
+.gallery-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--accent-cyan));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+}
+
+.gallery-link:hover::after {
+    width: 100%;
+}
+
+.gallery-message p {
+    font-size: 1.1rem;
+    color: var(--dark-gray);
+    margin-bottom: 0;
+}
+
+/* Mobile responsive for gallery link */
+@media (max-width: 768px) {
+    .gallery-link {
+        padding: 8px 15px;
+        font-size: 1rem;
+    }
 }
     </style>
 </head>
@@ -1551,12 +1622,12 @@ header, footer, main {
             </div>
         </div>
         
-        <!-- Message shown when gallery not opened yet -->
-        <div class="gallery-message" id="galleryMessage">
-            <i class="fas fa-images"></i>
-            <h3>Galerimizi Görüntülemek İçin</h3>
-            <p>Yukarıdaki menüden "Galeri" sekmesine tıklayın</p>
-        </div>
+       <!-- Gallery Message kısmını şu şekilde güncelleyin -->
+<div class="gallery-message" id="galleryMessage">
+    <i class="fas fa-images"></i>
+    <h3>Galerimizi Görüntülemek İçin</h3>
+    <p><a href="javascript:void(0)" id="openGalleryLink" class="gallery-link">Buraya dokunun</a> ve galeriyi görüntüleyin</p>
+</div>
     </div>
 </section>
     <section id="contact" class="section bg-light">
@@ -2019,36 +2090,75 @@ function initializeLightbox() {
 }
 
 
-            // Gallery visibility control
-function initializeGalleryVisibility() {
+           function initializeGalleryVisibility() {
     const galleryLinks = document.querySelectorAll('a[href="#gallery"]');
+    const openGalleryLink = document.getElementById('openGalleryLink');
     const galleryContentWrapper = document.getElementById('galleryContentWrapper');
     const galleryMessage = document.getElementById('galleryMessage');
     let galleryOpened = false;
 
+    // Tüm galeri bağlantıları için (menüdekiler dahil)
     galleryLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            if (!galleryOpened) {
-                e.preventDefault();
-                
-                // Scroll to gallery section
-                const gallerySection = document.getElementById('gallery');
-                if (gallerySection) {
-                    gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                
-                // Show gallery content with delay for smooth scroll
-                setTimeout(() => {
-                    if (galleryMessage) galleryMessage.style.display = 'none';
-                    if (galleryContentWrapper) {
-                        galleryContentWrapper.classList.add('visible');
-                    }
-                    galleryOpened = true;
-                }, 500);
-            }
+            e.preventDefault();
+            openGallery();
         });
     });
+
+    // Galeri mesajındaki tıklanabilir bağlantı için
+    if (openGalleryLink) {
+        openGalleryLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            openGallery();
+        });
+    }
+
+    function openGallery() {
+        if (!galleryOpened) {
+            // Scroll to gallery section
+            const gallerySection = document.getElementById('gallery');
+            if (gallerySection) {
+                gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            
+            // Show gallery content with delay for smooth scroll
+            setTimeout(() => {
+                if (galleryMessage) {
+                    galleryMessage.style.opacity = '0';
+                    galleryMessage.style.transform = 'translateY(-20px)';
+                    galleryMessage.style.transition = 'all 0.5s ease';
+                    
+                    setTimeout(() => {
+                        galleryMessage.style.display = 'none';
+                        if (galleryContentWrapper) {
+                            galleryContentWrapper.classList.add('visible');
+                            galleryContentWrapper.style.opacity = '0';
+                            galleryContentWrapper.style.transform = 'translateY(20px)';
+                            
+                            // Fade in animation
+                            setTimeout(() => {
+                                galleryContentWrapper.style.opacity = '1';
+                                galleryContentWrapper.style.transform = 'translateY(0)';
+                                galleryContentWrapper.style.transition = 'all 0.6s ease';
+                            }, 100);
+                        }
+                    }, 500);
+                }
+                galleryOpened = true;
+            }, 500);
+        }
+    }
+
+    // Eğer kullanıcı doğrudan #gallery hash'i ile gelmişse
+    if (window.location.hash === '#gallery') {
+        setTimeout(() => {
+            if (!galleryOpened) {
+                openGallery();
+            }
+        }, 1000);
+    }
 }
+        
         // Scroll animations for elements
 function initializeScrollAnimations() {
     const observerOptions = {
