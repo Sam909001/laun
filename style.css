@@ -992,7 +992,6 @@ footer::before {
     gap: 20px;
 }
 
-/* FIX: Make "Yeditepe Laundry" more visible */
 .footer-logo .logo-text h1 {
     color: var(--white) !important;
     font-size: 2.2rem;
@@ -1006,48 +1005,34 @@ footer::before {
     margin-bottom: 10px;
 }
 
-/* Alternative solid color option (choose one): */
-/*
-.footer-logo .logo-text h1 {
-    color: var(--white) !important;
-    font-size: 2.2rem;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-    font-weight: 800 !important;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
-*/
-
+/* FIX: Make the tagline under "Yeditepe Laundry" more visible */
 .footer-tagline {
     color: var(--accent-cyan) !important;
     font-size: 1rem !important;
     margin-bottom: 10px;
     font-weight: 600 !important;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    opacity: 1 !important;
 }
 
 .footer-description {
-    color: rgba(255, 255, 255, 0.95) !important;
-    line-height: 1.7 !important;
-    font-size: 0.95rem !important;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+    font-size: 0.87rem;
     margin-bottom: 0;
-    font-weight: 400;
 }
 
 .footer-links h3 {
     color: var(--white);
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 1rem;
+    margin-bottom: 12px;
 }
 
 .footer-links ul {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .footer-links li {
@@ -1055,56 +1040,54 @@ footer::before {
 }
 
 .footer-links a {
-    color: rgba(255, 255, 255, 0.95) !important;
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     transition: var(--transition);
     padding: 5px 0;
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-size: 0.85rem;
 }
 
 .footer-links a:hover {
-    color: var(--accent-cyan) !important;
+    color: var(--accent-cyan);
     padding-left: 10px;
 }
 
 .footer-contact-column h3 {
     color: var(--white);
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 15px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .contact-item-footer {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 15px;
+    gap: 10px;
+    margin-bottom: 12px;
 }
 
 .contact-item-footer i {
-    color: var(--accent-cyan) !important;
-    font-size: 16px !important;
-    width: 20px;
+    color: var(--accent-cyan);
+    font-size: 14px;
+    width: 18px;
     margin-top: 2px;
     flex-shrink: 0;
 }
 
 .contact-item-footer p,
 .contact-item-footer a {
-    color: rgba(255, 255, 255, 0.95) !important;
+    color: rgba(255, 255, 255, 0.85);
     margin: 0;
-    line-height: 1.5;
-    font-size: 0.95rem;
+    line-height: 1.4;
+    font-size: 0.85rem;
     text-decoration: none;
     transition: var(--transition);
-    font-weight: 500;
 }
 
 .contact-item-footer a:hover {
-    color: var(--accent-cyan) !important;
+    color: var(--accent-cyan);
 }
 
 .map-link {
@@ -1113,65 +1096,63 @@ footer::before {
     gap: 5px;
     background: var(--primary-blue);
     color: white !important;
-    padding: 6px 12px;
+    padding: 4px 10px;
     border-radius: 12px;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 600;
     margin-top: 5px;
-    transition: var(--transition);
 }
 
 .map-link:hover {
     background: var(--accent-cyan);
     color: var(--dark-blue) !important;
-    transform: translateY(-2px);
 }
 
 .footer-social {
     display: flex;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 8px;
+    margin-top: 12px;
 }
 
 .social-link {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.15);
+    width: 35px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
-    font-size: 18px;
+    font-size: 15px;
     transition: var(--transition);
     text-decoration: none;
 }
 
 .social-link:hover {
     background: var(--primary-blue);
-    transform: translateY(-3px) scale(1.1);
+    transform: translateY(-3px);
 }
 
 .footer-form {
-    background: rgba(255, 255, 255, 0.08);
-    padding: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
     border-radius: var(--border-radius);
-    border: 2px solid rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-form h3 {
     color: var(--white);
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 15px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
 }
 
 .form-group.half {
@@ -1179,21 +1160,19 @@ footer::before {
 }
 
 .footer-form .btn-primary {
-    padding: 12px;
-    margin-top: 10px;
-    font-size: 1rem;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 0.9rem;
     width: 100%;
-    font-weight: 600;
 }
 
 .copyright {
     text-align: center;
     padding-top: 20px;
     margin-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-    font-weight: 400;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
 }
 
 /* ===== LIGHTBOX ===== */
