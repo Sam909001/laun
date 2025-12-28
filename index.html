@@ -2220,15 +2220,22 @@ function initializeSliders() {
             clickable: true,
         },
         loop: true,
+        loopAdditionalSlides: 2, 
         speed: 800,
         effect: 'fade',
         fadeEffect: {
             crossFade: true
         },
+        watchSlidesProgress: true,
+        watchSlidesVisibility: true,
+  
+        slidesPerView: 1,
+        slidesPerGroup: 1,
     });
+    
     const aboutSlider = new Swiper('.about-slider', {
         autoplay: {
-            delay: 5000, 
+            delay: 5000,
             disableOnInteraction: false,
         },
         pagination: {
@@ -2236,11 +2243,17 @@ function initializeSliders() {
             clickable: true,
         },
         loop: true,
+        loopAdditionalSlides: 2, 
         speed: 800,
         effect: 'fade',
         fadeEffect: {
             crossFade: true
         },
+        watchSlidesProgress: true,
+        watchSlidesVisibility: true,
+        // Fade effect için gerekli
+        slidesPerView: 1,
+        slidesPerGroup: 1,
     });
 }
 function initializeLightbox() {
