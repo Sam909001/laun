@@ -294,16 +294,21 @@ header {
 }
 
 .logo-text h1 {
-    font-size: 1.8rem;
-    margin-bottom: 0;
-}
-
-.logo-text p {
-    font-size: 0.85rem;
-    color: var(--light-blue);
-    margin-bottom: 0;
-    font-weight: 500;
-}
+        font-size: 1.15rem !important;
+        line-height: 1.1;
+        margin-bottom: 1px;
+        font-weight: 700 !important;
+    }
+    
+    .logo-text p {
+        font-size: 0.75rem !important;
+        line-height: 1;
+        margin-bottom: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 
 /* ===== NAVIGATION ===== */
 nav {
