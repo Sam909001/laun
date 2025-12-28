@@ -2210,6 +2210,9 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Site configuration applied successfully!');
 }
 function initializeSliders() {
+    const heroSlideCount = siteConfig.heroSlider.length;
+    const aboutSlideCount = siteConfig.aboutSlider.length;
+    
     const heroSlider = new Swiper('.hero-slider', {
         autoplay: {
             delay: 5000,
@@ -2220,17 +2223,20 @@ function initializeSliders() {
             clickable: true,
         },
         loop: true,
-        loopAdditionalSlides: 2, 
+        loopedSlides: heroSlideCount, 
+        loopAdditionalSlides: 1,
         speed: 800,
         effect: 'fade',
         fadeEffect: {
             crossFade: true
         },
-        watchSlidesProgress: true,
-        watchSlidesVisibility: true,
-  
         slidesPerView: 1,
-        slidesPerGroup: 1,
+        watchSlidesProgress: true,
+        on: {
+            init: function() {
+                console.log('Hero Slider initialized with', heroSlideCount, 'slides');
+            }
+        }
     });
     
     const aboutSlider = new Swiper('.about-slider', {
@@ -2243,17 +2249,20 @@ function initializeSliders() {
             clickable: true,
         },
         loop: true,
-        loopAdditionalSlides: 2, 
+        loopedSlides: aboutSlideCount, 
+        loopAdditionalSlides: 1,
         speed: 800,
         effect: 'fade',
         fadeEffect: {
             crossFade: true
         },
-        watchSlidesProgress: true,
-        watchSlidesVisibility: true,
-        // Fade effect için gerekli
         slidesPerView: 1,
-        slidesPerGroup: 1,
+        watchSlidesProgress: true,
+        on: {
+            init: function() {
+                console.log('About Slider initialized with', aboutSlideCount, 'slides');
+            }
+        }
     });
 }
 function initializeLightbox() {
