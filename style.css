@@ -263,12 +263,14 @@ header {
     align-items: center;
     padding: 8px 0;
     min-height: 50px;
+    position: relative;
 }
 
 .logo {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex: 1;
 }
 
 .logo-icon {
@@ -352,11 +354,16 @@ nav a:hover:after {
     color: var(--dark-blue);
     cursor: pointer;
     transition: var(--transition);
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
 }
 
 .mobile-menu-btn:hover {
     color: var(--primary-blue);
-    transform: scale(1.1);
+    transform: translateY(-50%) scale(1.1);
 }
 
 /* ===== HERO SECTION ===== */
@@ -1234,18 +1241,6 @@ footer::before {
     margin: 0;
 }
 
-@keyframes pulse {
-    0% {
-        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-    }
-    50% {
-        box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7);
-    }
-    100% {
-        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-    }
-}
-
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 992px) {
     .hero-content,
@@ -1287,11 +1282,14 @@ footer::before {
     .header-container {
         padding: 6px 0 !important;
         min-height: 45px;
+        position: relative;
     }
     
     /* Smaller logo for mobile */
     .logo {
         gap: 6px;
+        flex: 1;
+        justify-content: flex-start;
     }
     
     .logo-icon {
@@ -1320,13 +1318,30 @@ footer::before {
         overflow: hidden;
     }
     
-    /* Mobile navigation */
+    /* Mobile navigation - FIXED POSITIONING */
     .mobile-menu-btn {
         display: block;
-        padding: 6px;
-        font-size: 1.2rem;
-        width: 30px;
-        height: 30px;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 8px;
+        font-size: 1.3rem;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        color: var(--dark-blue);
+        cursor: pointer;
+        z-index: 1001;
+    }
+    
+    .mobile-menu-btn:hover {
+        color: var(--primary-blue);
+        transform: translateY(-50%) scale(1.1);
     }
     
     nav {
@@ -1476,6 +1491,7 @@ footer::before {
     .header-container {
         padding: 4px 0 !important;
         min-height: 40px;
+        position: relative;
     }
     
     .logo-icon {
@@ -1498,7 +1514,12 @@ footer::before {
     
     .mobile-menu-btn {
         font-size: 1.1rem !important;
-        padding: 5px !important;
+        padding: 6px !important;
+        width: 32px;
+        height: 32px;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
     }
     
     /* Adjust hero */
@@ -1555,5 +1576,14 @@ footer::before {
     
     .gallery-cta-btn .btn-text {
         font-size: 1.2rem;
+    }
+    
+    /* WhatsApp button */
+    .whatsapp-float {
+        width: 45px;
+        height: 45px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 22px;
     }
 }
