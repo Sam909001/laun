@@ -2210,9 +2210,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Site configuration applied successfully!');
 }
 function initializeSliders() {
-    const heroSlideCount = siteConfig.heroSlider.length;
-    const aboutSlideCount = siteConfig.aboutSlider.length;
-    
     const heroSlider = new Swiper('.hero-slider', {
         autoplay: {
             delay: 5000,
@@ -2223,20 +2220,10 @@ function initializeSliders() {
             clickable: true,
         },
         loop: true,
-        loopedSlides: heroSlideCount, 
-        loopAdditionalSlides: 1,
         speed: 800,
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true
-        },
+        effect: 'slide',
         slidesPerView: 1,
-        watchSlidesProgress: true,
-        on: {
-            init: function() {
-                console.log('Hero Slider initialized with', heroSlideCount, 'slides');
-            }
-        }
+        spaceBetween: 0,
     });
     
     const aboutSlider = new Swiper('.about-slider', {
@@ -2249,20 +2236,10 @@ function initializeSliders() {
             clickable: true,
         },
         loop: true,
-        loopedSlides: aboutSlideCount, 
-        loopAdditionalSlides: 1,
         speed: 800,
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true
-        },
+        effect: 'slide',
         slidesPerView: 1,
-        watchSlidesProgress: true,
-        on: {
-            init: function() {
-                console.log('About Slider initialized with', aboutSlideCount, 'slides');
-            }
-        }
+        spaceBetween: 0,
     });
 }
 function initializeLightbox() {
