@@ -1190,7 +1190,6 @@ footer::before {
     font-size: 0.85rem;
 }
 
-/* ===== LIGHTBOX ===== */
 .lightbox-modal {
     display: none;
     position: fixed;
@@ -1199,24 +1198,23 @@ footer::before {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.85);
     animation: fadeIn 0.3s ease;
 }
 
-.lightbox-content {
-    margin: auto;
-    display: block;
-    max-width: 90%;
-    max-height: 90vh;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+lightbox-content {
+    max-width: 80%;
+    max-height: 60vh; /* 60% of viewport height */
+}
+
+.lightbox-content img {
+    max-width: 80%;
+    max-height: 60vh;
 }
 
 .lightbox-content video {
-    max-width: 100%;
-    max-height: 90vh;
+    max-width: 80%;
+    max-height: 60vh;
 }
 
 .close-lightbox {
@@ -1234,7 +1232,6 @@ footer::before {
     color: var(--light-blue);
 }
 
-/* ===== WHATSAPP FLOAT BUTTON ===== */
 .whatsapp-float {
     position: fixed;
     width: 60px;
@@ -1266,7 +1263,6 @@ footer::before {
     margin: 0;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 992px) {
     .hero-content,
     .about-content {
@@ -1293,7 +1289,6 @@ footer::before {
 }
 
 @media (max-width: 768px) {
-    /* Adjust scroll padding for thinner header */
     html {
         scroll-padding-top: 60px;
     }
@@ -1309,8 +1304,7 @@ footer::before {
         min-height: 45px;
         position: relative;
     }
-    
-    /* Smaller logo for mobile */
+
     .logo {
         gap: 6px;
         flex: 1;
@@ -1343,7 +1337,6 @@ footer::before {
         overflow: hidden;
     }
     
-    /* Mobile navigation - FIXED POSITIONING */
     .mobile-menu-btn {
         display: block;
         position: absolute;
@@ -1426,7 +1419,6 @@ footer::before {
         background: var(--accent-cyan);
     }
     
-    /* Adjust hero section for thinner header */
     .hero {
         padding-top: 70px !important;
         padding-bottom: 40px !important;
@@ -1455,7 +1447,6 @@ footer::before {
         scroll-margin-top: 50px !important;
     }
     
-    /* Services grid */
     .services-grid {
         grid-template-columns: 1fr;
         max-width: 400px;
@@ -1463,12 +1454,10 @@ footer::before {
         margin-right: auto;
     }
     
-    /* Contact form */
     .contact-form {
         padding: 25px;
     }
     
-    /* Gallery */
     .gallery-link {
         padding: 8px 15px;
         font-size: 1rem;
@@ -1482,8 +1471,7 @@ footer::before {
     .gallery-cta-btn .btn-text {
         font-size: 1.3rem;
     }
-    
-    /* Hero buttons */
+
     .hero-buttons {
         flex-direction: column;
         width: 100%;
@@ -1495,8 +1483,7 @@ footer::before {
         text-align: center;
         padding: 12px 24px;
     }
-    
-    /* WhatsApp button */
+
     .whatsapp-float {
         width: 50px;
         height: 50px;
@@ -1507,12 +1494,10 @@ footer::before {
 }
 
 @media (max-width: 576px) {
-    /* Adjust scroll padding for very small screens */
     html {
         scroll-padding-top: 55px;
     }
-    
-    /* Even thinner header */
+
     .header-container {
         padding: 4px 0 !important;
         min-height: 40px;
@@ -1547,7 +1532,6 @@ footer::before {
         transform: translateY(-50%);
     }
     
-    /* Adjust hero */
     .hero {
         padding-top: 60px !important;
         padding-bottom: 35px !important;
@@ -1565,7 +1549,6 @@ footer::before {
         scroll-margin-top: 45px !important;
     }
     
-    /* Grid layouts */
     .gallery-grid {
         grid-template-columns: 1fr;
     }
@@ -1574,8 +1557,7 @@ footer::before {
         grid-template-columns: 1fr;
         max-width: 100%;
     }
-    
-    /* Typography */
+
     h1 {
         font-size: 2.2rem;
     }
@@ -1584,7 +1566,6 @@ footer::before {
         font-size: 1.6rem !important;
     }
     
-    /* Footer */
     .footer-container {
         grid-template-columns: 1fr;
     }
@@ -1593,7 +1574,6 @@ footer::before {
         grid-template-columns: 1fr;
     }
     
-    /* Gallery CTA button */
     .gallery-cta-btn {
         min-width: 200px;
         padding: 16px 25px;
@@ -1602,8 +1582,7 @@ footer::before {
     .gallery-cta-btn .btn-text {
         font-size: 1.2rem;
     }
-    
-    /* WhatsApp button */
+
     .whatsapp-float {
         width: 45px;
         height: 45px;
