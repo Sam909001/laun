@@ -1190,6 +1190,7 @@ footer::before {
     font-size: 0.85rem;
 }
 
+/* ===== LIGHTBOX ===== */
 .lightbox-modal {
     display: none;
     position: fixed;
@@ -1198,23 +1199,37 @@ footer::before {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.9);
     animation: fadeIn 0.3s ease;
 }
 
-lightbox-content {
-    max-width: 80%;
-    max-height: 60vh; 
+.lightbox-content {
+    margin: auto;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
+/* Images - smaller size (40% of screen) */
 .lightbox-content img {
-    max-width: 80%;
-    max-height: 60vh;
+    max-width: 40vw;
+    max-height: 50vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
+/* Videos - keep larger size */
 .lightbox-content video {
-    max-width: 100%;
+    max-width: 90vw;
     max-height: 90vh;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
 }
 
 .close-lightbox {
@@ -1226,12 +1241,45 @@ lightbox-content {
     font-weight: bold;
     cursor: pointer;
     transition: var(--transition);
+    z-index: 2001;
 }
 
 .close-lightbox:hover {
     color: var(--light-blue);
 }
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .lightbox-content img {
+        max-width: 70vw;
+        max-height: 50vh;
+    }
+    
+    .lightbox-content video {
+        max-width: 95vw;
+        max-height: 85vh;
+    }
+    
+    .close-lightbox {
+        top: 10px;
+        right: 15px;
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 576px) {
+    .lightbox-content img {
+        max-width: 85vw;
+        max-height: 45vh;
+    }
+    
+    .lightbox-content video {
+        max-width: 98vw;
+        max-height: 80vh;
+    }
+}
+
+/* ===== WHATSAPP FLOAT BUTTON ===== */
 .whatsapp-float {
     position: fixed;
     width: 60px;
@@ -1263,6 +1311,7 @@ lightbox-content {
     margin: 0;
 }
 
+/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 992px) {
     .hero-content,
     .about-content {
@@ -1289,6 +1338,7 @@ lightbox-content {
 }
 
 @media (max-width: 768px) {
+    /* Adjust scroll padding for thinner header */
     html {
         scroll-padding-top: 60px;
     }
@@ -1304,7 +1354,8 @@ lightbox-content {
         min-height: 45px;
         position: relative;
     }
-
+    
+    /* Smaller logo for mobile */
     .logo {
         gap: 6px;
         flex: 1;
@@ -1337,6 +1388,7 @@ lightbox-content {
         overflow: hidden;
     }
     
+    /* Mobile navigation - FIXED POSITIONING */
     .mobile-menu-btn {
         display: block;
         position: absolute;
@@ -1419,6 +1471,7 @@ lightbox-content {
         background: var(--accent-cyan);
     }
     
+    /* Adjust hero section for thinner header */
     .hero {
         padding-top: 70px !important;
         padding-bottom: 40px !important;
@@ -1447,6 +1500,7 @@ lightbox-content {
         scroll-margin-top: 50px !important;
     }
     
+    /* Services grid */
     .services-grid {
         grid-template-columns: 1fr;
         max-width: 400px;
@@ -1454,10 +1508,12 @@ lightbox-content {
         margin-right: auto;
     }
     
+    /* Contact form */
     .contact-form {
         padding: 25px;
     }
     
+    /* Gallery */
     .gallery-link {
         padding: 8px 15px;
         font-size: 1rem;
@@ -1471,7 +1527,8 @@ lightbox-content {
     .gallery-cta-btn .btn-text {
         font-size: 1.3rem;
     }
-
+    
+    /* Hero buttons */
     .hero-buttons {
         flex-direction: column;
         width: 100%;
@@ -1483,7 +1540,8 @@ lightbox-content {
         text-align: center;
         padding: 12px 24px;
     }
-
+    
+    /* WhatsApp button */
     .whatsapp-float {
         width: 50px;
         height: 50px;
@@ -1494,10 +1552,12 @@ lightbox-content {
 }
 
 @media (max-width: 576px) {
+    /* Adjust scroll padding for very small screens */
     html {
         scroll-padding-top: 55px;
     }
-
+    
+    /* Even thinner header */
     .header-container {
         padding: 4px 0 !important;
         min-height: 40px;
@@ -1532,6 +1592,7 @@ lightbox-content {
         transform: translateY(-50%);
     }
     
+    /* Adjust hero */
     .hero {
         padding-top: 60px !important;
         padding-bottom: 35px !important;
@@ -1549,6 +1610,7 @@ lightbox-content {
         scroll-margin-top: 45px !important;
     }
     
+    /* Grid layouts */
     .gallery-grid {
         grid-template-columns: 1fr;
     }
@@ -1557,7 +1619,8 @@ lightbox-content {
         grid-template-columns: 1fr;
         max-width: 100%;
     }
-
+    
+    /* Typography */
     h1 {
         font-size: 2.2rem;
     }
@@ -1566,6 +1629,7 @@ lightbox-content {
         font-size: 1.6rem !important;
     }
     
+    /* Footer */
     .footer-container {
         grid-template-columns: 1fr;
     }
@@ -1574,6 +1638,7 @@ lightbox-content {
         grid-template-columns: 1fr;
     }
     
+    /* Gallery CTA button */
     .gallery-cta-btn {
         min-width: 200px;
         padding: 16px 25px;
@@ -1582,7 +1647,8 @@ lightbox-content {
     .gallery-cta-btn .btn-text {
         font-size: 1.2rem;
     }
-
+    
+    /* WhatsApp button */
     .whatsapp-float {
         width: 45px;
         height: 45px;
