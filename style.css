@@ -1204,7 +1204,7 @@ footer::before {
 
 lightbox-content {
     max-width: 80%;
-    max-height: 60vh; /* 60% of viewport height */
+    max-height: 60vh; 
 }
 
 .lightbox-content img {
@@ -1213,8 +1213,8 @@ lightbox-content {
 }
 
 .lightbox-content video {
-    max-width: 80%;
-    max-height: 60vh;
+    max-width: 100%;
+    max-height: 90vh;
 }
 
 .close-lightbox {
