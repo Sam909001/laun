@@ -1212,10 +1212,9 @@ footer::before {
     transform: translate(-50%, -50%);
 }
 
-/* Images - smaller size (40% of screen) */
 .lightbox-content img {
-    max-width: 40vw;
-    max-height: 50vh;
+    max-width: 90vw;
+    max-height: 90vh;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -1223,7 +1222,6 @@ footer::before {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* Videos - keep larger size */
 .lightbox-content video {
     max-width: 90vw;
     max-height: 90vh;
